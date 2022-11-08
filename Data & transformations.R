@@ -11,8 +11,8 @@ dbayern <- data[data$state == "Bayern", ]
 
 # daten erklärung https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/45258e51f57d43efb612f700a876ae8f_0/about
 
+## git pull 
 ## git add --all    // or "filename"
 ## git commit -m"message"
 ## git push
-## git pull 
 ## git status
