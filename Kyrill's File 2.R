@@ -14,6 +14,10 @@ levels(data$state)
 
 library(ggplot2)
 
+factor2<-as.factor(data$new_fatality)
+
+factor2
+
 
 ## Baden Württemberg
 baden_wurttemberg<-data[data$state=="Baden-Württemberg",]
@@ -30,17 +34,20 @@ vector1 # insgesamt 100 districts, allerdings nur 44 mit Beobachtungen
 
 
 ## Bayern
-bayern<-data[data$state=="Bayern",]
-View(bayern)
-str(bayern)
-summary(bayern)
-summary(bayern$district)
-vector2<-as.vector(summary(bayern$district))
+d_bayern<-data[data$state=="Bayern",]
+View(d_bayern)
+str(d_bayern)
+summary(d_bayern)
+summary(d_bayern$district)
+vector2<-as.vector(summary(d_bayern$district))
 vector2 # insgesamt 100 districts, 96 districts mit Beobachtungen, districts
 # sind schon der Größe nach sortiert
-bayern_cases<-ggplot(data=bayern,mapping=aes(x=bayern$date,y=bayern$cases))+geom_line()
+bayern_cases<-ggplot(data=d_bayern,mapping=aes(x=d_bayern$date,y=d_bayern$cases))+geom_line()
 bayern_cases
 
+vector22<-c(summary(d_bayern$district)[1:96])
+d<-as.table(vector22)
+View(d)
 
 ## Berlin
 berlin<-data[data$state=="Berlin",]
