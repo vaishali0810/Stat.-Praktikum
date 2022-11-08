@@ -27,12 +27,12 @@ truth_vector <- rep.int(FALSE, 6285344)
 # head(vectorstate)
 
 #data_bayern <- data[truth_vector]
-data_bayern <- data[data$state == "Bayern", ]
+#data_bayern <- data[data$state == "Bayern", ]
 
 getwd()
 
 
-ggplot(data_bayern, aes(y = cases, x = date, color= cases)) + #mapping = aes(x = new_cases)
+ggplot(dbayern, aes(y = cases, x = date, color= cases)) + #mapping = aes(x = new_cases)
   geom_line() +
   theme
 
@@ -53,6 +53,23 @@ ggplot(data = data, aes(x = date, y = cases)) +
 ## only 4 districts levels are not in Bayern, 3 are not in Bavaria, one is other
 
 
+test1<-as.vector(summary(dbayern$district))
+
+test2 <- summary(dbayern$district)
+
+# labels(test2)
+# dim(test2)
+# length(test2)
+# names(test2)
+
+test5 <- data.frame(matrix(NA, nrow=length(test2), ncol=2))
+test5[,1] <- labels(test2)
+test5[,2] <- as.vector(summary(dbayern$district))
+test5
 
 
+colnames(test5) <- c("district", "Einträge")
+test5
+
+table(dbayern$district, dbayern$cases)
 
