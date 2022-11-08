@@ -65,11 +65,11 @@ test2 <- summary(dbayern$district)
 test5 <- data.frame(matrix(NA, nrow=length(test2), ncol=2))
 test5[,1] <- labels(test2)
 test5[,2] <- as.vector(summary(dbayern$district))
+test5 <- test5[ -c(97:100), ]
 test5
-
 
 colnames(test5) <- c("district", "Einträge")
 test5
+plot(test5$district[1:10,], test5$Einträge)
 
 table(dbayern$district, dbayern$cases)
-
