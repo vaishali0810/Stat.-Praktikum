@@ -1,4 +1,4 @@
-data <- readRDS("cases_GermanTemporal_2022-10-25.rds")
+#data <- readRDS("cases_GermanTemporal_2022-10-25.rds")
 head(data)
 summary(data)
 
@@ -35,20 +35,22 @@ getwd()
 ggplot(data_bayern, aes(y = cases, x = date, color= cases)) + #mapping = aes(x = new_cases)
   geom_line() +
   theme
- # facet_wrap(facets = ~variable, scales = "free") + theme
+
+# facet_wrap(facets = ~variable, scales = "free") + theme
 
 ggplot(data, aes(y = cases, x = date)) + #mapping = aes(x = new_cases)
   geom_line(data$state) +
   theme
 
-# ggplot(data_bayern, aes(y = cases, x = date, color= district)) + #mapping = aes(x = new_cases)
-#   geom_line() +
-#   theme
+# ggplot(dbayern, aes(y = cases, x = date, color= district)) + #mapping = aes(x = new_cases)
+#    geom_line() +
+#    theme
 
 ggplot(data = data, aes(x = date, y = cases)) +
   geom_line() +
   facet_wrap(facets = vars(state))
 
+## only 4 districts levels are not in Bayern, 3 are not in Bavaria, one is other
 
 
 
