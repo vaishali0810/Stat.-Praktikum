@@ -45,13 +45,13 @@ vector2 # insgesamt 100 districts, 96 districts mit Beobachtungen, districts
 bayern_cases<-ggplot(data=dbayern,mapping=aes(x=dbayern$date,y=dbayern$cases))+geom_line()
 bayern_cases
 
-<<<<<<< HEAD
-vector22<-c(summary(bayern$district)[1:96])
-d<-as.data.frame(as.table(vector22))
-=======
+## <<<<<<< HEAD
+vector23<-c(summary(bayern$district)[1:96])
+d<-as.data.frame(as.table(vector23))
+## =======
 vector22<-c(summary(dbayern$district)[1:96])
 d<-as.table(vector22)
->>>>>>> d6e934ed6cd41746a4e5ec2d31b10c2d25a114b5
+## >>>>>>> d6e934ed6cd41746a4e5ec2d31b10c2d25a114b5
 View(d)
 e<-ggplot(data=d,aes(X=Var1, y= Freq))
 e+geom_bar()
