@@ -55,6 +55,9 @@ d<-as.table(vector22)
 View(d)
 e<-ggplot(data=d,aes(X=Var1, y= Freq))
 e+geom_bar()
+
+
+
 ## Berlin
 berlin<-data[data$state=="Berlin",]
 View(berlin)
