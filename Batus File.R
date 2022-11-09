@@ -12,3 +12,12 @@ d<-as.data.frame(as.table(vector22))
 View(d)
 library(ggplot2)
 ggplot(data=d,mapping=aes(x=d$Var1, y=d$Freq))+geom_bar(stat = "identity", position = "dodge")
+
+library(dplyr)
+vector23<-c(summary(dbayern$district)[1:96])
+e<-as.data.frame(as.table(vector23))
+x<- levels(e$Var1)
+Storage<-list()
+for (i in x){
+  Storage[i]<-filter(dbayern,district == i)
+}
