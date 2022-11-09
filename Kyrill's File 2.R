@@ -34,21 +34,22 @@ vector1 # insgesamt 100 districts, allerdings nur 44 mit Beobachtungen
 
 
 ## Bayern
-bayern<-data[data$state=="Bayern",]
-View(bayern)
-str(bayern)
-summary(bayern)
-summary(bayern$district)
-vector2<-as.vector(summary(bayern$district))
+dbayern<-data[data$state=="Bayern",]
+View(dbayern)
+str(dbayern)
+summary(dbayern)
+summary(dbayern$district)
+vector2<-as.vector(summary(dbayern$district))
 vector2 # insgesamt 100 districts, 96 districts mit Beobachtungen, districts
 # sind schon der Größe nach sortiert
-bayern_cases<-ggplot(data=bayern,mapping=aes(x=bayern$date,y=bayern$cases))+geom_line()
+bayern_cases<-ggplot(data=dbayern,mapping=aes(x=dbayern$date,y=dbayern$cases))+geom_line()
 bayern_cases
 
 vector22<-c(summary(bayern$district)[1:96])
-d<-as.table(vector22)
+d<-as.data.frame(as.table(vector22))
 View(d)
-
+e<-ggplot(data=d,aes(X=Var1, y= Freq))
+e+geom_bar()
 ## Berlin
 berlin<-data[data$state=="Berlin",]
 View(berlin)
