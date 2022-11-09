@@ -45,18 +45,23 @@ vector2 # insgesamt 100 districts, 96 districts mit Beobachtungen, districts
 bayern_cases<-ggplot(data=dbayern,mapping=aes(x=dbayern$date,y=dbayern$cases))+geom_line()
 bayern_cases
 
-## <<<<<<< HEAD
-vector23<-c(summary(bayern$district)[1:96])
-d<-as.data.frame(as.table(vector23))
-## =======
-vector22<-c(summary(dbayern$district)[1:96])
-d<-as.table(vector22)
+## Plots
+vector23<-c(summary(dbayern$district)[1:96])
+tbl1<-as.table(vector23)
+df1<-as.data.frame(tbl1)
 ## >>>>>>> d6e934ed6cd41746a4e5ec2d31b10c2d25a114b5
-View(d)
+View(df1)
 e<-ggplot(data=d,aes(X=Var1, y= Freq))
 e+geom_bar()
+vector23names<-names(vector23)
 
 
+## Loop
+Storage<-list()
+for(i in 1:length(vector23names)){
+   Storage[[i]]<-dbayern[dbayern$district==vector23names[i],]
+ }
+View(Storage)
 
 ## Berlin
 berlin<-data[data$state=="Berlin",]
