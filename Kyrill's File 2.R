@@ -80,6 +80,14 @@ for(i in 1:length(vector23names)){
 }
 View(Storage3[[1]])
 
+## Nach Gender sortieren
+Storage4<-Storage3
+for(i in 1:length(vector23names)){
+  Storage4[[i]]<-Storage4[[i]]%>%arrange(gender)
+}
+View(Storage4[[1]])
+
+
 
 ## Berlin
 berlin<-data[data$state=="Berlin",]
