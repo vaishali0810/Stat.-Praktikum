@@ -1,22 +1,24 @@
 data<- readRDS("~/Statistische Software/Stat.-Praktikum/cases_GermanTemporal_2022-10-25.rds")
 
-str(data)
+# str(data)
 
-View(data)
+# View(data)
 
-summary(data)
+# summary(data)
 
 data[,6]<-as.Date(data[,6])
 
 data[,7]<-as.Date(data[,7])
 
-levels(data$state)
+data_new<-data[,-7]
+
+# levels(data$state)
 
 library(ggplot2)
 
-factor2<-as.factor(data$new_fatality)
+# factor2<-as.factor(data$new_fatality)
 
-factor2
+# factor2
 
 
 ## Baden Württemberg
@@ -34,7 +36,7 @@ vector1 # insgesamt 100 districts, allerdings nur 44 mit Beobachtungen
 
 
 ## Bayern
-dbayern<-data[data$state=="Bayern",]
+dbayern<-data_new[data_new$state=="Bayern",]
 View(dbayern)
 str(dbayern)
 summary(dbayern)
@@ -62,6 +64,18 @@ for(i in 1:length(vector23names)){
    Storage[[i]]<-dbayern[dbayern$district==vector23names[i],]
  }
 View(Storage)
+
+## Nach age groups erstellen
+## Zuerst nach Datum sortieren
+
+library(dplyr)
+Storage2<-Storage
+for(i in 1:length(vector23names)){
+  Storage2[[i]]<-Storage2[[i]]%>%arrange(date)
+}
+View(Storage2[[1]])
+
+
 
 ## Berlin
 berlin<-data[data$state=="Berlin",]
