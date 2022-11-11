@@ -65,9 +65,7 @@ for(i in 1:length(vector23names)){
  }
 View(Storage)
 
-## Nach age groups erstellen
-## Zuerst nach Datum sortieren
-
+## Nach Datum sortieren
 library(dplyr)
 Storage2<-Storage
 for(i in 1:length(vector23names)){
@@ -75,6 +73,12 @@ for(i in 1:length(vector23names)){
 }
 View(Storage2[[1]])
 
+## Nach Age groups sortieren
+Storage3<-Storage2
+for(i in 1:length(vector23names)){
+  Storage3[[i]]<-Storage3[[i]]%>%arrange(age_group)
+}
+View(Storage3[[1]])
 
 
 ## Berlin
