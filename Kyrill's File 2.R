@@ -1,16 +1,14 @@
 data<- readRDS("~/Statistische Software/Stat.-Praktikum/cases_GermanTemporal_2022-10-25.rds")
 
+data[,6]<-as.Date(data[,6])
+
+data_new<-data[,-7]
+
 # str(data)
 
 # View(data)
 
 # summary(data)
-
-data[,6]<-as.Date(data[,6])
-
-data[,7]<-as.Date(data[,7])
-
-data_new<-data[,-7]
 
 # levels(data$state)
 
@@ -49,17 +47,18 @@ bayern_cases
 
 ## Plots
 vector23<-c(summary(dbayern$district)[1:96])
-vectortop10<-c(summary(dbayern$district[1:10]))
+vectortop10<-c(summary(dbayern$district)[1:10])
 tbl1<-as.table(vectortop10)
 df1<-as.data.frame(tbl1)
 ## >>>>>>> d6e934ed6cd41746a4e5ec2d31b10c2d25a114b5
 View(df1)
-e<-ggplot(data=df1,aes(X=Var1, y= Freq))
-e+geom_bar()
+ggplot(data=df1,mapping=aes(x=Var1, y=Freq))+geom_bar(stat = "identity", position="dodge")
 vector23names<-names(vector23)
 
 
 ## Loop
+vector23<-c(summary(dbayern$district)[1:96])
+vector23names<-names(vector23)
 Storage<-list()
 for(i in 1:length(vector23names)){
    Storage[[i]]<-dbayern[dbayern$district==vector23names[i],]
@@ -77,14 +76,14 @@ View(Storage2[[1]])
 ## Nach Gender sortieren
 Storage3<-Storage2
 for(i in 1:length(vector23names)){
-  Storage5[[i]]<-Storage5[[i]]%>%arrange(gender)
+  Storage3[[i]]<-Storage3[[i]]%>%arrange(gender)
 }
 View(Storage3[[1]])
 
 ## Nach age group sortieren
 Storage4<-Storage3
 for(i in 1:length(vector23names)){
-  Storage6[[i]]<-Storage6[[i]]%>%arrange(age_group)
+  Storage4[[i]]<-Storage4[[i]]%>%arrange(age_group)
 }
 View(Storage4[[1]])
 
