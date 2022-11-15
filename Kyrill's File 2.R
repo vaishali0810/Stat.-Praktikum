@@ -57,7 +57,7 @@ vector23names<-names(vector23)
 
 
 ## Loop
-
+# data_new und dbayern einlesen
 vector23<-c(summary(dbayern$district)[1:96])
 vector23names<-names(vector23)
 Storage<-list()
