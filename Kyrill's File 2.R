@@ -1,16 +1,16 @@
 data<- readRDS("~/Statistische Software/Stat.-Praktikum/cases_GermanTemporal_2022-10-25.rds")
 
+data[,6]<-as.Date(data[,6])
+
+data_new<-data[,-7]
+
+data_new[,15]<-data_new[,2]
+
 # str(data)
 
 # View(data)
 
 # summary(data)
-
-data[,6]<-as.Date(data[,6])
-
-data[,7]<-as.Date(data[,7])
-
-data_new<-data[,-7]
 
 # levels(data$state)
 
@@ -37,7 +37,7 @@ vector1 # insgesamt 100 districts, allerdings nur 44 mit Beobachtungen
 
 ## Bayern
 dbayern<-data_new[data_new$state=="Bayern",]
-View(dbayern)
+# View(dbayern)
 str(dbayern)
 summary(dbayern)
 summary(dbayern$district)
@@ -49,22 +49,42 @@ bayern_cases
 
 ## Plots
 vector23<-c(summary(dbayern$district)[1:96])
-vectortop10<-c(summary(dbayern$district[1:10]))
+vectortop10<-c(summary(dbayern$district)[1:10])
 tbl1<-as.table(vectortop10)
 df1<-as.data.frame(tbl1)
 ## >>>>>>> d6e934ed6cd41746a4e5ec2d31b10c2d25a114b5
 View(df1)
-e<-ggplot(data=df1,aes(X=Var1, y= Freq))
-e+geom_bar()
+ggplot(data=df1,mapping=aes(x=Var1, y=Freq))+geom_bar(stat = "identity", position="dodge")
 vector23names<-names(vector23)
 
+vector23names[1:6]
+vector23names[46:51]
+vector23names[91:96]
+
+data_new[,15]<-data_new[,2]
+data_new[,15]%>%assign(colnames("bezirk"))
+View(data_new)
+for(i in 1:length(dbayern)){
+  i
+  if(dbayern[i,15]=="LK Aichach-Friedberg"){
+    dbayern[i,15]<-"Schwaben"
+  }else{
+    dbayern[i,15]<-"0"
+  }
+}
+
+if(dbayern$district==)
+any(dbayern$district=="LK Aichach-Friedberg")
 
 ## Loop
+# data_new und dbayern einlesen
+vector23<-c(summary(dbayern$district)[1:96])
+vector23names<-names(vector23)
 Storage<-list()
 for(i in 1:length(vector23names)){
    Storage[[i]]<-dbayern[dbayern$district==vector23names[i],]
  }
-View(Storage)
+# View(Storage)
 
 ## Nach Datum sortieren
 library(dplyr)
@@ -72,21 +92,22 @@ Storage2<-Storage
 for(i in 1:length(vector23names)){
   Storage2[[i]]<-Storage2[[i]]%>%arrange(date)
 }
-View(Storage2[[1]])
+# View(Storage2)
 
 ## Nach Gender sortieren
 Storage3<-Storage2
 for(i in 1:length(vector23names)){
-  Storage5[[i]]<-Storage5[[i]]%>%arrange(gender)
+  Storage3[[i]]<-Storage3[[i]]%>%arrange(gender)
 }
-View(Storage3[[1]])
+# View (Storage3)
 
 ## Nach age group sortieren
 Storage4<-Storage3
 for(i in 1:length(vector23names)){
-  Storage6[[i]]<-Storage6[[i]]%>%arrange(age_group)
+  Storage4[[i]]<-Storage4[[i]]%>%arrange(age_group)
 }
 View(Storage4[[1]])
+
 
 
 ## Berlin
