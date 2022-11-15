@@ -49,11 +49,12 @@ bayern_cases
 
 ## Plots
 vector23<-c(summary(dbayern$district)[1:96])
-tbl1<-as.table(vector23)
+vectortop10<-c(summary(dbayern$district[1:10]))
+tbl1<-as.table(vectortop10)
 df1<-as.data.frame(tbl1)
 ## >>>>>>> d6e934ed6cd41746a4e5ec2d31b10c2d25a114b5
 View(df1)
-e<-ggplot(data=d,aes(X=Var1, y= Freq))
+e<-ggplot(data=df1,aes(X=Var1, y= Freq))
 e+geom_bar()
 vector23names<-names(vector23)
 
@@ -73,20 +74,19 @@ for(i in 1:length(vector23names)){
 }
 View(Storage2[[1]])
 
-## Nach Age groups sortieren
+## Nach Gender sortieren
 Storage3<-Storage2
 for(i in 1:length(vector23names)){
-  Storage3[[i]]<-Storage3[[i]]%>%arrange(age_group)
+  Storage5[[i]]<-Storage5[[i]]%>%arrange(gender)
 }
 View(Storage3[[1]])
 
-## Nach Gender sortieren
+## Nach age group sortieren
 Storage4<-Storage3
 for(i in 1:length(vector23names)){
-  Storage4[[i]]<-Storage4[[i]]%>%arrange(gender)
+  Storage6[[i]]<-Storage6[[i]]%>%arrange(age_group)
 }
 View(Storage4[[1]])
-
 
 
 ## Berlin
