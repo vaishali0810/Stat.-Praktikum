@@ -73,3 +73,44 @@ test5
 plot(test5$district[1:10,], test5$Einträge)
 
 table(dbayern$district, dbayern$cases)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+dimpf <- read.csv("impfdaten_regional.csv")
+
+
+table(dimpf$bundesland)
+bdimpf1 <- dimpf[dimpf$bundesland == "Freistaat Bayern", ]
+table(dimpf$kreis)
+summary(bdimpf)
+bdimpf
+
+bdimpf <- dimpf %>% select(bundesland == "Freistaat Bayern")
+head(bdimpf)
+table(dimpf$kreis)
+
+identical(bdimpf, dimpf)
+
+impfBayern <- dimpf[dimpf$bundesland == "Freistaat Bayern", ]
+table(impfBayern$kreis)
+# impfBayern
+impfBayern <- impfBayern %>%
+  mutate(kreis=recode(kreis,  "Roth" = "Mittelfranken", "Starnberg" = "Oberbayern")) %>%
+  as.data.frame()
+table(impfBayern$kreis)
+
+table(dbayern$district)
