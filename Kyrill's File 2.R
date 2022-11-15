@@ -35,7 +35,7 @@ vector1 # insgesamt 100 districts, allerdings nur 44 mit Beobachtungen
 
 ## Bayern
 dbayern<-data_new[data_new$state=="Bayern",]
-View(dbayern)
+# View(dbayern)
 str(dbayern)
 summary(dbayern)
 summary(dbayern$district)
@@ -57,13 +57,14 @@ vector23names<-names(vector23)
 
 
 ## Loop
+
 vector23<-c(summary(dbayern$district)[1:96])
 vector23names<-names(vector23)
 Storage<-list()
 for(i in 1:length(vector23names)){
    Storage[[i]]<-dbayern[dbayern$district==vector23names[i],]
  }
-View(Storage)
+# View(Storage)
 
 ## Nach Datum sortieren
 library(dplyr)
@@ -71,14 +72,14 @@ Storage2<-Storage
 for(i in 1:length(vector23names)){
   Storage2[[i]]<-Storage2[[i]]%>%arrange(date)
 }
-View(Storage2[[1]])
+# View(Storage2)
 
 ## Nach Gender sortieren
 Storage3<-Storage2
 for(i in 1:length(vector23names)){
   Storage3[[i]]<-Storage3[[i]]%>%arrange(gender)
 }
-View(Storage3[[1]])
+# View (Storage3)
 
 ## Nach age group sortieren
 Storage4<-Storage3
@@ -86,6 +87,7 @@ for(i in 1:length(vector23names)){
   Storage4[[i]]<-Storage4[[i]]%>%arrange(age_group)
 }
 View(Storage4[[1]])
+
 
 
 ## Berlin
