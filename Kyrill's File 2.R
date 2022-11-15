@@ -4,6 +4,8 @@ data[,6]<-as.Date(data[,6])
 
 data_new<-data[,-7]
 
+data_new[,15]<-data_new[,2]
+
 # str(data)
 
 # View(data)
@@ -55,6 +57,24 @@ View(df1)
 ggplot(data=df1,mapping=aes(x=Var1, y=Freq))+geom_bar(stat = "identity", position="dodge")
 vector23names<-names(vector23)
 
+vector23names[1:6]
+vector23names[46:51]
+vector23names[91:96]
+
+data_new[,15]<-data_new[,2]
+data_new[,15]%>%assign(colnames("bezirk"))
+View(data_new)
+for(i in 1:length(dbayern)){
+  i
+  if(dbayern[i,15]=="LK Aichach-Friedberg"){
+    dbayern[i,15]<-"Schwaben"
+  }else{
+    dbayern[i,15]<-"0"
+  }
+}
+
+if(dbayern$district==)
+any(dbayern$district=="LK Aichach-Friedberg")
 
 ## Loop
 # data_new und dbayern einlesen
