@@ -109,7 +109,38 @@ impfBayern <- dimpf[dimpf$bundesland == "Freistaat Bayern", ]
 table(impfBayern$kreis)
 # impfBayern
 impfBayern <- impfBayern %>%
-  mutate(kreis=recode(kreis, "München, Landeshauptstadt" = "SK München", "Traunstein" ="LK Traunstein", )) %>%
+  mutate(kreis=recode(kreis, "München, Landeshauptstadt" = "SK München", "Traunstein" ="LK Traunstein",                       "LK München"                         
+                      "SK Augsburg"                         "LK Rosenheim"                        "LK Augsburg"                        
+                      "LK Schwandorf"                       "LK Unterallgäu"                      "LK Mühldorf a.Inn"                  
+                      "LK Landshut"                         "LK Freising"                         "LK Ebersberg"                       
+                      "LK Miltenberg"                       "LK Aschaffenburg"                    "LK Rottal-Inn"                      
+                      "LK Dachau"                           "LK Pfaffenhofen a.d.Ilm"             "SK Ingolstadt"                      
+                      "LK Roth"                             "LK Günzburg"                         "LK Nürnberger Land"                 
+                      "LK Fürstenfeldbruck"                 "LK Dillingen a.d.Donau"              "LK Donau-Ries"                      
+                      "LK Altötting"                        "LK Dingolfing-Landau"                "LK Kelheim"                         
+                      "LK Bamberg"                          "LK Neustadt a.d.Aisch-Bad Windsheim" "LK Regensburg"                      
+                      "LK Freyung-Grafenau"                 "LK Amberg-Sulzbach"                  "LK Neu-Ulm"                         
+                      "LK Rhön-Grabfeld"                    "LK Neumarkt i.d.OPf."                "LK Berchtesgadener Land"            
+                      "LK Passau"                           "LK Bayreuth"                         "LK Regen"                           
+                      "LK Bad Tölz-Wolfratshausen"          "LK Aichach-Friedberg"                "LK Schweinfurt"                     
+                      "LK Forchheim"                        "LK Miesbach"                         "SK Regensburg"                      
+                      "LK Main-Spessart"                    "LK Ansbach"                          "SK Bayreuth"                        
+                      "LK Cham"                             "LK Kitzingen"                        "LK Tirschenreuth"                   
+                      "LK Eichstätt"                        "SK Landshut"                         "SK Rosenheim"                       
+                      "LK Oberallgäu"                       "SK Fürth"                            "SK Aschaffenburg"                   
+                      "LK Coburg"                           "LK Ostallgäu"                        "LK Neustadt a.d.Waldnaab"           
+                      "LK Wunsiedel i.Fichtelgebirge"       "LK Deggendorf"                       "LK Lichtenfels"                     
+                      "SK Nürnberg"                         "LK Weißenburg-Gunzenhausen"          "LK Erlangen-Höchstadt"              
+                      "SK Schweinfurt"                      "LK Kulmbach"                         "LK Würzburg"                        
+                      "SK Würzburg"                         "LK Fürth"                            "SK Schwabach"                       
+                      "SK Memmingen"                        "LK Weilheim-Schongau"                "LK Bad Kissingen"                   
+                      "SK Bamberg"                          "LK Straubing-Bogen"                  "LK Hof"                             
+                      "LK Erding"                           "SK Erlangen"                         "LK Lindau"                          
+                      "SK Amberg"                           "LK Starnberg"                        "LK Neuburg-Schrobenhausen"          
+                      "LK Landsberg a.Lech"                 "LK Haßberge"                         "SK Kempten"                         
+                      "SK Coburg"                           "LK Kronach"                          "SK Weiden i.d.OPf."                 
+                      "LK Garmisch-Partenkirchen"           "SK Passau"                           "SK Hof"                             
+                      "SK Straubing"                        "SK Kaufbeuren"                       "SK Ansbach"  "Roth" = "Mittelfranken", "Starnberg" = "Oberbayern")) %>%
   as.data.frame()
 table(impfBayern$kreis)
 
