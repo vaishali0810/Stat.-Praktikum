@@ -21,13 +21,12 @@ impfMuc
 ggplot(impfMuc, aes(y = kr_erstimpf, x = datum)) + geom_line(stat = "identity")
 
 ggplot(impfMuc, aes(x=datum))+
-geom_line( aes(y = kr_erstimpf_05u12, colour = "kr_erstimpf_05u12"))+ 
-geom_line( aes(y = kr_erstimpf_12u18, colour = "kr_erstimpf_12u18")) +
-geom_line( aes(y = kr_erstimpf_18u60, colour = "kr_erstimpf_18u60")) +
-geom_line( aes(y = kr_erstimpf_ab60, colour = "kr_erstimpf_ab60"))
+  geom_line( aes(y = kr_erstimpf_05u12, colour = "kr_erstimpf_05u12"))+ 
+  geom_line( aes(y = kr_erstimpf_12u18, colour = "kr_erstimpf_12u18")) +
+  geom_line( aes(y = kr_erstimpf_18u60, colour = "kr_erstimpf_18u60")) +
+  geom_line( aes(y = kr_erstimpf_ab60, colour = "kr_erstimpf_ab60"))
 
 # Traunstein Impfung
 impfTraunstein <- impfBayern[impfBayern$kreis == "Traunstein", ]
 impfTraunstein
 ggplot(impfTraunstein, aes(y = kr_erstimpf, x = datum)) + geom_line(stat = "identity")
-

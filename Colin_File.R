@@ -209,3 +209,13 @@ impfBayern <- impfBayern %>%
 table(impfBayern$kreis)
 
 table(dbayern$district)
+
+
+colnames(impfBayern)[5] <- "district"
+colnames(impfBayern)
+
+dbayern2 <- merge(dbayern, impfBayern, by = "district")
+
+
+
+
