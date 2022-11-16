@@ -6,6 +6,14 @@ data_new<-data[,-7]
 
 data_new[,15]<-data_new[,2]
 
+# zuerst dbayern einlesen (ab Zeile 47)
+
+levels(dbayern[,15])<-c(levels(dbayern[,15])[1:411],"Schwaben","0")
+
+dbayern[,15]<-as.vector(dbayern[,15])
+
+names(dbayern)<-c(names(dbayern)[1:14],"bezirk")
+
 # str(data)
 
 # View(data)
@@ -61,20 +69,18 @@ vector23names[1:6]
 vector23names[46:51]
 vector23names[91:96]
 
-data_new[,15]<-data_new[,2]
-data_new[,15]%>%assign(colnames("bezirk"))
-View(data_new)
-for(i in 1:length(dbayern)){
-  i
-  if(dbayern[i,15]=="LK Aichach-Friedberg"){
-    dbayern[i,15]<-"Schwaben"
-  }else{
-    dbayern[i,15]<-"0"
-  }
-}
 
-if(dbayern$district==)
-any(dbayern$district=="LK Aichach-Friedberg")
+
+dbayern<-dbayern%>%mutate(V15=recode(V15,"LK Aichach-Friedberg"="Schwaben","SK Augsburg"="Schwaben",
+                                     "LK Augsburg"="Schwaben","LK Dillingen a.d.Donau"="Schwaben",
+                                     "LK Donau-Ries"="Schwaben","LK Günzburg"="Schwaben","LK Lindau"="Schwaben",
+                                     "LK Neu-Ulm"="Schwaben","LK Oberallgäu"="Schwaben","LK Ostallgäu"="Schwaben",
+                                     "LK Unterallgäu"="Schwaben","SK Kaufbeuren"="Schwaben","SK Kempten"="Schwaben",
+                                     "SK Memmingen"="Schwaben"))
+dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"SK Bamberg"="Oberfranken","SK Bayreuth"="Oberfranken",
+                                        "SK Coburg"="Oberfranken","SK Hof"="Oberfranken",))
+
+oberfranken<-c("")
 
 ## Loop
 # data_new und dbayern einlesen
