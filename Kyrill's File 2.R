@@ -14,6 +14,8 @@ dbayern[,15]<-as.vector(dbayern[,15])
 
 names(dbayern)<-c(names(dbayern)[1:14],"bezirk")
 
+# jetzt Zeile 76-134 (## Schwaben bis levels(dbayern2$bezirk))
+
 # str(data)
 
 # View(data)
