@@ -16,7 +16,7 @@ dbayern[,15]<-as.vector(dbayern[,15])
 
 names(dbayern)<-c(names(dbayern)[1:14],"bezirk")
 
-# jetzt Zeile 78-132 (## ab Schwaben)
+# jetzt Bayern Abteil einlesen (Zeile 36-134)
 
 # str(data)
 
@@ -33,20 +33,6 @@ library(ggplot2)
 # factor2
 
 
-## Baden Württemberg
-baden_wurttemberg<-data[data$state=="Baden-Württemberg",]
-View(baden_wurttemberg)
-str(baden_wurttemberg)
-summary(baden_wurttemberg)
-summary(baden_wurttemberg$district) # 56 districts haben keine Beobachtungen
-lk_esslingen<-baden_wurttemberg[baden_wurttemberg$district=="LK Esslingen",]
-levels(baden_wurttemberg$district)
-vector1<-as.vector(summary(baden_wurttemberg$district))
-vector1 # insgesamt 100 districts, allerdings nur 44 mit Beobachtungen
-# districts sind schon der Größe nach sortiert
-
-
-
 ## Bayern
 dbayern<-data_new[data_new$state=="Bayern",]
 # View(dbayern)
@@ -56,24 +42,6 @@ summary(dbayern$district)
 vector2<-as.vector(summary(dbayern$district))
 vector2 # insgesamt 100 districts, 96 districts mit Beobachtungen, districts
 # sind schon der Größe nach sortiert
-bayern_cases<-ggplot(data=dbayern,mapping=aes(x=dbayern$date,y=dbayern$cases))+geom_line()
-bayern_cases
-
-## Plots
-vector23<-c(summary(dbayern$district)[1:96])
-vectortop10<-c(summary(dbayern$district)[1:10])
-tbl1<-as.table(vectortop10)
-df1<-as.data.frame(tbl1)
-## >>>>>>> d6e934ed6cd41746a4e5ec2d31b10c2d25a114b5
-View(df1)
-ggplot(data=df1,mapping=aes(x=Var1, y=Freq))+geom_bar(stat = "identity", position="dodge")
-vector23names<-names(vector23)
-
-vector23names[1:6]
-vector23names[46:51]
-vector23names[91:96]
-
-
 
 ## Schwaben
 dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"LK Aichach-Friedberg"="Schwaben","SK Augsburg"="Schwaben",
@@ -130,11 +98,6 @@ dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"LK Landshut"="Niederbayern","SK 
                                         "LK Passau"="Niederbayern","SK Passau"="Niederbayern","LK Rottal-Inn"="Niederbayern",
                                         "SK Straubing"="Niederbayern","LK Straubing-Bogen"="Niederbayern","LK Kelheim"="Niederbayern"))
 
-dbayern2<-dbayern
-dbayern2$bezirk<-as.factor(dbayern2$bezirk)
-View(dbayern_neu)
-levels(dbayern2$bezirk)
-
 
 
 
@@ -170,8 +133,39 @@ for(i in 1:length(vector23names)){
 }
 View(Storage4[[1]])
 
-## Plots
 
+
+########## Plots
+vector23<-c(summary(dbayern$district)[1:96])
+vectortop10<-c(summary(dbayern$district)[1:10])
+tbl1<-as.table(vectortop10)
+df1<-as.data.frame(tbl1)
+## >>>>>>> d6e934ed6cd41746a4e5ec2d31b10c2d25a114b5
+View(df1)
+ggplot(data=df1,mapping=aes(x=Var1, y=Freq))+geom_bar(stat = "identity", position="dodge")
+vector23names<-names(vector23)
+
+vector23names[1:6]
+vector23names[46:51]
+vector23names[91:96]
+
+bayern_cases<-ggplot(data=dbayern,mapping=aes(x=dbayern$date,y=dbayern$cases))+geom_line()
+bayern_cases
+
+
+
+
+## Baden Württemberg
+baden_wurttemberg<-data[data$state=="Baden-Württemberg",]
+View(baden_wurttemberg)
+str(baden_wurttemberg)
+summary(baden_wurttemberg)
+summary(baden_wurttemberg$district) # 56 districts haben keine Beobachtungen
+lk_esslingen<-baden_wurttemberg[baden_wurttemberg$district=="LK Esslingen",]
+levels(baden_wurttemberg$district)
+vector1<-as.vector(summary(baden_wurttemberg$district))
+vector1 # insgesamt 100 districts, allerdings nur 44 mit Beobachtungen
+# districts sind schon der Größe nach sortiert
 
 
 
