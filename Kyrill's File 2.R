@@ -16,7 +16,11 @@ dbayern[,15]<-as.vector(dbayern[,15])
 
 names(dbayern)<-c(names(dbayern)[1:14],"bezirk")
 
-# jetzt Bayern Abteil einlesen (Zeile 36-134)
+library(ggplot2)
+
+library(dplyr)
+
+# jetzt Bayern Abteil einlesen (Zeile 38-136)
 
 # str(data)
 
@@ -26,21 +30,19 @@ names(dbayern)<-c(names(dbayern)[1:14],"bezirk")
 
 # levels(data$state)
 
-library(ggplot2)
-
 # factor2<-as.factor(data$new_fatality) 
 
 # factor2
 
 
 ## Bayern
-dbayern<-data_new[data_new$state=="Bayern",]
+# dbayern<-data_new[data_new$state=="Bayern",]
 # View(dbayern)
-str(dbayern)
-summary(dbayern)
-summary(dbayern$district)
-vector2<-as.vector(summary(dbayern$district))
-vector2 # insgesamt 100 districts, 96 districts mit Beobachtungen, districts
+# str(dbayern)
+# summary(dbayern)
+# summary(dbayern$district)
+# vector2<-as.vector(summary(dbayern$district))
+# vector2 # insgesamt 100 districts, 96 districts mit Beobachtungen, districts
 # sind schon der Größe nach sortiert
 
 ## Schwaben
