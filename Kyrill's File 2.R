@@ -6,13 +6,17 @@ data_new<-data[,-7]
 
 data_new[,15]<-data_new[,2]
 
-# zuerst dbayern einlesen (ab Zeile 47)
+dbayern<-data_new[data_new$state=="Bayern",]
 
-levels(dbayern[,15])<-c(levels(dbayern[,15])[1:411],"Schwaben","0")
+levels(dbayern[,15])<-c(levels(dbayern[,15])[1:411],"Schwaben","Oberbayern",
+                        "Unterfranken","Oberpfalz","Oberfranken","Mittelfranken",
+                        "Niederbayern")
 
 dbayern[,15]<-as.vector(dbayern[,15])
 
 names(dbayern)<-c(names(dbayern)[1:14],"bezirk")
+
+# jetzt Zeile 78-132 (## ab Schwaben)
 
 # str(data)
 
@@ -24,7 +28,7 @@ names(dbayern)<-c(names(dbayern)[1:14],"bezirk")
 
 library(ggplot2)
 
-# factor2<-as.factor(data$new_fatality)
+# factor2<-as.factor(data$new_fatality) 
 
 # factor2
 
@@ -71,16 +75,68 @@ vector23names[91:96]
 
 
 
-dbayern<-dbayern%>%mutate(V15=recode(V15,"LK Aichach-Friedberg"="Schwaben","SK Augsburg"="Schwaben",
+## Schwaben
+dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"LK Aichach-Friedberg"="Schwaben","SK Augsburg"="Schwaben",
                                      "LK Augsburg"="Schwaben","LK Dillingen a.d.Donau"="Schwaben",
                                      "LK Donau-Ries"="Schwaben","LK Günzburg"="Schwaben","LK Lindau"="Schwaben",
                                      "LK Neu-Ulm"="Schwaben","LK Oberallgäu"="Schwaben","LK Ostallgäu"="Schwaben",
                                      "LK Unterallgäu"="Schwaben","SK Kaufbeuren"="Schwaben","SK Kempten"="Schwaben",
                                      "SK Memmingen"="Schwaben"))
+## Oberfranken
 dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"SK Bamberg"="Oberfranken","SK Bayreuth"="Oberfranken",
-                                        "SK Coburg"="Oberfranken","SK Hof"="Oberfranken",))
+                                        "SK Coburg"="Oberfranken","SK Hof"="Oberfranken","LK Bamberg"="Oberfranken",
+                                        "LK Bayreuth"="Oberfranken","LK Coburg"="Oberfranken","LK Forchheim"="Oberfranken",
+                                        "LK Hof"="Oberfranken","LK Kronach"="Oberfranken","LK Kulmbach"="Oberfranken",
+                                        "LK Lichtenfels"="Oberfranken","LK Wunsiedel i.Fichtelgebirge"="Oberfranken"))
 
-oberfranken<-c("")
+## Oberbayern_Unterfranken_oberpfalz.R File einlesen
+dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"SK München" = "Oberbayern", "SK Ingolstadt" = "Oberbayern", "SK Rosenheim" = "Oberbayern",
+                                        "LK Altötting" = "Oberbayern", "LK Berchtesgadener Land" = "Oberbayern", 
+                                        "LK Bad Tölz-Wolfratshausen" = "Oberbayern", "LK Dachau" = "Oberbayern",
+                                        "LK Ebersberg" = "Oberbayern", "LK Eichstätt" = "Oberbayern", "LK Erding" = "Oberbayern",
+                                        "LK Freising" = "Oberbayern", " LK Fürstenfeldbruck" = "Oberbayern",
+                                        "LK Garmisch-Partenkirchen" = "Oberbayern", "LK Landsberg a.Lech" = "Oberbayern",
+                                        "LK Miesbach" = "Oberbayern","LK Mühldorf a.Inn" = "Oberbayern", "LK München" = "Oberbayern",
+                                        "LK Neuburg-Schrobenhausen" = "Oberbayern", 
+                                        "LK Pfaffenhofen a.d.Ilm" = "Oberbayern", "LK Rosenheim" = "Oberbayern", "LK Starnberg" = "Oberbayern", 
+                                        "LK Traunstein" = "Oberbayern", "LK Weilheim-Schongau" = "Oberbayern", 
+                                        "LK Erding" = "Oberbayern", "LK Bad Reichenhall" = "Oberbayern","LK Fürstenfeldbruck"="Oberbayern",
+                                        ))
+
+dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"LK Aschaffenburg" = "Unterfranken", "LK Aschaffenburg" = "Unterfranken",
+                                        "LK Haßberge" = "Unterfranken", "LK Kitzingen" = "Unterfranken",
+                                        "LK Main-Spessart" = "Unterfranken", "LK Miltenberg" = "Unterfranken",
+                                        "LK Rhön-Grabfeld" = "Unterfranken", "LK Schweinfurt" = "Unterfranken",
+                                        "LK Würzburg" = "Unterfranken", "SK Würzburg" = "Unterfranken",
+                                        "SK Aschaffenburg" = "Unterfranken", "SK Schweinfurt" = "Unterfranken","LK Bad Kissingen"="Unterfranken"))
+
+dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"LK Amberg-Sulzbach" = "Oberpfalz", "LK Cham" = "Oberpfalz",
+                                        "LK Neumarkt i.d.OPf."= "Oberpfalz", "LK Neustadt a.d.Waldnaab" = "Oberpfalz",
+                                        "LK Regensburg" = "Oberpfalz", "LK Schwandorf" = "Oberpfalz", "LK Tirschenreuth" = "Oberpfalz",
+                                        "SK Amberg" = "Oberpfalz", "SK Regensburg"  = "Oberpfalz",
+                                        "SK Weiden i.d.OPf."  = "Oberpfalz"))
+
+
+## Mittelfranken_Niederbayern.R File einlesen
+dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"LK Roth"="Mittelfranken","LK Nürnberger Land"="Mittelfranken",
+                                        "LK Neustadt a.d.Aisch-Bad Windsheim"="Mittelfranken","LK Ansbach"="Mittelfranken",
+                                        "SK Fürth"="Mittelfranken","SK Nürnberg"="Mittelfranken","LK Weißenburg-Gunzenhausen"="Mittelfranken",
+                                        "LK Erlangen-Höchstadt"="Mittelfranken","LK Fürth"="Mittelfranken","SK Schwabach"="Mittelfranken",
+                                        "SK Erlangen"="Mittelfranken","SK Erlangen"="Mittelfranken","SK Ansbach"="Mittelfranken"))
+
+dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"LK Landshut"="Niederbayern","SK Landshut"="Niederbayern",
+                                        "LK Dingolfing-Landau"="Niederbayern","LK Freyung-Grafenau"="Niederbayern",
+                                        "LK Regen"="Niederbayern","LK Deggendorf"="Niederbayern",
+                                        "LK Passau"="Niederbayern","SK Passau"="Niederbayern","LK Rottal-Inn"="Niederbayern",
+                                        "SK Straubing"="Niederbayern","LK Straubing-Bogen"="Niederbayern","LK Kelheim"="Niederbayern"))
+
+dbayern2<-dbayern
+dbayern2$bezirk<-as.factor(dbayern2$bezirk)
+View(dbayern_neu)
+levels(dbayern2$bezirk)
+
+
+
 
 ## Loop
 # data_new und dbayern einlesen
@@ -113,6 +169,9 @@ for(i in 1:length(vector23names)){
   Storage4[[i]]<-Storage4[[i]]%>%arrange(age_group)
 }
 View(Storage4[[1]])
+
+## Plots
+
 
 
 
