@@ -135,6 +135,39 @@ for(i in 1:length(vector23names)){
 }
 View(Storage4[[1]])
 
+## Nach bezirk Kategorie
+dbayern$bezirk<-as.factor(dbayern$bezirk)
+summary(dbayern$bezirk)
+bezirk_names<-c(names(summary(dbayern$bezirk)))
+Storage5<-list()
+for(i in 1:length(bezirk_names)){
+  Storage5[[i]]<-dbayern[dbayern$bezirk==bezirk_names[i],]
+}
+Storage6<-Storage5
+for(i in 1:length(bezirk_names)){
+  Storage6[[i]]<-Storage6[[i]]%>%arrange(date)
+}
+Storage7<-Storage6
+for(i in 1:length(bezirk_names)){
+  Storage7[[i]]<-Storage7[[i]]%>%arrange(gender)
+}
+Storage8<-Storage7
+for(i in 1:length(bezirk_names)){
+  Storage8[[i]]<-Storage8[[i]]%>%arrange(age_group)
+}
+View(Storage8[[1]])
+Storage9<-Storage8
+for(i in 1:length(bezirk_names)){
+  Storage9[[i]]<-Storage9[[i]]%>%arrange(district)
+}
+View(Storage9[[1]])
+
+
+
+
+
+
+
 
 
 ########## Plots
