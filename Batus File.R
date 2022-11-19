@@ -29,5 +29,18 @@ for(i in 1:length(vector2names)){
 }
 View(Stor4[[1]])
 
+S41<-as.data.frame(Stor4[1])
+S41%>%
+  ggplot(aes(date, cases, colour = gender)) + 
+  geom_line(stat = "identity")
 
+ggplot(S41, aes(date,cases,color = gender,
+                        linetype = gender)) +
+  geom_line(stat="identity",size=0.1)+
+  geom_smooth()
+
+ggplot(S41, aes(date,cases,color = gender,
+                linetype = gender)) +
+  geom_point(size=0.1)+
+  geom_smooth()
 
