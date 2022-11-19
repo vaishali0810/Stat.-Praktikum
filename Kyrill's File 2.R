@@ -6,15 +6,17 @@ data_new<-data[,-7]
 
 data_new[,15]<-data_new[,2]
 
-# zuerst dbayern einlesen (ab Zeile 47)
+dbayern<-data_new[data_new$state=="Bayern",]
 
-levels(dbayern[,15])<-c(levels(dbayern[,15])[1:411],"Schwaben","0")
+levels(dbayern[,15])<-c(levels(dbayern[,15])[1:411],"Schwaben","Oberbayern",
+                        "Unterfranken","Oberpfalz","Oberfranken","Mittelfranken",
+                        "Niederbayern")
 
 dbayern[,15]<-as.vector(dbayern[,15])
 
 names(dbayern)<-c(names(dbayern)[1:14],"bezirk")
 
-# jetzt Zeile 76-134 (## Schwaben bis levels(dbayern2$bezirk))
+# jetzt Zeile 78-132 (## ab Schwaben)
 
 # str(data)
 
@@ -26,7 +28,7 @@ names(dbayern)<-c(names(dbayern)[1:14],"bezirk")
 
 library(ggplot2)
 
-# factor2<-as.factor(data$new_fatality)
+# factor2<-as.factor(data$new_fatality) 
 
 # factor2
 
@@ -167,6 +169,9 @@ for(i in 1:length(vector23names)){
   Storage4[[i]]<-Storage4[[i]]%>%arrange(age_group)
 }
 View(Storage4[[1]])
+
+## Plots
+
 
 
 
