@@ -162,31 +162,53 @@ for(i in 1:length(bezirk_names)){
 }
 View(Storage9[[1]])
 
-
-
-
-
-
-
-
-
 ########## Plots
-vector23<-c(summary(dbayern$district)[1:96])
-vectortop10<-c(summary(dbayern$district)[1:10])
-tbl1<-as.table(vectortop10)
-df1<-as.data.frame(tbl1)
+# vectortop10<-c(summary(dbayern$district)[1:10])
+# tbl1<-as.table(vectortop10)
+# df1<-as.data.frame(tbl1)
 ## >>>>>>> d6e934ed6cd41746a4e5ec2d31b10c2d25a114b5
-View(df1)
-ggplot(data=df1,mapping=aes(x=Var1, y=Freq))+geom_bar(stat = "identity", position="dodge")
-vector23names<-names(vector23)
+# View(df1)
+# ggplot(data=df1,mapping=aes(x=Var1, y=Freq))+geom_bar(stat = "identity", position="dodge")
+# vector23names<-names(vector23)
+#vector23names[1:6]
+#vector23names[46:51]
+#vector23names[91:96]
+#bayern_cases<-ggplot(data=dbayern,mapping=aes(x=dbayern$date,y=dbayern$cases))+geom_line()
+#bayern_cases
 
-vector23names[1:6]
-vector23names[46:51]
-vector23names[91:96]
+df91<-as.data.frame(Storage9[[1]]) #Mittelfranken
+#plot1<-ggplot(df91,aes(date,cases))+geom_line()
+#plot1
+#plot1<-ggplot(df91,aes(date,cases,colour=gender))+geom_point(stat="identity",size=0.1)
+#plot1
+#plot2<-ggplot(df91,aes(x=date,y=cases,color=gender,group=gender))+geom_point()+geom_line()+geom_smooth()
+#plot2
+plot1<-ggplot(df91,aes(x=date,y=cases,colour=district,group=district))+geom_point()+geom_line()+geom_smooth()+labs(title="Mittelfranken")
+plot1
 
-bayern_cases<-ggplot(data=dbayern,mapping=aes(x=dbayern$date,y=dbayern$cases))+geom_line()
-bayern_cases
+df92<-as.data.frame(Storage9[[2]]) #Niederbayern
+plot2<-ggplot(df92,aes(x=date,y=cases,colour=district,group=district))+geom_point()+geom_line()+geom_smooth()+labs(title="Niederbayern")
+plot2
 
+df93<-as.data.frame(Storage9[[3]]) #Oberbayern
+plot3<-ggplot(df93,aes(x=date,y=cases,colour=district,group=district))+geom_point()+geom_line()+geom_smooth()+labs(title="Oberbayern")
+plot3
+
+df94<-as.data.frame(Storage9[[4]]) #Oberfranken
+plot4<-ggplot(df94,aes(x=date,y=cases,colour=district,group=district))+geom_point()+geom_line()+geom_smooth()+labs(title="Oberfranken")
+plot4
+
+df95<-as.data.frame(Storage9[[5]]) #Oberpfalz
+plot5<-ggplot(df95,aes(x=date,y=cases,colour=district,group=district))+geom_point()+geom_line()+geom_smooth()+labs(title="Oberpfalz")
+plot5
+
+df96<-as.data.frame(Storage9[[6]]) #Schwaben
+plot6<-ggplot(df96,aes(x=date,y=cases,colour=district,group=district))+geom_point()+geom_line()+geom_smooth()+labs(title="Schwaben")
+plot6
+
+df97<-as.data.frame(Storage9[[7]]) #Unterfranken
+plot7<-ggplot(df97,aes(x=date,y=cases,colour=district,group=district))+geom_point()+geom_line()+geom_smooth()+labs(title="Unterfranken")
+plot7
 
 
 
