@@ -217,5 +217,11 @@ colnames(impfBayern)
 dbayern2 <- merge(dbayern, impfBayern, by = "district")
 
 
+dbayern <- dbayern %>% arrange(district)
+impfBayern <- impfBayern %>% arrange(district)
+head(dbayern)
 
-
+library(tidyverse)
+dbayern2 <- dbayern %>% right_join(impfBayern, by = "district")
+dbayern <- as_tibble(dbayern)
+impfBayern <- as_tibble(impfBayern)
