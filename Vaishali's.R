@@ -20,16 +20,25 @@ impfMuc <- impfBayern[impfBayern$kreis == "MÃ¼nchen, Kreis", ]
 impfMuc
 ggplot(impfMuc, aes(y = kr_erstimpf, x = datum)) + geom_line(stat = "identity")
 
+<<<<<<< HEAD:Vaishali's File.R
 ggplot(impfMuc, aes(x = datum))+
 geom_line(aes(y = kr_erstimpf_05u12, colour = "kr_erstimpf_05u12"))+ 
 geom_line(aes(y = kr_erstimpf_12u18, colour = "kr_erstimpf_12u18")) +
 geom_line(aes(y = kr_erstimpf_18u60, colour = "kr_erstimpf_18u60")) +
 geom_line(aes(y = kr_erstimpf_ab60, colour = "kr_erstimpf_ab60"))
+=======
+ggplot(impfMuc, aes(x=datum))+
+  geom_line( aes(y = kr_erstimpf_05u12, colour = "kr_erstimpf_05u12"))+ 
+  geom_line( aes(y = kr_erstimpf_12u18, colour = "kr_erstimpf_12u18")) +
+  geom_line( aes(y = kr_erstimpf_18u60, colour = "kr_erstimpf_18u60")) +
+  geom_line( aes(y = kr_erstimpf_ab60, colour = "kr_erstimpf_ab60"))
+>>>>>>> 11f3690ba94b054b1b4fc58f1f0f6c30793aa89d:Vaishali's.R
 
 # Traunstein Impfung
 impfTraunstein <- impfBayern[impfBayern$kreis == "Traunstein", ]
 impfTraunstein
 ggplot(impfTraunstein, aes(y = kr_erstimpf, x = datum)) + geom_line(stat = "identity")
+<<<<<<< HEAD:Vaishali's File.R
 
 ggplot(impfTraunstein, aes(x = datum)) +
   geom_line(aes(y = kr_erstimpf_05u12, colour = "kr_erstimpf_05u12")) + 
@@ -40,3 +49,5 @@ ggplot(impfTraunstein, aes(x = datum)) +
 
 
 
+=======
+>>>>>>> 11f3690ba94b054b1b4fc58f1f0f6c30793aa89d:Vaishali's.R
