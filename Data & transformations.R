@@ -235,3 +235,76 @@ ggplot(df97, aes(date,cases,color = gender,
   geom_line(stat="identity",size=0.1)+
   geom_smooth()
 
+
+Storage9[[1]] <- Storage9[[1]] %>% arrange(Storage9[[1]], district, date, age_group, cases) %>% 
+  mutate(lag1=lag(cases),
+         lag2=lag(cases,2),
+         lag3=lag(cases,3),
+         lag4=lag(cases,4),
+         lag5=lag(cases,5),
+         lag6=lag(cases,6),
+         MA7cases=(lag1+lag2+lag3+lag4+lag5+lag6+cases)/7)
+Storage9[[1]] <- Storage9[[1]] %>% arrange(Storage9[[1]], district, date, age_group, cases) %>% 
+  mutate(lag1=lag(cases),
+         lag2=lag(cases,2),
+         lag3=lag(cases,3),
+         lag4=lag(cases,4),
+         lag5=lag(cases,5),
+         lag6=lag(cases,6),
+         lag7=lag(cases,7),
+         lag8=lag(cases,8),
+         lag9=lag(cases,9),
+         lag10=lag(cases,10),
+         lag11=lag(cases,11),
+         lag12=lag(cases,12),
+         lag13=lag(cases,13),
+         lag14=lag(cases,14),
+         MA15cases=(lag1+lag2+lag3+lag4+lag5+lag6+lag7+lag8+lag9+lag10+lag11+lag12+lag13+lag14+cases)/15)
+Storage9[[1]] <- Storage9[[1]] %>% arrange(Storage9[[1]], district, date, age_group, cases) %>% 
+  mutate(lag1=lag(cases),
+         lag2=lag(cases,2),
+         lag3=lag(cases,3),
+         lag4=lag(cases,4),
+         lag5=lag(cases,5),
+         lag6=lag(cases,6),
+         lag7=lag(cases,7),
+         lag8=lag(cases,8),
+         lag9=lag(cases,9),
+         lag10=lag(cases,10),
+         lag11=lag(cases,11),
+         lag12=lag(cases,12),
+         lag13=lag(cases,13),
+         lag14=lag(cases,14),
+         lag15=lag(cases,15),
+         lag16=lag(cases,16),
+         lag17=lag(cases,17),
+         lag18=lag(cases,18),
+         lag19=lag(cases,19),
+         lag20=lag(cases,20),
+         lag21=lag(cases,21),
+         lag22=lag(cases,22),
+         lag23=lag(cases,23),
+         lag24=lag(cases,24),
+         lag25=lag(cases,25),
+         lag26=lag(cases,26),
+         lag27=lag(cases,27),
+         lag28=lag(cases,28),
+         MA29cases=(lag1+lag2+lag3+lag4+lag5+lag6+lag7+lag8+lag9+lag10+lag11+lag12+lag13+lag14+cases
+                    +lag15+lag16+lag17+lag18+lag19+lag20+lag21+lag22+lag23+lag24+lag25+lag26+lag27+lag28)/29)
+
+head(Storage9[[1]])
+table(Storage9[[1]]$MA15cases)
+View(Storage9[[1]])
+library(ggplot2)
+df91<-as.data.frame(Storage9[[1]], stringsAsFactors = FALSE) #Mittelfranken
+ggplot(df91, aes(date,MA29cases,color = district,
+                 linetype = gender)) +
+  geom_point(stat="identity",size=0.1) + 
+  theme
+ggplot(df91, aes(date,MA7cases,color = district,
+                 linetype = gender)) +
+  geom_line(stat="identity",size=0.1)
+colnames(df91)
+
+
+
