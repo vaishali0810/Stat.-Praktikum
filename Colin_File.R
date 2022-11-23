@@ -210,7 +210,7 @@ table(impfBayern$kreis)
 
 #table(dbayern$district)
 
-view(impfBayern)
+View(impfBayern)
 
 colnames(impfBayern)[5] <- "district"
 colnames(impfBayern)[6] <- "date"
@@ -219,6 +219,8 @@ colnames(impfBayern)
 str(impfBayern)
 
 impfungentake <- impfBayern %>% select(district, date, kr_erstimpf, kr_zweitimpf, kr_drittimpf, kr_viertimpf)
+View(impfungentake)
+View(dbayern)
 
 dbayern2 <- merge(dbayern, impfBayern, by = "district")
 
