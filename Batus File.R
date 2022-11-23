@@ -44,3 +44,4 @@ ggplot(S41, aes(date,cases,color = gender,
   geom_point(size=0.1)+
   geom_smooth()
 
+broom augument
