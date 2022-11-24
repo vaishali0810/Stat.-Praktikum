@@ -179,6 +179,10 @@ for(i in 1:length(bezirk_names)){
 }
 View(Storage9[[1]])
 
+a<-min(Storage9[[1]]$date)
+b<-max(Storage9[[1]]$date)
+c<-seq(as.Date(a), as.Date(b), "days")
+
 ########## Plots
 # vectortop10<-c(summary(dbayern$district)[1:10])
 # tbl1<-as.table(vectortop10)

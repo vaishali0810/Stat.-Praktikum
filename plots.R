@@ -1,4 +1,5 @@
 library(plotly)
+library(ggpubr)
 
 plot_ly(
   data = df91,
@@ -8,6 +9,10 @@ plot_ly(
   mode = "lines",
   color = ~gender
 )
+
+ggplot(data=df, aes(x= date, y=cases)) + 
+  geom_line(aes(color = source_clean)) + 
+  scale_x_date(date_breaks = "months" , date_labels = "%d-%b-%y")
 
 qplot(date, cases, data=df91,
       geom="line", color =gender)

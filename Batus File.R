@@ -45,3 +45,19 @@ ggplot(S41, aes(date,cases,color = gender,
   geom_smooth()
 
 broom augument
+
+
+
+
+a<-min(Storage9[[1]]$date)
+b<-max(Storage9[[1]]$date)
+c<-seq(as.Date(a), as.Date(b), "days")
+c<-as.data.frame(c)
+colnames(c)[1] <- "date"
+y<-merge(Storage9[[1]],c, by="date",
+         all.x=TRUE, all.y=TRUE)
+y
+ggplot(y, aes(date,cases,color = gender,
+              linetype = gender)) +
+  geom_line(stat="identity",size=0.1)+
+  geom_smooth()
