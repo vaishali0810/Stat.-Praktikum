@@ -196,6 +196,30 @@ index<-is.na(v)
 v[index]<-"egal"
 y$gender<-v
 
+ymal<-subset(y,gender=="M")
+yfem<-subset(y,gender=="W")
+yunk<-subset(y,gender=="unbekannt")
+
+smal<-aggregate(x = ymal$cases,               
+                by = list(ymal$date),              
+                FUN = sum)
+smal<-mutate(smal, gender ="M")
+
+sfem<-aggregate(x = yfem$cases,               
+                by = list(yfem$date),              
+                FUN = sum)
+sfem<-mutate(sfem, gender ="W")
+
+sunk<-aggregate(x = yunk$cases,               
+                by = list(yunk$date),              
+                FUN = sum)
+sunk<-mutate(sunk, gender ="U")
+
+sall<-rbind(smal,sfem,sunk)
+
+ggplot(sall, aes(Group.1,x,color = gender)) +
+  geom_line(size=0.1)
+
 ########## Plots
 # vectortop10<-c(summary(dbayern$district)[1:10])
 # tbl1<-as.table(vectortop10)

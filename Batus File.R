@@ -66,7 +66,36 @@ index<-is.na(v)
 v[index]<-"egal"
 y$gender<-v
 
-y <- y %>% arrange(y, district, date, age_group, cases) %>% 
+
+#####
+
+
+ymal<-subset(y,gender=="M")
+yfem<-subset(y,gender=="W")
+yunk<-subset(y,gender=="unbekannt")
+
+smal<-aggregate(x = ymal$cases,               
+          by = list(ymal$date),              
+          FUN = sum)
+smal<-mutate(smal, gender ="M")
+
+sfem<-aggregate(x = yfem$cases,               
+                by = list(yfem$date),              
+                FUN = sum)
+sfem<-mutate(sfem, gender ="W")
+
+sunk<-aggregate(x = yunk$cases,               
+                by = list(yunk$date),              
+                FUN = sum)
+sunk<-mutate(sunk, gender ="U")
+
+sall<-rbind(smal,sfem,sunk)
+
+ggplot(sall, aes(Group.1,x,color = gender)) +
+  geom_line(size=0.1)
+
+
+y2 <- y2 %>% arrange(y2, district, date, age_group, cases) %>% 
   mutate(lag1=lag(cases),
          lag2=lag(cases,2),
          lag3=lag(cases,3),
@@ -83,8 +112,7 @@ y <- y %>% arrange(y, district, date, age_group, cases) %>%
          lag14=lag(cases,14),
          MA15cases=(lag1+lag2+lag3+lag4+lag5+lag6+lag7+lag8+lag9+lag10+lag11+lag12+lag13+lag14+cases)/15)
 
-df91<-as.data.frame(y, stringsAsFactors = FALSE)
-ggplot(df91, aes(date,MA15cases,color = gender,
-                 linetype = gender)) +
+df91<-as.data.frame(ymal, stringsAsFactors = FALSE)
+ggplot(sall, aes(Group.1,x,color = gender)) +
   geom_line(size=0.1)
 
