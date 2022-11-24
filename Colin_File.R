@@ -86,8 +86,8 @@ table(dbayern$district, dbayern$cases)
 
 
 
-
-
+library(dplyr)
+library(tidyselect)
 
 
 dimpf <- read.csv("impfdaten_regional.csv")
@@ -210,7 +210,7 @@ table(impfBayern$kreis)
 
 #table(dbayern$district)
 
-view(impfBayern)
+View(impfBayern)
 
 colnames(impfBayern)[5] <- "district"
 colnames(impfBayern)[6] <- "date"
@@ -219,8 +219,10 @@ colnames(impfBayern)
 str(impfBayern)
 
 impfungentake <- impfBayern %>% select(district, date, kr_erstimpf, kr_zweitimpf, kr_drittimpf, kr_viertimpf)
-
-dbayern2 <- merge(dbayern, impfBayern, by = "district")
+View(impfungentake)
+View(dbayern)
+df3 = merge(df1, df2, by.x=c("CustomerId", "Hobby"), by.y=c("CustomerId", "like"))
+dbayern2 <- merge(dbayern, impfungentake, by = c("district", "date"))
 
 
 dbayern <- dbayern %>% arrange(district)
@@ -231,3 +233,6 @@ library(tidyverse)
 dbayern2 <- dbayern %>% right_join(impfBayern, by = "district")
 dbayern <- as_tibble(dbayern)
 impfBayern <- as_tibble(impfBayern)
+
+
+
