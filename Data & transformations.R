@@ -182,7 +182,7 @@ View(Storage9[[1]])
 a<-min(Storage9[[1]]$date)
 b<-max(Storage9[[1]]$date)
 c<-seq(as.Date(a), as.Date(b), "days")
-
+c<-as.data.frame(c)
 colnames(c)[1] <- "date"
 y<-merge(Storage9[[1]],c, by="date",
          all.x=TRUE, all.y=TRUE)
