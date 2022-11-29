@@ -425,62 +425,6 @@ sall<-rbind(smal,sfem,sunk)
 ggplot(sall, aes(Group.1,x,color = gender)) +
   geom_line(size=0.1)
 
-########## Plots
-# vectortop10<-c(summary(dbayern$district)[1:10])
-# tbl1<-as.table(vectortop10)
-# df1<-as.data.frame(tbl1)
-## >>>>>>> d6e934ed6cd41746a4e5ec2d31b10c2d25a114b5
-# View(df1)
-# ggplot(data=df1,mapping=aes(x=Var1, y=Freq))+geom_bar(stat = "identity", position="dodge")
-# vector23names<-names(vector23)
-#vector23names[1:6]
-#vector23names[46:51]
-#vector23names[91:96]
-#bayern_cases<-ggplot(data=dbayern,mapping=aes(x=dbayern$date,y=dbayern$cases))+geom_line()
-#bayern_cases
-
-df91<-as.data.frame(Storage9[[1]]) #Mittelfranken
-ggplot(df91, aes(date,cases,color = gender,
-                linetype = gender)) +
-  geom_line(stat="identity",size=0.1)+
-  geom_smooth()
-
-df92<-as.data.frame(Storage9[[2]]) #Niederbayern
-ggplot(df92, aes(date,cases,color = gender,
-                 linetype = gender)) +
-  geom_line(stat="identity",size=0.1)+
-  geom_smooth()
-
-df93<-as.data.frame(Storage9[[3]]) #Oberbayern
-ggplot(df93, aes(date,cases,color = gender,
-                 linetype = gender)) +
-  geom_line(stat="identity",size=0.1)+
-  geom_smooth()
-
-df94<-as.data.frame(Storage9[[4]]) #Oberfranken
-ggplot(df94, aes(date,cases,color = gender,
-                 linetype = gender)) +
-  geom_line(stat="identity",size=0.1)+
-  geom_smooth()
-
-df95<-as.data.frame(Storage9[[5]]) #Oberpfalz
-ggplot(df95, aes(date,cases,color = gender,
-                 linetype = gender)) +
-  geom_line(stat="identity",size=0.1)+
-  geom_smooth()
-
-df96<-as.data.frame(Storage9[[6]]) #Schwaben
-ggplot(df96, aes(date,cases,color = gender,
-                 linetype = gender)) +
-  geom_line(stat="identity",size=0.1)+
-  geom_smooth()
-
-df97<-as.data.frame(Storage9[[7]]) #Unterfranken
-ggplot(df97, aes(date,cases,color = gender,
-                 linetype = gender)) +
-  geom_line(stat="identity",size=0.1)+
-  geom_smooth()
-
 
 Storage9[[1]] <- Storage9[[1]] %>% arrange(Storage9[[1]], district, date, age_group, cases) %>% 
   mutate(lag1=lag(cases),
@@ -538,19 +482,6 @@ Storage9[[1]] <- Storage9[[1]] %>% arrange(Storage9[[1]], district, date, age_gr
          MA29cases=(lag1+lag2+lag3+lag4+lag5+lag6+lag7+lag8+lag9+lag10+lag11+lag12+lag13+lag14+cases
                     +lag15+lag16+lag17+lag18+lag19+lag20+lag21+lag22+lag23+lag24+lag25+lag26+lag27+lag28)/29)
 
-head(Storage9[[1]])
-table(Storage9[[1]]$MA15cases)
-View(Storage9[[1]])
-library(ggplot2)
-df91<-as.data.frame(Storage9[[1]], stringsAsFactors = FALSE) #Mittelfranken
-ggplot(df91, aes(date,MA29cases,color = district,
-                 linetype = gender)) +
-  geom_point(stat="identity",size=0.1) + 
-  theme
-ggplot(df91, aes(date,MA7cases,color = district,
-                 linetype = gender)) +
-  geom_line(stat="identity",size=0.1)
-colnames(df91)
 
 
 
