@@ -1,5 +1,5 @@
 rm(list=ls())
-data <- readRDS("cases_GermanTemporal_2022-10-25.rds")
+data <- readRDS("cases_GermanTemporal_2022-11-28.rds")
 # 
 # # remove age_group_2 & reference date
 # data <- data[, -(c(4, 7))]
