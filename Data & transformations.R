@@ -212,7 +212,9 @@ View(dbayern3)
 # dbayern3$density <- as.numeric(dbayern3$density)
 # dbayern3$area <- as.numeric(dbayern3$area)
 dbayern3$age_group <- as.factor(dbayern3$age_group)
-dbayern <- dbayern3[, -6]
+dbayern3 <- dbayern3[, -6]
+dbayern3 <- dbayern3 %>% mutate(gender = recode(gender, "W" = "1", "M" = "0", "unbekannt" = "NA_integer_"))
+dbayern3[, 6] <- as.numeric(dbayern3[, 6])
 # # remove age_group_2 & reference date
 # data <- data[, -(c(4, 7))]
 # # formate date as date
