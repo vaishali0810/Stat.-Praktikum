@@ -481,7 +481,3 @@ Storage9[[1]] <- Storage9[[1]] %>% arrange(Storage9[[1]], district, date, age_gr
          lag28=lag(cases,28),
          MA29cases=(lag1+lag2+lag3+lag4+lag5+lag6+lag7+lag8+lag9+lag10+lag11+lag12+lag13+lag14+cases
                     +lag15+lag16+lag17+lag18+lag19+lag20+lag21+lag22+lag23+lag24+lag25+lag26+lag27+lag28)/29)
-
-
-
-
