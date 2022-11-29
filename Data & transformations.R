@@ -205,12 +205,14 @@ popbay <- popbay %>% select(state, bezirk, district, population, male, female, d
 colnames(popbay)
 dbayern3 <- merge(dbayern2, popbay, by = c("district", "state", "bezirk"))
 View(dbayern3)
-dbayern3$date <- as.Date(dbayern3$date)
-dbayern3$population <- as.numeric(dbayern3$population)
-dbayern3$male <- as.numeric(dbayern3$male)
-dbayern3$female <- as.numeric(dbayern3$female)
-dbayern3$density <- as.numeric(dbayern3$density)
-dbayern3$area <- as.numeric(dbayern3$area)
+# dbayern3$date <- as.Date(dbayern3$date)
+# dbayern3$population <- as.numeric(dbayern3$population)
+# dbayern3$male <- as.numeric(dbayern3$male)
+# dbayern3$female <- as.numeric(dbayern3$female)
+# dbayern3$density <- as.numeric(dbayern3$density)
+# dbayern3$area <- as.numeric(dbayern3$area)
+dbayern3$age_group <- as.factor(dbayern3$age_group)
+dbayern <- dbayern3[, -6]
 # # remove age_group_2 & reference date
 # data <- data[, -(c(4, 7))]
 # # formate date as date
