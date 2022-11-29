@@ -235,4 +235,7 @@ dbayern <- as_tibble(dbayern)
 impfBayern <- as_tibble(impfBayern)
 
 
-
+trends <- read.csv("trends.csv", header=TRUE, sep = ",")
+View(trends)
+popkreise <- read.csv("04-kreise.csv", header = TRUE, sep= ";")
+View(popkreise)
