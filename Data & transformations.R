@@ -17,6 +17,7 @@ popbay <- popbay %>% select(state, bezirk, district, population, male, female, d
 colnames(popbay)
 dbayern3 <- merge(dbayern2, popbay, by = c("district", "state"))
 View(dbayern3)
+dbayern3$date <- as.Date(dbayern3$date)
 # # remove age_group_2 & reference date
 # data <- data[, -(c(4, 7))]
 # # formate date as date
