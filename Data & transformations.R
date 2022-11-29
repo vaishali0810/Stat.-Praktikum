@@ -341,7 +341,7 @@ df91<-as.data.frame(Storage9[[1]], stringsAsFactors = FALSE) #Mittelfranken
 ggplot(df91, aes(date,MA29cases,color = district,
                  linetype = gender)) +
   geom_point(stat="identity",size=0.1) + 
-  theme
+  theme()
 ggplot(df91, aes(date,MA7cases,color = district,
                  linetype = gender)) +
   geom_line(stat="identity",size=0.1)
