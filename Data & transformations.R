@@ -203,6 +203,43 @@ popbay$district <- "NA"
 popbay$district <- paste(popbay$Kreis...Landkreise, popbay$Kreisfreie.Stadt, sep=" ")
 popbay <- popbay %>% select(state, bezirk, district, population, male, female, density, area)
 colnames(popbay)
+popbay <- read.csv("popBay.csv", header = TRUE, sep = ";")
+#View(popbay) 
+popbay <- popbay %>% mutate(Kreis...Landkreise = recode(Kreis...Landkreise, "Kreisfreie Stadt" = "SK", "Landkreis" = "LK"))
+popbay$district <- "NA"
+popbay$district <- paste(popbay$Kreis...Landkreise, popbay$Kreisfreie.Stadt, sep=" ")
+popbay <- popbay %>% select(state, bezirk, district, population, male, female, density, area)
+colnames(popbay)
+
+popbay2<-popbay
+
+popbay2<-sapply(popbay2, gsub, pattern = ",", replacement= ".")
+popbay2<-as.data.frame(popbay2)
+a<-gsub(" ","",x=popbay2$area)
+c<-as.numeric(a)
+popbay2$area<-c
+
+a<-gsub(" ","",x=popbay2$population)
+b<-unlist(a)
+c<-as.numeric(b)
+popbay2$population<-c
+
+a<-gsub(" ","",x=popbay2$male)
+b<-unlist(a)
+c<-as.numeric(b)
+popbay2$male<-c
+
+a<-gsub(" ","",x=popbay2$female)
+b<-unlist(a)
+c<-as.numeric(b)
+popbay2$female<-c
+
+a<-gsub(" ","",x=popbay2$density)
+b<-unlist(a)
+c<-as.numeric(b)
+popbay2$density<-c
+
+
 dbayern3 <- merge(dbayern2, popbay, by = c("district", "state", "bezirk"))
 View(dbayern3)
 # dbayern3$date <- as.Date(dbayern3$date)
