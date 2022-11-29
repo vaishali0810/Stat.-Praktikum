@@ -203,7 +203,7 @@ popbay$district <- "NA"
 popbay$district <- paste(popbay$Kreis...Landkreise, popbay$Kreisfreie.Stadt, sep=" ")
 popbay <- popbay %>% select(state, bezirk, district, population, male, female, density, area)
 colnames(popbay)
-dbayern3 <- merge(dbayern2, popbay, by = c("district", "state"))
+dbayern3 <- merge(dbayern2, popbay, by = c("district", "state", "bezirk"))
 View(dbayern3)
 dbayern3$date <- as.Date(dbayern3$date)
 # # remove age_group_2 & reference date
