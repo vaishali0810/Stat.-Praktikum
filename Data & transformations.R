@@ -4,10 +4,11 @@ data <- readRDS("cases_GermanTemporal_2022-11-28.rds")
 
 trends <- read.csv("trends.csv", header=TRUE, sep = ",")
 View(trends)
-popkreise <- read.csv("04-kreise.csv", header = TRUE, sep= ";")
-View(popkreise)
+# popkreise <- read.csv("04-kreise.csv", header = TRUE, sep= ";")
+# View(popkreise)
+popbay <- read.csv("popBay.csv", header = TRUE, sep = ";")
+View(popbay) 
 
-# 
 # # remove age_group_2 & reference date
 # data <- data[, -(c(4, 7))]
 # # formate date as date
