@@ -1,0 +1,97 @@
+﻿Schlüssel-nummer;state;bezirk;Kreis / Landkreise;Kreisfreie Stadt;NUTS3;area;population;male;female;density
+9161;Bayern;Oberbayern;Kreisfreie Stadt;Ingolstadt;DE211;133,35;   138 016;   69 858;   68 158;   1 035
+9162;Bayern;Oberbayern;Kreisfreie Stadt;München, Landeshauptstadt;DE212;310,7;  1 487 708;   725 594;   762 114;   4 788
+9163;Bayern;Oberbayern;Kreisfreie Stadt;Rosenheim;DE213;37,22;   63 508;   31 438;   32 070;   1 706
+9171;Bayern;Oberbayern;Landkreis;Altötting;DE214;569,28;   112 116;   55 429;   56 687;197
+9172;Bayern;Oberbayern;Landkreis;Berchtesgadener Land;DE215;839,82;   106 389;   52 425;   53 964;127
+9173;Bayern;Oberbayern;Landkreis;Bad Tölz-Wolfratshausen;DE216;   1 110,67;   127 919;   63 112;   64 807;115
+9174;Bayern;Oberbayern;Landkreis;Dachau;DE217;579,16;   155 449;   77 545;   77 904;268
+9175;Bayern;Oberbayern;Landkreis;Ebersberg;DE218;549,39;   144 562;   72 179;   72 383;263
+9176;Bayern;Oberbayern;Landkreis;Eichstätt;DE219;   1 213,85;   133 634;   67 599;   66 035;110
+9177;Bayern;Oberbayern;Landkreis;Erding;DE21A;870,74;   139 622;   70 223;   69 399;160
+9178;Bayern;Oberbayern;Landkreis;Freising;DE21B;799,85;   181 144;   92 520;   88 624;226
+9179;Bayern;Oberbayern;Landkreis;Fürstenfeldbruck;DE21C;434,8;   218 579;   107 330;   111 249;503
+9180;Bayern;Oberbayern;Landkreis;Garmisch-Partenkirchen;DE21D;   1 012,17;   88 232;   42 733;   45 499;87
+9181;Bayern;Oberbayern;Landkreis;Landsberg am Lech;DE21E;804,36;   121 466;   60 572;   60 894;151
+9182;Bayern;Oberbayern;Landkreis;Miesbach;DE21F;866,21;   99 978;   48 892;   51 086;115
+9183;Bayern;Oberbayern;Landkreis;Mühldorf a.Inn;DE21G;805,33;   117 606;   59 484;   58 122;146
+9184;Bayern;Oberbayern;Landkreis;München;DE21H;664,25;   349 837;   173 610;   176 227;527
+9185;Bayern;Oberbayern;Landkreis;Neuburg-Schrobenhausen;DE21I;739,71;   98 503;   49 541;   48 962;133
+9186;Bayern;Oberbayern;Landkreis;Pfaffenhofen a.d.Ilm;DE21J;761,05;   129 772;   65 711;   64 061;171
+9187;Bayern;Oberbayern;Landkreis;Rosenheim;DE21K;   1 439,44;   263 367;   130 304;   133 063;183
+9188;Bayern;Oberbayern;Landkreis;Starnberg;DE21L;487,71;   136 747;   66 184;   70 563;280
+9189;Bayern;Oberbayern;Landkreis;Traunstein;DE21M;   1 533,76;   178 447;   88 061;   90 386;116
+9190;Bayern;Oberbayern;Landkreis;Weilheim-Schongau;DE21N;966,28;   136 642;   67 701;   68 941;141
+9261;Bayern;Niederbayern;Kreisfreie Stadt;Landshut;DE221;65,83;   73 150;   35 715;   37 435;   1 111
+9262;Bayern;Niederbayern;Kreisfreie Stadt;Passau;DE222;69,56;   53 093;   25 869;   27 224;763
+9263;Bayern;Niederbayern;Kreisfreie Stadt;Straubing;DE223;67,59;   47 854;   24 084;   23 770;708
+9271;Bayern;Niederbayern;Landkreis;Deggendorf;DE224;861,17;   120 521;   60 544;   59 977;140
+9272;Bayern;Niederbayern;Landkreis;Freyung-Grafenau;DE225;983,85;   78 632;   39 190;   39 442;80
+9273;Bayern;Niederbayern;Landkreis;Kelheim;DE226;   1 065,13;   123 899;   62 610;   61 289;116
+9274;Bayern;Niederbayern;Landkreis;Landshut;DE227;   1 347,55;   162 331;   81 932;   80 399;120
+9275;Bayern;Niederbayern;Landkreis;Passau;DE228;   1 530,09;   194 090;   96 442;   97 648;127
+9276;Bayern;Niederbayern;Landkreis;Regen;DE229;974,78;   77 176;   38 539;   38 637;79
+9277;Bayern;Niederbayern;Landkreis;Rottal-Inn;DE22A;   1 281,20;   122 252;   61 352;   60 900;95
+9278;Bayern;Niederbayern;Landkreis;Straubing-Bogen;DE22B;   1 201,61;   102 398;   51 417;   50 981;85
+9279;Bayern;Niederbayern;Landkreis;Dingolfing-Landau;DE22C;877,58;   98 045;   50 219;   47 826;112
+9361;Bayern;Oberpfalz;Kreisfreie Stadt;Amberg;DE231;50,13;   41 994;   20 725;   21 269;838
+9362;Bayern;Oberpfalz;Kreisfreie Stadt;Regensburg;DE232;80,86;   153 542;   74 784;   78 758;   1 899
+9363;Bayern;Oberpfalz;Kreisfreie Stadt;Weiden i.d.OPf.;DE233;70,57;   42 472;   20 556;   21 916;602
+9371;Bayern;Oberpfalz;Landkreis;Amberg-Sulzbach;DE234;   1 255,86;   103 277;   51 795;   51 482;82
+9372;Bayern;Oberpfalz;Landkreis;Cham;DE235;   1 526,82;   128 444;   64 549;   63 895;84
+9373;Bayern;Oberpfalz;Landkreis;Neumarkt i.d.OPf.;DE236;   1 343,96;   136 062;   68 857;   67 205;101
+9374;Bayern;Oberpfalz;Landkreis;Neustadt a.d.Waldnaab;DE237;   1 427,69;   94 838;   47 235;   47 603;66
+9375;Bayern;Oberpfalz;Landkreis;Regensburg;DE238;   1 391,65;   195 225;   97 630;   97 595;140
+9376;Bayern;Oberpfalz;Landkreis;Schwandorf;DE239;   1 458,34;   149 239;   75 024;   74 215;102
+9377;Bayern;Oberpfalz;Landkreis;Tirschenreuth;DE23A;   1 084,25;   71 648;   35 674;   35 974;66
+9461;Bayern;Oberfranken;Kreisfreie Stadt;Bamberg;DE241;54,62;   77 749;   37 702;   40 047;   1 423
+9462;Bayern;Oberfranken;Kreisfreie Stadt;Bayreuth;DE242;66,89;   73 909;   36 307;   37 602;   1 105
+9463;Bayern;Oberfranken;Kreisfreie Stadt;Coburg;DE243;48,29;   40 955;   19 896;   21 059;848
+9464;Bayern;Oberfranken;Kreisfreie Stadt;Hof;DE244;58,02;   45 125;   21 847;   23 278;778
+9471;Bayern;Oberfranken;Landkreis;Bamberg;DE245;   1 167,79;   147 697;   73 984;   73 713;126
+9472;Bayern;Oberfranken;Landkreis;Bayreuth;DE246;   1 273,62;   103 648;   51 423;   52 225;81
+9473;Bayern;Oberfranken;Landkreis;Coburg;DE247;590,42;   86 544;   42 781;   43 763;147
+9474;Bayern;Oberfranken;Landkreis;Forchheim;DE248;642,82;   116 753;   57 917;   58 836;182
+9475;Bayern;Oberfranken;Landkreis;Hof;DE249;892,52;   93 907;   46 017;   47 890;105
+9476;Bayern;Oberfranken;Landkreis;Kronach;DE24A;651,49;   66 091;   32 676;   33 415;101
+9477;Bayern;Oberfranken;Landkreis;Kulmbach;DE24B;658,33;   71 328;   35 111;   36 217;108
+9478;Bayern;Oberfranken;Landkreis;Lichtenfels;DE24C;519,94;   66 741;   32 949;   33 792;128
+9479;Bayern;Oberfranken;Landkreis;Wunsiedel i.Fichtelgebirge;DE24D;606,37;   71 482;   34 955;   36 527;118
+9561;Bayern;Mittelfranken;Kreisfreie Stadt;Ansbach;DE251;99,91;   41 662;   19 946;   21 716;417
+9562;Bayern;Mittelfranken;Kreisfreie Stadt;Erlangen;DE252;76,96;   113 292;   56 520;   56 772;   1 472
+9563;Bayern;Mittelfranken;Kreisfreie Stadt;Fürth;DE253;63,35;   129 122;   63 224;   65 898;   2 038
+9564;Bayern;Mittelfranken;Kreisfreie Stadt;Nürnberg;DE254;186,44;   510 632;   249 546;   261 086;   2 739
+9565;Bayern;Mittelfranken;Kreisfreie Stadt;Schwabach;DE255;40,8;   41 146;   20 207;   20 939;   1 008
+9571;Bayern;Mittelfranken;Landkreis;Ansbach;DE256;   1 971,32;   186 279;   93 562;   92 717;94
+9572;Bayern;Mittelfranken;Landkreis;Erlangen-Höchstadt;DE257;564,55;   139 323;   69 214;   70 109;247
+9573;Bayern;Mittelfranken;Landkreis;Fürth;DE258;307,44;   119 432;   58 211;   61 221;388
+9574;Bayern;Mittelfranken;Landkreis;Nürnberger Land;DE259;799,52;   171 424;   84 391;   87 033;214
+9575;Bayern;Mittelfranken;Landkreis;Neustadt a.d.Aisch-Bad Windsheim;DE25A;   1 267,45;   101 788;   51 017;   50 771;80
+9576;Bayern;Mittelfranken;Landkreis;Roth;DE25B;895,16;   127 520;   63 240;   64 280;142
+9577;Bayern;Mittelfranken;Landkreis;Weißenburg-Gunzenhausen;DE25C;970,78;   95 523;   47 641;   47 882;98
+9661;Bayern;Unterfranken;Kreisfreie Stadt;Aschaffenburg;DE261;62,45;   71 381;   34 822;   36 559;   1 143
+9662;Bayern;Unterfranken;Kreisfreie Stadt;Schweinfurt;DE262;35,7;   53 585;   26 451;   27 134;   1 501
+9663;Bayern;Unterfranken;Kreisfreie Stadt;Würzburg;DE263;87,6;   126 933;   60 749;   66 184;   1 449
+9671;Bayern;Unterfranken;Landkreis;Aschaffenburg;DE264;698,9;   174 965;   86 790;   88 175;250
+9672;Bayern;Unterfranken;Landkreis;Bad Kissingen;DE265;   1 136,90;   103 454;   50 987;   52 467;91
+9673;Bayern;Unterfranken;Landkreis;Rhön-Grabfeld;DE266;   1 021,68;   79 376;   39 486;   39 890;78
+9674;Bayern;Unterfranken;Landkreis;Haßberge;DE267;956,19;   84 284;   42 287;   41 997;88
+9675;Bayern;Unterfranken;Landkreis;Kitzingen;DE268;684,14;   91 980;   46 286;   45 694;134
+9676;Bayern;Unterfranken;Landkreis;Miltenberg;DE269;715,58;   128 782;   64 051;   64 731;180
+9677;Bayern;Unterfranken;Landkreis;Main-Spessart;DE26A;   1 321,20;   126 105;   62 873;   63 232;95
+9678;Bayern;Unterfranken;Landkreis;Schweinfurt;DE26B;841,39;   116 134;   58 345;   57 789;138
+9679;Bayern;Unterfranken;Landkreis;Würzburg;DE26C;968,35;   163 534;   81 233;   82 301;169
+9761;Bayern;Schwaben;Kreisfreie Stadt;Augsburg;DE271;146,85;   296 478;   146 234;   150 244;   2 019
+9762;Bayern;Schwaben;Kreisfreie Stadt;Kaufbeuren;DE272;40,02;   45 118;   22 229;   22 889;   1 127
+9763;Bayern;Schwaben;Kreisfreie Stadt;Kempten (Allgäu);DE273;63,28;   69 053;   34 240;   34 813;   1 091
+9764;Bayern;Schwaben;Kreisfreie Stadt;Memmingen;DE274;70,11;   44 721;   22 195;   22 526;638
+9771;Bayern;Schwaben;Landkreis;Aichach-Friedberg;DE275;780,23;   135 538;   67 418;   68 120;174
+9772;Bayern;Schwaben;Landkreis;Augsburg;DE276;   1 070,63;   257 790;   127 849;   129 941;241
+9773;Bayern;Schwaben;Landkreis;Dillingen a.d.Donau;DE277;792,23;   97 985;   49 123;   48 862;124
+9774;Bayern;Schwaben;Landkreis;Günzburg;DE278;762,4;   128 436;   64 872;   63 564;168
+9775;Bayern;Schwaben;Landkreis;Neu-Ulm;DE279;515,84;   177 330;   88 007;   89 323;344
+9776;Bayern;Schwaben;Landkreis;Lindau (Bodensee);DE27A;323,39;   82 330;   40 613;   41 717;255
+9777;Bayern;Schwaben;Landkreis;Ostallgäu;DE27B;   1 394,43;   143 236;   71 432;   71 804;103
+9778;Bayern;Schwaben;Landkreis;Unterallgäu;DE27C;   1 229,57;   147 776;   74 634;   73 142;120
+9779;Bayern;Schwaben;Landkreis;Donau-Ries;DE27D;   1 274,57;   134 986;   68 516;   66 470;106
+9780;Bayern;Schwaben;Landkreis;Oberallgäu;DE27E;   1 527,97;   157 202;   77 429;   79 773;103
