@@ -211,6 +211,14 @@ plot7<-ggplot(df97,aes(x=date,y=cases,colour=district,group=district))+geom_poin
 plot7
 
 
+# Models
+install.packages("lme4")
+library(lme4)
+install.packages("MASS")
+library(MASS)
+glm(cases~age_group+gender+kr_erstimpf+kr_zweitimpf+kr_drittimpf+kr_viertimpf,
+    family=negative.binomial(2),data=dbayern3)
+
 
 ## Baden Württemberg
 baden_wurttemberg<-data[data$state=="Baden-Württemberg",]
