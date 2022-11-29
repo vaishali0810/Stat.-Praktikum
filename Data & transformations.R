@@ -1,6 +1,22 @@
 rm(list=ls())
-data <- readRDS("cases_GermanTemporal_2022-10-25.rds")
-# 
+data <- readRDS("cases_GermanTemporal_2022-11-28.rds")
+
+library(tidyr)
+library(dplyr)
+trends <- read.csv("trends.csv", header=TRUE, sep = ",")
+View(trends)
+# popkreise <- read.csv("04-kreise.csv", header = TRUE, sep= ";")
+# View(popkreise)
+# data from destatis.de ; density in km^2
+popbay <- read.csv("popBay.csv", header = TRUE, sep = ";")
+View(popbay) 
+popbay <- popbay %>% mutate(Kreis...Landkreise = recode(Kreis...Landkreise, "Kreisfreie Stadt" = "SK", "Landkreis" = "LK"))
+popbay$district <- "NA"
+popbay$district <- paste(popbay$Kreis...Landkreise, popbay$Kreisfreie.Stadt, sep=" ")
+popbay <- popbay %>% select(state, bezirk, district, population, male, female, density, area)
+colnames(popbay)
+dbayern3 <- merge(dbayern2, popbay, by = c("district", "state"))
+View(dbayern3)
 # # remove age_group_2 & reference date
 # data <- data[, -(c(4, 7))]
 # # formate date as date
