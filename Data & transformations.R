@@ -211,6 +211,7 @@ dbayern3$male <- as.numeric(dbayern3$male)
 dbayern3$female <- as.numeric(dbayern3$female)
 dbayern3$density <- as.numeric(dbayern3$density)
 dbayern3$area <- as.numeric(dbayern3$area)
+dbayern3$age
 # # remove age_group_2 & reference date
 # data <- data[, -(c(4, 7))]
 # # formate date as date
