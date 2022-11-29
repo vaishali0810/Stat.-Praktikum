@@ -1,15 +1,203 @@
 rm(list=ls())
-data <- readRDS("cases_GermanTemporal_2022-11-28.rds")
 
 library(tidyr)
 library(dplyr)
+data <- readRDS("cases_GermanTemporal_2022-11-28.rds")
+
+data[,6]<-as.Date(data[,6])
+
+data<-data[,-7]
+
+data[,15]<-data[,2]
+
+dbayern<-data[data$state=="Bayern",]
+
+levels(dbayern[,15])<-c(levels(dbayern[,15])[1:411],"Schwaben","Oberbayern",
+                        "Unterfranken","Oberpfalz","Oberfranken","Mittelfranken",
+                        "Niederbayern")
+
+dbayern[,15]<-as.vector(dbayern[,15])
+
+names(dbayern)<-c(names(dbayern)[1:14],"bezirk")
+
+## Schwaben
+dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"LK Aichach-Friedberg"="Schwaben","SK Augsburg"="Schwaben",
+                                        "LK Augsburg"="Schwaben","LK Dillingen a.d.Donau"="Schwaben",
+                                        "LK Donau-Ries"="Schwaben","LK Günzburg"="Schwaben","LK Lindau"="Schwaben",
+                                        "LK Neu-Ulm"="Schwaben","LK Oberallgäu"="Schwaben","LK Ostallgäu"="Schwaben",
+                                        "LK Unterallgäu"="Schwaben","SK Kaufbeuren"="Schwaben","SK Kempten"="Schwaben",
+                                        "SK Memmingen"="Schwaben"))
+## Oberfranken
+dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"SK Bamberg"="Oberfranken","SK Bayreuth"="Oberfranken",
+                                        "SK Coburg"="Oberfranken","SK Hof"="Oberfranken","LK Bamberg"="Oberfranken",
+                                        "LK Bayreuth"="Oberfranken","LK Coburg"="Oberfranken","LK Forchheim"="Oberfranken",
+                                        "LK Hof"="Oberfranken","LK Kronach"="Oberfranken","LK Kulmbach"="Oberfranken",
+                                        "LK Lichtenfels"="Oberfranken","LK Wunsiedel i.Fichtelgebirge"="Oberfranken"))
+
+## Oberbayern_Unterfranken_oberpfalz.R File einlesen
+dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"SK München" = "Oberbayern", "SK Ingolstadt" = "Oberbayern", "SK Rosenheim" = "Oberbayern",
+                                        "LK Altötting" = "Oberbayern", "LK Berchtesgadener Land" = "Oberbayern", 
+                                        "LK Bad Tölz-Wolfratshausen" = "Oberbayern", "LK Dachau" = "Oberbayern",
+                                        "LK Ebersberg" = "Oberbayern", "LK Eichstätt" = "Oberbayern", "LK Erding" = "Oberbayern",
+                                        "LK Freising" = "Oberbayern", " LK Fürstenfeldbruck" = "Oberbayern",
+                                        "LK Garmisch-Partenkirchen" = "Oberbayern", "LK Landsberg a.Lech" = "Oberbayern",
+                                        "LK Miesbach" = "Oberbayern","LK Mühldorf a.Inn" = "Oberbayern", "LK München" = "Oberbayern",
+                                        "LK Neuburg-Schrobenhausen" = "Oberbayern", 
+                                        "LK Pfaffenhofen a.d.Ilm" = "Oberbayern", "LK Rosenheim" = "Oberbayern", "LK Starnberg" = "Oberbayern", 
+                                        "LK Traunstein" = "Oberbayern", "LK Weilheim-Schongau" = "Oberbayern", 
+                                        "LK Erding" = "Oberbayern", "LK Bad Reichenhall" = "Oberbayern","LK Fürstenfeldbruck"="Oberbayern",
+))
+
+dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"LK Aschaffenburg" = "Unterfranken", "LK Aschaffenburg" = "Unterfranken",
+                                        "LK Haßberge" = "Unterfranken", "LK Kitzingen" = "Unterfranken",
+                                        "LK Main-Spessart" = "Unterfranken", "LK Miltenberg" = "Unterfranken",
+                                        "LK Rhön-Grabfeld" = "Unterfranken", "LK Schweinfurt" = "Unterfranken",
+                                        "LK Würzburg" = "Unterfranken", "SK Würzburg" = "Unterfranken",
+                                        "SK Aschaffenburg" = "Unterfranken", "SK Schweinfurt" = "Unterfranken","LK Bad Kissingen"="Unterfranken"))
+
+dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"LK Amberg-Sulzbach" = "Oberpfalz", "LK Cham" = "Oberpfalz",
+                                        "LK Neumarkt i.d.OPf."= "Oberpfalz", "LK Neustadt a.d.Waldnaab" = "Oberpfalz",
+                                        "LK Regensburg" = "Oberpfalz", "LK Schwandorf" = "Oberpfalz", "LK Tirschenreuth" = "Oberpfalz",
+                                        "SK Amberg" = "Oberpfalz", "SK Regensburg"  = "Oberpfalz",
+                                        "SK Weiden i.d.OPf."  = "Oberpfalz"))
+
+
+## Mittelfranken_Niederbayern.R File einlesen
+dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"LK Roth"="Mittelfranken","LK Nürnberger Land"="Mittelfranken",
+                                        "LK Neustadt a.d.Aisch-Bad Windsheim"="Mittelfranken","LK Ansbach"="Mittelfranken",
+                                        "SK Fürth"="Mittelfranken","SK Nürnberg"="Mittelfranken","LK Weißenburg-Gunzenhausen"="Mittelfranken",
+                                        "LK Erlangen-Höchstadt"="Mittelfranken","LK Fürth"="Mittelfranken","SK Schwabach"="Mittelfranken",
+                                        "SK Erlangen"="Mittelfranken","SK Erlangen"="Mittelfranken","SK Ansbach"="Mittelfranken"))
+
+dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"LK Landshut"="Niederbayern","SK Landshut"="Niederbayern",
+                                        "LK Dingolfing-Landau"="Niederbayern","LK Freyung-Grafenau"="Niederbayern",
+                                        "LK Regen"="Niederbayern","LK Deggendorf"="Niederbayern",
+                                        "LK Passau"="Niederbayern","SK Passau"="Niederbayern","LK Rottal-Inn"="Niederbayern",
+                                        "SK Straubing"="Niederbayern","LK Straubing-Bogen"="Niederbayern","LK Kelheim"="Niederbayern"))
+
+
+
+
+
+
+
+
+
+dimpf <- read.csv("impfdaten_regional.csv")
+impfBayern <- dimpf[dimpf$bundesland == "Freistaat Bayern", ]
+impfBayern <- impfBayern %>%
+  mutate(kreis=recode(kreis, "München, Landeshauptstadt" = "SK München",
+                      "Traunstein" = "LK Traunstein",
+                      "München, Kreis" = "LK München",
+                      "Augsburg, Stadt" = "SK Augsburg",
+                      "Rosenheim, Kreis" = "LK Rosenheim",
+                      "Augsburg, Kreis"= "LK Augsburg",
+                      "Schwandorf" = "LK Schwandorf",
+                      "Unterallgäu" = "LK Unterallgäu",
+                      "Mühldorf a.Inn" = "LK Mühldorf a.Inn",
+                      "Landshut, Kreis" = "LK Landshut",
+                      "Freising" = "LK Freising",
+                      "Ebersberg" = "LK Ebersberg",
+                      "Miltenberg" = "LK Miltenberg",
+                      "Aschaffenburg, Kreis" = "LK Aschaffenburg",
+                      "Rottal-Inn" = "LK Rottal-Inn",
+                      "Dachau" = "LK Dachau",
+                      "Pfaffenhofen a.d.Ilm" = "LK Pfaffenhofen a.d.Ilm",
+                      "Ingolstadt" = "SK Ingolstadt",
+                      "Roth" = "LK Roth",
+                      "Günzburg" = "LK Günzburg",
+                      "Nürnberger Land" = "LK Nürnberger Land",
+                      "Fürstenfeldbruck" = "LK Fürstenfeldbruck",
+                      "Dillingen a.d.Donau" = "LK Dillingen a.d.Donau",
+                      "Donau-Ries" = "LK Donau-Ries",
+                      "Altötting" = "LK Altötting",
+                      "Dingolfing-Landau" = "LK Dingolfing-Landau",
+                      "Kelheim" = "LK Kelheim",
+                      "Bamberg, Kreis" = "LK Bamberg",
+                      "Neustadt a.d.Aisch-Bad Windsheim" = "LK Neustadt a.d.Aisch-Bad Windsheim",
+                      "Regensburg, Kreis" = "LK Regensburg",
+                      "Freyung-Grafenau" = "LK Freyung-Grafenau",
+                      "Amberg-Sulzbach" = "LK Amberg-Sulzbach",
+                      "Neu-Ulm" = "LK Neu-Ulm",
+                      "Rhön-Grabfeld" = "LK Rhön-Grabfeld",
+                      "Neumarkt i.d.OPf." = "LK Neumarkt i.d.OPf.",
+                      "Berchtesgadener Land" = "LK Berchtesgadener Land",
+                      "Passau, Kreis" = "LK Passau",
+                      "Bayreuth, Kreis" = "LK Bayreuth",
+                      "Regen" = "LK Regen",
+                      "Bad Tölz-Wolfratshausen" = "LK Bad Tölz-Wolfratshausen",
+                      "Aichach-Friedberg" = "LK Aichach-Friedberg",
+                      "Schweinfurt, Kreis" = "LK Schweinfurt",
+                      "Forchheim" = "LK Forchheim",
+                      "Miesbach" = "LK Miesbach",
+                      "Regensburg, Stadt" = "SK Regensburg",
+                      "Main-Spessart" = "LK Main-Spessart",
+                      "Ansbach, Kreis" = "LK Ansbach",
+                      "Bayreuth, Stadt" = "SK Bayreuth",
+                      "Cham" = "LK Cham",
+                      "Kitzingen" = "LK Kitzingen",
+                      "Tirschenreuth" = "LK Tirschenreuth",
+                      "Eichstätt" = "LK Eichstätt",
+                      "Landshut, Stadt" = "SK Landshut",
+                      "Rosenheim, Stadt" = "SK Rosenheim",
+                      "Oberallgäu" = "LK Oberallgäu",
+                      "Fürth, Stadt" = "SK Fürth",
+                      "Aschaffenburg, Stadt" = "SK Aschaffenburg",
+                      "Coburg, Kreis" = "LK Coburg",
+                      "Ostallgäu" = "LK Ostallgäu",
+                      "Neustadt a.d.Waldnaab" = "LK Neustadt a.d.Waldnaab",
+                      "Wunsiedel i.Fichtelgebirge" = "LK Wunsiedel i.Fichtelgebirge",
+                      "Deggendorf" = "LK Deggendorf",
+                      "Lichtenfels" = "LK Lichtenfels",
+                      "Nürnberg" = "SK Nürnberg",
+                      "Weißenburg-Gunzenhausen" = "LK Weißenburg-Gunzenhausen",
+                      "Erlangen-Höchstadt" = "LK Erlangen-Höchstadt",
+                      "Schweinfurt, Stadt" = "SK Schweinfurt",
+                      "Kulmbach" = "LK Kulmbach",
+                      "Würzburg, Kreis" = "LK Würzburg",
+                      "Würzburg, Stadt" = "SK Würzburg",
+                      "Fürth, Kreis" = "LK Fürth",
+                      "Schwabach" = "SK Schwabach",
+                      "Memmingen" = "SK Memmingen",
+                      "Weilheim-Schongau" = "LK Weilheim-Schongau",
+                      "Bad Kissingen" = "LK Bad Kissingen",
+                      "Bamberg, Stadt" = "SK Bamberg",
+                      "Straubing-Bogen" = "LK Straubing-Bogen",
+                      "Hof, Kreis" = "LK Hof",
+                      "Erding" = "LK Erding",
+                      "Erlangen" = "SK Erlangen",
+                      "Lindau (Bodensee)" = "LK Lindau",
+                      "Amberg" = "SK Amberg",
+                      "Starnberg"= "LK Starnberg",
+                      "Neuburg-Schrobenhausen" = "LK Neuburg-Schrobenhausen",
+                      "Landsberg am Lech" = "LK Landsberg a.Lech",
+                      "Haßberge" = "LK Haßberge",
+                      "Kempten (Allgäu)" = "SK Kempten",
+                      "Coburg, Stadt" = "SK Coburg",
+                      "Kronach" = "LK Kronach",
+                      "Weiden i.d.OPf." = "SK Weiden i.d.OPf.",
+                      "Garmisch-Partenkirchen" = "LK Garmisch-Partenkirchen",
+                      "Passau, Stadt" = "SK Passau",
+                      "Hof, Stadt" = "SK Hof",
+                      "Straubing" = "SK Straubing",
+                      "Kaufbeuren" = "SK Kaufbeuren",
+                      "Ansbach, Stadt" = "SK Ansbach")) %>%
+  as.data.frame()
+colnames(impfBayern)[5] <- "district"
+colnames(impfBayern)[6] <- "date"
+impfBayern[,6] <- as.Date(impfBayern[,6])
+impfungentake <- impfBayern %>% select(district, date, kr_erstimpf, kr_zweitimpf, kr_drittimpf, kr_viertimpf)
+dbayern2 <- merge(dbayern, impfungentake, by = c("district", "date"))
+
+
+
 trends <- read.csv("trends.csv", header=TRUE, sep = ",")
-View(trends)
+#View(trends)
 # popkreise <- read.csv("04-kreise.csv", header = TRUE, sep= ";")
 # View(popkreise)
 # data from destatis.de ; density in km^2
 popbay <- read.csv("popBay.csv", header = TRUE, sep = ";")
-View(popbay) 
+#View(popbay) 
 popbay <- popbay %>% mutate(Kreis...Landkreise = recode(Kreis...Landkreise, "Kreisfreie Stadt" = "SK", "Landkreis" = "LK"))
 popbay$district <- "NA"
 popbay$district <- paste(popbay$Kreis...Landkreise, popbay$Kreisfreie.Stadt, sep=" ")
@@ -17,6 +205,7 @@ popbay <- popbay %>% select(state, bezirk, district, population, male, female, d
 colnames(popbay)
 dbayern3 <- merge(dbayern2, popbay, by = c("district", "state"))
 View(dbayern3)
+dbayern3$date <- as.Date(dbayern3$date)
 # # remove age_group_2 & reference date
 # data <- data[, -(c(4, 7))]
 # # formate date as date
