@@ -191,8 +191,8 @@ impfBayern[,6] <- as.Date(impfBayern[,6])
 #impfBayern$drittimpf <-cumsum(impfBayern$kr_drittimpf)
 #impfBayern$viertimpf <-cumsum(impfBayern$kr_viertimpf)
 
-impfungentake <- impfBayern %>% select(district, date, kr_erstimpf, kr_zweitimpf, kr_drittimpf, kr_viertimpf)
-dbayern2 <- merge(dbayern, impfungentake, by = c("district", "date"))
+# impfungentake <- impfBayern %>% select(district, date, kr_erstimpf, kr_zweitimpf, kr_drittimpf, kr_viertimpf)
+# dbayern2 <- merge(dbayern, impfungentake, by = c("district", "date"))
 
 impfBayern$erstimpf_sum<-NA
 impfBayern$zweitimpf_sum<-NA
@@ -203,7 +203,11 @@ impfbayern2<-impfBayern%>%group_by(district)%>%dplyr::mutate(erstimpf_sum=cumsum
 
 View(impfbayern2)
 
+impfungentake <- impfBayern2 %>% select(district, date, erstimpf_sum, zweitimpf_sum, drittimpf_sum, viertimpf_sum)
+dbayern2 <- merge(dbayern, impfungentake, by = c("district", "date"))
 
+
+#dbayern2 <- merge(dbayern, impfungentake, by = c("district", "date"))
 
 trends <- read.csv("trends.csv", header=TRUE, sep = ",")
 #View(trends)
