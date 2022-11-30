@@ -13,3 +13,14 @@ lm(cases ~ state + kr_erstimpf+ kr_zweitimpf + kr_drittimpf,  data=dbayern3)
 
 glm(cases ~ district , family = negative.binomial(2), data=dbayern3)
 isfactor(dbayern3)
+
+
+
+library(tidyverse) # Modern data science library 
+library(plm)       # Panel data analysis library
+library(car)       # Companion to applied regression 
+library(gplots)    # Various programing tools for plotting data
+library(tseries)   # For timeseries analysis
+library(lmtest)   
+dbayern3 <- plm.data(dbayern3, index=c("district", "date"))
+plm(cases~district + kr_erstimpf+ kr_zweitimpf + kr_drittimpf, data=dbayern3, model = "random")
