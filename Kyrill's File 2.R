@@ -105,11 +105,11 @@ dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"LK Landshut"="Niederbayern","SK 
 
 ## Loop
 # data_new und dbayern einlesen
-vector23<-c(summary(dbayern$district)[1:96])
+vector23<-c(summary(dbayern3$district)[1:92])
 vector23names<-names(vector23)
 Storage<-list()
 for(i in 1:length(vector23names)){
-   Storage[[i]]<-dbayern[dbayern$district==vector23names[i],]
+   Storage[[i]]<-dbayern3[dbayern3$district==vector23names[i],]
  }
 # View(Storage)
 
@@ -215,7 +215,45 @@ dbayern3$male_anteil<-dbayern3$male/dbayern3$population
 dbayern3$female_anteil<-dbayern3$female/dbayern3$population
 View(dbayern3)
 
+dbayern3$kr_erstimpf_sum<-NA
 
+## Storage2 einlesen
+
+View(Storage2[[1]])
+
+Storage2[[i]][j,26]
+
+Storage2[[1]][Storage2[[1]]$date=="2020-12-27",26]<-sum(Storage2[[1]][Storage2[[1]]$date=="2020-12-27",15])
+
+test1<-sum(Storage2[[1]][Storage2[[1]]$date=="2020-12-27",15])
+
+View(Storage2[[1]])
+
+
+#for(i in 1:length(Storage2)){
+ # for(j in 1:681){
+  #  Storage2[[i]][Storage2[[i]]$date==2020-12-26+j,26]<-sum(Storage2[[i]][Storage2[[i]]$date==2020-12-26+j,15])+sum(Storage2[[i]][Storage2[[i]]$date==2020-12-26+(j-1),15])
+  #}
+#}
+
+#View(Storage2[[1]])
+
+#for(i in 1:length(Storage2)){
+#  Storage2[[i]]$kr_erstimpf_sum<-cumsum(Storage2[[i]]$kr_erstimpf)
+#}
+
+#for(i in 1:length(Storage2)){
+#  for(j in as.Date("2020-12-28"):as.Date("2022-11-08")){
+#    Storage2[[i]][Storage2[[i]]$date==j,26]<-sum(Storage2[[i]][Storage2[[i]]$date==(j-1),15])+sum(Storage2[[i]][Storage2[[i]]$date==j,15])
+#  }
+#}
+
+
+impfBayern$erstimpf_sum<-NA
+
+impfbayern2<-impfBayern%>%group_by(district)%>%dplyr::mutate(erstimpf_sum=cumsum(kr_erstimpf))
+
+View(impfbayern2)
 
 # Models
 install.packages("lme4")
