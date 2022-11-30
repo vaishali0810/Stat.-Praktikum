@@ -1,4 +1,4 @@
-dbayern3 <- merge(dbayern2, popbay, by = c("district", "state", "bezirk"))
+dbayern3 <- merge(dbayern2, popbay2, by = c("district", "state", "bezirk"))
 View(dbayern3)
 dbayern3$date <- as.Date(dbayern3$date)
 
@@ -11,48 +11,29 @@ data_train <- dbayern3[ind_train, ]
 ind_test <- setdiff(1:n, ind_train)
 data_test <- dbayern3[ind_test, ]
 dbayern3<-dbayern3[,-2]
-dbayern3<-dbayern3[,-3]
-dbayern3$cases<-as.factor(dbayern3$cases)
-model_boosting_default<- glmboost(cases ~ ., data = data_train,
-                                  control = boost_control(mstop = 100,
+dbayern3<-dbayern3[,-5]
+dbayern3<-dbayern3[,-13]
+dbayern3<-dbayern3[,-7]
+dbayern3$bezirk<-as.factor(dbayern3$bezirk)
+dbayern3$gender<-as.factor(dbayern3$gender)
+library(plm)
+dbayern3 <- pdata.frame(dbayern3, index=c("district", "date"))
+library(MASS)
+model_boosting_default<- glmboost(cases ~ bezirk+age_group+gender+kr_erstimpf
+                                  +kr_zweitimpf+kr_drittimpf+kr_viertimpf+population+
+                                    density+area, data = data_train,
+                                  control = boost_control(mstop = 1000,
                                                           nu = 0.1))
+model_bezirk<- glmboost(cases ~ bezirk, data = data_train,
+                                  control = boost_control(mstop = 1000,
+                                                          nu = 0.1))
+library(smurf)
+model_lasso_cv <- glmsmurf(formula =  cases ~ p(bezirk, pen = "flasso",refcat = "Mittelfranken")+
+                             p(area,pen = "lasso"),family = neg.bin(2), data = dbayern3, 
+                           lambda = "cv.mse")
+p(lage, pen = "flasso", refcat = "normal")
+
+plot_lambda(model_lasso_cv)
+par(mar = c(5.1, 4.1, 4.1, 9.1)) 
 plot(x = model_boosting_default, main = "Koeffizientenpfade")
-
-
-
-popbay <- read.csv("popBay.csv", header = TRUE, sep = ";")
-#View(popbay) 
-popbay <- popbay %>% mutate(Kreis...Landkreise = recode(Kreis...Landkreise, "Kreisfreie Stadt" = "SK", "Landkreis" = "LK"))
-popbay$district <- "NA"
-popbay$district <- paste(popbay$Kreis...Landkreise, popbay$Kreisfreie.Stadt, sep=" ")
-popbay <- popbay %>% select(state, bezirk, district, population, male, female, density, area)
-colnames(popbay)
-
-popbay2<-popbay
-
-popbay2<-sapply(popbay2, gsub, pattern = ",", replacement= ".")
-popbay2<-as.data.frame(popbay2)
-a<-gsub(" ","",x=popbay2$area)
-c<-as.numeric(a)
-popbay2$area<-c
-
-a<-gsub(" ","",x=popbay2$population)
-b<-unlist(a)
-c<-as.numeric(b)
-popbay2$population<-c
-
-a<-gsub(" ","",x=popbay2$male)
-b<-unlist(a)
-c<-as.numeric(b)
-popbay2$male<-c
-
-a<-gsub(" ","",x=popbay2$female)
-b<-unlist(a)
-c<-as.numeric(b)
-popbay2$female<-c
-
-a<-gsub(" ","",x=popbay2$density)
-b<-unlist(a)
-c<-as.numeric(b)
-popbay2$density<-c
-
+plot(x = model_bezirk, main = "Koeffizientenpfade",)
