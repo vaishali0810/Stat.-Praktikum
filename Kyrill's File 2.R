@@ -211,13 +211,21 @@ plot7<-ggplot(df97,aes(x=date,y=cases,colour=district,group=district))+geom_poin
 plot7
 
 
+dbayern3$male_anteil<-dbayern3$male/dbayern3$population
+dbayern3$female_anteil<-dbayern3$female/dbayern3$population
+View(dbayern3)
+
+
+
 # Models
 install.packages("lme4")
 library(lme4)
 install.packages("MASS")
 library(MASS)
 glm(cases~age_group+gender+kr_erstimpf+kr_zweitimpf+kr_drittimpf+kr_viertimpf,
-    family=negative.binomial(2),data=dbayern3)
+    family=negative.binomial(10,link="logit"),data=dbayern3)
+
+
 
 
 ## Baden Württemberg
