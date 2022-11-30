@@ -186,6 +186,11 @@ impfBayern <- impfBayern %>%
 colnames(impfBayern)[5] <- "district"
 colnames(impfBayern)[6] <- "date"
 impfBayern[,6] <- as.Date(impfBayern[,6])
+impfBayern$erstimpf <-cumsum(impfBayern$kr_erstimpf)
+impfBayern$zweitimpf <-cumsum(impfBayern$kr_zweitimpf)
+impfBayern$drittimpf <-cumsum(impfBayern$kr_drittimpf)
+impfBayern$viertimpf <-cumsum(impfBayern$kr_viertimpf)
+
 impfungentake <- impfBayern %>% select(district, date, kr_erstimpf, kr_zweitimpf, kr_drittimpf, kr_viertimpf)
 dbayern2 <- merge(dbayern, impfungentake, by = c("district", "date"))
 
