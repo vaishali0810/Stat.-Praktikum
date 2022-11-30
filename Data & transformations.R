@@ -252,6 +252,8 @@ dbayern3$age_group <- as.factor(dbayern3$age_group)
 dbayern3 <- dbayern3[, -6]
 dbayern3 <- dbayern3 %>% mutate(gender = recode(gender, "W" = "1", "M" = "0", "unbekannt" = "NA_integer_"))
 dbayern3[, 6] <- as.numeric(dbayern3[, 6])
+
+dbayern3$inzidenz <- (dbayern3$cases/dbayern3$population) * 100000
 # # remove age_group_2 & reference date
 # data <- data[, -(c(4, 7))]
 # # formate date as date
