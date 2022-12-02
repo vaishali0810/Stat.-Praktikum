@@ -218,7 +218,7 @@ Storage4<-Storage3
 for(i in 1:length(vector23names)){
   Storage4[[i]]<-Storage4[[i]]%>%arrange(age_group)
 }
-View(Storage4[[1]])
+#View(Storage4[[1]])
 
 ## Nach bezirk Kategorie
 dbayern$bezirk<-as.factor(dbayern$bezirk)
@@ -240,12 +240,12 @@ Storage8<-Storage7
 for(i in 1:length(bezirk_names)){
   Storage8[[i]]<-Storage8[[i]]%>%arrange(age_group)
 }
-View(Storage8[[1]])
+#View(Storage8[[1]])
 Storage9<-Storage8
 for(i in 1:length(bezirk_names)){
   Storage9[[i]]<-Storage9[[i]]%>%arrange(district)
 }
-View(Storage9[[1]])
+#View(Storage9[[1]])
 
 a<-min(Storage9[[1]]$date)
 b<-max(Storage9[[1]]$date)
@@ -281,7 +281,7 @@ impfBayern$viertimpf_sum<-NA
 
 impfbayern2<-impfBayern%>%group_by(district)%>%dplyr::mutate(erstimpf_sum=cumsum(kr_erstimpf),zweitimpf_sum=cumsum(kr_zweitimpf),drittimpf_sum=cumsum(kr_drittimpf),viertimpf_sum=cumsum(kr_viertimpf))
 
-View(impfbayern2)
+#View(impfbayern2)
 
 #impfungentake <- impfbayern2 %>% select(district, date, erstimpf_sum, zweitimpf_sum, drittimpf_sum, viertimpf_sum)
 impfungentake <- impfBayern %>% select(district, date, kr_erstimpf, kr_zweitimpf, kr_drittimpf, kr_viertimpf)
