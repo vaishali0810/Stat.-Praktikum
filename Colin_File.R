@@ -212,11 +212,38 @@ table(impfBayern$kreis)
 
 View(impfBayern)
 
+str(impfBayern)
+
 colnames(impfBayern)[5] <- "district"
 colnames(impfBayern)[6] <- "date"
 impfBayern[,6] <- as.Date(impfBayern[,6])
 colnames(impfBayern)
 str(impfBayern)
+
+impfBayern$erstimpftotal <- 0
+impfBayern <- impfBayern %>% mutate(erstimpftotal = as.factor(kr))
+
+#districtvector<-unique(impfBayern$district)[1:96]
+#districtvector<-names(vector23)
+storageimpf<-list()
+districtvector <- unique(impfBayern$district)
+for(i in 1:length(districtvector)){
+  storageimpf[[i]]<-impfBayern[impfBayern$district==districtvector[i],]
+}
+
+
+
+
+# add_fun <- function(x) {
+#   for (i in seq_along(x$date)) {
+#     if (date == "2020-12-27") {
+#       x$erstimpftotal[i] <- kr_erstimpf[i]
+#     }
+#     else {
+#       x$erstimpftotal <- x$erstimpftotal[i-1] + x$kr_erstimpf[i]
+#     }
+#   }
+# }
 
 impfungentake <- impfBayern %>% select(district, date, kr_erstimpf, kr_zweitimpf, kr_drittimpf, kr_viertimpf)
 View(impfungentake)

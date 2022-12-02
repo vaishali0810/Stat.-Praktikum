@@ -11,8 +11,8 @@ lm(cases ~ state + kr_erstimpf+ kr_zweitimpf + kr_drittimpf,  data=dbayern3)
 # dbayern3$area <- as.numeric(dbayern3$area)
 # str(dbayern3)
 
-glm(cases ~ district , family = negative.binomial(2), data=dbayern3)
-isfactor(dbayern3)
+# glm(cases ~ district , family = negative.binomial(2), data=dbayern3)
+# isfactor(dbayern3)
 
 
 
@@ -23,4 +23,5 @@ library(gplots)    # Various programing tools for plotting data
 library(tseries)   # For timeseries analysis
 library(lmtest)   
 dbayern3 <- plm.data(dbayern3, index=c("district", "date"))
-plm(cases~district + kr_erstimpf+ kr_zweitimpf + kr_drittimpf, data=dbayern3, model = "random")
+re1 <- plm(inzidenz~ bezirk + erstimpf_sum + zweitimpf_sum + drittimpf_sum + male_anteil, data=dbayern3, model = "random")
+summary(re1)

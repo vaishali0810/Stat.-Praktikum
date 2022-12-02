@@ -186,6 +186,86 @@ impfBayern <- impfBayern %>%
 colnames(impfBayern)[5] <- "district"
 colnames(impfBayern)[6] <- "date"
 impfBayern[,6] <- as.Date(impfBayern[,6])
+
+
+## Loop
+# data_new und dbayern einlesen
+vector23<-c(summary(dbayern$district)[1:96])
+vector23names<-names(vector23)
+Storage<-list()
+for(i in 1:length(vector23names)){
+  Storage[[i]]<-dbayern[dbayern$district==vector23names[i],]
+}
+# View(Storage)
+
+## Nach Datum sortieren
+#library(dplyr)
+Storage2<-Storage
+for(i in 1:length(vector23names)){
+  Storage2[[i]]<-Storage2[[i]]%>%arrange(date)
+}
+# View(Storage2)
+
+## Nach Gender sortieren
+Storage3<-Storage2
+for(i in 1:length(vector23names)){
+  Storage3[[i]]<-Storage3[[i]]%>%arrange(gender)
+}
+# View (Storage3)
+
+## Nach age group sortieren
+Storage4<-Storage3
+for(i in 1:length(vector23names)){
+  Storage4[[i]]<-Storage4[[i]]%>%arrange(age_group)
+}
+View(Storage4[[1]])
+
+## Nach bezirk Kategorie
+dbayern$bezirk<-as.factor(dbayern$bezirk)
+summary(dbayern$bezirk)
+bezirk_names<-c(names(summary(dbayern$bezirk)))
+Storage5<-list()
+for(i in 1:length(bezirk_names)){
+  Storage5[[i]]<-dbayern[dbayern$bezirk==bezirk_names[i],]
+}
+Storage6<-Storage5
+for(i in 1:length(bezirk_names)){
+  Storage6[[i]]<-Storage6[[i]]%>%arrange(date)
+}
+Storage7<-Storage6
+for(i in 1:length(bezirk_names)){
+  Storage7[[i]]<-Storage7[[i]]%>%arrange(gender)
+}
+Storage8<-Storage7
+for(i in 1:length(bezirk_names)){
+  Storage8[[i]]<-Storage8[[i]]%>%arrange(age_group)
+}
+View(Storage8[[1]])
+Storage9<-Storage8
+for(i in 1:length(bezirk_names)){
+  Storage9[[i]]<-Storage9[[i]]%>%arrange(district)
+}
+View(Storage9[[1]])
+
+a<-min(Storage9[[1]]$date)
+b<-max(Storage9[[1]]$date)
+c<-seq(as.Date(a), as.Date(b), "days")
+c<-as.data.frame(c)
+colnames(c)[1] <- "date"
+y<-merge(Storage9[[1]],c, by="date",
+         all.x=TRUE, all.y=TRUE)
+v<-y$cases
+index<-is.na(v)
+v[index]<-0
+y$cases<-v
+
+v<-y$gender
+index<-is.na(v)
+v[index]<-"egal"
+y$gender<-v
+
+
+
 #impfBayern$erstimpf <-cumsum(impfBayern$kr_erstimpf)
 #impfBayern$zweitimpf <-cumsum(impfBayern$kr_zweitimpf)
 #impfBayern$drittimpf <-cumsum(impfBayern$kr_drittimpf)
@@ -203,10 +283,20 @@ impfbayern2<-impfBayern%>%group_by(district)%>%dplyr::mutate(erstimpf_sum=cumsum
 
 View(impfbayern2)
 
-impfungentake <- impfBayern2 %>% select(district, date, erstimpf_sum, zweitimpf_sum, drittimpf_sum, viertimpf_sum)
-dbayern2 <- merge(dbayern, impfungentake, by = c("district", "date"))
+#impfungentake <- impfbayern2 %>% select(district, date, erstimpf_sum, zweitimpf_sum, drittimpf_sum, viertimpf_sum)
+impfungentake <- impfBayern %>% select(district, date, kr_erstimpf, kr_zweitimpf, kr_drittimpf, kr_viertimpf)
+View(impfungentake)
+dbayern2 <- merge(dbayern, impfungentake, by = c("district", "date"), all.x = TRUE, all.y = TRUE)
+View(dbayern2)
 
+dbayern2.1<-dbayern2%>%group_by(district)%>%dplyr::mutate(erstimpf_sum=cumsum(kr_erstimpf),zweitimpf_sum=cumsum(kr_zweitimpf),drittimpf_sum=cumsum(kr_drittimpf),viertimpf_sum=cumsum(kr_viertimpf))
+View(dbayern2)
 
+a <- dbayern2$erstimpf_sum 
+index <- is.na(a) 
+dbayern2[index, 16] <- 0
+
+#dbayern2$erstimpf_sum <- a
 #dbayern2 <- merge(dbayern, impfungentake, by = c("district", "date"))
 
 trends <- read.csv("trends.csv", header=TRUE, sep = ",")
@@ -230,6 +320,8 @@ popbay <- popbay %>% select(state, bezirk, district, population, male, female, d
 colnames(popbay)
 
 popbay2<-popbay
+
+### Code character change to valid numerics (no commas, no spaces etc.)
 
 popbay2<-sapply(popbay2, gsub, pattern = ",", replacement= ".")
 popbay2<-as.data.frame(popbay2)
@@ -407,7 +499,7 @@ for(i in 1:length(vector23names)){
 # View(Storage)
 
 ## Nach Datum sortieren
-library(dplyr)
+#library(dplyr)
 Storage2<-Storage
 for(i in 1:length(vector23names)){
   Storage2[[i]]<-Storage2[[i]]%>%arrange(date)
