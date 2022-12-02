@@ -285,9 +285,9 @@ impfbayern2<-impfBayern%>%group_by(district)%>%dplyr::mutate(erstimpf_sum=cumsum
 
 #impfungentake <- impfbayern2 %>% select(district, date, erstimpf_sum, zweitimpf_sum, drittimpf_sum, viertimpf_sum)
 impfungentake <- impfBayern %>% select(district, date, kr_erstimpf, kr_zweitimpf, kr_drittimpf, kr_viertimpf)
-View(impfungentake)
+#View(impfungentake)
 dbayern2 <- merge(dbayern, impfungentake, by = c("district", "date"), all.x = TRUE, all.y = TRUE)
-View(dbayern2)
+#View(dbayern2)
 
 
 
@@ -306,7 +306,7 @@ dbayern2[index, 19] <- 0
 
 
 dbayern2.1<-dbayern2%>%group_by(district)%>%dplyr::mutate(erstimpf_sum=cumsum(kr_erstimpf),zweitimpf_sum=cumsum(kr_zweitimpf),drittimpf_sum=cumsum(kr_drittimpf),viertimpf_sum=cumsum(kr_viertimpf))
-View(dbayern2.1)
+#View(dbayern2.1)
 
 #dbayern2$erstimpf_sum <- a
 #dbayern2 <- merge(dbayern, impfungentake, by = c("district", "date"))
@@ -361,9 +361,9 @@ b<-unlist(a)
 c<-as.numeric(b)
 popbay2$density<-c
 
-
+#View(popbay2)
 dbayern3 <- merge(dbayern2.1, popbay2, by = c("district", "state", "bezirk"))
-View(dbayern3)
+#View(dbayern3)
 # dbayern3$date <- as.Date(dbayern3$date)
 # dbayern3$population <- as.numeric(dbayern3$population)
 # dbayern3$male <- as.numeric(dbayern3$male)
