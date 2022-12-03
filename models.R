@@ -1,7 +1,7 @@
 install.packages("lme4")
 library(lme4)
 
-lm(cases ~ state + kr_erstimpf+ kr_zweitimpf + kr_drittimpf,  data=dbayern3)
+summary(lm(inzidenz~ bezirk + lag(inzidenz, 7) + gender + erstimpf_sum + zweitimpf_sum + drittimpf_sum,  data=dbayern5))
 
 #dbayern3$district <- as.factor(dbayern3$district)
 # dbayern3$population <- as.numeric(dbayern3$population)
@@ -19,9 +19,10 @@ lm(cases ~ state + kr_erstimpf+ kr_zweitimpf + kr_drittimpf,  data=dbayern3)
 library(tidyverse) # Modern data science library 
 library(plm)       # Panel data analysis library
 library(car)       # Companion to applied regression 
-library(gplots)    # Various programing tools for plotting data
+#library(ggplots2)    # Various programing tools for plotting data
 library(tseries)   # For timeseries analysis
 library(lmtest)   
-dbayern3 <- plm.data(dbayern3, index=c("district", "date"))
-re1 <- plm(inzidenz~ bezirk + erstimpf_sum + zweitimpf_sum + drittimpf_sum + male_anteil, data=dbayern3, model = "random")
+dbayern4 <- pdata.frame(dbayern3, index=c("district", "gender", "age_group"))
+dbayern5 <- dbayern4[complete.cases(dbayern4),]
+re1 <- plm(inzidenz~ bezirk + erstimpf_sum + zweitimpf_sum + drittimpf_sum + male_anteil, data=dbayern5, model = "random")
 summary(re1)
