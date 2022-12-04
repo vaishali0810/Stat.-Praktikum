@@ -5,7 +5,7 @@
 .RData
 corona_infKreise.zipx
 trends.csv
-impfdaten_regional
+impfdaten_regional.csv
 trends.zip
 cases_GermanTemporal_2022-11-28.rds
 04-kreise.xlsx
@@ -13,3 +13,4 @@ cases_GermanTemporal_2022-11-28.rds
 
 04-kreise.csv
 corona_inf_kreise.zipx
+
