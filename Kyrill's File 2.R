@@ -103,13 +103,14 @@ dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"LK Landshut"="Niederbayern","SK 
 
 
 
+dbayern$cases_on_date<-NA
 ## Loop
 # data_new und dbayern einlesen
-vector23<-c(summary(dbayern4$district))
+vector23<-c(summary(dbayern$district))
 vector23names<-names(vector23)
 Storage<-list()
 for(i in 1:length(vector23names)){
-   Storage[[i]]<-dbayern4[dbayern4$district==vector23names[i],]
+   Storage[[i]]<-dbayern[dbayern$district==vector23names[i],]
  }
 # View(Storage)
 
@@ -119,6 +120,17 @@ Storage2<-Storage
 for(i in 1:length(vector23names)){
   Storage2[[i]]<-Storage2[[i]]%>%arrange(date)
 }
+
+dates<-seq(as.Date("2020-01-28"),as.Date("2022-11-25"),by=1)
+
+for(j in 1:length(Storage2)){
+  for(i in dates){
+    Storage2[[j]][Storage2[[j]]$date==i,16]<-sum(Storage2[[j]][Storage2[[j]]$date==i,11],na.rm=TRUE)
+  }
+}
+
+View(Storage2[[1]])
+
 # View(Storage2)
 
 ## Nach Gender sortieren
@@ -211,11 +223,11 @@ plot7<-ggplot(df97,aes(x=date,y=cases,colour=district,group=district))+geom_poin
 plot7
 
 
-dbayern3$male_anteil<-dbayern3$male/dbayern3$population
-dbayern3$female_anteil<-dbayern3$female/dbayern3$population
-View(dbayern3)
+#dbayern3$male_anteil<-dbayern3$male/dbayern3$population
+#dbayern3$female_anteil<-dbayern3$female/dbayern3$population
+#View(dbayern3)
 
-dbayern3$kr_erstimpf_sum<-NA
+#dbayern3$kr_erstimpf_sum<-NA
 
 ## Storage2 einlesen
 
@@ -267,7 +279,6 @@ re1 <- plm(inzidenz~ bezirk + erstimpf_sum + zweitimpf_sum + drittimpf_sum + mal
 summary(re1)
 
 #dbayern4<-dbayern3%>%arrange(district)
-dates<-seq(as.Date("2020-01-28"),as.Date("2022-11-25"),by=1)
 #for(i in 1:length(Storage2)){
 #  for(j in dates){
 #    Storage2[[i]]$cases_on_date<-sum(Storage2[[i]][Storage2[[i]]$date==j,11],na.rm=TRUE)
@@ -279,11 +290,39 @@ dates<-seq(as.Date("2020-01-28"),as.Date("2022-11-25"),by=1)
 #  Storage2[[1]][Storage2[[1]]$date==i,16]<-sum(Storage2[[1]][Storage2[[1]]$date==i,11],na.rm=TRUE)
 #}
 
+dates<-seq(as.Date("2020-01-28"),as.Date("2022-11-25"),by=1)
+
 for(j in 1:length(Storage2)){
   for(i in dates){
     Storage2[[j]][Storage2[[j]]$date==i,16]<-sum(Storage2[[j]][Storage2[[j]]$date==i,11],na.rm=TRUE)
   }
 }
+
+View(Storage2[[1]])
+
+dbayernshort<-dbayern%>%select(district, age_group, gender, date, cases, bezirk,cases_on_date)
+
+Storageshort<-list()
+
+vector23_2<-c(summary(dbayern$district))
+vector23names_2<-names(vector23)
+for(i in 1:length(vector23names_2)){
+  Storageshort[[i]]<-dbayernshort[dbayernshort$district==vector23names_2[i],]
+}
+
+Storage2short<-Storageshort
+for(i in 1:length(vector23names_2)){
+  Storage2short[[i]]<-Storage2short[[i]]%>%arrange(date)
+}
+
+for(j in 1:length(Storage2short)){
+  for(i in dates){
+    Storage2short[[j]][Storage2short[[j]]$date==i,7]<-sum(Storage2short[[j]][Storage2short[[j]]$date==i,5],na.rm=TRUE)
+  }
+}
+
+View(Storage2short[[1]])
+
 
 
 #dbayern4$anteil_man<-NA
