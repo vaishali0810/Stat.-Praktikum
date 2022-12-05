@@ -105,11 +105,11 @@ dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"LK Landshut"="Niederbayern","SK 
 
 ## Loop
 # data_new und dbayern einlesen
-vector23<-c(summary(dbayern3$district)[1:92])
+vector23<-c(summary(dbayern4$district))
 vector23names<-names(vector23)
 Storage<-list()
 for(i in 1:length(vector23names)){
-   Storage[[i]]<-dbayern3[dbayern3$district==vector23names[i],]
+   Storage[[i]]<-dbayern4[dbayern4$district==vector23names[i],]
  }
 # View(Storage)
 
@@ -219,15 +219,15 @@ dbayern3$kr_erstimpf_sum<-NA
 
 ## Storage2 einlesen
 
-View(Storage2[[1]])
+#View(Storage2[[1]])
 
-Storage2[[i]][j,26]
+#Storage2[[i]][j,26]
 
-Storage2[[1]][Storage2[[1]]$date=="2020-12-27",26]<-sum(Storage2[[1]][Storage2[[1]]$date=="2020-12-27",15])
+#Storage2[[1]][Storage2[[1]]$date=="2020-12-27",26]<-sum(Storage2[[1]][Storage2[[1]]$date=="2020-12-27",15])
 
-test1<-sum(Storage2[[1]][Storage2[[1]]$date=="2020-12-27",15])
+#test1<-sum(Storage2[[1]][Storage2[[1]]$date=="2020-12-27",15])
 
-View(Storage2[[1]])
+#View(Storage2[[1]])
 
 
 #for(i in 1:length(Storage2)){
@@ -249,11 +249,11 @@ View(Storage2[[1]])
 #}
 
 
-impfBayern$erstimpf_sum<-NA
+#impfBayern$erstimpf_sum<-NA
 
-impfbayern2<-impfBayern%>%group_by(district)%>%dplyr::mutate(erstimpf_sum=cumsum(kr_erstimpf))
+#impfbayern2<-impfBayern%>%group_by(district)%>%dplyr::mutate(erstimpf_sum=cumsum(kr_erstimpf))
 
-View(impfbayern2)
+#View(impfbayern2)
 
 # Models
 install.packages("lme4")
@@ -263,6 +263,40 @@ library(MASS)
 glm(cases~age_group+gender+kr_erstimpf+kr_zweitimpf+kr_drittimpf+kr_viertimpf,
     family=negative.binomial(10,link="logit"),data=dbayern3)
 
+re1 <- plm(inzidenz~ bezirk + erstimpf_sum + zweitimpf_sum + drittimpf_sum + male_anteil, data=dbayern3, model = "random")
+summary(re1)
+
+#dbayern4<-dbayern3%>%arrange(district)
+dates<-seq(as.Date("2020-01-28"),as.Date("2022-11-25"),by=1)
+#for(i in 1:length(Storage2)){
+#  for(j in dates){
+#    Storage2[[i]]$cases_on_date<-sum(Storage2[[i]][Storage2[[i]]$date==j,11],na.rm=TRUE)
+#  }
+#}
+#View(Storage2[[3]])
+
+#for(i in dates){
+#  Storage2[[1]][Storage2[[1]]$date==i,16]<-sum(Storage2[[1]][Storage2[[1]]$date==i,11],na.rm=TRUE)
+#}
+
+for(j in 1:length(Storage2)){
+  for(i in dates){
+    Storage2[[j]][Storage2[[j]]$date==i,16]<-sum(Storage2[[j]][Storage2[[j]]$date==i,11],na.rm=TRUE)
+  }
+}
+
+
+#dbayern4$anteil_man<-NA
+#dbayern4$anteil_woman<-NA
+#dbayern4$anteil_man<-ifelse(dbayern4$gender==0,1,0)
+#dbayern4$anteil_woman<-ifelse(dbayern4$gender==1,1,0)
+#View(dbayern5)
+
+#dbayern4$erstimpf_sum<-as.factor(dbayern4$erstimpf_sum)
+#dbayern4$zweitimpf_sum<-as.factor(dbayern4$zweitimpf_sum)
+#dbayern4$drittimpf_sum<-as.factor(dbayern4$drittimpf_sum)
+#dbayern4$male_anteil<-as.factor(dbayern4$male_anteil)
+#dbayern4$inzidenz<-as.factor(dbayern4$inzidenz)
 
 
 

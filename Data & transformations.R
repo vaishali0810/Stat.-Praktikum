@@ -323,13 +323,13 @@ popbay$district <- "NA"
 popbay$district <- paste(popbay$Kreis...Landkreise, popbay$Kreisfreie.Stadt, sep=" ")
 popbay <- popbay %>% select(state, bezirk, district, population, male, female, density, area)
 colnames(popbay)
-popbay <- read.csv("popBay.csv", header = TRUE, sep = ";")
+#popbay <- read.csv("popBay.csv", header = TRUE, sep = ";")
 #View(popbay) 
-popbay <- popbay %>% mutate(Kreis...Landkreise = recode(Kreis...Landkreise, "Kreisfreie Stadt" = "SK", "Landkreis" = "LK"))
-popbay$district <- "NA"
-popbay$district <- paste(popbay$Kreis...Landkreise, popbay$Kreisfreie.Stadt, sep=" ")
-popbay <- popbay %>% select(state, bezirk, district, population, male, female, density, area)
-colnames(popbay)
+#popbay <- popbay %>% mutate(Kreis...Landkreise = recode(Kreis...Landkreise, "Kreisfreie Stadt" = "SK", "Landkreis" = "LK"))
+#popbay$district <- "NA"
+#popbay$district <- paste(popbay$Kreis...Landkreise, popbay$Kreisfreie.Stadt, sep=" ")
+#popbay <- popbay %>% select(state, bezirk, district, population, male, female, density, area)
+#colnames(popbay)
 
 popbay2<-popbay
 
