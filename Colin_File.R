@@ -350,8 +350,6 @@ for(j in 1:length(Storage2)){
 View(Storage2[[1]])
 
 
-
-
 f <- Storage2[[1]]%>%filter(gender=="M") %>% filter(age_group=="A00-A04")
 for(j in 1:length(f)){
   for(i in dates){
@@ -360,6 +358,11 @@ for(j in 1:length(f)){
 }
 f <- f %>% select(district, date, bezirk, cases_on_date, age_group, gender)
 f <- unique(f)
+
+
+
+## Split data based on gender and age group
+
 
 m0.4 <- list()
 m5.14 <- list()
@@ -604,5 +607,68 @@ for(i in seq_along(Storage2)) {
   unb.unb[[i]] <- unb.unb[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
   unb.unb[[i]] <- unique(unb.unb[[i]])
 }
+
+View(m0.4[[1]])
+# m0.4
+# m5.14 
+# m15.34
+# m35.59 
+# m60.79 
+# m.80 
+# m.unb 
+# f0.4 
+# f5.14 
+# f15.34 
+# f35.59 
+# f60.79 
+# f.80 
+# f.unb 
+# unb0.4 
+# unb5.14 
+# unb15.34 
+# unb35.59
+# unb60.79 
+# unb.80 
+# unb.unb 
+length(datev)
+
+datev <- as.data.frame(datev)
+colnames(datev) <- "date"
+
+
+datev[,1] <- as.Date(datev[,1])
+test999 <- as.data.frame(m0.4[[1]])
+test999[,2] <- as.Date(test999[,2])
+
+test1000 <- merge(y = test999, x = datev,  all.x = TRUE, all.y = TRUE)
+test1000[is.na(test1000)] <- 0
+test1000[,2] <- test999[1,1]
+test1000[,5] <- test999[1,5]
+test1000[,3] <- test999[1,3]
+test1000[,6] <- test999[1,6]
+
+
+
+
+for(i in seq_along(m0.4)) {
+  temp1 <- m0.4[[i]][1,1]
+  temp2 <- m0.4[[i]][1,5]
+  temp3 <- m0.4[[i]][1,3]
+  temp4 <- m0.4[[i]][1,6]
+  m0.4[[i]] <- merge(y = m0.4[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  m0.4[[i]][is.na(m0.4[[i]])] <- 0
+  m0.4[[i]][,2] <- temp1
+  m0.4[[i]][,5] <- temp2
+  m0.4[[i]][,3] <- temp3
+  m0.4[[i]][,6] <- temp4
+}
+
+m0.4 <- m0.4[[-c(97, 98,99,100)]]
+
+
+
+
+
+
 
 

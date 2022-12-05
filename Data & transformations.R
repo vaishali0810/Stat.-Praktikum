@@ -375,7 +375,12 @@ dbayern3 <- dbayern3[, -6]
 dbayern3 <- dbayern3 %>% mutate(gender = recode(gender, "W" = "1", "M" = "0", "unbekannt" = "NA_integer_"))
 dbayern3[, 6] <- as.numeric(dbayern3[, 6])
 
-dbayern3$inzidenz <- (dbayern3$cases/dbayern3$population) * 100000
+
+dbayern3 <- dbayern3 %>% 
+  arrange(date) %>%
+  mutate(inzidenz = ((lag(cases,6) + lag(cases,5) + lag(cases,4)+ 
+                                              lag(cases,3) +lag(cases,2) + lag(cases,1) + cases)
+                                            /population) * 100000)
 
 dbayern3$male_anteil<-dbayern3$male/dbayern3$population
 dbayern3$female_anteil<-dbayern3$female/dbayern3$population
