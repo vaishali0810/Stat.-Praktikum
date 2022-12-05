@@ -310,6 +310,7 @@ a<-min(dbayern$date)
 b<-max(dbayern$date)
 datev<-seq(as.Date(a), as.Date(b), "days")
 c<-as.data.frame(c)
+c<-as.Date(c)
 head(datev)
 length(datev)
 
@@ -323,7 +324,7 @@ for(i in 1:length(vector23names)){
   Storage1000[[i]]<-list.m.age[[1]][list.m.age[[1]]$district==vector23names[i],]
 }
 
-
+d<-merge(Storage1000,c,by=date,all.x=TRUE,all.y=TRUE)
 
 
 
