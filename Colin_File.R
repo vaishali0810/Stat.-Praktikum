@@ -266,3 +266,79 @@ trends <- read.csv("trends.csv", header=TRUE, sep = ",")
 View(trends)
 popkreise <- read.csv("04-kreise.csv", header = TRUE, sep= ";")
 View(popkreise)
+
+library(dplyr)
+
+dbayernshort <- dbayern %>% select(district, age_group, gender, date, cases, bezirk)
+
+
+
+list <- list()
+levelsgender <- levels(dbayernshort$gender)
+
+for (i in seq_along(levelsgender)) {
+ list[[i]] <- dbayernshort[dbayernshort$gender == levelsgender[i], ]
+}
+
+listm <- list[[1]]
+listna <- list[[2]]
+listw <- list[[3]]
+
+list.m.age <- list()
+list.na.age <- list()
+list.w.age <- list()
+
+levelsage <- levels(dbayernshort$age_group)
+
+for (i in seq_along(levelsage)) {
+  list.m.age[[i]] <- list[[1]][list[[1]]$age_group == levelsage[i], ]
+}
+
+for (i in seq_along(levelsage)) {
+  list.na.age[[i]] <- list[[2]][list[[2]]$age_group == levelsage[i], ]
+}
+
+for (i in seq_along(levelsage)) {
+  list.w.age[[i]] <- list[[3]][list[[3]]$age_group == levelsage[i], ]
+}
+
+#datevector <- c(min(dbayern$date):max(dbayern$date))
+
+
+
+a<-min(dbayern$date)
+b<-max(dbayern$date)
+datev<-seq(as.Date(a), as.Date(b), "days")
+c<-as.data.frame(c)
+head(datev)
+length(datev)
+
+#length(list.m.age)
+
+
+vector23<-c(summary(dbayern$district)[1:96])
+vector23names<-names(vector23)
+Storage1000<-list()
+for(i in 1:length(vector23names)){
+  Storage1000[[i]]<-list.m.age[[1]][list.m.age[[1]]$district==vector23names[i],]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

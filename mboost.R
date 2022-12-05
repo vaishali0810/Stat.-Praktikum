@@ -31,7 +31,11 @@ library(smurf)
 model_lasso_cv <- glmsmurf(formula =  cases ~ p(bezirk, pen = "flasso",refcat = "Mittelfranken")+
                              p(area,pen = "lasso"),family = neg.bin(2), data = dbayern3, 
                            lambda = "cv.mse")
-p(lage, pen = "flasso", refcat = "normal")
+dbayern5 <- merge(dbayern2, popbay2, by = c("district", "state", "bezirk"))
+model_norm <- glm(formula =  cases ~ bezirk+erstimpf_sum,family = neg.bin(2), data = dbayern5)
+
+model_gls <- gls(formula =  cases ~ bezirk+ erstimpf_sum, data = dbayern3)
+a<-glm.nb(formula =  cases ~ bezirk+ erstimpf_sum, data = dbayern3)
 
 plot_lambda(model_lasso_cv)
 par(mar = c(5.1, 4.1, 4.1, 9.1)) 
