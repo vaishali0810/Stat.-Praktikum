@@ -350,7 +350,7 @@ for(j in 1:length(Storage2)){
 View(Storage2[[1]])
 
 
-f <- Storage2[[1]]%>%filter(gender=="M") %>% filter(age_group=="A00-A04")
+f <- Storage2[[1]]%>%filter(gender=="W") %>% filter(age_group=="A00-A04")
 for(j in 1:length(f)){
   for(i in dates){
     f[f$date==i,16]<-sum(f[f$date==i,10],na.rm=TRUE)
@@ -454,7 +454,7 @@ f60.79 <- list()
 f.80 <- list()
 f.unb <- list()
 for(i in seq_along(Storage2)) {
-  f0.4[[i]] <- Storage2[[i]]%>%filter(gender=="F") %>% filter(age_group=="A00-A04")
+  f0.4[[i]] <- Storage2[[i]]%>%filter(gender=="W") %>% filter(age_group=="A00-A04")
   for(j in 1:length(f)){
     for(j in dates){
       f0.4[[i]][f0.4[[i]]$date==j,16]<-sum(f0.4[[i]][f0.4[[i]]$date==j,10],na.rm=TRUE)
@@ -467,7 +467,7 @@ for(i in seq_along(Storage2)) {
 #View(f0.4)
 
 for(i in seq_along(Storage2)) {
-  f5.14[[i]] <- Storage2[[i]]%>%filter(gender=="F") %>% filter(age_group=="A05-A14")
+  f5.14[[i]] <- Storage2[[i]]%>%filter(gender=="W") %>% filter(age_group=="A05-A14")
   for(j in 1:length(f)){
     for(j in dates){
       f5.14[[i]][f5.14[[i]]$date==j,16]<-sum(f5.14[[i]][f5.14[[i]]$date==j,10],na.rm=TRUE)
@@ -477,7 +477,7 @@ for(i in seq_along(Storage2)) {
   f5.14[[i]] <- unique(f5.14[[i]])
 }
 for(i in seq_along(Storage2)) {
-  f15.34[[i]] <- Storage2[[i]]%>%filter(gender=="F") %>% filter(age_group=="A05-A14")
+  f15.34[[i]] <- Storage2[[i]]%>%filter(gender=="W") %>% filter(age_group=="A15-A34")
   for(j in 1:length(f)){
     for(j in dates){
       f15.34[[i]][f15.34[[i]]$date==j,16]<-sum(f15.34[[i]][f15.34[[i]]$date==j,10],na.rm=TRUE)
@@ -487,7 +487,7 @@ for(i in seq_along(Storage2)) {
   f15.34[[i]] <- unique(f15.34[[i]])
 }
 for(i in seq_along(Storage2)) {
-  f35.59[[i]] <- Storage2[[i]]%>%filter(gender=="F") %>% filter(age_group=="A05-A14")
+  f35.59[[i]] <- Storage2[[i]]%>%filter(gender=="W") %>% filter(age_group=="A35-A59")
   for(j in 1:length(f)){
     for(j in dates){
       f35.59[[i]][f35.59[[i]]$date==j,16]<-sum(f35.59[[i]][f35.59[[i]]$date==j,10],na.rm=TRUE)
@@ -497,7 +497,7 @@ for(i in seq_along(Storage2)) {
   f35.59[[i]] <- unique(f35.59[[i]])
 }
 for(i in seq_along(Storage2)) {
-  f60.79[[i]] <- Storage2[[i]]%>%filter(gender=="F") %>% filter(age_group=="A05-A14")
+  f60.79[[i]] <- Storage2[[i]]%>%filter(gender=="W") %>% filter(age_group=="A60-A79")
   for(j in 1:length(f)){
     for(j in dates){
       f60.79[[i]][f60.79[[i]]$date==j,16]<-sum(f60.79[[i]][f60.79[[i]]$date==j,10],na.rm=TRUE)
@@ -507,7 +507,7 @@ for(i in seq_along(Storage2)) {
   f60.79[[i]] <- unique(f60.79[[i]])
 }
 for(i in seq_along(Storage2)) {
-  f.80[[i]] <- Storage2[[i]]%>%filter(gender=="F") %>% filter(age_group=="A05-A14")
+  f.80[[i]] <- Storage2[[i]]%>%filter(gender=="W") %>% filter(age_group=="A80+")
   for(j in 1:length(f)){
     for(j in dates){
       f.80[[i]][f.80[[i]]$date==j,16]<-sum(f.80[[i]][f.80[[i]]$date==j,10],na.rm=TRUE)
@@ -517,7 +517,7 @@ for(i in seq_along(Storage2)) {
   f.80[[i]] <- unique(f.80[[i]])
 }
 for(i in seq_along(Storage2)) {
-  f.unb[[i]] <- Storage2[[i]]%>%filter(gender=="F") %>% filter(age_group=="A05-A14")
+  f.unb[[i]] <- Storage2[[i]]%>%filter(gender=="W") %>% filter(age_group=="unbekannt")
   for(j in 1:length(f)){
     for(j in dates){
       f.unb[[i]][f.unb[[i]]$date==j,16]<-sum(f.unb[[i]][f.unb[[i]]$date==j,10],na.rm=TRUE)
@@ -926,3 +926,102 @@ for(i in seq_along(unb.unb)) {
   unb.unb[[i]][,3] <- temp3
   unb.unb[[i]][,6] <- temp4
 }
+
+length(m0.4)
+m0.4 <- m0.4[c(1:96)]
+m5.14 <- m5.14[c(1:96)]
+m15.34 <- m15.34[c(1:96)]
+m35.59 <- m35.59[c(1:96)]
+m60.79 <- m60.79[c(1:96)]
+m.80 <- m.80[c(1:96)]
+m.unb <- m.unb[c(1:96)]
+f0.4 <- f0.4[c(1:96)]
+f5.14 <- f5.14[c(1:96)]
+f15.34 <- f15.34[c(1:96)]
+f35.59 <- f35.59[c(1:96)]
+f60.79 <- f60.79[c(1:96)]
+f.80 <- f.80[c(1:96)]
+f.unb <- f.unb[c(1:96)]
+unb0.4 <- unb0.4[c(1:96)]
+unb5.14 <- unb5.14[c(1:96)]
+unb15.34 <- unb15.34[c(1:96)]
+unb35.59 <- unb35.59[c(1:96)]
+unb60.79 <- unb60.79[c(1:96)]
+unb.80 <- unb.80[c(1:96)]
+unb.unb <- unb.unb[c(1:96)]
+
+df <- as.data.frame(do.call(rbind, m0.4))
+colnames(df)[4] <- "M.A00-04"
+df <- df[,c(-5, -6)]
+head(df)
+dim(df)
+dfnew <- as.data.frame(do.call(rbind, m5.14))
+df$new <- dfnew[,4]
+colnames(df)[5] <- "M.A05-14"
+dfnew <- as.data.frame(do.call(rbind, m15.34))
+df <- df %>% mutate(new = dfnew[,4])
+colnames(df)[6] <- "M.A15-34"
+dfnew <- as.data.frame(do.call(rbind, m35.59))
+df <- df %>% mutate(new = dfnew[,4])
+colnames(df)[7] <- "M.A35-59"
+dfnew <- as.data.frame(do.call(rbind, m60.79))
+df <- df %>% mutate(new = dfnew[,4])
+colnames(df)[8] <- "M.A60-79"
+dfnew <- as.data.frame(do.call(rbind, m.80))
+df <- df %>% mutate(new = dfnew[,4])
+colnames(df)[9] <- "M.A80+"
+dfnew <- as.data.frame(do.call(rbind, m.unb))
+df <- df %>% mutate(new = dfnew[,4])
+colnames(df)[10] <- "M.Aunb"
+
+
+dfnew <- as.data.frame(do.call(rbind, f0.4))
+df <- df %>% mutate(new = dfnew[,4])
+colnames(df)[11] <- "F.A00-04"
+dfnew <- as.data.frame(do.call(rbind, f5.14))
+df <- df %>% mutate(new = dfnew[,4])
+colnames(df)[12] <- "F.A05.14"
+dfnew <- as.data.frame(do.call(rbind, f15.34))
+df <- df %>% mutate(new = dfnew[,4])
+colnames(df)[13] <- "F.A15-34"
+dfnew <- as.data.frame(do.call(rbind, f35.59))
+df <- df %>% mutate(new = dfnew[,4])
+colnames(df)[14] <- "F.A35-59"
+dfnew <- as.data.frame(do.call(rbind, f60.79))
+df <- df %>% mutate(new = dfnew[,4])
+colnames(df)[15] <- "F.A60-79"
+dfnew <- as.data.frame(do.call(rbind, f.80))
+df <- df %>% mutate(new = dfnew[,4])
+colnames(df)[16] <- "F.A80+"
+dfnew <- as.data.frame(do.call(rbind, f.unb))
+df <- df %>% mutate(new = dfnew[,4])
+colnames(df)[17] <- "F.Aunb"
+
+dfnew <- as.data.frame(do.call(rbind, unb0.4))
+df <- df %>% mutate(new = dfnew[,4])
+colnames(df)[18] <- "Unb.A00-04"
+dfnew <- as.data.frame(do.call(rbind, unb5.14))
+df <- df %>% mutate(new = dfnew[,4])
+colnames(df)[19] <- "Unb.A05.14"
+dfnew <- as.data.frame(do.call(rbind, unb15.34))
+df <- df %>% mutate(new = dfnew[,4])
+colnames(df)[20] <- "Unb.A15-34"
+dfnew <- as.data.frame(do.call(rbind, unb35.59))
+df <- df %>% mutate(new = dfnew[,4])
+colnames(df)[21] <- "Unb.A35-59"
+dfnew <- as.data.frame(do.call(rbind, unb60.79))
+df <- df %>% mutate(new = dfnew[,4])
+colnames(df)[22] <- "Unb.A60-79"
+dfnew <- as.data.frame(do.call(rbind, unb.80))
+df <- df %>% mutate(new = dfnew[,4])
+colnames(df)[23] <- "Unb.A80+"
+dfnew <- as.data.frame(do.call(rbind, unb.unb))
+df <- df %>% mutate(new = dfnew[,4])
+colnames(df)[24] <- "Unb.Aunb"
+df$total_cases <- 0
+df[,25] <- 0
+
+for(i in 1:nrow(df)){
+  df[i,25] <- sum(df[i,4:24])
+}
+
