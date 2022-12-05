@@ -76,5 +76,3 @@ schwabach <- subset(new, district =="SK Schwabach")
 ggplot() + geom_line(data=nuernberg, aes(x=date, y = inz), color = "red") + 
   geom_line(data=schwabach, aes(x=date,y=inz), color = "blue")
 
-
-## 3.  
