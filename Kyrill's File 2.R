@@ -323,7 +323,9 @@ for(j in 1:length(Storage2short)){
 
 View(Storage2short[[1]])
 
+Storage21filter<-Storage2[[1]]%>%filter(gender=="M")%>%filter(age_group=="A00-A04")
 
+View(Storage21filter)
 
 #dbayern4$anteil_man<-NA
 #dbayern4$anteil_woman<-NA
