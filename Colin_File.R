@@ -302,4 +302,15 @@ for (i in seq_along(levelsage)) {
   list.w.age[[i]] <- dbayernshort[dbayernshort$age_group == levelsage[i], ]
 }
 
+datevector <- c(min(dbayern$date):max(dbayern$date))
+
+
+
+a<-min(dbayern$date)
+b<-max(dbayern$date)
+c<-seq(as.Date(a), as.Date(b), "days")
+#c<-as.data.frame(c)
+head(c)
+length(c)
+
 
