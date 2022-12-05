@@ -266,3 +266,40 @@ trends <- read.csv("trends.csv", header=TRUE, sep = ",")
 View(trends)
 popkreise <- read.csv("04-kreise.csv", header = TRUE, sep= ";")
 View(popkreise)
+
+library(dplyr)
+
+dbayernshort <- dbayern %>% select(district, age_group, gender, date, cases, bezirk)
+
+
+
+list <- list()
+levelsgender <- levels(dbayernshort$gender)
+
+for (i in seq_along(levelsgender)) {
+ list[[i]] <- dbayernshort[dbayernshort$gender == levelsgender[i], ]
+}
+
+listm <- list[[1]]
+listna <- list[[2]]
+listw <- list[[3]]
+
+list.m.age <- list()
+list.na.age <- list()
+list.w.age <- list()
+
+levelsage <- levels(dbayernshort$age_group)
+
+for (i in seq_along(levelsage)) {
+  list.m.age[[i]] <- dbayernshort[dbayernshort$age_group == levelsage[i], ]
+}
+
+for (i in seq_along(levelsage)) {
+  list.na.age[[i]] <- dbayernshort[dbayernshort$age_group == levelsage[i], ]
+}
+
+for (i in seq_along(levelsage)) {
+  list.w.age[[i]] <- dbayernshort[dbayernshort$age_group == levelsage[i], ]
+}
+
+
