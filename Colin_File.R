@@ -325,12 +325,43 @@ for(i in 1:length(vector23names)){
 }
 
 colnames(c)[1] <- "date"
-d<-merge(Storage1000[[1]],c,by=date,all.x=TRUE,all.y=TRUE)
+d<-merge(c, Storage1000[[1]], by = "date", all.x = TRUE, all.y = TRUE)
+
+is.data.frame(Storage1000[[1]])
+is.data.frame(c)
+View(c)
+
+
+testdf <- data.frame(matrix(data=NA, nrow = length(c), ncol = 6))
+colnames(testdf) <- c("district", "age_group", "gender", "date", "cases", "bezirk")
+testdf[,4] <- c
+testdf[,c(1:3,6)] <- Storage1000[[1]][1,c(1:3,6)]
+for(j in seq_along(testdf$date)) {
+  
+}
+
+
+for(j in 1:length(Storage2)){
+  for(i in dates){
+    Storage2[[j]][Storage2[[j]]$date==i,16]<-sum(Storage2[[j]][Storage2[[j]]$date==i,11],na.rm=TRUE)
+  }
+}
+
+View(Storage2[[1]])
 
 
 
 
+f <- Storage2[[1]]%>%filter(gender=="M") %>% filter(age_group=="A00-A04")
 
+for(j in 1:length(f)){
+  for(i in dates){
+    f[f$date==i,16]<-sum(f[f$date==i,10],na.rm=TRUE)
+  }
+}
+View(f)
+
+which(duplicates(f$date))
 
 
 
