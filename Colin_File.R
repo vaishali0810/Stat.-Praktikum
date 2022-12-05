@@ -324,7 +324,8 @@ for(i in 1:length(vector23names)){
   Storage1000[[i]]<-list.m.age[[1]][list.m.age[[1]]$district==vector23names[i],]
 }
 
-d<-merge(Storage1000,c,by=date,all.x=TRUE,all.y=TRUE)
+colnames(c)[1] <- "date"
+d<-merge(Storage1000[[1]],c,by=date,all.x=TRUE,all.y=TRUE)
 
 
 
