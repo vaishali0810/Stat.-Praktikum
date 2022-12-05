@@ -11,7 +11,7 @@ new2 <- dbayern3 %>%
 
 ggplot(data=new2, aes(x=date, y =inz)) + geom_line(color = "black") +
   labs(x = "Datum", y = "Covid-Infektionen\npro 100.000 Einwohner", 
-       title = "Tägliche Covid-Infektionen pro 100.000 Einwohner um die EM in Rest-Bayern") +
+       title = "Tägliche Covid-Infektionen pro 100.000 Einwohner Bayern") +
   geom_vline(xintercept = as.Date(c("2020-12-27", "2021-01-16", "2021-06-14")), color = "red")+
   scale_x_date(date_breaks = "2 month", date_labels = "%d. %b %y") +
   theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 1, hjust = 1, face = "bold")) +
