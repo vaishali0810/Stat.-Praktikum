@@ -378,6 +378,7 @@ dbayern3[, 6] <- as.numeric(dbayern3[, 6])
 
 dbayern3 <- dbayern3 %>% 
   arrange(date) %>%
+  group_by(district) %>%
   mutate(inzidenz = ((lag(cases,6) + lag(cases,5) + lag(cases,4)+ 
                                               lag(cases,3) +lag(cases,2) + lag(cases,1) + cases)
                                             /population) * 100000)

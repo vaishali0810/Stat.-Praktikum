@@ -630,23 +630,22 @@ View(m0.4[[1]])
 # unb60.79 
 # unb.80 
 # unb.unb 
-length(datev)
-
-datev <- as.data.frame(datev)
-colnames(datev) <- "date"
-
-
-datev[,1] <- as.Date(datev[,1])
-test999 <- as.data.frame(m0.4[[1]])
-test999[,2] <- as.Date(test999[,2])
-
-test1000 <- merge(y = test999, x = datev,  all.x = TRUE, all.y = TRUE)
-test1000[is.na(test1000)] <- 0
-test1000[,2] <- test999[1,1]
-test1000[,5] <- test999[1,5]
-test1000[,3] <- test999[1,3]
-test1000[,6] <- test999[1,6]
-
+# length(datev)
+# 
+# datev <- as.data.frame(datev)
+# colnames(datev) <- "date"
+# 
+# 
+# datev[,1] <- as.Date(datev[,1])
+# test999 <- as.data.frame(m0.4[[1]])
+# test999[,2] <- as.Date(test999[,2])
+# 
+# test1000 <- merge(y = test999, x = datev,  all.x = TRUE, all.y = TRUE)
+# test1000[is.na(test1000)] <- 0
+# test1000[,2] <- test999[1,1]
+# test1000[,5] <- test999[1,5]
+# test1000[,3] <- test999[1,3]
+# test1000[,6] <- test999[1,6]
 
 
 
@@ -663,12 +662,267 @@ for(i in seq_along(m0.4)) {
   m0.4[[i]][,6] <- temp4
 }
 
-m0.4 <- m0.4[[-c(97, 98,99,100)]]
+for(i in seq_along(m5.14)) {
+  temp1 <- m5.14[[i]][1,1]
+  temp2 <- m5.14[[i]][1,5]
+  temp3 <- m5.14[[i]][1,3]
+  temp4 <- m5.14[[i]][1,6]
+  m5.14[[i]] <- merge(y = m5.14[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  m5.14[[i]][is.na(m5.14[[i]])] <- 0
+  m5.14[[i]][,2] <- temp1
+  m5.14[[i]][,5] <- temp2
+  m5.14[[i]][,3] <- temp3
+  m5.14[[i]][,6] <- temp4
+}
+
+for(i in seq_along(m15.34)) {
+  temp1 <- m15.34[[i]][1,1]
+  temp2 <- m15.34[[i]][1,5]
+  temp3 <- m15.34[[i]][1,3]
+  temp4 <- m15.34[[i]][1,6]
+  m15.34[[i]] <- merge(y = m15.34[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  m15.34[[i]][is.na(m15.34[[i]])] <- 0
+  m15.34[[i]][,2] <- temp1
+  m15.34[[i]][,5] <- temp2
+  m15.34[[i]][,3] <- temp3
+  m15.34[[i]][,6] <- temp4
+}
 
 
+for(i in seq_along(m35.59)) {
+  temp1 <- m35.59[[i]][1,1]
+  temp2 <- m35.59[[i]][1,5]
+  temp3 <- m35.59[[i]][1,3]
+  temp4 <- m35.59[[i]][1,6]
+  m35.59[[i]] <- merge(y = m35.59[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  m35.59[[i]][is.na(m35.59[[i]])] <- 0
+  m35.59[[i]][,2] <- temp1
+  m35.59[[i]][,5] <- temp2
+  m35.59[[i]][,3] <- temp3
+  m35.59[[i]][,6] <- temp4
+}
+
+for(i in seq_along(m60.79)) {
+  temp1 <- m60.79[[i]][1,1]
+  temp2 <- m60.79[[i]][1,5]
+  temp3 <- m60.79[[i]][1,3]
+  temp4 <- m60.79[[i]][1,6]
+  m60.79[[i]] <- merge(y = m60.79[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  m60.79[[i]][is.na(m60.79[[i]])] <- 0
+  m60.79[[i]][,2] <- temp1
+  m60.79[[i]][,5] <- temp2
+  m60.79[[i]][,3] <- temp3
+  m60.79[[i]][,6] <- temp4
+}
 
 
+for(i in seq_along(m.80)) {
+  temp1 <- m.80[[i]][1,1]
+  temp2 <- m.80[[i]][1,5]
+  temp3 <- m.80[[i]][1,3]
+  temp4 <- m.80[[i]][1,6]
+  m.80[[i]] <- merge(y = m.80[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  m.80[[i]][is.na(m.80[[i]])] <- 0
+  m.80[[i]][,2] <- temp1
+  m.80[[i]][,5] <- temp2
+  m.80[[i]][,3] <- temp3
+  m.80[[i]][,6] <- temp4
+}
+
+for(i in seq_along(m.unb)) {
+  temp1 <- m.unb[[i]][1,1]
+  temp2 <- m.unb[[i]][1,5]
+  temp3 <- m.unb[[i]][1,3]
+  temp4 <- m.unb[[i]][1,6]
+  m.unb[[i]] <- merge(y = m.unb[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  m.unb[[i]][is.na(m.unb[[i]])] <- 0
+  m.unb[[i]][,2] <- temp1
+  m.unb[[i]][,5] <- temp2
+  m.unb[[i]][,3] <- temp3
+  m.unb[[i]][,6] <- temp4
+}
+
+for(i in seq_along(f0.4)) {
+  temp1 <- f0.4[[i]][1,1]
+  temp2 <- f0.4[[i]][1,5]
+  temp3 <- f0.4[[i]][1,3]
+  temp4 <- f0.4[[i]][1,6]
+  f0.4[[i]] <- merge(y = f0.4[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  f0.4[[i]][is.na(f0.4[[i]])] <- 0
+  f0.4[[i]][,2] <- temp1
+  f0.4[[i]][,5] <- temp2
+  f0.4[[i]][,3] <- temp3
+  f0.4[[i]][,6] <- temp4
+}
+
+for(i in seq_along(f5.14)) {
+  temp1 <- f5.14[[i]][1,1]
+  temp2 <- f5.14[[i]][1,5]
+  temp3 <- f5.14[[i]][1,3]
+  temp4 <- f5.14[[i]][1,6]
+  f5.14[[i]] <- merge(y = f5.14[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  f5.14[[i]][is.na(f5.14[[i]])] <- 0
+  f5.14[[i]][,2] <- temp1
+  f5.14[[i]][,5] <- temp2
+  f5.14[[i]][,3] <- temp3
+  f5.14[[i]][,6] <- temp4
+}
+
+for(i in seq_along(f15.34)) {
+  temp1 <- f15.34[[i]][1,1]
+  temp2 <- f15.34[[i]][1,5]
+  temp3 <- f15.34[[i]][1,3]
+  temp4 <- f15.34[[i]][1,6]
+  f15.34[[i]] <- merge(y = f15.34[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  f15.34[[i]][is.na(f15.34[[i]])] <- 0
+  f15.34[[i]][,2] <- temp1
+  f15.34[[i]][,5] <- temp2
+  f15.34[[i]][,3] <- temp3
+  f15.34[[i]][,6] <- temp4
+}
 
 
+for(i in seq_along(f35.59)) {
+  temp1 <- f35.59[[i]][1,1]
+  temp2 <- f35.59[[i]][1,5]
+  temp3 <- f35.59[[i]][1,3]
+  temp4 <- f35.59[[i]][1,6]
+  f35.59[[i]] <- merge(y = f35.59[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  f35.59[[i]][is.na(f35.59[[i]])] <- 0
+  f35.59[[i]][,2] <- temp1
+  f35.59[[i]][,5] <- temp2
+  f35.59[[i]][,3] <- temp3
+  f35.59[[i]][,6] <- temp4
+}
+
+for(i in seq_along(f60.79)) {
+  temp1 <- f60.79[[i]][1,1]
+  temp2 <- f60.79[[i]][1,5]
+  temp3 <- f60.79[[i]][1,3]
+  temp4 <- f60.79[[i]][1,6]
+  f60.79[[i]] <- merge(y = f60.79[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  f60.79[[i]][is.na(f60.79[[i]])] <- 0
+  f60.79[[i]][,2] <- temp1
+  f60.79[[i]][,5] <- temp2
+  f60.79[[i]][,3] <- temp3
+  f60.79[[i]][,6] <- temp4
+}
 
 
+for(i in seq_along(f.80)) {
+  temp1 <- f.80[[i]][1,1]
+  temp2 <- f.80[[i]][1,5]
+  temp3 <- f.80[[i]][1,3]
+  temp4 <- f.80[[i]][1,6]
+  f.80[[i]] <- merge(y = f.80[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  f.80[[i]][is.na(f.80[[i]])] <- 0
+  f.80[[i]][,2] <- temp1
+  f.80[[i]][,5] <- temp2
+  f.80[[i]][,3] <- temp3
+  f.80[[i]][,6] <- temp4
+}
+
+for(i in seq_along(f.unb)) {
+  temp1 <- f.unb[[i]][1,1]
+  temp2 <- f.unb[[i]][1,5]
+  temp3 <- f.unb[[i]][1,3]
+  temp4 <- f.unb[[i]][1,6]
+  f.unb[[i]] <- merge(y = f.unb[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  f.unb[[i]][is.na(f.unb[[i]])] <- 0
+  f.unb[[i]][,2] <- temp1
+  f.unb[[i]][,5] <- temp2
+  f.unb[[i]][,3] <- temp3
+  f.unb[[i]][,6] <- temp4
+}
+for(i in seq_along(unb0.4)) {
+  temp1 <- unb0.4[[i]][1,1]
+  temp2 <- unb0.4[[i]][1,5]
+  temp3 <- unb0.4[[i]][1,3]
+  temp4 <- unb0.4[[i]][1,6]
+  unb0.4[[i]] <- merge(y = unb0.4[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  unb0.4[[i]][is.na(unb0.4[[i]])] <- 0
+  unb0.4[[i]][,2] <- temp1
+  unb0.4[[i]][,5] <- temp2
+  unb0.4[[i]][,3] <- temp3
+  unb0.4[[i]][,6] <- temp4
+}
+
+for(i in seq_along(unb5.14)) {
+  temp1 <- unb5.14[[i]][1,1]
+  temp2 <- unb5.14[[i]][1,5]
+  temp3 <- unb5.14[[i]][1,3]
+  temp4 <- unb5.14[[i]][1,6]
+  unb5.14[[i]] <- merge(y = unb5.14[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  unb5.14[[i]][is.na(unb5.14[[i]])] <- 0
+  unb5.14[[i]][,2] <- temp1
+  unb5.14[[i]][,5] <- temp2
+  unb5.14[[i]][,3] <- temp3
+  unb5.14[[i]][,6] <- temp4
+}
+
+for(i in seq_along(unb15.34)) {
+  temp1 <- unb15.34[[i]][1,1]
+  temp2 <- unb15.34[[i]][1,5]
+  temp3 <- unb15.34[[i]][1,3]
+  temp4 <- unb15.34[[i]][1,6]
+  unb15.34[[i]] <- merge(y = unb15.34[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  unb15.34[[i]][is.na(unb15.34[[i]])] <- 0
+  unb15.34[[i]][,2] <- temp1
+  unb15.34[[i]][,5] <- temp2
+  unb15.34[[i]][,3] <- temp3
+  unb15.34[[i]][,6] <- temp4
+}
+
+
+for(i in seq_along(unb35.59)) {
+  temp1 <- unb35.59[[i]][1,1]
+  temp2 <- unb35.59[[i]][1,5]
+  temp3 <- unb35.59[[i]][1,3]
+  temp4 <- unb35.59[[i]][1,6]
+  unb35.59[[i]] <- merge(y = unb35.59[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  unb35.59[[i]][is.na(unb35.59[[i]])] <- 0
+  unb35.59[[i]][,2] <- temp1
+  unb35.59[[i]][,5] <- temp2
+  unb35.59[[i]][,3] <- temp3
+  unb35.59[[i]][,6] <- temp4
+}
+
+for(i in seq_along(unb60.79)) {
+  temp1 <- unb60.79[[i]][1,1]
+  temp2 <- unb60.79[[i]][1,5]
+  temp3 <- unb60.79[[i]][1,3]
+  temp4 <- unb60.79[[i]][1,6]
+  unb60.79[[i]] <- merge(y = unb60.79[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  unb60.79[[i]][is.na(unb60.79[[i]])] <- 0
+  unb60.79[[i]][,2] <- temp1
+  unb60.79[[i]][,5] <- temp2
+  unb60.79[[i]][,3] <- temp3
+  unb60.79[[i]][,6] <- temp4
+}
+
+
+for(i in seq_along(unb.80)) {
+  temp1 <- unb.80[[i]][1,1]
+  temp2 <- unb.80[[i]][1,5]
+  temp3 <- unb.80[[i]][1,3]
+  temp4 <- unb.80[[i]][1,6]
+  unb.80[[i]] <- merge(y = unb.80[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  unb.80[[i]][is.na(unb.80[[i]])] <- 0
+  unb.80[[i]][,2] <- temp1
+  unb.80[[i]][,5] <- temp2
+  unb.80[[i]][,3] <- temp3
+  unb.80[[i]][,6] <- temp4
+}
+
+for(i in seq_along(unb.unb)) {
+  temp1 <- unb.unb[[i]][1,1]
+  temp2 <- unb.unb[[i]][1,5]
+  temp3 <- unb.unb[[i]][1,3]
+  temp4 <- unb.unb[[i]][1,6]
+  unb.unb[[i]] <- merge(y = unb.unb[[i]], x = datev,  all.x = TRUE, all.y = TRUE)
+  unb.unb[[i]][is.na(unb.unb[[i]])] <- 0
+  unb.unb[[i]][,2] <- temp1
+  unb.unb[[i]][,5] <- temp2
+  unb.unb[[i]][,3] <- temp3
+  unb.unb[[i]][,6] <- temp4
+}
