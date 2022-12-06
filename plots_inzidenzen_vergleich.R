@@ -33,9 +33,11 @@ ggplot(data= new2, aes(x=date, y = inz)) + geom_line(color = "black") +
 ## 2. Größte und Kleinste Population vergleich pro Bezirk
 
 new <- dbayern3 %>%
-  group_by(district, bezirk, date) %>%
+  group_by(district, bezirk, date, male_anteil, female_anteil) %>%
   summarize(inz = sum(inzidenz),
-            case = sum(cases))
+            case = sum(cases),
+            m_teil = sum(male_anteil),
+            f_teil = sum(female_anteil))
 
 # Schwaben
 augsburg <- subset(new, district =="SK Augsburg")
@@ -65,6 +67,7 @@ ggplot() + geom_line(data=regensburg, aes(x=date, y = inz), color = "red") +
   labs(x = "Datum", y = "Covid-Infektionen\npro 100.000 Einwohner", 
        title = "Tägliche Covid-Infektionen pro 100.000 Einwohner in Regensburg und Amberg (Oberpfalz)") +
   scale_x_date(date_breaks = "2 month", date_labels = "%d. %b %y") +
+  
   theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 1, hjust = 1, face = "bold")) +
   theme(axis.text.y = element_text(size = 10, face = "bold"))+
   theme(text = element_text(size = 15))+
@@ -173,3 +176,121 @@ ggplot() + geom_line(data=nuernberg, aes(x=date, y = inz), color = "red") +
 
 # 3. Anteil männlich - weiblich
 
+
+# Schwaben
+ggplot() + geom_line(data=augsburg, aes(x=date, y = m_teil), color = "blue") + 
+  geom_line(data=memmingen, aes(x=date,y=f_teil), color = "pink") +
+  labs(x = "Datum", y = "Covid-Infektionen\npro 100.000 Einwohner", 
+       title = "Tägliche Covid-Infektionen pro 100.000 Einwohner in Augsburg und Memmingen (Schwaben)") +
+  scale_x_date(date_breaks = "2 month", date_labels = "%d. %b %y") +
+  theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 1, hjust = 1, face = "bold")) +
+  theme(axis.text.y = element_text(size = 10, face = "bold"))+
+  theme(text = element_text(size = 15))+
+  theme(panel.background = element_rect(fill = "white",
+                                        colour = "white",
+                                        size = 0.5, linetype = "solid"),
+        panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+                                        colour = "grey"), 
+        panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+                                        colour = "white"))
+
+# Oberpfalz
+ggplot() + geom_line(data=regensburg, aes(x=date, y = m_teil), color = "blue") + 
+  geom_line(data=amberg, aes(x=date,y=f_teil), color = "pink") +
+  labs(x = "Datum", y = "Covid-Infektionen\npro 100.000 Einwohner", 
+       title = "Tägliche Covid-Infektionen pro 100.000 Einwohner in Augsburg und Memmingen (Schwaben)") +
+  scale_x_date(date_breaks = "2 month", date_labels = "%d. %b %y") +
+  theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 1, hjust = 1, face = "bold")) +
+  theme(axis.text.y = element_text(size = 10, face = "bold"))+
+  theme(text = element_text(size = 15))+
+  theme(panel.background = element_rect(fill = "white",
+                                        colour = "white",
+                                        size = 0.5, linetype = "solid"),
+        panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+                                        colour = "grey"), 
+        panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+                                        colour = "white"))
+# Niederbayern
+ggplot() + geom_line(data=passau, aes(x=date, y = m_teil), color = "blue") + 
+  geom_line(data=straubing, aes(x=date,y=f_teil), color = "pink") +
+  labs(x = "Datum", y = "Covid-Infektionen\npro 100.000 Einwohner", 
+       title = "Tägliche Covid-Infektionen pro 100.000 Einwohner in Augsburg und Memmingen (Schwaben)") +
+  scale_x_date(date_breaks = "2 month", date_labels = "%d. %b %y") +
+  theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 1, hjust = 1, face = "bold")) +
+  theme(axis.text.y = element_text(size = 10, face = "bold"))+
+  theme(text = element_text(size = 15))+
+  theme(panel.background = element_rect(fill = "white",
+                                        colour = "white",
+                                        size = 0.5, linetype = "solid"),
+        panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+                                        colour = "grey"), 
+        panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+                                        colour = "white"))
+
+#Unterfranken
+ggplot() + geom_line(data=aschaffenburg, aes(x=date, y = m_teil), color = "blue") + 
+  geom_line(data=schweinfurt, aes(x=date,y=f_teil), color = "pink") +
+  labs(x = "Datum", y = "Covid-Infektionen\npro 100.000 Einwohner", 
+       title = "Tägliche Covid-Infektionen pro 100.000 Einwohner in Augsburg und Memmingen (Schwaben)") +
+  scale_x_date(date_breaks = "2 month", date_labels = "%d. %b %y") +
+  theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 1, hjust = 1, face = "bold")) +
+  theme(axis.text.y = element_text(size = 10, face = "bold"))+
+  theme(text = element_text(size = 15))+
+  theme(panel.background = element_rect(fill = "white",
+                                        colour = "white",
+                                        size = 0.5, linetype = "solid"),
+        panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+                                        colour = "grey"), 
+        panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+                                        colour = "white"))
+
+#Oberfranken
+ggplot() + geom_line(data=bamberg, aes(x=date, y = m_teil), color = "blue") + 
+  geom_line(data=hof, aes(x=date,y=f_teil), color = "pink") +
+  labs(x = "Datum", y = "Covid-Infektionen\npro 100.000 Einwohner", 
+       title = "Tägliche Covid-Infektionen pro 100.000 Einwohner in Augsburg und Memmingen (Schwaben)") +
+  scale_x_date(date_breaks = "2 month", date_labels = "%d. %b %y") +
+  theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 1, hjust = 1, face = "bold")) +
+  theme(axis.text.y = element_text(size = 10, face = "bold"))+
+  theme(text = element_text(size = 15))+
+  theme(panel.background = element_rect(fill = "white",
+                                        colour = "white",
+                                        size = 0.5, linetype = "solid"),
+        panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+                                        colour = "grey"), 
+        panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+                                        colour = "white"))
+
+#Oberbayern
+ggplot() + geom_line(data=muenchen, aes(x=date, y = m_teil), color = "blue") + 
+  geom_line(data=rosenheim, aes(x=date,y=f_teil), color = "pink") +
+  labs(x = "Datum", y = "Covid-Infektionen\npro 100.000 Einwohner", 
+       title = "Tägliche Covid-Infektionen pro 100.000 Einwohner in Augsburg und Memmingen (Schwaben)") +
+  scale_x_date(date_breaks = "2 month", date_labels = "%d. %b %y") +
+  theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 1, hjust = 1, face = "bold")) +
+  theme(axis.text.y = element_text(size = 10, face = "bold"))+
+  theme(text = element_text(size = 15))+
+  theme(panel.background = element_rect(fill = "white",
+                                        colour = "white",
+                                        size = 0.5, linetype = "solid"),
+        panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+                                        colour = "grey"), 
+        panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+                                        colour = "white"))
+
+#Mittelfranken
+ggplot() + geom_line(data=nuernberg, aes(x=date, y = m_teil), color = "blue") + 
+  geom_line(data=schwabach, aes(x=date,y=f_teil), color = "pink") +
+  labs(x = "Datum", y = "Covid-Infektionen\npro 100.000 Einwohner", 
+       title = "Tägliche Covid-Infektionen pro 100.000 Einwohner in Augsburg und Memmingen (Schwaben)") +
+  scale_x_date(date_breaks = "2 month", date_labels = "%d. %b %y") +
+  theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 1, hjust = 1, face = "bold")) +
+  theme(axis.text.y = element_text(size = 10, face = "bold"))+
+  theme(text = element_text(size = 15))+
+  theme(panel.background = element_rect(fill = "white",
+                                        colour = "white",
+                                        size = 0.5, linetype = "solid"),
+        panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+                                        colour = "grey"), 
+        panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+                                        colour = "white"))
