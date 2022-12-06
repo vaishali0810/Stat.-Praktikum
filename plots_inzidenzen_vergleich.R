@@ -169,5 +169,7 @@ ggplot() + geom_line(data=nuernberg, aes(x=date, y = inz), color = "red") +
         panel.grid.major = element_line(size = 0.5, linetype = 'solid',
                                         colour = "grey"), 
         panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
-                                        colour = "white") )
+                                        colour = "white"))
+
+# 3. Anteil männlich - weiblich
 
