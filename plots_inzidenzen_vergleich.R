@@ -45,11 +45,11 @@ memmingen <- subset(new, district =="SK Memmingen")
  ggplot() + geom_line(data=augsburg, aes(x=date, y = inz), color = "red") + 
   geom_line(data=memmingen, aes(x=date,y=inz), color = "blue") +
   labs(x = "Datum", y = "Covid-Infektionen\npro 100.000 Einwohner", 
-       title = "Tägliche Covid-Infektionen pro 100.000 Einwohner in Augsburg und Memmingen (Schwaben)") +
+       title = "Covid-Infektionen pro 100.000 Einwohner in Augsburg & Memmingen (Schwaben)") +
    scale_x_date(date_breaks = "2 month", date_labels = "%d. %b %y") +
    theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 1, hjust = 1, face = "bold")) +
    theme(axis.text.y = element_text(size = 10, face = "bold"))+
-   theme(text = element_text(size = 15))+
+   theme(text = element_text(size = 8))+
    theme(panel.background = element_rect(fill = "white",
                                          colour = "white",
                                          size = 0.5, linetype = "solid"),
@@ -161,11 +161,11 @@ schwabach <- subset(new, district =="SK Schwabach")
 ggplot() + geom_line(data=nuernberg, aes(x=date, y = inz), color = "red") + 
   geom_line(data=schwabach, aes(x=date,y=inz), color = "blue") +
   labs(x = "Datum", y = "Covid-Infektionen\npro 100.000 Einwohner", 
-       title = "Tägliche Covid-Infektionen pro 100.000 Einwohner Nürnberg und Schwabach (Mittelfranken)") +
+       title = "Covid-Infektionen pro 100.000 Einwohner Nürnberg & Schwabach (Mittelfranken)") +
   scale_x_date(date_breaks = "2 month", date_labels = "%d. %b %y") +
   theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 1, hjust = 1, face = "bold")) +
   theme(axis.text.y = element_text(size = 10, face = "bold"))+
-  theme(text = element_text(size = 15))+
+  theme(text = element_text(size = 8))+
   theme(panel.background = element_rect(fill = "white",
                                         colour = "white",
                                         size = 0.5, linetype = "solid"),
@@ -181,11 +181,11 @@ ggplot() + geom_line(data=nuernberg, aes(x=date, y = inz), color = "red") +
 ggplot() + geom_line(data=augsburg, aes(x=date, y = m_teil), color = "blue") + 
   geom_line(data=memmingen, aes(x=date,y=f_teil), color = "pink") +
   labs(x = "Datum", y = "Covid-Infektionen\npro 100.000 Einwohner", 
-       title = "Tägliche Covid-Infektionen pro 100.000 Einwohner in Augsburg und Memmingen (Schwaben)") +
+       title = "Covid-Infektionen pro 100.000 Einwohner in Augsburg und Memmingen (Schwaben)") +
   scale_x_date(date_breaks = "2 month", date_labels = "%d. %b %y") +
   theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 1, hjust = 1, face = "bold")) +
   theme(axis.text.y = element_text(size = 10, face = "bold"))+
-  theme(text = element_text(size = 15))+
+  theme(text = element_text(size = 8))+
   theme(panel.background = element_rect(fill = "white",
                                         colour = "white",
                                         size = 0.5, linetype = "solid"),
@@ -193,6 +193,8 @@ ggplot() + geom_line(data=augsburg, aes(x=date, y = m_teil), color = "blue") +
                                         colour = "grey"), 
         panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
                                         colour = "white"))
+
+
 
 # Oberpfalz
 ggplot() + geom_line(data=regensburg, aes(x=date, y = m_teil), color = "blue") + 
@@ -282,11 +284,11 @@ ggplot() + geom_line(data=muenchen, aes(x=date, y = m_teil), color = "blue") +
 ggplot() + geom_line(data=nuernberg, aes(x=date, y = m_teil), color = "blue") + 
   geom_line(data=schwabach, aes(x=date,y=f_teil), color = "pink") +
   labs(x = "Datum", y = "Covid-Infektionen\npro 100.000 Einwohner", 
-       title = "Tägliche Covid-Infektionen pro 100.000 Einwohner in Augsburg und Memmingen (Schwaben)") +
+       title = "Covid-Infektionen pro 100.000 Einwohner in Nürnberg und Schwabach (Mittelfranken)") +
   scale_x_date(date_breaks = "2 month", date_labels = "%d. %b %y") +
   theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 1, hjust = 1, face = "bold")) +
   theme(axis.text.y = element_text(size = 10, face = "bold"))+
-  theme(text = element_text(size = 15))+
+  theme(text = element_text(size = 8))+
   theme(panel.background = element_rect(fill = "white",
                                         colour = "white",
                                         size = 0.5, linetype = "solid"),
