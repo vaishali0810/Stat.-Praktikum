@@ -362,7 +362,7 @@ c<-as.numeric(b)
 popbay2$density<-c
 
 #View(popbay2)
-dbayern3 <- merge(dbayern2.1, popbay2, by = c("district", "state", "bezirk"))
+dbayern3 <- merge(dbayern2.1, popbay2, by = c("district", "state"))  ##"bezirk"
 #View(dbayern3)
 # dbayern3$date <- as.Date(dbayern3$date)
 # dbayern3$population <- as.numeric(dbayern3$population)

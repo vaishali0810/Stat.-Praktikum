@@ -269,10 +269,10 @@ View(popkreise)
 
 library(dplyr)
 
+
+
+dbayern$gender <- as.factor(dbayern$gender)
 dbayernshort <- dbayern %>% select(district, age_group, gender, date, cases, bezirk)
-
-
-
 list <- list()
 levelsgender <- levels(dbayernshort$gender)
 
@@ -309,8 +309,8 @@ for (i in seq_along(levelsage)) {
 a<-min(dbayern$date)
 b<-max(dbayern$date)
 datev<-seq(as.Date(a), as.Date(b), "days")
-c<-as.data.frame(c)
-c<-as.Date(c)
+datev<-as.Date(datev)
+datev<-as.data.frame(datev)
 head(datev)
 length(datev)
 
@@ -324,36 +324,38 @@ for(i in 1:length(vector23names)){
   Storage1000[[i]]<-list.m.age[[1]][list.m.age[[1]]$district==vector23names[i],]
 }
 
-colnames(c)[1] <- "date"
-d<-merge(c, Storage1000[[1]], by = "date", all.x = TRUE, all.y = TRUE)
+colnames(datev)[1] <- "date"
+d<-merge(datev, Storage1000[[1]], by= "date", all.x = TRUE, all.y = TRUE)
 
 is.data.frame(Storage1000[[1]])
-is.data.frame(c)
-View(c)
+is.data.frame(datev)
+View(datev)
 
 
-testdf <- data.frame(matrix(data=NA, nrow = length(c), ncol = 6))
+testdf <- data.frame(matrix(data=NA, nrow = nrow(datev), ncol = 6))
 colnames(testdf) <- c("district", "age_group", "gender", "date", "cases", "bezirk")
-testdf[,4] <- c
+testdf[,4] <- datev
 testdf[,c(1:3,6)] <- Storage1000[[1]][1,c(1:3,6)]
-for(j in seq_along(testdf$date)) {
-  
-}
 
 
-for(j in 1:length(Storage2)){
-  for(i in dates){
-    Storage2[[j]][Storage2[[j]]$date==i,16]<-sum(Storage2[[j]][Storage2[[j]]$date==i,11],na.rm=TRUE)
-  }
-}
+# for(j in seq_along(testdf$date)) {
+#   
+# }
 
-View(Storage2[[1]])
 
+# for(j in 1:length(Storage2)){
+#   for(i in dates){
+#     Storage2[[j]][Storage2[[j]]$date==i,16]<-sum(Storage2[[j]][Storage2[[j]]$date==i,11],na.rm=TRUE)
+#   }
+# }
+
+#View(Storage2[[1]])
+dates <- as.vector(datev[,1])
 
 f <- Storage2[[1]]%>%filter(gender=="W") %>% filter(age_group=="A00-A04")
 for(j in 1:length(f)){
   for(i in dates){
-    f[f$date==i,16]<-sum(f[f$date==i,10],na.rm=TRUE)
+    f[f$date==i,16]<-sum(f[f$date==i,11],na.rm=TRUE)
   }
 }
 f <- f %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -375,7 +377,7 @@ for(i in seq_along(Storage2)) {
   m0.4[[i]] <- Storage2[[i]]%>%filter(gender=="M") %>% filter(age_group=="A00-A04")
   for(j in 1:length(f)){
     for(j in dates){
-      m0.4[[i]][m0.4[[i]]$date==j,16]<-sum(m0.4[[i]][m0.4[[i]]$date==j,10],na.rm=TRUE)
+      m0.4[[i]][m0.4[[i]]$date==j,16]<-sum(m0.4[[i]][m0.4[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   m0.4[[i]] <- m0.4[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -388,7 +390,7 @@ for(i in seq_along(Storage2)) {
   m5.14[[i]] <- Storage2[[i]]%>%filter(gender=="M") %>% filter(age_group=="A05-A14")
   for(j in 1:length(f)){
     for(j in dates){
-      m5.14[[i]][m5.14[[i]]$date==j,16]<-sum(m5.14[[i]][m5.14[[i]]$date==j,10],na.rm=TRUE)
+      m5.14[[i]][m5.14[[i]]$date==j,16]<-sum(m5.14[[i]][m5.14[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   m5.14[[i]] <- m5.14[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -398,7 +400,7 @@ for(i in seq_along(Storage2)) {
   m15.34[[i]] <- Storage2[[i]]%>%filter(gender=="M") %>% filter(age_group=="A05-A14")
   for(j in 1:length(f)){
     for(j in dates){
-      m15.34[[i]][m15.34[[i]]$date==j,16]<-sum(m15.34[[i]][m15.34[[i]]$date==j,10],na.rm=TRUE)
+      m15.34[[i]][m15.34[[i]]$date==j,16]<-sum(m15.34[[i]][m15.34[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   m15.34[[i]] <- m15.34[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -408,7 +410,7 @@ for(i in seq_along(Storage2)) {
   m35.59[[i]] <- Storage2[[i]]%>%filter(gender=="M") %>% filter(age_group=="A05-A14")
   for(j in 1:length(f)){
     for(j in dates){
-      m35.59[[i]][m35.59[[i]]$date==j,16]<-sum(m35.59[[i]][m35.59[[i]]$date==j,10],na.rm=TRUE)
+      m35.59[[i]][m35.59[[i]]$date==j,16]<-sum(m35.59[[i]][m35.59[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   m35.59[[i]] <- m35.59[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -418,7 +420,7 @@ for(i in seq_along(Storage2)) {
   m60.79[[i]] <- Storage2[[i]]%>%filter(gender=="M") %>% filter(age_group=="A05-A14")
   for(j in 1:length(f)){
     for(j in dates){
-      m60.79[[i]][m60.79[[i]]$date==j,16]<-sum(m60.79[[i]][m60.79[[i]]$date==j,10],na.rm=TRUE)
+      m60.79[[i]][m60.79[[i]]$date==j,16]<-sum(m60.79[[i]][m60.79[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   m60.79[[i]] <- m60.79[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -428,7 +430,7 @@ for(i in seq_along(Storage2)) {
   m.80[[i]] <- Storage2[[i]]%>%filter(gender=="M") %>% filter(age_group=="A05-A14")
   for(j in 1:length(f)){
     for(j in dates){
-      m.80[[i]][m.80[[i]]$date==j,16]<-sum(m.80[[i]][m.80[[i]]$date==j,10],na.rm=TRUE)
+      m.80[[i]][m.80[[i]]$date==j,16]<-sum(m.80[[i]][m.80[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   m.80[[i]] <- m.80[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -438,7 +440,7 @@ for(i in seq_along(Storage2)) {
   m.unb[[i]] <- Storage2[[i]]%>%filter(gender=="M") %>% filter(age_group=="A05-A14")
   for(j in 1:length(f)){
     for(j in dates){
-      m.unb[[i]][m.unb[[i]]$date==j,16]<-sum(m.unb[[i]][m.unb[[i]]$date==j,10],na.rm=TRUE)
+      m.unb[[i]][m.unb[[i]]$date==j,16]<-sum(m.unb[[i]][m.unb[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   m.unb[[i]] <- m.unb[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -457,7 +459,7 @@ for(i in seq_along(Storage2)) {
   f0.4[[i]] <- Storage2[[i]]%>%filter(gender=="W") %>% filter(age_group=="A00-A04")
   for(j in 1:length(f)){
     for(j in dates){
-      f0.4[[i]][f0.4[[i]]$date==j,16]<-sum(f0.4[[i]][f0.4[[i]]$date==j,10],na.rm=TRUE)
+      f0.4[[i]][f0.4[[i]]$date==j,16]<-sum(f0.4[[i]][f0.4[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   f0.4[[i]] <- f0.4[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -470,7 +472,7 @@ for(i in seq_along(Storage2)) {
   f5.14[[i]] <- Storage2[[i]]%>%filter(gender=="W") %>% filter(age_group=="A05-A14")
   for(j in 1:length(f)){
     for(j in dates){
-      f5.14[[i]][f5.14[[i]]$date==j,16]<-sum(f5.14[[i]][f5.14[[i]]$date==j,10],na.rm=TRUE)
+      f5.14[[i]][f5.14[[i]]$date==j,16]<-sum(f5.14[[i]][f5.14[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   f5.14[[i]] <- f5.14[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -480,7 +482,7 @@ for(i in seq_along(Storage2)) {
   f15.34[[i]] <- Storage2[[i]]%>%filter(gender=="W") %>% filter(age_group=="A15-A34")
   for(j in 1:length(f)){
     for(j in dates){
-      f15.34[[i]][f15.34[[i]]$date==j,16]<-sum(f15.34[[i]][f15.34[[i]]$date==j,10],na.rm=TRUE)
+      f15.34[[i]][f15.34[[i]]$date==j,16]<-sum(f15.34[[i]][f15.34[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   f15.34[[i]] <- f15.34[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -490,7 +492,7 @@ for(i in seq_along(Storage2)) {
   f35.59[[i]] <- Storage2[[i]]%>%filter(gender=="W") %>% filter(age_group=="A35-A59")
   for(j in 1:length(f)){
     for(j in dates){
-      f35.59[[i]][f35.59[[i]]$date==j,16]<-sum(f35.59[[i]][f35.59[[i]]$date==j,10],na.rm=TRUE)
+      f35.59[[i]][f35.59[[i]]$date==j,16]<-sum(f35.59[[i]][f35.59[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   f35.59[[i]] <- f35.59[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -500,7 +502,7 @@ for(i in seq_along(Storage2)) {
   f60.79[[i]] <- Storage2[[i]]%>%filter(gender=="W") %>% filter(age_group=="A60-A79")
   for(j in 1:length(f)){
     for(j in dates){
-      f60.79[[i]][f60.79[[i]]$date==j,16]<-sum(f60.79[[i]][f60.79[[i]]$date==j,10],na.rm=TRUE)
+      f60.79[[i]][f60.79[[i]]$date==j,16]<-sum(f60.79[[i]][f60.79[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   f60.79[[i]] <- f60.79[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -510,7 +512,7 @@ for(i in seq_along(Storage2)) {
   f.80[[i]] <- Storage2[[i]]%>%filter(gender=="W") %>% filter(age_group=="A80+")
   for(j in 1:length(f)){
     for(j in dates){
-      f.80[[i]][f.80[[i]]$date==j,16]<-sum(f.80[[i]][f.80[[i]]$date==j,10],na.rm=TRUE)
+      f.80[[i]][f.80[[i]]$date==j,16]<-sum(f.80[[i]][f.80[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   f.80[[i]] <- f.80[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -520,7 +522,7 @@ for(i in seq_along(Storage2)) {
   f.unb[[i]] <- Storage2[[i]]%>%filter(gender=="W") %>% filter(age_group=="unbekannt")
   for(j in 1:length(f)){
     for(j in dates){
-      f.unb[[i]][f.unb[[i]]$date==j,16]<-sum(f.unb[[i]][f.unb[[i]]$date==j,10],na.rm=TRUE)
+      f.unb[[i]][f.unb[[i]]$date==j,16]<-sum(f.unb[[i]][f.unb[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   f.unb[[i]] <- f.unb[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -538,7 +540,7 @@ for(i in seq_along(Storage2)) {
   unb0.4[[i]] <- Storage2[[i]]%>%filter(gender=="unbekannt") %>% filter(age_group=="A00-A04")
   for(j in 1:length(f)){
     for(j in dates){
-      unb0.4[[i]][unb0.4[[i]]$date==j,16]<-sum(unb0.4[[i]][unb0.4[[i]]$date==j,10],na.rm=TRUE)
+      unb0.4[[i]][unb0.4[[i]]$date==j,16]<-sum(unb0.4[[i]][unb0.4[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   unb0.4[[i]] <- unb0.4[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -551,7 +553,7 @@ for(i in seq_along(Storage2)) {
   unb5.14[[i]] <- Storage2[[i]]%>%filter(gender=="unbekannt") %>% filter(age_group=="A05-A14")
   for(j in 1:length(f)){
     for(j in dates){
-      unb5.14[[i]][unb5.14[[i]]$date==j,16]<-sum(unb5.14[[i]][unb5.14[[i]]$date==j,10],na.rm=TRUE)
+      unb5.14[[i]][unb5.14[[i]]$date==j,16]<-sum(unb5.14[[i]][unb5.14[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   unb5.14[[i]] <- unb5.14[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -561,7 +563,7 @@ for(i in seq_along(Storage2)) {
   unb15.34[[i]] <- Storage2[[i]]%>%filter(gender=="unbekannt") %>% filter(age_group=="A05-A14")
   for(j in 1:length(f)){
     for(j in dates){
-      unb15.34[[i]][unb15.34[[i]]$date==j,16]<-sum(unb15.34[[i]][unb15.34[[i]]$date==j,10],na.rm=TRUE)
+      unb15.34[[i]][unb15.34[[i]]$date==j,16]<-sum(unb15.34[[i]][unb15.34[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   unb15.34[[i]] <- unb15.34[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -571,7 +573,7 @@ for(i in seq_along(Storage2)) {
   unb35.59[[i]] <- Storage2[[i]]%>%filter(gender=="unbekannt") %>% filter(age_group=="A05-A14")
   for(j in 1:length(f)){
     for(j in dates){
-      unb35.59[[i]][unb35.59[[i]]$date==j,16]<-sum(unb35.59[[i]][unb35.59[[i]]$date==j,10],na.rm=TRUE)
+      unb35.59[[i]][unb35.59[[i]]$date==j,16]<-sum(unb35.59[[i]][unb35.59[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   unb35.59[[i]] <- unb35.59[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -581,7 +583,7 @@ for(i in seq_along(Storage2)) {
   unb60.79[[i]] <- Storage2[[i]]%>%filter(gender=="unbekannt") %>% filter(age_group=="A05-A14")
   for(j in 1:length(f)){
     for(j in dates){
-      unb60.79[[i]][unb60.79[[i]]$date==j,16]<-sum(unb60.79[[i]][unb60.79[[i]]$date==j,10],na.rm=TRUE)
+      unb60.79[[i]][unb60.79[[i]]$date==j,16]<-sum(unb60.79[[i]][unb60.79[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   unb60.79[[i]] <- unb60.79[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -591,7 +593,7 @@ for(i in seq_along(Storage2)) {
   unb.80[[i]] <- Storage2[[i]]%>%filter(gender=="unbekannt") %>% filter(age_group=="A05-A14")
   for(j in 1:length(f)){
     for(j in dates){
-      unb.80[[i]][unb.80[[i]]$date==j,16]<-sum(unb.80[[i]][unb.80[[i]]$date==j,10],na.rm=TRUE)
+      unb.80[[i]][unb.80[[i]]$date==j,16]<-sum(unb.80[[i]][unb.80[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   unb.80[[i]] <- unb.80[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
@@ -601,7 +603,7 @@ for(i in seq_along(Storage2)) {
   unb.unb[[i]] <- Storage2[[i]]%>%filter(gender=="unbekannt") %>% filter(age_group=="A05-A14")
   for(j in 1:length(f)){
     for(j in dates){
-      unb.unb[[i]][unb.unb[[i]]$date==j,16]<-sum(unb.unb[[i]][unb.unb[[i]]$date==j,10],na.rm=TRUE)
+      unb.unb[[i]][unb.unb[[i]]$date==j,16]<-sum(unb.unb[[i]][unb.unb[[i]]$date==j,11],na.rm=TRUE)
     }
   }
   unb.unb[[i]] <- unb.unb[[i]] %>% select(district, date, bezirk, cases_on_date, age_group, gender)
