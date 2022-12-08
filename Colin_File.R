@@ -1053,3 +1053,8 @@ for(i in 1:nrow(df)){
   df[i,25] <- sum(df[i,4:24])
 }
 
+
+write.csv(df, "/Users/colinlinke/Documents/ProgR/Stat.-Praktikum/dfcombined.csv", row.names=FALSE)
+
+
+test100000 <- read.csv("dfcombined.csv", head=TRUE, sep=",")
