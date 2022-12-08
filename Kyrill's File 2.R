@@ -1,4 +1,6 @@
-data<- readRDS("~/Statistische Software/Stat.-Praktikum/cases_GermanTemporal_2022-10-25.rds")
+`cases_GermanTemporal_2022-11-28` <- readRDS("~/Statistische Software/Stat.-Praktikum/cases_GermanTemporal_2022-11-28.rds")
+
+data<-`cases_GermanTemporal_2022-11-28`
 
 data[,6]<-as.Date(data[,6])
 
@@ -104,6 +106,7 @@ dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"LK Landshut"="Niederbayern","SK 
 
 
 dbayern$cases_on_date<-NA
+dbayern$inzidenz<-NA
 ## Loop
 # data_new und dbayern einlesen
 vector23<-c(summary(dbayern$district))
@@ -148,6 +151,15 @@ for(i in 1:length(vector23names)){
 View(Storage4[[1]])
 
 ## Nach bezirk Kategorie
+#dbayern$inzidenz<-NULL
+#dbayern2<-dbayern
+#dbayern2 <- dbayern2 %>% 
+#  arrange(date) %>%
+#  mutate(inzidenz = ((lag(cases,6) + lag(cases,5) + lag(cases,4)+ 
+#                        lag(cases,3) +lag(cases,2) + lag(cases,1) + cases)
+#                     /population) * 100000)
+#
+#
 dbayern$bezirk<-as.factor(dbayern$bezirk)
 summary(dbayern$bezirk)
 bezirk_names<-c(names(summary(dbayern$bezirk)))
@@ -159,6 +171,17 @@ Storage6<-Storage5
 for(i in 1:length(bezirk_names)){
   Storage6[[i]]<-Storage6[[i]]%>%arrange(date)
 }
+
+#Storage62<-Storage6
+#for(i in 1:length(bezirk_names)){
+#  Storage62[[i]]<-Storage62[[i]]%>%mutate(inzidenz =  ((lag(cases,6) + lag(cases,5) + 
+#                                                lag(cases,4)+ lag(cases,3) +
+#                                                lag(cases,2) + lag(cases,1) + 
+#                                                cases)/population) * 100000)
+#  
+#}
+  
+  
 Storage7<-Storage6
 for(i in 1:length(bezirk_names)){
   Storage7[[i]]<-Storage7[[i]]%>%arrange(gender)
@@ -221,6 +244,303 @@ plot6
 df97<-as.data.frame(Storage9[[7]]) #Unterfranken
 plot7<-ggplot(df97,aes(x=date,y=cases,colour=district,group=district))+geom_point()+geom_line()+geom_smooth()+labs(title="Unterfranken")
 plot7
+
+
+a1<-min(Storage9[[1]]$date)
+b1<-max(Storage9[[1]]$date)
+c1<-seq(as.Date(a), as.Date(b), "days")
+c1<-as.data.frame(c)
+colnames(c1)[1] <- "date"
+y1<-merge(Storage9[[1]],c1, by="date",
+         all.x=TRUE, all.y=TRUE)
+v1<-y1$cases
+index1<-is.na(v1)
+v1[index]<-0
+y1$cases<-v1
+
+v1<-y1$gender
+index1<-is.na(v1)
+v1[index1]<-"egal"
+y1$gender<-v1
+
+ymal1<-subset(y1,gender=="M")
+yfem1<-subset(y1,gender=="W")
+yunk1<-subset(y1,gender=="unbekannt")
+
+smal1<-aggregate(x = ymal1$cases,               
+                by = list(ymal1$date),              
+                FUN = sum)
+smal1<-mutate(smal1, gender ="M")
+
+sfem1<-aggregate(x = yfem1$cases,               
+                by = list(yfem1$date),              
+                FUN = sum)
+sfem1<-mutate(sfem1, gender ="W")
+
+sunk1<-aggregate(x = yunk1$cases,               
+                by = list(yunk1$date),              
+                FUN = sum)
+sunk1<-mutate(sunk1, gender ="U")
+
+sall1<-rbind(smal1,sfem1,sunk1)
+
+ggplot(sall1, aes(Group.1,x,color = gender)) +
+  geom_line(size=0.1)+labs(title="Mittelfranken")
+
+
+
+a2<-min(Storage9[[2]]$date)
+b2<-max(Storage9[[2]]$date)
+c2<-seq(as.Date(a2), as.Date(b2), "days")
+c2<-as.data.frame(c2)
+colnames(c2)[1] <- "date"
+y2<-merge(Storage9[[2]],c2, by="date",
+          all.x=TRUE, all.y=TRUE)
+v2<-y2$cases
+index2<-is.na(v2)
+v2[index2]<-0
+y2$cases<-v2
+
+v2<-y2$gender
+index2<-is.na(v2)
+v2[index2]<-"egal"
+y2$gender<-v2
+
+ymal2<-subset(y2,gender=="M")
+yfem2<-subset(y2,gender=="W")
+yunk2<-subset(y2,gender=="unbekannt")
+
+smal2<-aggregate(x = ymal2$cases,               
+                 by = list(ymal2$date),              
+                 FUN = sum)
+smal2<-mutate(smal2, gender ="M")
+
+sfem2<-aggregate(x = yfem2$cases,               
+                by = list(yfem2$date),              
+                 FUN = sum)
+sfem2<-mutate(sfem2, gender ="W")
+
+sunk2<-aggregate(x = yunk2$cases,               
+                 by = list(yunk2$date),              
+                 FUN = sum)
+sunk2<-mutate(sunk2, gender ="U")
+
+sall2<-rbind(smal2,sfem2,sunk2)
+
+ggplot(sall2, aes(Group.1,x,color = gender)) +
+  geom_line(size=0.1)+labs(title="Niederbayern")
+
+
+
+a3<-min(Storage9[[3]]$date)
+b3<-max(Storage9[[3]]$date)
+c3<-seq(as.Date(a3), as.Date(b3), "days")
+c3<-as.data.frame(c3)
+colnames(c3)[1] <- "date"
+y3<-merge(Storage9[[3]],c3, by="date",
+          all.x=TRUE, all.y=TRUE)
+v3<-y3$cases
+index3<-is.na(v3)
+v3[index3]<-0
+y3$cases<-v3
+
+v3<-y3$gender
+index3<-is.na(v3)
+v3[index3]<-"egal"
+y3$gender<-v3
+
+ymal3<-subset(y3,gender=="M")
+yfem3<-subset(y3,gender=="W")
+yunk3<-subset(y3,gender=="unbekannt")
+
+smal3<-aggregate(x = ymal3$cases,               
+                 by = list(ymal3$date),              
+                 FUN = sum)
+smal3<-mutate(smal3, gender ="M")
+
+sfem3<-aggregate(x = yfem3$cases,               
+                 by = list(yfem3$date),              
+                 FUN = sum)
+sfem3<-mutate(sfem3, gender ="W")
+
+sunk3<-aggregate(x = yunk3$cases,               
+                 by = list(yunk3$date),              
+                 FUN = sum)
+sunk3<-mutate(sunk3, gender ="U")
+
+sall3<-rbind(smal3,sfem3,sunk3)
+
+ggplot(sall3, aes(Group.1,x,color = gender)) +
+  geom_line(size=0.1)+labs(title="Oberbayern")
+
+
+a4<-min(Storage9[[4]]$date)
+b4<-max(Storage9[[4]]$date)
+c4<-seq(as.Date(a4), as.Date(b4), "days")
+c4<-as.data.frame(c4)
+colnames(c4)[1] <- "date"
+y4<-merge(Storage9[[4]],c4, by="date",
+          all.x=TRUE, all.y=TRUE)
+v4<-y4$cases
+index4<-is.na(v4)
+v4[index4]<-0
+y4$cases<-v4
+
+v4<-y4$gender
+index4<-is.na(v4)
+v4[index4]<-"egal"
+y4$gender<-v4
+
+ymal4<-subset(y4,gender=="M")
+yfem4<-subset(y4,gender=="W")
+yunk4<-subset(y4,gender=="unbekannt")
+
+smal4<-aggregate(x = ymal4$cases,               
+                by = list(ymal4$date),              
+                 FUN = sum)
+smal4<-mutate(smal4, gender ="M")
+
+sfem4<-aggregate(x = yfem4$cases,               
+                 by = list(yfem4$date),              
+                 FUN = sum)
+sfem4<-mutate(sfem4, gender ="W")
+
+sunk4<-aggregate(x = yunk4$cases,               
+                 by = list(yunk4$date),              
+                 FUN = sum)
+sunk4<-mutate(sunk4, gender ="U")
+
+sall4<-rbind(smal4,sfem4,sunk4)
+
+ggplot(sall4, aes(Group.1,x,color = gender)) +
+  geom_line(size=0.1)+labs(title="Oberfranken")
+
+
+a5<-min(Storage9[[5]]$date)
+b5<-max(Storage9[[5]]$date)
+c5<-seq(as.Date(a5), as.Date(b5), "days")
+c5<-as.data.frame(c5)
+colnames(c5)[1] <- "date"
+y5<-merge(Storage9[[5]],c5, by="date",
+          all.x=TRUE, all.y=TRUE)
+v5<-y5$cases
+index5<-is.na(v5)
+v5[index5]<-0
+y5$cases<-v5
+
+v5<-y5$gender
+index5<-is.na(v5)
+v5[index5]<-"egal"
+y5$gender<-v5
+
+ymal5<-subset(y5,gender=="M")
+yfem5<-subset(y5,gender=="W")
+yunk5<-subset(y5,gender=="unbekannt")
+
+smal5<-aggregate(x = ymal5$cases,               
+                 by = list(ymal5$date),              
+                 FUN = sum)
+smal5<-mutate(smal5, gender ="M")
+
+sfem5<-aggregate(x = yfem5$cases,               
+                 by = list(yfem5$date),              
+                 FUN = sum)
+sfem5<-mutate(sfem5, gender ="W")
+
+sunk5<-aggregate(x = yunk5$cases,               
+                 by = list(yunk5$date),              
+                 FUN = sum)
+sunk5<-mutate(sunk5, gender ="U")
+
+sall5<-rbind(smal5,sfem5,sunk5)
+
+ggplot(sall5, aes(Group.1,x,color = gender)) +
+  geom_line(size=0.1)+labs(title="Oberpfalz")
+
+
+a6<-min(Storage9[[6]]$date)
+b6<-max(Storage9[[6]]$date)
+c6<-seq(as.Date(a6), as.Date(b6), "days")
+c6<-as.data.frame(c6)
+colnames(c6)[1] <- "date"
+y6<-merge(Storage9[[6]],c6, by="date",
+          all.x=TRUE, all.y=TRUE)
+v6<-y6$cases
+index6<-is.na(v6)
+v6[index6]<-0
+y6$cases<-v6
+
+v6<-y6$gender
+index6<-is.na(v6)
+v6[index6]<-"egal"
+y6$gender<-v6
+
+ymal6<-subset(y6,gender=="M")
+yfem6<-subset(y6,gender=="W")
+yunk6<-subset(y6,gender=="unbekannt")
+
+smal6<-aggregate(x = ymal6$cases,               
+                 by = list(ymal6$date),              
+                 FUN = sum)
+smal6<-mutate(smal6, gender ="M")
+
+sfem6<-aggregate(x = yfem6$cases,               
+                 by = list(yfem6$date),              
+                 FUN = sum)
+sfem6<-mutate(sfem6, gender ="W")
+
+sunk6<-aggregate(x = yunk6$cases,               
+                 by = list(yunk6$date),              
+                 FUN = sum)
+sunk6<-mutate(sunk6, gender ="U")
+
+sall6<-rbind(smal6,sfem6,sunk6)
+
+ggplot(sall6, aes(Group.1,x,color = gender)) +
+  geom_line(size=0.1)+labs(title="Schwaben")
+
+
+
+a7<-min(Storage9[[7]]$date)
+b7<-max(Storage9[[7]]$date)
+c7<-seq(as.Date(a7), as.Date(b7), "days")
+c7<-as.data.frame(c7)
+colnames(c7)[1] <- "date"
+y7<-merge(Storage9[[7]],c7, by="date",
+          all.x=TRUE, all.y=TRUE)
+v7<-y7$cases
+index7<-is.na(v7)
+v7[index7]<-0
+y7$cases<-v7
+
+v7<-y7$gender
+index7<-is.na(v7)
+v7[index7]<-"egal"
+y7$gender<-v7
+
+ymal7<-subset(y7,gender=="M")
+yfem7<-subset(y7,gender=="W")
+yunk7<-subset(y7,gender=="unbekannt")
+
+smal7<-aggregate(x = ymal7$cases,               
+                 by = list(ymal7$date),              
+                 FUN = sum)
+smal7<-mutate(smal7, gender ="M")
+
+sfem7<-aggregate(x = yfem7$cases,               
+                 by = list(yfem7$date),              
+                 FUN = sum)
+sfem7<-mutate(sfem7, gender ="W")
+
+sunk7<-aggregate(x = yunk7$cases,               
+                 by = list(yunk7$date),              
+                 FUN = sum)
+sunk7<-mutate(sunk7, gender ="U")
+
+sall7<-rbind(smal7,sfem7,sunk7)
+
+ggplot(sall7, aes(Group.1,x,color = gender)) +
+  geom_line(size=0.1)+labs(title="Unterfranken")
 
 
 #dbayern3$male_anteil<-dbayern3$male/dbayern3$population
@@ -323,9 +643,25 @@ for(j in 1:length(Storage2short)){
 
 View(Storage2short[[1]])
 
+Storage2shortfiltered<-Storage2short
+
+for(i in 1:length(Storage2short)){
+  Storage2shortfiltered[[i]]<-Storage2short[[i]]%>%filter(gender=="M")%>%filter(age_group=="A00-A04")
+}
+
+View(Storage2shortfiltered[[1]])
+
 Storage21filter<-Storage2[[1]]%>%filter(gender=="M")%>%filter(age_group=="A00-A04")
 
 View(Storage21filter)
+
+Storage2filtered<-Storage2
+
+for(i in 1:length(Storage2filtered)){
+  Storage2filtered[[i]]<-Storage2[[i]]%>%filter(gender=="M")%>%filter(age_group=="A00-A04")
+}
+
+View(Storage2filtered[[2]])
 
 #dbayern4$anteil_man<-NA
 #dbayern4$anteil_woman<-NA
@@ -339,6 +675,132 @@ View(Storage21filter)
 #dbayern4$male_anteil<-as.factor(dbayern4$male_anteil)
 #dbayern4$inzidenz<-as.factor(dbayern4$inzidenz)
 
+plot12<-NA
+plot22<-NA
+plot32<-NA
+plot42<-NA
+plot52<-NA
+plot62<-NA
+plot72<-NA
+
+dbayern3$bezirk<-as.factor(dbayern3$bezirk)
+summary(dbayern3$bezirk)
+bezirk_names<-c(names(summary(dbayern3$bezirk)))
+Storage52<-list()
+for(i in 1:length(bezirk_names)){
+  Storage52[[i]]<-dbayern3[dbayern3$bezirk==bezirk_names[i],]
+}
+Storage62<-Storage52
+for(i in 1:length(bezirk_names)){
+  Storage62[[i]]<-Storage62[[i]]%>%arrange(date)
+}
+Storage72<-Storage62
+for(i in 1:length(bezirk_names)){
+  Storage72[[i]]<-Storage72[[i]]%>%arrange(gender)
+}
+Storage82<-Storage72
+for(i in 1:length(bezirk_names)){
+  Storage82[[i]]<-Storage82[[i]]%>%arrange(age_group)
+}
+#View(Storage8[[1]])
+Storage92<-Storage82
+for(i in 1:length(bezirk_names)){
+  Storage92[[i]]<-Storage92[[i]]%>%arrange(district)
+}
+
+
+
+for(i in 1:length(Storage92)){
+  a1<-min(Storage92[[i]]$date)
+  b1<-max(Storage92[[i]]$date)
+  c1<-seq(as.Date(a1), as.Date(b1), "days")
+  c1<-as.data.frame(c1)
+  colnames(c1)[1] <- "date"
+  y1<-merge(Storage92[[i]],c1, by="date",
+            all.x=TRUE, all.y=TRUE)
+  v1<-y1$inzidenz
+  index1<-is.na(v1)
+  v1[index1]<-0
+  y1$cases<-v1
+  v1<-y1$gender
+  index1<-is.na(v1)
+  v1[index1]<-"egal"
+  y1$gender<-v1
+  ymal1<-subset(y1,gender=="M")
+  yfem1<-subset(y1,gender=="W")
+  yunk1<-subset(y1,gender=="unbekannt")
+  smal1<-aggregate(x = ymal1$cases,               
+                   by = list(ymal1$date),              
+                   FUN = sum)
+  smal1<-mutate(smal1, gender ="M")
+  sfem1<-aggregate(x = yfem1$cases,               
+                   by = list(yfem1$date),              
+                   FUN = sum)
+  sfem1<-mutate(sfem1, gender ="W")
+  sunk1<-aggregate(x = yunk1$cases,               
+                   by = list(yunk1$date),              
+                   FUN = sum)
+  sunk1<-mutate(sunk1, gender ="U")
+  sall1<-rbind(smal1,sfem1,sunk1)
+  i<-ggplot(sall1, aes(Group.1,x,color = gender)) +
+    geom_line(size=0.1)+labs(title="Mittelfranken")
+  
+  if(Storage92[[i]]$bezirk=="Mittelfranken"){
+    plot12<-i
+  }else if(Storage92[[i]]$bezirk=="Niederbayern"){
+    plot22<-i
+  }else if(Storage92[[i]]$bezirk=="Oberbayern"){
+    plot32<-i
+  }else if(Storage92[[i]]$bezirk=="Oberfranken"){
+    plot42<-i
+  }else if(Storage92[[i]]$bezirk=="Oberpfalz"){
+    plot52<-i
+  }else if(Storage92[[i]]$bezirk=="Schwaben"){
+    plot62<-i
+  }else if(Storage92[[i]]$bezirk=="Unterfranken"){
+    plot72<-i
+  }
+  
+}
+
+
+for(i in 1:length(Storage92)){
+  a1<-min(Storage92[[i]]$date)
+  b1<-max(Storage92[[i]]$date)
+  c1<-seq(as.Date(a1), as.Date(b1), "days")
+  c1<-as.data.frame(c1)
+  colnames(c1)[1] <- "date"
+  y1<-merge(Storage92[[i]],c1, by="date",
+            all.x=TRUE, all.y=TRUE)
+  v1<-y1$inzidenz
+  index1<-is.na(v1)
+  v1[index1]<-0
+  y1$cases<-v1
+  v1<-y1$gender
+  index1<-is.na(v1)
+  v1[index1]<-"egal"
+  y1$gender<-v1
+  ymal1<-subset(y1,gender=="M")
+  yfem1<-subset(y1,gender=="W")
+  yunk1<-subset(y1,gender=="unbekannt")
+  smal1<-aggregate(x = ymal1$cases,               
+                   by = list(ymal1$date),              
+                   FUN = sum)
+  smal1<-mutate(smal1, gender ="M")
+  sfem1<-aggregate(x = yfem1$cases,               
+                   by = list(yfem1$date),              
+                   FUN = sum)
+  sfem1<-mutate(sfem1, gender ="W")
+  sunk1<-aggregate(x = yunk1$cases,               
+                   by = list(yunk1$date),              
+                   FUN = sum)
+  sunk1<-mutate(sunk1, gender ="U")
+  sall1<-rbind(smal1,sfem1,sunk1)
+  i<-ggplot(sall1, aes(Group.1,x,color = gender)) +
+    geom_line(size=0.1)+labs(title="Mittelfranken")
+  
+  
+}
 
 
 ## Baden Württemberg
