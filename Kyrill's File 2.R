@@ -802,6 +802,57 @@ for(i in 1:length(Storage92)){
   
 }
 
+##Impfbayern, popbay
+
+vector33<-c(unique(dfcombined$district))
+Storage01<-list()
+for(i in 1:length(vector33)){
+  Storage01[[i]]<-dfcombined[dfcombined$district==vector33[i],]
+}
+View(Storage01[[1]])
+
+
+library(lubridate)
+  
+Storage02<-list()
+for(i in 1:length(Storage01)){
+  
+}
+
+
+bezirk_names02<-c(unique(dfcombined$bezirk))
+Storage02<-list()
+for(i in 1:length(bezirk_names02)){
+  Storage02[[i]]<-dfcombined[dfcombined$bezirk==bezirk_names02[i],]
+}
+View(Storage02[[1]])
+
+#Storage62<-Storage6
+#for(i in 1:length(bezirk_names)){
+#  Storage62[[i]]<-Storage62[[i]]%>%mutate(inzidenz =  ((lag(cases,6) + lag(cases,5) + 
+#                                                lag(cases,4)+ lag(cases,3) +
+#                                                lag(cases,2) + lag(cases,1) + 
+#                                                cases)/population) * 100000)
+#  
+#}
+
+
+Storage7<-Storage6
+for(i in 1:length(bezirk_names)){
+  Storage7[[i]]<-Storage7[[i]]%>%arrange(gender)
+}
+Storage8<-Storage7
+for(i in 1:length(bezirk_names)){
+  Storage8[[i]]<-Storage8[[i]]%>%arrange(age_group)
+}
+View(Storage8[[1]])
+Storage9<-Storage8
+for(i in 1:length(bezirk_names)){
+  Storage9[[i]]<-Storage9[[i]]%>%arrange(district)
+}
+View(Storage9[[1]])
+
+
 
 ## Baden Württemberg
 baden_wurttemberg<-data[data$state=="Baden-Württemberg",]
