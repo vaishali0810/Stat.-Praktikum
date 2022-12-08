@@ -397,7 +397,7 @@ dbayern3$male_anteil<-dbayern3$male/dbayern3$population
 dbayern3$female_anteil<-dbayern3$female/dbayern3$population
 View(dbayern3)
 
-# # remove age_group_2 & reference date
+# # remove age_group_2 & reference datee
 # data <- data[, -(c(4, 7))]
 # # formate date as date
 # data[, 5]<-as.Date(data[, 5])
