@@ -1,6 +1,9 @@
 install.packages("lme4")
 library(lme4)
 
+
+dfcombined <- df
+
 summary(lm(inzidenz~ bezirk + lag(inzidenz, 7) + gender + erstimpf_sum + zweitimpf_sum + drittimpf_sum,  data=dbayern5))
 str(dbayern5)
 #dbayern3$district <- as.factor(dbayern3$district)
@@ -26,12 +29,16 @@ library(car)       # Companion to applied regression
 #library(ggplots2)    # Various programing tools for plotting data
 library(tseries)   # For timeseries analysis
 library(lmtest)   
-dbayern4 <- pdata.frame(dbayern3, index=c("district", "gender", "age_group"))
-dbayern5 <- dbayern4[complete.cases(dbayern4),]
-re1 <- plm(inzidenz~ bezirk + erstimpf_sum + zweitimpf_sum + drittimpf_sum + male_anteil, data=dbayern5, model = "random")
-summary(re1)
+# dbayern4 <- pdata.frame(dfcombined, index=c("district", "gender", "age_group"))
+# dbayern5 <- dbayern4[complete.cases(dbayern4),]
+# #re1 <- plm(inzidenz~ bezirk + erstimpf_sum + zweitimpf_sum + drittimpf_sum + male_anteil, data=dbayern5, model = "random")
+# summary(re1)
 
 summary(glm(inzidenz ~ + I(zweitimpf_sum/population) + 
              I(drittimpf_sum/population) + lag(inzidenz, 7) + I(lag(inzidenz, 7) * log(density)) , data = dbayern3))
+
+
+testpdf <- pdata.frame(dfcombined, index=c("district", "date"))
+re1 <- plm(total_cases~lag(total_cases, 7), data= testpdf, model = "random")
 
 
