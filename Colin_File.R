@@ -270,6 +270,32 @@ View(popkreise)
 library(dplyr)
 
 
+dbayern$cases_on_date<-NA
+dbayern$inzidenz<-NA
+## Loop
+# data_new und dbayern einlesen
+vector23<-c(summary(dbayern$district))
+vector23names<-names(vector23)
+Storage<-list()
+for(i in 1:length(vector23names)){
+  Storage[[i]]<-dbayern[dbayern$district==vector23names[i],]
+}
+
+Storage2<-Storage
+for(i in 1:length(vector23names)){
+  Storage2[[i]]<-Storage2[[i]]%>%arrange(date)
+}
+
+#dates<-seq(as.Date("2020-01-28"),as.Date("2022-11-25"),by=1)
+
+for(j in 1:length(Storage2)){
+  for(i in dates){
+    Storage2[[j]][Storage2[[j]]$date==i,16]<-sum(Storage2[[j]][Storage2[[j]]$date==i,11],na.rm=TRUE)
+  }
+}
+
+
+
 
 dbayern$gender <- as.factor(dbayern$gender)
 dbayernshort <- dbayern %>% select(district, age_group, gender, date, cases, bezirk)
