@@ -361,7 +361,17 @@ b<-unlist(a)
 c<-as.numeric(b)
 popbay2$density<-c
 
+popbay2$district<-gsub("SK München. Landeshauptstadt","SK München",popbay2$district)
+
+popbay2$district<-gsub("LK Lindau (Bodensee)","LK Lindau",popbay2$district)
+
+popbay2$district<-gsub("SK Kempten (Allgäu)","SK Kempten",popbay2$district)
+
+#popbay2$district
+
 #View(popbay2)
+
+
 dbayern3 <- merge(dbayern2.1, popbay2, by = c("district", "state", "bezirk"))
 #View(dbayern3)
 # dbayern3$date <- as.Date(dbayern3$date)
