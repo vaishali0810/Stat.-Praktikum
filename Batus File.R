@@ -116,3 +116,183 @@ df91<-as.data.frame(ymal, stringsAsFactors = FALSE)
 ggplot(sall, aes(Group.1,x,color = gender)) +
   geom_line(size=0.1)
 
+
+
+impfBayern <- dimpf[dimpf$bundesland == "Freistaat Bayern", ]
+impfBayern <- impfBayern %>%
+  mutate(kreis=recode(kreis, "München, Landeshauptstadt" = "SK München",
+                      "Traunstein" = "LK Traunstein",
+                      "München, Kreis" = "LK München",
+                      "Augsburg, Stadt" = "SK Augsburg",
+                      "Rosenheim, Kreis" = "LK Rosenheim",
+                      "Augsburg, Kreis"= "LK Augsburg",
+                      "Schwandorf" = "LK Schwandorf",
+                      "Unterallgäu" = "LK Unterallgäu",
+                      "Mühldorf a.Inn" = "LK Mühldorf a.Inn",
+                      "Landshut, Kreis" = "LK Landshut",
+                      "Freising" = "LK Freising",
+                      "Ebersberg" = "LK Ebersberg",
+                      "Miltenberg" = "LK Miltenberg",
+                      "Aschaffenburg, Kreis" = "LK Aschaffenburg",
+                      "Rottal-Inn" = "LK Rottal-Inn",
+                      "Dachau" = "LK Dachau",
+                      "Pfaffenhofen a.d.Ilm" = "LK Pfaffenhofen a.d.Ilm",
+                      "Ingolstadt" = "SK Ingolstadt",
+                      "Roth" = "LK Roth",
+                      "Günzburg" = "LK Günzburg",
+                      "Nürnberger Land" = "LK Nürnberger Land",
+                      "Fürstenfeldbruck" = "LK Fürstenfeldbruck",
+                      "Dillingen a.d.Donau" = "LK Dillingen a.d.Donau",
+                      "Donau-Ries" = "LK Donau-Ries",
+                      "Altötting" = "LK Altötting",
+                      "Dingolfing-Landau" = "LK Dingolfing-Landau",
+                      "Kelheim" = "LK Kelheim",
+                      "Bamberg, Kreis" = "LK Bamberg",
+                      "Neustadt a.d.Aisch-Bad Windsheim" = "LK Neustadt a.d.Aisch-Bad Windsheim",
+                      "Regensburg, Kreis" = "LK Regensburg",
+                      "Freyung-Grafenau" = "LK Freyung-Grafenau",
+                      "Amberg-Sulzbach" = "LK Amberg-Sulzbach",
+                      "Neu-Ulm" = "LK Neu-Ulm",
+                      "Rhön-Grabfeld" = "LK Rhön-Grabfeld",
+                      "Neumarkt i.d.OPf." = "LK Neumarkt i.d.OPf.",
+                      "Berchtesgadener Land" = "LK Berchtesgadener Land",
+                      "Passau, Kreis" = "LK Passau",
+                      "Bayreuth, Kreis" = "LK Bayreuth",
+                      "Regen" = "LK Regen",
+                      "Bad Tölz-Wolfratshausen" = "LK Bad Tölz-Wolfratshausen",
+                      "Aichach-Friedberg" = "LK Aichach-Friedberg",
+                      "Schweinfurt, Kreis" = "LK Schweinfurt",
+                      "Forchheim" = "LK Forchheim",
+                      "Miesbach" = "LK Miesbach",
+                      "Regensburg, Stadt" = "SK Regensburg",
+                      "Main-Spessart" = "LK Main-Spessart",
+                      "Ansbach, Kreis" = "LK Ansbach",
+                      "Bayreuth, Stadt" = "SK Bayreuth",
+                      "Cham" = "LK Cham",
+                      "Kitzingen" = "LK Kitzingen",
+                      "Tirschenreuth" = "LK Tirschenreuth",
+                      "Eichstätt" = "LK Eichstätt",
+                      "Landshut, Stadt" = "SK Landshut",
+                      "Rosenheim, Stadt" = "SK Rosenheim",
+                      "Oberallgäu" = "LK Oberallgäu",
+                      "Fürth, Stadt" = "SK Fürth",
+                      "Aschaffenburg, Stadt" = "SK Aschaffenburg",
+                      "Coburg, Kreis" = "LK Coburg",
+                      "Ostallgäu" = "LK Ostallgäu",
+                      "Neustadt a.d.Waldnaab" = "LK Neustadt a.d.Waldnaab",
+                      "Wunsiedel i.Fichtelgebirge" = "LK Wunsiedel i.Fichtelgebirge",
+                      "Deggendorf" = "LK Deggendorf",
+                      "Lichtenfels" = "LK Lichtenfels",
+                      "Nürnberg" = "SK Nürnberg",
+                      "Weißenburg-Gunzenhausen" = "LK Weißenburg-Gunzenhausen",
+                      "Erlangen-Höchstadt" = "LK Erlangen-Höchstadt",
+                      "Schweinfurt, Stadt" = "SK Schweinfurt",
+                      "Kulmbach" = "LK Kulmbach",
+                      "Würzburg, Kreis" = "LK Würzburg",
+                      "Würzburg, Stadt" = "SK Würzburg",
+                      "Fürth, Kreis" = "LK Fürth",
+                      "Schwabach" = "SK Schwabach",
+                      "Memmingen" = "SK Memmingen",
+                      "Weilheim-Schongau" = "LK Weilheim-Schongau",
+                      "Bad Kissingen" = "LK Bad Kissingen",
+                      "Bamberg, Stadt" = "SK Bamberg",
+                      "Straubing-Bogen" = "LK Straubing-Bogen",
+                      "Hof, Kreis" = "LK Hof",
+                      "Erding" = "LK Erding",
+                      "Erlangen" = "SK Erlangen",
+                      "Lindau (Bodensee)" = "LK Lindau",
+                      "Amberg" = "SK Amberg",
+                      "Starnberg"= "LK Starnberg",
+                      "Neuburg-Schrobenhausen" = "LK Neuburg-Schrobenhausen",
+                      "Landsberg am Lech" = "LK Landsberg a.Lech",
+                      "Haßberge" = "LK Haßberge",
+                      "Kempten (Allgäu)" = "SK Kempten",
+                      "Coburg, Stadt" = "SK Coburg",
+                      "Kronach" = "LK Kronach",
+                      "Weiden i.d.OPf." = "SK Weiden i.d.OPf.",
+                      "Garmisch-Partenkirchen" = "LK Garmisch-Partenkirchen",
+                      "Passau, Stadt" = "SK Passau",
+                      "Hof, Stadt" = "SK Hof",
+                      "Straubing" = "SK Straubing",
+                      "Kaufbeuren" = "SK Kaufbeuren",
+                      "Ansbach, Stadt" = "SK Ansbach")) %>%
+  as.data.frame()
+colnames(impfBayern)[5] <- "district"
+colnames(impfBayern)[6] <- "date"
+impfBayern[,6] <- as.Date(impfBayern[,6])
+
+#impfBayern$erstimpf <-cumsum(impfBayern$kr_erstimpf)
+#impfBayern$zweitimpf <-cumsum(impfBayern$kr_zweitimpf)
+#impfBayern$drittimpf <-cumsum(impfBayern$kr_drittimpf)
+#impfBayern$viertimpf <-cumsum(impfBayern$kr_viertimpf)
+
+# impfungentake <- impfBayern %>% select(district, date, kr_erstimpf, kr_zweitimpf, kr_drittimpf, kr_viertimpf)
+# dbayern2 <- merge(dbayern, impfungentake, by = c("district", "date"))
+
+impfBayern$erstimpf_sum<-NA
+impfBayern$zweitimpf_sum<-NA
+impfBayern$drittimpf_sum<-NA
+impfBayern$viertimpf_sum<-NA
+
+impfbayern2<-impfBayern%>%group_by(district)%>%dplyr::mutate(erstimpf_sum=cumsum(kr_erstimpf),zweitimpf_sum=cumsum(kr_zweitimpf),drittimpf_sum=cumsum(kr_drittimpf),viertimpf_sum=cumsum(kr_viertimpf))
+
+#View(impfbayern2)
+
+#impfungentake <- impfbayern2 %>% select(district, date, erstimpf_sum, zweitimpf_sum, drittimpf_sum, viertimpf_sum)
+impfungentake <- impfBayern %>% select(district, date, kr_erstimpf, kr_zweitimpf, kr_drittimpf, kr_viertimpf)
+#View(impfungentake)
+dbayern2 <- merge(dbayern, impfungentake, by = c("district", "date"), all.x = TRUE, all.y = TRUE)
+#View(dbayern2)
+
+
+impf<- read.csv("impfdaten_regional.csv", head=TRUE, sep=",")
+
+dfcombined<-test100000
+
+dfcombined$date<-as.Date(dfcombined$date)
+impfungentake$date<-as.Date(impfungentake$date)
+
+dfcomb_impf <- merge(dfcombined, impfungentake, by = c("district", "date"), 
+           all.x = TRUE, all.y = TRUE)
+
+a <- dfcomb_impf$kr_erstimpf 
+index <- is.na(a) 
+dfcomb_impf[index, 26] <- 0
+a <- dfcomb_impf$kr_zweitimpf 
+index <- is.na(a) 
+dfcomb_impf[index, 27] <- 0
+a <- dfcomb_impf$kr_drittimpf
+index <- is.na(a) 
+dfcomb_impf[index, 28] <- 0
+a <- dfcomb_impf$kr_viertimpf 
+index <- is.na(a) 
+dfcomb_impf[index, 29] <- 0
+
+dfcomb_impf_pop2<-merge(dfcomb_impf, popbay2, by=c("district","bezirk"))
+
+colnames(dfcomb_impf)
+colnames(popbay2)
+
+
+
+dfcomb_impf_pop2 <- dfcomb_impf_pop2 %>% 
+  arrange(date) %>%
+  group_by(district) %>%
+  mutate(inzidenz = ((lag(total_cases,6) + lag(total_cases,5) + lag(total_cases,4)+ 
+                        lag(total_cases,3) +lag(total_cases,2) + lag(total_cases,1) + total_cases)
+                     /population) * 100000)
+dfcomb_impf_pop2<-dfcomb_impf_pop2%>%arrange(district)
+
+dfcomb_impf_pop2$male_anteil<-dfcomb_impf_pop2$male/dfcomb_impf_pop2$population
+dfcomb_impf_pop2$female_anteil<-dfcomb_impf_pop2$female/dfcomb_impf_pop2$population
+View(dfcomb_impf_pop2)
+
+model_boosting_default <- glmboost(medv ~ ., data = data_train,
+                                   control = boost_control(mstop = 100,
+                                                           nu = 0.1))
+
+
+
+
+
+
