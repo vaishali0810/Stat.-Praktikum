@@ -51,6 +51,7 @@ for(i in 1:length(vector33)){
 
 Storage01[[69]] <- Storage01[[69]] %>% 
   mutate(week = cut.Date(date, breaks = "1 week", labels = FALSE)) %>% 
-  arrange(Order_Date)
+  arrange(date)
 Storage01[[69]]$date <- as.Date(Storage01[[69]]$date)
 str(Storage01[[69]])
+View(Storage01[[69]])
