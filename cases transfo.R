@@ -35,9 +35,26 @@ df_comb_week<-dfcombined%>%group_by(district,week)%>%summarise(M.A00.04 =sum(M.A
                                                                     total_cases = sum(total_cases),
                                                                     .groups="keep")
 # identical(sum(dfcombined$total_cases), sum(df_comb_week$total_cases))
+colnames(df_comb_week)
+
+colnames(impfbayern2)
+
+
+# min(impfbayern2$date)
+# [1] "2020-12-27"
+
+colnames(impfungentake)
+
+impfungentake <- impfungentake %>% 
+  mutate(week = cut.Date(date, breaks = "1 week", labels = FALSE)) %>% 
+  arrange(district, date)
+
+impfungentake<-impfungentake%>%group_by(district,week)%>%summarise(kr_erstimpf =sum(kr_erstimpf),
+                                                               kr_zweitimpf =sum(kr_zweitimpf),
+                                                               kr_drittimpf =sum(kr_drittimpf),
+                                                               kr_viertimpf =sum(kr_viertimpf),
+                                                               .groups="keep")
 
 
 
-
-
-
+View(impfungentake)
