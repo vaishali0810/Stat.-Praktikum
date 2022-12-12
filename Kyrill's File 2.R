@@ -816,25 +816,47 @@ for(i in 1:length(vector33)){
 }
 View(Storage01[[1]])
 
+for(i in 1:length(Storage01))
+Storage01[[i]] <- Storage01[[i]] %>% 
+  mutate(week = cut.Date(date, breaks = "1 week", labels = FALSE)) %>% 
+  arrange(date)
 
-library(lubridate)
+View(Storage01[[1]])
+
+Storage012<-Storage_new
+
+#Storage012[[1]]<-Storage01[[1]]%>%group_by(date=cut(date,"week"))%>%summarise(total_cases=sum(total_cases))
+
+View(Storage012[[1]])
+
+#library(lubridate)
+
+#View(Storage01[[69]])
   
-Storage022<-Storage01
-for(i in 1:length(vector33)){
-  Storage022[[i]]<-Storage01[[i]]%>%group_by(date=unique(cut(dates,"week")))
-}
+Storage012[[69]]<-Storage01[[69]]%>%select(date,`M.A00-04`,week)
 
-View(Storage022[[1]])
+Storage012[[69]]<-Storage01[[69]]%>%group_by(week)%>%summarise(`M.A00-04`=sum(`M.A00-04`),.groups="keep")
 
-Storage02[[1]]<-unique(Storage02[[1]])
+View(Storage012[[69]])
 
-View(Storage02[[1]])
+#Storage022<-Storage01
+#for(i in 1:length(vector33)){
+#  Storage022[[i]]<-Storage01[[i]]%>%group_by(date=unique(cut(dates,"week")))
+#}
 
-Storage03<-list()
-for(i in 1:length(vector33)){
-  Storage03[[i]]<-Storage01[[i]]%>%group_by(date=cut(date,"week"))%>%
-    summarise(M.A00-A04=sum(M.A00-A04),M.A05-A14=sum(M.A05-A14))
-}
+#View(Storage022[[1]])
+
+#Storage02[[1]]<-unique(Storage02[[1]])
+
+#View(Storage02[[1]])
+
+#Storage03<-list()
+#for(i in 1:length(vector33)){
+#  Storage03[[i]]<-Storage01[[i]]%>%group_by(date=cut(date,"week"))%>%
+#    summarise(M.A00-A04=sum(M.A00-A04),M.A05-A14=sum(M.A05-A14))
+#}
+
+dates<-seq(as.Date("2020-01-28"),as.Date("2022-11-25"),by=1)
 
 Storage_new<-list()
 for(i in 1:length(vector33)){
@@ -857,6 +879,8 @@ for(i in 1:length(vector33)){
   for(j in 1:nrow(Storage_new))
   Storage_new[[i]][j,4]<-Storage01[[i]][j,4]
 }
+
+
 
 
 

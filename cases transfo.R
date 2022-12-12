@@ -41,3 +41,18 @@ for(i in 1:length(vector33)){
   Storage_new[[i]][, 26] <- c(1:148)
 }
 View(Storage01[[69]])
+
+
+Storage012<-Storage_new
+
+View(Storage012[[1]])
+
+Storage012[[69]]<-Storage01[[69]]%>%select(date,`M.A00-04`,week)
+
+Storage012[[69]]<-Storage01[[69]]%>%group_by(week)%>%summarise(`M.A00-04`=sum(`M.A00-04`),.groups="keep")
+
+View(Storage012[[69]])
+
+
+
+
