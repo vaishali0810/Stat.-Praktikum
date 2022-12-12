@@ -140,4 +140,9 @@ df_ultimate$m_anteil<-df_ultimate$male/df_ultimate$population
 
 df_ultimate$f_anteil<-df_ultimate$female/df_ultimate$population
 
+df_ultimate <- df_ultimate %>% mutate(inzidenz = (total_cases / population) * 100000)
+df_ultimate<-df_ultimate[,c(1:4,42, 36:39, 34, 35, 5:33, 40:41)]
+
 View(df_ultimate)
+
+write.csv(df_ultimate, "/Users/colinlinke/Documents/ProgR/Stat.-Praktikum/dfultimate.csv", row.names=FALSE)
