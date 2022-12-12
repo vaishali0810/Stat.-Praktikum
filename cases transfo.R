@@ -40,4 +40,4 @@ for(i in 1:length(vector33)){
   Storage_new[[i]][, 3] <- Storage01[[i]][1, 3]
   Storage_new[[i]][, 26] <- c(1:148)
 }
-View(Storage_new[[69]])
+View(Storage01[[69]])
