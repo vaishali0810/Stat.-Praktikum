@@ -1,8 +1,6 @@
 dfcombined <- read.csv("dfcombined.csv", header = TRUE, sep =",")
 View(dfcombined)
 
-
-
 # weekly_cases <- dbayern3 %>%
 #   group_by(date = cut(date, "week"))  %>% summarise(case = sum(cases))
 # 
@@ -43,10 +41,3 @@ for(i in 1:length(vector33)){
   Storage_new[[i]][, 26] <- c(1:148)
 }
 View(Storage_new[[69]])
-# 
-# Storage01[[69]] <- Storage01[[69]] %>% 
-#   mutate(week = cut.Date(date, breaks = "1 week", labels = FALSE)) %>% 
-#   arrange(date)
-# Storage01[[69]]$date <- as.Date(Storage01[[69]]$date)
-# str(Storage01[[69]])
-# View(Storage01[[69]])
