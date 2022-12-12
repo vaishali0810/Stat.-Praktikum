@@ -69,5 +69,54 @@ df_comb_week_impf[is.na(df_comb_week_impf)] <- 0
 popbay <- read.csv("popBay.csv", header = TRUE, sep = ";")
 #View(popbay) 
 popbay <- popbay %>% mutate(Kreis...Landkreise = recode(Kreis...Landkreise, "Kreisfreie Stadt" = "SK", "Landkreis" = "LK"))
+popbay$district <- "NA"
+popbay$district <- paste(popbay$Kreis...Landkreise, popbay$Kreisfreie.Stadt, sep=" ")
+popbay <- popbay %>% select(state, bezirk, district, population, male, female, density, area)
+colnames(popbay)
+#popbay <- read.csv("popBay.csv", header = TRUE, sep = ";")
+#View(popbay) 
+#popbay <- popbay %>% mutate(Kreis...Landkreise = recode(Kreis...Landkreise, "Kreisfreie Stadt" = "SK", "Landkreis" = "LK"))
+#popbay$district <- "NA"
+#popbay$district <- paste(popbay$Kreis...Landkreise, popbay$Kreisfreie.Stadt, sep=" ")
+#popbay <- popbay %>% select(state, bezirk, district, population, male, female, density, area)
+#colnames(popbay)
 
+popbay2<-popbay
+
+### Code character change to valid numerics (no commas, no spaces etc.)
+
+popbay2<-sapply(popbay2, gsub, pattern = ",", replacement= ".")
+popbay2<-as.data.frame(popbay2)
+a<-gsub(" ","",x=popbay2$area)
+c<-as.numeric(a)
+popbay2$area<-c
+
+a<-gsub(" ","",x=popbay2$population)
+b<-unlist(a)
+c<-as.numeric(b)
+popbay2$population<-c
+
+a<-gsub(" ","",x=popbay2$male)
+b<-unlist(a)
+c<-as.numeric(b)
+popbay2$male<-c
+
+a<-gsub(" ","",x=popbay2$female)
+b<-unlist(a)
+c<-as.numeric(b)
+popbay2$female<-c
+
+a<-gsub(" ","",x=popbay2$density)
+b<-unlist(a)
+c<-as.numeric(b)
+popbay2$density<-c
+
+popbay2$district<-gsub("SK München. Landeshauptstadt","SK München",popbay2$district)
+
+popbay2$district<-gsub("LK Lindau (Bodensee)","LK Lindau",popbay2$district)
+
+popbay2$district<-gsub("SK Kempten (Allgäu)","SK Kempten",popbay2$district)
+popbay2 <- popbay2 %>% 
+  mutate(district = recode(district, "LK Lindau (Bodensee)" = "LK Lindau", 
+                           "LK Landsberg am Lech" = "LK Landsberg a.Lech", "SK Kempten (Allgäu)" = "SK Kempten"))
 df_ultimate <- merge(df_comb_week_impf, popbay2, by = c("district"), all.x = TRUE, all.y = TRUE)
