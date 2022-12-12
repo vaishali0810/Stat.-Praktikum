@@ -3,10 +3,10 @@ View(dfcombined)
 
 
 
-weekly_cases <- dbayern3 %>%
-  group_by(date = cut(date, "week"))  %>% summarise(case = sum(cases))
-
-weekly_cases$date <- as.Date(weekly_cases$date)
+# weekly_cases <- dbayern3 %>%
+#   group_by(date = cut(date, "week"))  %>% summarise(case = sum(cases))
+# 
+# weekly_cases$date <- as.Date(weekly_cases$date)
 
 dfcombined$date <- as.Date(dfcombined$date)
 
@@ -31,20 +31,22 @@ library(lubridate)
 
 Storage_new<-list()
 for(i in 1:length(vector33)){
-  Storage_new[[i]]<-data.frame(matrix(NA,ncol=25,nrow=148))
+  Storage_new[[i]]<-data.frame(matrix(NA, ncol = 26, nrow = 148))
   colnames(Storage_new[[i]])<-colnames(Storage01[[1]])
 }
 
 View(Storage_new[[1]])
 
 for(i in 1:length(vector33)){
-  Storage_new[[i]][,2]<-Storage01[[i]][1,2]
-  Storage_new[[i]][,3]<-Storage01[[i]][1,3]
+  Storage_new[[i]][, 2] <- Storage01[[i]][1, 2]
+  Storage_new[[i]][, 3] <- Storage01[[i]][1, 3]
+  Storage_new[[i]][, 26] <- c(1:148)
 }
-
-Storage01[[69]] <- Storage01[[69]] %>% 
-  mutate(week = cut.Date(date, breaks = "1 week", labels = FALSE)) %>% 
-  arrange(date)
-Storage01[[69]]$date <- as.Date(Storage01[[69]]$date)
-str(Storage01[[69]])
-View(Storage01[[69]])
+View(Storage_new[[69]])
+# 
+# Storage01[[69]] <- Storage01[[69]] %>% 
+#   mutate(week = cut.Date(date, breaks = "1 week", labels = FALSE)) %>% 
+#   arrange(date)
+# Storage01[[69]]$date <- as.Date(Storage01[[69]]$date)
+# str(Storage01[[69]])
+# View(Storage01[[69]])
