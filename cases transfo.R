@@ -123,8 +123,6 @@ df_ultimate <- merge(df_comb_week_impf, popbay2, by = c("district"), all.x = TRU
 
 df_ultimate<-df_ultimate[,c(1,30,29,2,3:28,31:35)]
 
-View(df_ultimate)
-
 
 ## calculating rates of vaccinations
 df_ultimate<-df_ultimate%>%
@@ -138,3 +136,8 @@ vector10001 <- which(df_ultimate$rate_erstimpf < df_ultimate$rate_zweitimpf)
 df_ultimate[vector10001,36] <- df_ultimate[vector10001,37]
 ## Some have more vaccinations than population, maybe Impfzenter in Altötting and the like are the explanation.
 
+df_ultimate$m_anteil<-df_ultimate$male/df_ultimate$population
+
+df_ultimate$f_anteil<-df_ultimate$female/df_ultimate$population
+
+View(df_ultimate)
