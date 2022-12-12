@@ -55,6 +55,19 @@ impfungentake<-impfungentake%>%group_by(district,week)%>%summarise(kr_erstimpf =
                                                                kr_viertimpf =sum(kr_viertimpf),
                                                                .groups="keep")
 
+#time difference 334 days ---> 47 weeks (days are Tuesday and Sunday --> round down)
 
+impfungentake$week <- impfungentake$week + 47
 
-View(impfungentake)
+df_comb_week_impf <- merge(df_comb_week, impfungentake, by = c("district", "week"), all.x = TRUE, all.y = TRUE)
+# View(df_comb_week_impf)
+df_comb_week_impf[is.na(df_comb_week_impf)] <- 0
+
+# any(is.na(df_comb_week_impf))
+# identical(sum(df_comb_week_impf$kr_erstimpf, na.rm=TRUE), sum(impfungentake$kr_erstimpf, na.rm=TRUE))
+
+popbay <- read.csv("popBay.csv", header = TRUE, sep = ";")
+#View(popbay) 
+popbay <- popbay %>% mutate(Kreis...Landkreise = recode(Kreis...Landkreise, "Kreisfreie Stadt" = "SK", "Landkreis" = "LK"))
+
+df_ultimate <- merge(df_comb_week_impf, popbay2, by = c("district"), all.x = TRUE, all.y = TRUE)
