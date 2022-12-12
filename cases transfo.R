@@ -8,6 +8,14 @@ weekly_cases <- dbayern3 %>%
 
 weekly_cases$date <- as.Date(weekly_cases$date)
 
+dfcombined$date <- as.Date(dfcombined$date)
+
+dfcombined <- dfcombined %>% 
+  mutate(week = cut.Date(date, breaks = "1 week", labels = FALSE)) %>% 
+  arrange(date)
+
+dfcombined <- dfcombined %>% arrange(district, date)
+View(dfcombined)
 
 vector33<-c(unique(dfcombined$district))
 Storage01<-list()
@@ -19,22 +27,7 @@ View(Storage01[[1]])
 
 library(lubridate)
 
-Storage022<-Storage01
-for(i in 1:length(vector33)){
-  Storage022[[i]]<-Storage01[[i]]%>%group_by(date=unique(cut(dates,"week")))
-}
 
-View(Storage022[[1]])
-
-Storage02[[1]]<-unique(Storage02[[1]])
-
-View(Storage02[[1]])
-
-# Storage03<-list()
-# for(i in 1:length(vector33)){
-#   Storage03[[i]]<-Storage01[[i]]%>%group_by(date=cut(date,"week"))%>%
-#     summarise(M.A00-A04=sum(M.A00-A04),M.A05-A14=sum(M.A05-A14))
-# }
 
 Storage_new<-list()
 for(i in 1:length(vector33)){
