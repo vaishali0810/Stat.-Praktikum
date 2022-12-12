@@ -120,3 +120,7 @@ popbay2 <- popbay2 %>%
   mutate(district = recode(district, "LK Lindau (Bodensee)" = "LK Lindau", 
                            "LK Landsberg am Lech" = "LK Landsberg a.Lech", "SK Kempten (Allgäu)" = "SK Kempten"))
 df_ultimate <- merge(df_comb_week_impf, popbay2, by = c("district"), all.x = TRUE, all.y = TRUE)
+
+df_ultimate<-df_ultimate[,c(1,30,29,2,3:28,31:35)]
+
+View(df_ultimate)

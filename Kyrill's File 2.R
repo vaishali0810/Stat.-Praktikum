@@ -839,6 +839,10 @@ Storage012[[69]]<-Storage01[[69]]%>%group_by(week)%>%summarise(`M.A00-04`=sum(`M
 
 View(Storage012[[69]])
 
+
+
+
+
 #Storage022<-Storage01
 #for(i in 1:length(vector33)){
 #  Storage022[[i]]<-Storage01[[i]]%>%group_by(date=unique(cut(dates,"week")))
@@ -879,16 +883,6 @@ for(i in 1:length(vector33)){
   for(j in 1:nrow(Storage_new))
   Storage_new[[i]][j,4]<-Storage01[[i]][j,4]
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
