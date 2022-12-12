@@ -124,3 +124,17 @@ df_ultimate <- merge(df_comb_week_impf, popbay2, by = c("district"), all.x = TRU
 df_ultimate<-df_ultimate[,c(1,30,29,2,3:28,31:35)]
 
 View(df_ultimate)
+
+
+## calculating rates of vaccinations
+df_ultimate<-df_ultimate%>%
+  group_by(district)%>%
+  dplyr::mutate(rate_erstimpf = cumsum(kr_erstimpf) / population,
+                rate_zweitimpf=cumsum(kr_zweitimpf) / population,
+                rate_drittimpf=cumsum(kr_drittimpf) / population,
+                rate_viertimpf=cumsum(kr_viertimpf) / population)
+## Fixxing issue of fewer first vaccinations than second vaccinations
+vector10001 <- which(df_ultimate$rate_erstimpf < df_ultimate$rate_zweitimpf)
+df_ultimate[vector10001,36] <- df_ultimate[vector10001,37]
+## Some have more vaccinations than population, maybe Impfzenter in Altötting and the like are the explanation.
+
