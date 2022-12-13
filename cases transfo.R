@@ -145,4 +145,16 @@ df_ultimate<-df_ultimate[,c(1:4,42, 36:39, 34, 35, 5:33, 40:41)]
 
 View(df_ultimate)
 
-write.csv(df_ultimate, "/Users/colinlinke/Documents/ProgR/Stat.-Praktikum/dfultimate.csv", row.names=FALSE)
+
+colnames(nachbarkreise) <- c("district", "neighboring districts", "bezirk")
+dfultimate <- merge(dfultimate, nachbarkreise, by = c("district", "bezirk"), all.x = TRUE, all.y = TRUE)
+
+
+View(dfultimate)
+
+
+
+
+
+
+#write.csv(df_ultimate, "/Users/colinlinke/Documents/ProgR/Stat.-Praktikum/dfultimate.csv", row.names=FALSE)
