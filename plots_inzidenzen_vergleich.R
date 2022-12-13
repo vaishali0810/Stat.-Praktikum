@@ -29,7 +29,7 @@ ggplot(data= weekly_cases_bayern, aes(x=date, y = case)) + geom_line(color = "bl
                                         colour = "white") )
              
           
-# Nachbarkreise von allen Bezirken
+# 2. Nachbarkreise von allen Bezirken
 
 ## Schwaben
 
@@ -142,9 +142,6 @@ oberfranken <- data.frame(bezirk = c("SK Bamberg","SK Bayreuth",
 #"LK Starnberg":"LK Fürstenfeldbruck", "LK München","LK Bad Tölz-Wolfratshausen" , "LK Weilheim-Schongau", "LK Landsberg a.Lech"
 #"LK Traunstein":"LK Mühldorf a.Inn", "LK Altötting", "LK Berchtesgadener Land", "LK Rosenheim"
 #"LK Weilheim-Schongau":"LK Landsberg a.Lech", "LK Starnberg", "LK Bad Tölz-Wolfratshausen", "LK Garmisch-Partenkirchen" (LK Ostallgäu)
-#"LK Bad Reichenhall":"LK Berchtesgadener Land" 
-
-##last one check
 
 oberbayern <- data.frame(bezirk = c("SK München" , "SK Ingolstadt" , "SK Rosenheim" ,
                                     "LK Altötting" , "LK Berchtesgadener Land" , 
@@ -155,8 +152,7 @@ oberbayern <- data.frame(bezirk = c("SK München" , "SK Ingolstadt" , "SK Rosenh
                                     "LK Miesbach" ,"LK Mühldorf a.Inn" , "LK München" ,
                                     "LK Neuburg-Schrobenhausen" , 
                                     "LK Pfaffenhofen a.d.Ilm" , "LK Rosenheim" , "LK Starnberg" , 
-                                    "LK Traunstein" , "LK Weilheim-Schongau" , 
-                                    "LK Bad Reichenhall"),
+                                    "LK Traunstein" , "LK Weilheim-Schongau"),
                            
                            nachbarkreise = c( "LK Dachau, LK München, LK Fürstenfeldbruck",
                              "LK Eichstätt, LK Pfaffenhofen a.d.Ilm, LK Neuburg-Schrobenhausen" ,
@@ -180,8 +176,7 @@ oberbayern <- data.frame(bezirk = c("SK München" , "SK Ingolstadt" , "SK Rosenh
                              "LK Traunstein, LK Miesbach,LK München,LK Ebersberg, LK Mühldorf a.Inn",
                              "LK Fürstenfeldbruck, LK München,LK Bad Tölz-Wolfratshausen , LK Weilheim-Schongau, LK Landsberg a.Lech",
                              "LK Mühldorf a.Inn, LK Altötting, LK Berchtesgadener Land, LK Rosenheim",
-                             "LK Landsberg a.Lech, LK Starnberg, LK Bad Tölz-Wolfratshausen, LK Garmisch-Partenkirchen",
-                             "LK Berchtesgadener Land"),
+                             "LK Landsberg a.Lech, LK Starnberg, LK Bad Tölz-Wolfratshausen, LK Garmisch-Partenkirchen"),
                            
                            regierungsbezirk = rep("Oberbayern", 24)
                            
@@ -338,6 +333,32 @@ niederbayern <- data.frame( bezirk = c("LK Landshut","SK Landshut",
 ##Alle zuammen:
 nachbarkreise_list <- list(niederbayern, oberbayern,oberfranken, oberpfalz, mittelfranken, schwaben, unterfranken)
 nachbarkreise <-Reduce(function(x, y) merge(x, y, all=TRUE), nachbarkreise_list, accumulate=FALSE)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## 2. Größte und Kleinste Population vergleich pro Bezirk
