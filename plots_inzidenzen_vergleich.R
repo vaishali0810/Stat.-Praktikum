@@ -150,7 +150,7 @@ oberbayern <- data.frame(bezirk = c("SK München" , "SK Ingolstadt" , "SK Rosenh
                                     "LK Altötting" , "LK Berchtesgadener Land" , 
                                     "LK Bad Tölz-Wolfratshausen" , "LK Dachau" ,
                                     "LK Ebersberg" , "LK Eichstätt" , "LK Erding" ,
-                                    "LK Freising" , " LK Fürstenfeldbruck" ,
+                                    "LK Freising" , "LK Fürstenfeldbruck" ,
                                     "LK Garmisch-Partenkirchen" , "LK Landsberg a.Lech" ,
                                     "LK Miesbach" ,"LK Mühldorf a.Inn" , "LK München" ,
                                     "LK Neuburg-Schrobenhausen" , 
