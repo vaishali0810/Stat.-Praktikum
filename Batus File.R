@@ -291,8 +291,25 @@ model_boosting_default <- glmboost(medv ~ ., data = data_train,
                                    control = boost_control(mstop = 100,
                                                            nu = 0.1))
 
+data<-dfultimate
+testpdf <- pdata.frame(dfultimate, index=c("district", "week"))
+re1 <- plm(inzidenz~lag(inzidenz,7), data= testpdf, model = "random")
+
+form_lasso <- nm ~ p(wfl, pen = "lasso") + p(rooms, pen = "lasso") +
+  p(bj, pen = "lasso") + p(lage, pen = "lasso")
+
+model_lasso_cv <- glmsmurf(formula = form_lasso, family = gaussian(),
+                           data = miete, lambda = "cv.mse")
 
 
+dfultimate_pan <- pdata.frame(dfultimate, index=c("district", "week"))
 
+form_lasso <- inzidenz ~ p(lag(inzidenz, 1), pen = "lasso") + p(density,pen = "lasso")
++ p(rate_zweitimpf, pen = "lasso")+ p(m_anteil, pen = "lasso")
 
+model_lasso_cv <- glmsmurf(formula = inzidenz ~ p(lag(inzidenz, 1), pen = "lasso") + p(density,pen = "lasso")
+                           + p(rate_zweitimpf, pen = "lasso")+ p(m_anteil, pen = "lasso"), family = gaussian(),
+                           data = dfultimate_pan, lambda = "cv.mse")
+plot_lambda(model_lasso_cv)
 
+lambda<-4.5

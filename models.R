@@ -51,5 +51,12 @@ re2 <- plm(inzidenz ~ lag(inzidenz, 1) + bezirk + density + m_anteil + rate_zwei
 summary(re2)
 
 
+model_lasso_cv <- glmsmurf(formula = inzidenz ~ p(lag(inzidenz, 1), pen = "lasso") + p(density,pen = "lasso")
+                           + p(rate_zweitimpf, pen = "lasso")+ p(m_anteil, pen = "lasso"), family = gaussian(),
+                           data = dfultimate_pan, lambda = "cv.mse")
+plot_lambda(model_lasso_cv)
+
+lambda<-4.5
+
 
 
