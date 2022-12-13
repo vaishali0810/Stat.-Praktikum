@@ -336,14 +336,8 @@ niederbayern <- data.frame( bezirk = c("LK Landshut","SK Landshut",
 
 
 ##Alle zuammen:
-nachbarkreise <- list(niederbayern, oberbayern,oberfranken, oberpfalz, mittelfranken, schwaben, unterfranken)
-
-
-
-
-
-
-
+nachbarkreise_list <- list(niederbayern, oberbayern,oberfranken, oberpfalz, mittelfranken, schwaben, unterfranken)
+nachbarkreise <-Reduce(function(x, y) merge(x, y, all=TRUE), nachbarkreise_list, accumulate=FALSE)
 
 
 ## 2. Größte und Kleinste Population vergleich pro Bezirk
