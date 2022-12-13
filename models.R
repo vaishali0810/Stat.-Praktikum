@@ -49,3 +49,7 @@ dfultimate_pan <- pdata.frame(dfultimate, index=c("district", "week"))
 
 re2 <- plm(inzidenz ~ lag(inzidenz, 1) + bezirk + density + m_anteil + rate_zweitimpf  - 1, data = dfultimate_pan, model = "random")
 summary(re2)
+
+
+
+
