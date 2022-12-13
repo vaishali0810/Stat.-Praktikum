@@ -256,7 +256,7 @@ for(i in seq_along(Storage2)) {
   m5.14[[i]] <- unique(m5.14[[i]])
 }
 for(i in seq_along(Storage2)) {
-  m15.34[[i]] <- Storage2[[i]]%>%filter(gender=="M") %>% filter(age_group=="A05-A14")
+  m15.34[[i]] <- Storage2[[i]]%>%filter(gender=="M") %>% filter(age_group=="A15-A34")
   for(j in 1:length(f)){
     for(j in dates){
       m15.34[[i]][m15.34[[i]]$date==j,16]<-sum(m15.34[[i]][m15.34[[i]]$date==j,11],na.rm=TRUE)
@@ -266,7 +266,7 @@ for(i in seq_along(Storage2)) {
   m15.34[[i]] <- unique(m15.34[[i]])
 }
 for(i in seq_along(Storage2)) {
-  m35.59[[i]] <- Storage2[[i]]%>%filter(gender=="M") %>% filter(age_group=="A05-A14")
+  m35.59[[i]] <- Storage2[[i]]%>%filter(gender=="M") %>% filter(age_group=="A35-A59")
   for(j in 1:length(f)){
     for(j in dates){
       m35.59[[i]][m35.59[[i]]$date==j,16]<-sum(m35.59[[i]][m35.59[[i]]$date==j,11],na.rm=TRUE)
@@ -276,7 +276,7 @@ for(i in seq_along(Storage2)) {
   m35.59[[i]] <- unique(m35.59[[i]])
 }
 for(i in seq_along(Storage2)) {
-  m60.79[[i]] <- Storage2[[i]]%>%filter(gender=="M") %>% filter(age_group=="A05-A14")
+  m60.79[[i]] <- Storage2[[i]]%>%filter(gender=="M") %>% filter(age_group=="A60-A79")
   for(j in 1:length(f)){
     for(j in dates){
       m60.79[[i]][m60.79[[i]]$date==j,16]<-sum(m60.79[[i]][m60.79[[i]]$date==j,11],na.rm=TRUE)
@@ -286,7 +286,7 @@ for(i in seq_along(Storage2)) {
   m60.79[[i]] <- unique(m60.79[[i]])
 }
 for(i in seq_along(Storage2)) {
-  m.80[[i]] <- Storage2[[i]]%>%filter(gender=="M") %>% filter(age_group=="A05-A14")
+  m.80[[i]] <- Storage2[[i]]%>%filter(gender=="M") %>% filter(age_group=="A80+")
   for(j in 1:length(f)){
     for(j in dates){
       m.80[[i]][m.80[[i]]$date==j,16]<-sum(m.80[[i]][m.80[[i]]$date==j,11],na.rm=TRUE)
@@ -296,7 +296,7 @@ for(i in seq_along(Storage2)) {
   m.80[[i]] <- unique(m.80[[i]])
 }
 for(i in seq_along(Storage2)) {
-  m.unb[[i]] <- Storage2[[i]]%>%filter(gender=="M") %>% filter(age_group=="A05-A14")
+  m.unb[[i]] <- Storage2[[i]]%>%filter(gender=="M") %>% filter(age_group=="unbekannt")
   for(j in 1:length(f)){
     for(j in dates){
       m.unb[[i]][m.unb[[i]]$date==j,16]<-sum(m.unb[[i]][m.unb[[i]]$date==j,11],na.rm=TRUE)
@@ -887,7 +887,7 @@ for(i in 1:nrow(df)){
 }
 
 
-write.csv(df, "/Users/colinlinke/Documents/ProgR/Stat.-Praktikum/dfcombined.csv", row.names=FALSE)
+write.csv(df, "C:/Users/Batu/Documents/5.Semester/StatPrak/Stat.-Praktikum/dfcombined.csv", row.names=FALSE)
 
 
 test100000 <- read.csv("dfcombined.csv", head=TRUE, sep=",")
