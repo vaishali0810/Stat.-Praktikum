@@ -178,7 +178,7 @@ oberbayern <- data.frame(bezirk = c("SK München" , "SK Ingolstadt" , "SK Rosenh
                              "LK Mühldorf a.Inn, LK Altötting, LK Berchtesgadener Land, LK Rosenheim",
                              "LK Landsberg a.Lech, LK Starnberg, LK Bad Tölz-Wolfratshausen, LK Garmisch-Partenkirchen"),
                            
-                           regierungsbezirk = rep("Oberbayern", 24)
+                           regierungsbezirk = rep("Oberbayern", 23)
                            
 )
 
