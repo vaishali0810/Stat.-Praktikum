@@ -163,19 +163,20 @@ oberbayern <- data.frame(bezirk = c("SK München" , "SK Ingolstadt" , "SK Rosenh
                              "LK Rosenheim",
                              "LK Traunstein, LK Mühldorf a.Inn",
                              "LK Traunstein",
-                             "LK Starnberg, LK München, LK Miesbach, LK Garmisch-Partenkirchen,LK Weilheim-Schongau" ,
+                             "LK Starnberg, LK München, LK Miesbach, LK Garmisch-Partenkirchen, LK Weilheim-Schongau" ,
                              "LK Pfaffenhofen a.d.Ilm, LK Freising, SK München, LK München, LK Fürstenfeldbruck",
                              "LK Erding, LK Mühldorf a.Inn, LK Rosenheim, LK München",
                              "LK Pfaffenhofen a.d.Ilm, SK Ingolstadt, LK Neuburg-Schrobenhausen",
                              "LK Mühldorf a.Inn, LK Ebersberg, LK München, LK Freising",
                              "LK Erding, LK München, LK Dachau, LK Pfaffenhofen a.d.Ilm",
-                             "SK München, LK München, LK Dachau,LK Starnberg,LK Landsberg a.Lech",
+                             "SK München, LK München, LK Dachau,LK Starnberg, LK Landsberg a.Lech",
                              "LK Weilheim-Schongau, LK Bad Tölz-Wolfratshausen",
                              "LK Fürstenfeldbruck, LK Starnberg, LK Weilheim-Schongau",
                              "LK München, LK Rosenheim, LK Bad Tölz-Wolfratshausen",
                              "LK Altötting, LK Traunstein, LK Rosenheim, LK Ebersberg, LK Erding",
                              "LK Dachau,LK Freising, LK Erding, LK Ebersberg, LK Rosenheim, LK Miesbach, LK Bad Tölz-Wolfratshausen, LK Starnberg, SK München",   
                              "LK Eichstätt, LK Pfaffenhofen a.d.Ilm, SK Ingolstadt", 
+                             "LK Eichstätt, SK Ingolstadt, LK Freising, LK Dachau, LK Neuburg-Schrobenhausen",
                              "LK Traunstein, LK Miesbach,LK München,LK Ebersberg, LK Mühldorf a.Inn",
                              "LK Fürstenfeldbruck, LK München,LK Bad Tölz-Wolfratshausen , LK Weilheim-Schongau, LK Landsberg a.Lech",
                              "LK Mühldorf a.Inn, LK Altötting, LK Berchtesgadener Land, LK Rosenheim",
@@ -334,12 +335,8 @@ niederbayern <- data.frame( bezirk = c("LK Landshut","SK Landshut",
                                                 )
 
 
-
-
-
-
-
-
+##Alle zuammen:
+nachbarkreise <- list(niederbayern, oberbayern,oberfranken, oberpfalz, mittelfranken, schwaben, unterfranken)
 
 
 
