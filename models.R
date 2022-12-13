@@ -42,3 +42,10 @@ testpdf <- pdata.frame(dfcombined, index=c("district", "date"))
 re1 <- plm(total_cases~lag(total_cases, 7), data= testpdf, model = "random")
 
 
+
+
+dfultimate_pan <- pdata.frame(dfultimate, index=c("district", "week"))
+
+
+re2 <- plm(inzidenz ~ lag(inzidenz, 1) + density + rate_zweitimpf + m_anteil, data = dfultimate_pan, model = "random")
+
