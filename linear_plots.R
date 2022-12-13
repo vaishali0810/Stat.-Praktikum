@@ -5,17 +5,17 @@ ggplot(data = gather(dfultimate, variable, value, inzidenz:area),
   geom_density(aes()) +
   facet_wrap(facets = ~variable, scales = "free") + theme()
 
-ggplot(data = gather(dfultimate, variable, value, M.A00.04:M.Aunb), # Geschlecht: Mann
+ggplot(data = gather(dfultimate, variable, value, M.A00.04.Anteil:M.Aunb.Anteil), # Geschlecht: Mann
        mapping = aes(x = value)) +
   geom_density(aes()) +
   facet_wrap(facets = ~variable, scales = "free") + theme()
 
-ggplot(data = gather(dfultimate, variable, value, F.A00.04:F.Aunb), # Geschlecht: Frau
+ggplot(data = gather(dfultimate, variable, value, F.A00.04.Anteil:F.Aunb.Anteil), # Geschlecht: Frau
        mapping = aes(x = value)) +
   geom_density(aes()) +
   facet_wrap(facets = ~variable, scales = "free") + theme()
 
-ggplot(data = gather(dfultimate, variable, value, Unb.A00.04:Unb.Aunb), # Geschlecht: unbekannt
+ggplot(data = gather(dfultimate, variable, value, Unb.A00.04.Anteil:Unb.Aunb.Anteil), # Geschlecht: unbekannt
        mapping = aes(x = value)) +
   geom_density(aes()) +
   facet_wrap(facets = ~variable, scales = "free") + theme()
