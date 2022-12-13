@@ -1,7 +1,12 @@
-library(dplyr)
+data<-`cases_GermanTemporal_2022-11-28`
 
-data <- readRDS("cases_GermanTemporal_2022-11-28.rds")
-dbayern<-data[data$state=="Bayern",]
+data[,6]<-as.Date(data[,6])
+
+data_new<-data[,-7]
+
+data_new[,15]<-data_new[,2]
+
+dbayern<-data_new[data_new$state=="Bayern",]
 
 levels(dbayern[,15])<-c(levels(dbayern[,15])[1:411],"Schwaben","Oberbayern",
                         "Unterfranken","Oberpfalz","Oberfranken","Mittelfranken",
@@ -10,6 +15,35 @@ levels(dbayern[,15])<-c(levels(dbayern[,15])[1:411],"Schwaben","Oberbayern",
 dbayern[,15]<-as.vector(dbayern[,15])
 
 names(dbayern)<-c(names(dbayern)[1:14],"bezirk")
+
+library(ggplot2)
+
+library(dplyr)
+
+# jetzt Bayern Abteil einlesen (Zeile 38-136)
+
+# str(data)
+
+# View(data)
+
+# summary(data)
+
+# levels(data$state)
+
+# factor2<-as.factor(data$new_fatality) 
+
+# factor2
+
+
+## Bayern
+# dbayern<-data_new[data_new$state=="Bayern",]
+# View(dbayern)
+# str(dbayern)
+# summary(dbayern)
+# summary(dbayern$district)
+# vector2<-as.vector(summary(dbayern$district))
+# vector2 # insgesamt 100 districts, 96 districts mit Beobachtungen, districts
+# sind schon der Größe nach sortiert
 
 ## Schwaben
 dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"LK Aichach-Friedberg"="Schwaben","SK Augsburg"="Schwaben",
