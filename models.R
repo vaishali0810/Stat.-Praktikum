@@ -64,7 +64,7 @@ model_lasso <- glmsmurf(formula = inzidenz ~ p(lag(inzidenz, 1), pen = "lasso") 
                            data = dfultimate_pan, lambda = lasso)
 summary(model_lasso)
 
-###Variablenselektion
+###Variablenselektion https://stackoverflow.com/questions/48978179/r-plotting-lasso-beta-coefficients
 library(reshape)
 
 dfultimate=na.omit(dfultimate)
