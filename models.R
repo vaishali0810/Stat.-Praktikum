@@ -49,3 +49,30 @@ dfultimate_pan <- pdata.frame(dfultimate, index=c("district", "week"))
 
 re2 <- plm(inzidenz ~ lag(inzidenz, 1) + bezirk + density + m_anteil + rate_zweitimpf  - 1, data = dfultimate_pan, model = "random")
 summary(re2)
+
+## Plot
+
+ggplot(data = gather(dfultimate, variable, value, inzidenz:area), 
+       mapping = aes(x = value)) +
+  geom_density(aes()) +
+  facet_wrap(facets = ~variable, scales = "free") + theme()
+
+ggplot(data = gather(dfultimate, variable, value, M.A00.04:M.Aunb), # Geschlecht: Mann
+       mapping = aes(x = value)) +
+  geom_density(aes()) +
+  facet_wrap(facets = ~variable, scales = "free") + theme()
+
+ggplot(data = gather(dfultimate, variable, value, F.A00.04:F.Aunb), # Geschlecht: Frau
+       mapping = aes(x = value)) +
+  geom_density(aes()) +
+  facet_wrap(facets = ~variable, scales = "free") + theme()
+
+ggplot(data = gather(dfultimate, variable, value, Unb.A00.04:Unb.Aunb), # Geschlecht: unbekannt
+       mapping = aes(x = value)) +
+  geom_density(aes()) +
+  facet_wrap(facets = ~variable, scales = "free") + theme()
+
+ggplot(data = gather(dfultimate, variable, value, total_cases:f_anteil),
+       mapping = aes(x = value)) +
+  geom_density(aes()) +
+  facet_wrap(facets = ~variable, scales = "free") + theme()
