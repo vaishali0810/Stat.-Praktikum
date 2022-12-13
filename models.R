@@ -50,13 +50,17 @@ dfultimate_pan <- pdata.frame(dfultimate, index=c("district", "week"))
 re2 <- plm(inzidenz ~ lag(inzidenz, 1) + bezirk + density + m_anteil + rate_zweitimpf  - 1, data = dfultimate_pan, model = "random")
 summary(re2)
 
-
+####lambda bestimmen
 model_lasso_cv <- glmsmurf(formula = inzidenz ~ p(lag(inzidenz, 1), pen = "lasso") + p(density,pen = "lasso")
                            + p(rate_zweitimpf, pen = "lasso")+ p(m_anteil, pen = "lasso"), family = gaussian(),
                            data = dfultimate_pan, lambda = "cv.mse")
 plot_lambda(model_lasso_cv)
 
-lambda<-4.5
 
-
+###Schätzung mit neuem lambda
+lasso <- model_lasso_cv$lambda
+model_lasso <- glmsmurf(formula = inzidenz ~ p(lag(inzidenz, 1), pen = "lasso") + p(density,pen = "lasso")
+                           + p(rate_zweitimpf, pen = "lasso")+ p(m_anteil, pen = "lasso"), family = gaussian(),
+                           data = dfultimate_pan, lambda = lasso)
+summary(model_lasso)
 
