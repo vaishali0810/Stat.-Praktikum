@@ -314,3 +314,42 @@ dfultimate <- dfultimate %>% mutate(inz.pop = inzidenz * population)
 
 # nachbarkreise Inzidenz:
 
+temp1 <- nachbarkreise$nachbarkreise
+
+temp1<-temp1[1]
+temp1 <- unlist(str_split(temp1, ", "))
+temp1<-as.list(temp1)
+temp5 <- unlist(str_split(temp1, ", "))
+
+temp2 <- dfultimate$inz.pop[1:148]
+temp3 <- list()
+for(i in temp5){
+  temp3[[i]] <- popbay2[popbay2$district==i,4]
+}
+
+temp3<-sum(unlist(temp3))
+
+
+temp4 <- list()
+for(i in temp5){
+  temp4[[i]] <- dfultimate[dfultimate$district==i,43]
+}
+
+temp7 <- list()
+for( i in temp5){
+ temp7[[i]] <- as.data.frame(c(temp4[[i]])) 
+}
+
+temp8 <- as.data.frame(do.call(cbind, temp7))
+
+
+temp8 <- unlist(temp7)
+donau <- as.data.frame(c(temp4[[1]]), col.names = "donau") 
+
+temp4<-t(temp4)
+temp5<- as.data.frame(unlist(temp4))
+
+temp4 <- temp2/temp3
+temp4
+
+seq
