@@ -37,13 +37,124 @@ df_comb_week<-dfcombined%>%group_by(district,week)%>%summarise(M.A00.04 =sum(M.A
 # identical(sum(dfcombined$total_cases), sum(df_comb_week$total_cases))
 colnames(df_comb_week)
 
-colnames(impfbayern2)
+
+# reading vaccination data and replacing the district names with the district names from the RKI data
+
+dimpf <- read.csv("impfdaten_regional.csv")
+impfBayern <- dimpf[dimpf$bundesland == "Freistaat Bayern", ]
+impfBayern <- impfBayern %>%
+  mutate(kreis=recode(kreis, "München, Landeshauptstadt" = "SK München",
+                      "Traunstein" = "LK Traunstein",
+                      "München, Kreis" = "LK München",
+                      "Augsburg, Stadt" = "SK Augsburg",
+                      "Rosenheim, Kreis" = "LK Rosenheim",
+                      "Augsburg, Kreis"= "LK Augsburg",
+                      "Schwandorf" = "LK Schwandorf",
+                      "Unterallgäu" = "LK Unterallgäu",
+                      "Mühldorf a.Inn" = "LK Mühldorf a.Inn",
+                      "Landshut, Kreis" = "LK Landshut",
+                      "Freising" = "LK Freising",
+                      "Ebersberg" = "LK Ebersberg",
+                      "Miltenberg" = "LK Miltenberg",
+                      "Aschaffenburg, Kreis" = "LK Aschaffenburg",
+                      "Rottal-Inn" = "LK Rottal-Inn",
+                      "Dachau" = "LK Dachau",
+                      "Pfaffenhofen a.d.Ilm" = "LK Pfaffenhofen a.d.Ilm",
+                      "Ingolstadt" = "SK Ingolstadt",
+                      "Roth" = "LK Roth",
+                      "Günzburg" = "LK Günzburg",
+                      "Nürnberger Land" = "LK Nürnberger Land",
+                      "Fürstenfeldbruck" = "LK Fürstenfeldbruck",
+                      "Dillingen a.d.Donau" = "LK Dillingen a.d.Donau",
+                      "Donau-Ries" = "LK Donau-Ries",
+                      "Altötting" = "LK Altötting",
+                      "Dingolfing-Landau" = "LK Dingolfing-Landau",
+                      "Kelheim" = "LK Kelheim",
+                      "Bamberg, Kreis" = "LK Bamberg",
+                      "Neustadt a.d.Aisch-Bad Windsheim" = "LK Neustadt a.d.Aisch-Bad Windsheim",
+                      "Regensburg, Kreis" = "LK Regensburg",
+                      "Freyung-Grafenau" = "LK Freyung-Grafenau",
+                      "Amberg-Sulzbach" = "LK Amberg-Sulzbach",
+                      "Neu-Ulm" = "LK Neu-Ulm",
+                      "Rhön-Grabfeld" = "LK Rhön-Grabfeld",
+                      "Neumarkt i.d.OPf." = "LK Neumarkt i.d.OPf.",
+                      "Berchtesgadener Land" = "LK Berchtesgadener Land",
+                      "Passau, Kreis" = "LK Passau",
+                      "Bayreuth, Kreis" = "LK Bayreuth",
+                      "Regen" = "LK Regen",
+                      "Bad Tölz-Wolfratshausen" = "LK Bad Tölz-Wolfratshausen",
+                      "Aichach-Friedberg" = "LK Aichach-Friedberg",
+                      "Schweinfurt, Kreis" = "LK Schweinfurt",
+                      "Forchheim" = "LK Forchheim",
+                      "Miesbach" = "LK Miesbach",
+                      "Regensburg, Stadt" = "SK Regensburg",
+                      "Main-Spessart" = "LK Main-Spessart",
+                      "Ansbach, Kreis" = "LK Ansbach",
+                      "Bayreuth, Stadt" = "SK Bayreuth",
+                      "Cham" = "LK Cham",
+                      "Kitzingen" = "LK Kitzingen",
+                      "Tirschenreuth" = "LK Tirschenreuth",
+                      "Eichstätt" = "LK Eichstätt",
+                      "Landshut, Stadt" = "SK Landshut",
+                      "Rosenheim, Stadt" = "SK Rosenheim",
+                      "Oberallgäu" = "LK Oberallgäu",
+                      "Fürth, Stadt" = "SK Fürth",
+                      "Aschaffenburg, Stadt" = "SK Aschaffenburg",
+                      "Coburg, Kreis" = "LK Coburg",
+                      "Ostallgäu" = "LK Ostallgäu",
+                      "Neustadt a.d.Waldnaab" = "LK Neustadt a.d.Waldnaab",
+                      "Wunsiedel i.Fichtelgebirge" = "LK Wunsiedel i.Fichtelgebirge",
+                      "Deggendorf" = "LK Deggendorf",
+                      "Lichtenfels" = "LK Lichtenfels",
+                      "Nürnberg" = "SK Nürnberg",
+                      "Weißenburg-Gunzenhausen" = "LK Weißenburg-Gunzenhausen",
+                      "Erlangen-Höchstadt" = "LK Erlangen-Höchstadt",
+                      "Schweinfurt, Stadt" = "SK Schweinfurt",
+                      "Kulmbach" = "LK Kulmbach",
+                      "Würzburg, Kreis" = "LK Würzburg",
+                      "Würzburg, Stadt" = "SK Würzburg",
+                      "Fürth, Kreis" = "LK Fürth",
+                      "Schwabach" = "SK Schwabach",
+                      "Memmingen" = "SK Memmingen",
+                      "Weilheim-Schongau" = "LK Weilheim-Schongau",
+                      "Bad Kissingen" = "LK Bad Kissingen",
+                      "Bamberg, Stadt" = "SK Bamberg",
+                      "Straubing-Bogen" = "LK Straubing-Bogen",
+                      "Hof, Kreis" = "LK Hof",
+                      "Erding" = "LK Erding",
+                      "Erlangen" = "SK Erlangen",
+                      "Lindau (Bodensee)" = "LK Lindau",
+                      "Amberg" = "SK Amberg",
+                      "Starnberg"= "LK Starnberg",
+                      "Neuburg-Schrobenhausen" = "LK Neuburg-Schrobenhausen",
+                      "Landsberg am Lech" = "LK Landsberg a.Lech",
+                      "Haßberge" = "LK Haßberge",
+                      "Kempten (Allgäu)" = "SK Kempten",
+                      "Coburg, Stadt" = "SK Coburg",
+                      "Kronach" = "LK Kronach",
+                      "Weiden i.d.OPf." = "SK Weiden i.d.OPf.",
+                      "Garmisch-Partenkirchen" = "LK Garmisch-Partenkirchen",
+                      "Passau, Stadt" = "SK Passau",
+                      "Hof, Stadt" = "SK Hof",
+                      "Straubing" = "SK Straubing",
+                      "Kaufbeuren" = "SK Kaufbeuren",
+                      "Ansbach, Stadt" = "SK Ansbach")) %>%
+  as.data.frame()
+colnames(impfBayern)[5] <- "district"
+colnames(impfBayern)[6] <- "date"
+impfBayern[,6] <- as.Date(impfBayern[,6])
+
+
+
+#colnames(impfbayern2)
 
 
 # min(impfbayern2$date)
 # [1] "2020-12-27"
 
-colnames(impfungentake)
+# colnames(impfungentake)
+
+impfungentake <- impfBayern %>% select(district, date, kr_erstimpf, kr_zweitimpf, kr_drittimpf, kr_viertimpf)
 
 impfungentake <- impfungentake %>% 
   mutate(week = cut.Date(date, breaks = "1 week", labels = FALSE)) %>% 
@@ -55,12 +166,14 @@ impfungentake<-impfungentake%>%group_by(district,week)%>%summarise(kr_erstimpf =
                                                                kr_viertimpf =sum(kr_viertimpf),
                                                                .groups="keep")
 
-#time difference 334 days ---> 47 weeks (days are Tuesday and Sunday --> round down)
+# time difference 334 days ---> 47 weeks (days are Tuesday and Sunday --> round down) (relative to RKI data of course)
+# correct week index enables the merge
 
 impfungentake$week <- impfungentake$week + 47
 
 df_comb_week_impf <- merge(df_comb_week, impfungentake, by = c("district", "week"), all.x = TRUE, all.y = TRUE)
 # View(df_comb_week_impf)
+# Merge induces NA for missing values --> replacement with 0
 df_comb_week_impf[is.na(df_comb_week_impf)] <- 0
 
 # any(is.na(df_comb_week_impf))
@@ -157,4 +270,4 @@ View(dfultimate)
 
 
 
-#write.csv(df_ultimate, "/Users/colinlinke/Documents/ProgR/Stat.-Praktikum/dfultimate.csv", row.names=FALSE)
+# write.csv(df_ultimate, "/Users/colinlinke/Documents/ProgR/Stat.-Praktikum/dfultimate.csv", row.names=FALSE)
