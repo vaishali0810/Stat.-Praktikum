@@ -44,7 +44,6 @@ schwaben <- data.frame(bezirk = c("LK Aichach-Friedberg","SK Augsburg",
                        
 )
 
-dfultimate %>% 
   
   #
   #####
@@ -303,7 +302,7 @@ niederbayern <- data.frame( bezirk = c("LK Landshut","SK Landshut",
 
 
 # Alle zuammen:
-nachbarkreise_list <- list(niederbayern, oberbayern,oberfranken, oberpfalz, mittelfranken, schwaben, unterfranken)
+nachbarkreise_list <- list(niederbayern, oberbayern, oberfranken, oberpfalz, mittelfranken, schwaben, unterfranken)
 nachbarkreise <-Reduce(function(x, y) merge(x, y, all=TRUE), nachbarkreise_list, accumulate=FALSE)
 
 
@@ -312,3 +311,6 @@ nachbarkreise <-Reduce(function(x, y) merge(x, y, all=TRUE), nachbarkreise_list,
 # neue Spalte: Inzidenzen * Population
 
 dfultimate <- dfultimate %>% mutate(inz.pop = inzidenz * population)
+
+# nachbarkreise Inzidenz:
+
