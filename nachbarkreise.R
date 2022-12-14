@@ -25,16 +25,16 @@ schwaben <- data.frame(bezirk = c("LK Aichach-Friedberg","SK Augsburg",
                                   "LK Unterallgäu","SK Kaufbeuren","SK Kempten",
                                   "SK Memmingen"),
                        
-                       nachbarkreise = c("LK Donau-Ries, SK Augsburg, LK Augsburg, LK Neuburg-Schrobenhausen, LK Pfaffenhofen a.d.Ilm , LK Dachau, LK Fürstenfeldbruck, LK Landsberg am Lech",
+                       nachbarkreise = c("LK Donau-Ries, SK Augsburg, LK Augsburg, LK Neuburg-Schrobenhausen, LK Pfaffenhofen a.d.Ilm, LK Dachau, LK Fürstenfeldbruck, LK Landsberg a.Lech",
                                          "LK Aichach-Friedberg, LK Augsburg",
-                                         "LK Dillingen a.d.Donau,  LK Donau-Ries, LK Aichach-Friedberg, sK Augsburg, LK Günzburg, LK Unterallgäu, LK Ostallgäu, LK Landsberg am Lech",
+                                         "LK Dillingen a.d.Donau,  LK Donau-Ries, LK Aichach-Friedberg, sK Augsburg, LK Günzburg, LK Unterallgäu, LK Ostallgäu, LK Landsberg a.Lech",
                                          "LK Donau-Ries, LK Augsburg, LK Günzburg",
                                          "LK Aichach-Friedberg, LK Augsburg, LK Dillingen a.d.Donau,LK Ansbach, LK Weißenburg-Gunzenhausen, LK Eichstätt, LK Neuburg-Schrobenhausen",
                                          "LK Dillingen a.d.Donau, LK Unterallgäu, LK Augsburg, LK Neu-Ulm",
                                          "LK Oberallgäu",
                                          "LK Günzburg, LK Unterallgäu",
                                          "LK Lindau, LK Unterallgäu, LK Ostallgäu, SK Kempten",
-                                         "LK Oberallgäu, LK Unterallgäu,LK Augsburg, SK Kaufbeuren, LK Landsberg am Lech, LK Weilheim-Schongau, LK Garmisch-Patenkirchen",
+                                         "LK Oberallgäu, LK Unterallgäu,LK Augsburg, SK Kaufbeuren, LK Landsberg a.Lech, LK Weilheim-Schongau, LK Garmisch-Patenkirchen",
                                          "LK Augsburg, LK Neu-Ulm, LK Günzburg, LK Ostallgäu, LK Oberallgäu, SK Memmingen",
                                          "LK Ostallgäu",
                                          "LK Oberallgäu",
@@ -313,9 +313,9 @@ nachbarkreise <-Reduce(function(x, y) merge(x, y, all=TRUE), nachbarkreise_list,
 dfultimate <- dfultimate %>% mutate(inz.pop = inzidenz * population)
 
 # nachbarkreise Inzidenz:
+list_temp <- list()
 
 temp1 <- nachbarkreise$nachbarkreise
-
 temp1<-temp1[1]
 temp1 <- unlist(str_split(temp1, ", "))
 temp1<-as.list(temp1)
@@ -341,15 +341,8 @@ for( i in temp5){
 }
 
 temp8 <- as.data.frame(do.call(cbind, temp7))
+temp9<-rowSums(temp8)
+temp10 <- temp9/temp3
 
 
-temp8 <- unlist(temp7)
-donau <- as.data.frame(c(temp4[[1]]), col.names = "donau") 
 
-temp4<-t(temp4)
-temp5<- as.data.frame(unlist(temp4))
-
-temp4 <- temp2/temp3
-temp4
-
-seq
