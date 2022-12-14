@@ -263,8 +263,56 @@ colnames(nachbarkreise) <- c("district", "neighboring districts", "bezirk")
 dfultimate <- merge(dfultimate, nachbarkreise, by = c("district", "bezirk"), all.x = TRUE, all.y = TRUE)
 
 
+
+dfultimate <- dfultimate %>% mutate(M.A00.04.Anteil = M.A00.04/total_cases,
+                                    M.A05.14.Anteil = M.A05.14/total_cases,
+                                    M.A15.34.Anteil = M.A15.34/total_cases,
+                                    M.A35.59.Anteil = M.A35.59/total_cases,
+                                    M.A60.79.Anteil = M.A60.79/total_cases,
+                                    M.A80.Anteil = M.A80./total_cases,
+                                    M.Aunb.Anteil = M.A80./total_cases,
+                                    
+                                    F.A00.04.Anteil =F.A00.04/total_cases,
+                                    F.A05.14.Anteil =F.A05.14/total_cases,
+                                    F.A15.34.Anteil =F.A15.34/total_cases,
+                                    F.A35.59.Anteil =F.A35.59/total_cases,
+                                    F.A60.79.Anteil =F.A60.79/total_cases,
+                                    F.A80.Anteil =F.A80./total_cases,
+                                    F.Aunb.Anteil =F.A80./total_cases,
+                                    
+                                    Unb.A00.04.Anteil =Unb.A00.04/total_cases,
+                                    Unb.A05.14.Anteil =Unb.A05.14/total_cases,
+                                    Unb.A15.34.Anteil =Unb.A15.34/total_cases,
+                                    Unb.A35.59.Anteil =Unb.A35.59/total_cases,
+                                    Unb.A60.79.Anteil =Unb.A60.79/total_cases,
+                                    Unb.A80.Anteil =Unb.A80./total_cases,
+                                    Unb.Aunb.Anteil =Unb.A80./total_cases)
+dfultimate <- dfultimate %>% mutate_all(~replace(., is.nan(.), 0)) 
+
+
+
+dfultimate <- dfultimate %>%
+  group_by(district) %>%
+  dplyr::mutate(A00.04.Anteil = M.A00.04.Anteil + F.A00.04.Anteil + Unb.A00.04.Anteil,
+                A05.14.Anteil = M.A05.14.Anteil + F.A05.14.Anteil + Unb.A05.14.Anteil,
+                A15.34.Anteil = M.A15.34.Anteil + F.A15.34.Anteil + Unb.A15.34.Anteil,
+                A35.59.Anteil = M.A35.59.Anteil + F.A35.59.Anteil + Unb.A35.59.Anteil,
+                A60.79.Anteil = M.A60.79.Anteil + F.A60.79.Anteil + Unb.A60.79.Anteil,
+                A80.Anteil = M.A80.Anteil + F.A80.Anteil + Unb.A80.Anteil,
+                Aunb.Anteil = M.Aunb.Anteil + F.Aunb.Anteil + Unb.Aunb.Anteil,
+                M.Anteil = M.A00.04.Anteil + M.A05.14.Anteil +
+                  M.A15.34.Anteil + M.A35.59.Anteil + M.A60.79.Anteil + M.Aunb.Anteil,
+                F.Anteil = F.A00.04.Anteil + F.A05.14.Anteil +
+                  F.A15.34.Anteil + F.A35.59.Anteil + F.A60.79.Anteil + F.Aunb.Anteil,
+                Unb.Anteil = Unb.A00.04.Anteil + Unb.A05.14.Anteil +
+                  Unb.A15.34.Anteil + Unb.A35.59.Anteil + Unb.A60.79.Anteil + Unb.Aunb.Anteil)
+
+
+
+
 View(dfultimate)
 
+dfultimate<-dfultimate[,c(1:11,38:73, 12:37)]
 
 
 

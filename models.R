@@ -47,8 +47,52 @@ re1 <- plm(total_cases~lag(total_cases, 7), data= testpdf, model = "random")
 dfultimate_pan <- pdata.frame(dfultimate, index=c("district", "week"))
 
 
-re2 <- plm(inzidenz ~ lag(inzidenz, 1) + bezirk + density + m_anteil + rate_zweitimpf  - 1, data = dfultimate_pan, model = "random")
+re2 <- plm(inzidenz ~ lag(inzidenz, 1) + bezirk + density + m_anteil + rate_zweitimpf + rate_drittimpf + 
+             M.Anteil + A00.04.Anteil + A05.14.Anteil + A15.34.Anteil + A35.59.Anteil + A60.79.Anteil 
+           + A80.Anteil- 1, data = dfultimate_pan, model = "random")
 summary(re2)
+
+re3 <- plm(inzidenz ~ lag(inzidenz, 1) + rate_zweitimpf + rate_drittimpf + density + 
+             M.Anteil + A00.04.Anteil + A05.14.Anteil + A15.34.Anteil + A35.59.Anteil + A60.79.Anteil 
+           + A80.Anteil - 1, data = dfultimate_pan, model = "random")
+
+summary(re3)
+
+re4 <- plm(inzidenz ~ lag(inzidenz, 1) + rate_zweitimpf + rate_drittimpf + density + 
+             M.Anteil + F.Anteil + A00.04.Anteil + A05.14.Anteil + A15.34.Anteil + A35.59.Anteil + A60.79.Anteil 
+           + A80.Anteil - 1, data = dfultimate_pan, model = "random")
+summary(re4)
+
+re5 <- plm(inzidenz ~ lag(inzidenz, 1) + rate_zweitimpf + rate_drittimpf + density + 
+             I(M.Anteil*m_anteil) + A00.04.Anteil + A05.14.Anteil + A15.34.Anteil + A35.59.Anteil + A60.79.Anteil 
+           + A80.Anteil - 1, data = dfultimate_pan, model = "random")
+summary(re5)
+
+
+####
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ####lambda bestimmen
 model_lasso_cv <- glmsmurf(formula = inzidenz ~ p(lag(inzidenz, 1), pen = "lasso") + p(density,pen = "lasso")
