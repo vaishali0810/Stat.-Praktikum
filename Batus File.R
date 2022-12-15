@@ -343,3 +343,5 @@ ggplot(tmp[tmp$coef != "(Intercept)",], aes(lambda, value, color = coef, linetyp
          linetype = guide_legend(title = "")) +
   theme_bw() + 
   theme(legend.key.width = unit(3,"lines"))
+
+
