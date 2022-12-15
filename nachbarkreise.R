@@ -307,6 +307,7 @@ nachbarkreise <-Reduce(function(x, y) merge(x, y, all=TRUE), nachbarkreise_list,
 
 
 
+
 ###
 # neue Spalte: Inzidenzen * Population
 
@@ -325,7 +326,7 @@ for(i in 1:96){
 }
 
 list_temp2 <- as.list(lapply(list_temp1, function(x) 
-  { unlist(str_split(x, ", "))}))
+  {unlist(str_split(x, ", "))}))
 
 list_temp3 <- list()
 
