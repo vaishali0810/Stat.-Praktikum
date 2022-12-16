@@ -42,9 +42,6 @@ for (i in 1:96) {
 emptylistinz
 emptylistpop
 
-whfor(i in 1:96) {
-  print(is.vector(neighboring[[i]]))
-}
 
 
 unlist(neighboring)
@@ -65,13 +62,13 @@ nblist[vector1234]
 
 listnbnew <- list()
 for (i in seq_along(neighboring)) {
-  print(all(neighboring[[i]] %in% districtnames))
+  listnbnew[i]<-(all(neighboring[[i]] %in% districtnames))
 }
 
+l<-as.vector(listnbnew)
+ View(neighboring[[3]])
 
-
-
-
+ (neighboring[[3]] %in% districtnames)
 
 
 
