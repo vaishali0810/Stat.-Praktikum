@@ -315,6 +315,28 @@ View(dfultimate)
 dfultimate<-dfultimate[,c(1:11,38:73, 12:37)]
 
 
+im_schwab <- dfultimate %>% filter(bezirk == "Schwaben")
+im_Oberba <- dfultimate %>% filter(bezirk == "Oberbayern")
+im_Oberpf <- dfultimate %>% filter(bezirk == "Oberpfalz")
+im_MittelF <- dfultimate %>% filter(bezirk == "Mittelfranken")
+im_UnterFr <- dfultimate %>% filter(bezirk == "Unterfranken")
+im_OberFr <- dfultimate %>% filter(bezirk == "Oberfranken")
+im_NiederB <- dfultimate %>% filter(bezirk == "Niederbayern")
+
+im_schwab <- im_schwab %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
+                                                        kr_drittimpf = sum(kr_drittimpf), kr_viertimpf = sum(kr_viertimpf))
+im_Oberba <- im_schwab %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
+                                                        kr_drittimpf = sum(kr_drittimpf), kr_viertimpf = sum(kr_viertimpf))
+im_Oberpf <- im_schwab %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
+                                                        kr_drittimpf = sum(kr_drittimpf), kr_viertimpf = sum(kr_viertimpf))
+im_MittelF <- im_schwab %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
+                                                        kr_drittimpf = sum(kr_drittimpf), kr_viertimpf = sum(kr_viertimpf))
+im_UnterFr <- im_schwab %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
+                                                        kr_drittimpf = sum(kr_drittimpf), kr_viertimpf = sum(kr_viertimpf))
+im_OberFr <- im_schwab %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
+                                                        kr_drittimpf = sum(kr_drittimpf), kr_viertimpf = sum(kr_viertimpf))
+im_NiederB <- im_schwab %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
+                                                        kr_drittimpf = sum(kr_drittimpf), kr_viertimpf = sum(kr_viertimpf))
 
 
 

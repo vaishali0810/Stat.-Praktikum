@@ -370,4 +370,4 @@ temp9<-rowSums(temp8)
 temp10 <- temp9/temp3
 
 
-
+..... // test
