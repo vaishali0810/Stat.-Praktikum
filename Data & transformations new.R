@@ -531,9 +531,21 @@ sum(dfultimate[which_vector1,26])
 #1738/2
 #869
 
-
+####### Unbekannt aufteilen auf Mann und Frau
 
 ## Alter 0-4
+which_vector1<-c(which(dfultimate$Unb.A00.04!=0))
+
+sum(dfultimate[which_vector1,12])
+#[1] 29772
+sum(dfultimate[which_vector1,19])
+#[1] 28372
+sum(dfultimate[which_vector1,26])
+#[1] 1738
+#1738/2
+#869
+
+
 for(i in 0:(length(which_vector1)/2)){
   dfultimate[which_vector1[2*i],19]<-dfultimate[which_vector1[2*i],26]+dfultimate[which_vector1[2*i],19]
 }
