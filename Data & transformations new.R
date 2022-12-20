@@ -515,3 +515,143 @@ colnames(df91)
 
 #=======
 #>>>>>>> 9f7e5bbaafaad5f226b3ae0d3e7068b08754da99
+#>
+#>
+#>
+#>
+
+which_vector1<-c(which(dfultimate$Unb.A00.04!=0))
+
+sum(dfultimate[which_vector1,12])
+#[1] 29772
+sum(dfultimate[which_vector1,19])
+#[1] 28372
+sum(dfultimate[which_vector1,26])
+#[1] 1738
+#1738/2
+#869
+
+
+
+## Alter 0-4
+for(i in 0:(length(which_vector1)/2)){
+  dfultimate[which_vector1[2*i],19]<-dfultimate[which_vector1[2*i],26]+dfultimate[which_vector1[2*i],19]
+}
+
+for(i in 0:((length(which_vector1)/2)-1)){
+  dfultimate[which_vector1[2*i+1],12]<-dfultimate[which_vector1[2*i+1],26]+dfultimate[which_vector1[2*i+1],12]
+}
+
+
+## Alter 5-14
+which_vector2<-c(which(dfultimate$Unb.A05.14!=0))
+sum(dfultimate[which_vector2,20])
+#[1] 200280
+sum(dfultimate[which_vector2,13])
+#[1] 216963
+sum(dfultimate[which_vector2,27])
+#[1] 7961
+
+for(i in 0:(length(which_vector2)/2)){
+  dfultimate[which_vector2[2*i],20]<-dfultimate[which_vector2[2*i],27]+dfultimate[which_vector2[2*i],20]
+}
+
+for(i in 0:((length(which_vector2)/2)-1)){
+  dfultimate[which_vector2[2*i+1],13]<-dfultimate[which_vector2[2*i+1],27]+dfultimate[which_vector2[2*i+1],13]
+}
+
+
+
+## Alter 15-34
+which_vector3<-c(which(dfultimate$Unb.A15.34!=0))
+sum(dfultimate[which_vector3,21])
+#[1] 462669
+sum(dfultimate[which_vector3,14])
+#[1] 436474
+sum(dfultimate[which_vector3,28])
+#[1] 7961
+
+
+for(i in 0:(length(which_vector3)/2)){
+  dfultimate[which_vector3[2*i],21]<-dfultimate[which_vector3[2*i],28]+dfultimate[which_vector3[2*i],21]
+}
+
+for(i in 0:((length(which_vector3)/2)-1)){
+  dfultimate[which_vector3[2*i+1],14]<-dfultimate[which_vector3[2*i+1],28]+dfultimate[which_vector3[2*i+1],14]
+}
+
+## Alter 35-59
+which_vector4<-c(which(dfultimate$Unb.A35.59!=0))
+sum(dfultimate[which_vector4,22])
+#[1] 580193
+sum(dfultimate[which_vector4,15])
+#[1] 520384
+sum(dfultimate[which_vector4,29])
+#[1] 7961
+
+
+for(i in 0:(length(which_vector4)/2)){
+  dfultimate[which_vector4[2*i],22]<-dfultimate[which_vector4[2*i],29]+dfultimate[which_vector4[2*i],22]
+}
+
+for(i in 0:((length(which_vector4)/2)-1)){
+  dfultimate[which_vector4[2*i+1],15]<-dfultimate[which_vector4[2*i+1],29]+dfultimate[which_vector4[2*i+1],15]
+}
+
+
+## Alter 60-79
+which_vector5<-c(which(dfultimate$Unb.A60.79!=0))
+sum(dfultimate[which_vector5,23])
+#[1] 166313
+sum(dfultimate[which_vector5,16])
+#[1] 159510
+sum(dfultimate[which_vector5,30])
+#[1] 7961
+
+for(i in 0:(length(which_vector5)/2)){
+  dfultimate[which_vector5[2*i],23]<-dfultimate[which_vector5[2*i],30]+dfultimate[which_vector5[2*i],23]
+}
+
+for(i in 0:((length(which_vector5)/2)-1)){
+  dfultimate[which_vector5[2*i+1],16]<-dfultimate[which_vector5[2*i+1],30]+dfultimate[which_vector5[2*i+1],16]
+}
+
+
+## Alter 80+
+which_vector6<-c(which(dfultimate$Unb.A80.!=0))
+sum(dfultimate[which_vector6,24])
+#[1] 54106
+sum(dfultimate[which_vector6,17])
+#[1] 34831
+sum(dfultimate[which_vector6,31])
+#[1] 7961
+
+
+for(i in 0:(length(which_vector6)/2)){
+  dfultimate[which_vector6[2*i],24]<-dfultimate[which_vector6[2*i],31]+dfultimate[which_vector6[2*i],24]
+}
+
+for(i in 0:((length(which_vector6)/2)-1)){
+  dfultimate[which_vector6[2*i+1],17]<-dfultimate[which_vector6[2*i+1],31]+dfultimate[which_vector6[2*i+1],17]
+}
+
+
+## Alter unbekannt
+which_vector7<-c(which(dfultimate$Unb.Aunb!=0))
+sum(dfultimate[which_vector7,25])
+#[1] 469
+sum(dfultimate[which_vector7,18])
+#[1] 442
+sum(dfultimate[which_vector7,32])
+#[1] 7961
+
+
+for(i in 0:(length(which_vector7)/2)){
+  dfultimate[which_vector7[2*i],25]<-dfultimate[which_vector7[2*i],32]+dfultimate[which_vector7[2*i],25]
+}
+
+for(i in 0:((length(which_vector7)/2)-1)){
+  dfultimate[which_vector7[2*i+1],18]<-dfultimate[which_vector7[2*i+1],32]+dfultimate[which_vector7[2*i+1],18]
+}
+
+
