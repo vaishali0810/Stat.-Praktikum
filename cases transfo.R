@@ -325,19 +325,96 @@ im_NiederB <- dfultimate %>% filter(bezirk == "Niederbayern")
 
 im_schwab <- im_schwab %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
                                                         kr_drittimpf = sum(kr_drittimpf), kr_viertimpf = sum(kr_viertimpf))
-im_Oberba <- im_schwab %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
+im_Oberba <- im_Oberba %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
                                                         kr_drittimpf = sum(kr_drittimpf), kr_viertimpf = sum(kr_viertimpf))
-im_Oberpf <- im_schwab %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
+im_Oberpf <- im_Oberpf %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
                                                         kr_drittimpf = sum(kr_drittimpf), kr_viertimpf = sum(kr_viertimpf))
-im_MittelF <- im_schwab %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
+im_MittelF <- im_MittelF %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
                                                         kr_drittimpf = sum(kr_drittimpf), kr_viertimpf = sum(kr_viertimpf))
-im_UnterFr <- im_schwab %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
-                                                        kr_drittimpf = sum(kr_drittimpf), kr_viertimpf = sum(kr_viertimpf))
-im_OberFr <- im_schwab %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
-                                                        kr_drittimpf = sum(kr_drittimpf), kr_viertimpf = sum(kr_viertimpf))
-im_NiederB <- im_schwab %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
+im_UnterFr <- im_UnterFr %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
                                                         kr_drittimpf = sum(kr_drittimpf), kr_viertimpf = sum(kr_viertimpf))
 
+im_OberFr <- im_OberFr %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
+                                                        kr_drittimpf = sum(kr_drittimpf), kr_viertimpf = sum(kr_viertimpf))
 
+im_NiederB <- im_NiederB %>% group_by(week) %>% summarise(kr_erstimpf = sum(kr_erstimpf), kr_zweitimpf = sum(kr_zweitimpf),
+                                                        kr_drittimpf = sum(kr_drittimpf), kr_viertimpf = sum(kr_viertimpf))
+
+schwabpop <- popbay2 %>% filter(bezirk == "Schwaben") 
+schwabpop <- sum(schwabpop$population)
+oberbbpop <- popbay2 %>% filter(bezirk == "Oberbayern") 
+oberbbpop <- sum(oberbbpop$population)
+niedbbpop <- popbay2 %>% filter(bezirk == "Niederbayern") 
+niedbbpop <- sum(niedbbpop$population)
+mittfbpop <- popbay2 %>% filter(bezirk == "Mittelfranken") 
+mittfbpop <- sum(mittfbpop$population)
+untefbpop <- popbay2 %>% filter(bezirk == "Unterfranken") 
+untefbpop <- sum(untefbpop$population)
+oberfbpop <- popbay2 %>% filter(bezirk == "Oberfranken") 
+oberfbpop <- sum(oberfbpop$population)
+oberpbpop <- popbay2 %>% filter(bezirk == "Oberpfalz") 
+oberpbpop <- sum(oberpbpop$population)
+
+
+im_schwab <- im_schwab %>% mutate(rate_erstimpf = cumsum(kr_erstimpf) / schwabpop,
+                                  rate_zweitimpf=cumsum(kr_zweitimpf) / schwabpop,
+                                  rate_drittimpf=cumsum(kr_drittimpf) / schwabpop,
+                                  rate_viertimpf=cumsum(kr_viertimpf) / schwabpop)
+
+im_Oberba <- im_Oberba %>% group_by(week) %>% dplyr::mutate(rate_erstimpf = cumsum(kr_erstimpf) / oberbbpop,
+                                                            rate_zweitimpf=cumsum(kr_zweitimpf) / oberbbpop,
+                                                            rate_drittimpf=cumsum(kr_drittimpf) / oberbbpop,
+                                                            rate_viertimpf=cumsum(kr_viertimpf) / oberbbpop)
+
+im_Oberpf <- im_Oberpf %>% group_by(week) %>% dplyr::mutate(rate_erstimpf = cumsum(kr_erstimpf) / oberpbpop,
+                                                            rate_zweitimpf=cumsum(kr_zweitimpf) / oberpbpop,
+                                                            rate_drittimpf=cumsum(kr_drittimpf) / oberpbpop,
+                                                            rate_viertimpf=cumsum(kr_viertimpf) / oberpbpop)
+
+im_MittelF <- im_MittelF %>% group_by(week) %>% dplyr::mutate(rate_erstimpf = cumsum(kr_erstimpf) / mittfbpop,
+                                                              rate_zweitimpf=cumsum(kr_zweitimpf) / mittfbpop,
+                                                              rate_drittimpf=cumsum(kr_drittimpf) / mittfbpop,
+                                                              rate_viertimpf=cumsum(kr_viertimpf) / mittfbpop)
+
+im_UnterFr <- im_UnterFr %>% group_by(week) %>% dplyr::mutate(rate_erstimpf = cumsum(kr_erstimpf) / untefbpop,
+                                                              rate_zweitimpf=cumsum(kr_zweitimpf) / untefbpop,
+                                                              rate_drittimpf=cumsum(kr_drittimpf) / untefbpop,
+                                                              rate_viertimpf=cumsum(kr_viertimpf) / untefbpop)
+
+im_OberFr <- im_OberFr %>% group_by(week) %>% dplyr::mutate(rate_erstimpf = cumsum(kr_erstimpf) / oberfbpop,
+                                                            rate_zweitimpf=cumsum(kr_zweitimpf) / oberfbpop,
+                                                            rate_drittimpf=cumsum(kr_drittimpf) / oberfbpop,
+                                                            rate_viertimpf=cumsum(kr_viertimpf) / oberfbpop)
+
+im_NiederB <- im_NiederB %>% group_by(week) %>% dplyr::mutate(rate_erstimpf = cumsum(kr_erstimpf) / niedbbpop,
+                                                              rate_zweitimpf=cumsum(kr_zweitimpf) / niedbbpop,
+                                                              rate_drittimpf=cumsum(kr_drittimpf) / niedbbpop,
+                                                              rate_viertimpf=cumsum(kr_viertimpf) / niedbbpop)
+
+im_schwab <- im_schwab %>% select(week, rate_erstimpf, rate_zweitimpf, rate_drittimpf, rate_viertimpf) %>% 
+  mutate(bezirk = "Schwaben")
+
+im_Oberba <- im_Oberba %>% select(week, rate_erstimpf, rate_zweitimpf, rate_drittimpf, rate_viertimpf) %>% 
+  mutate(bezirk = "Oberbayern")
+
+im_Oberpf <- im_Oberpf %>% select(week, rate_erstimpf, rate_zweitimpf, rate_drittimpf, rate_viertimpf) %>% 
+  mutate(bezirk = "Oberpfalz")
+
+im_MittelF <- im_MittelF %>% select(week, rate_erstimpf, rate_zweitimpf, rate_drittimpf, rate_viertimpf) %>% 
+  mutate(bezirk = "Mittelfranken")
+
+im_UnterFr <- im_UnterFr %>% select(week, rate_erstimpf, rate_zweitimpf, rate_drittimpf, rate_viertimpf) %>% 
+  mutate(bezirk = "Unterfranken")
+
+im_OberFr <- im_OberFr %>% select(week, rate_erstimpf, rate_zweitimpf, rate_drittimpf, rate_viertimpf) %>% 
+  mutate(bezirk = "Oberfranken")
+
+im_NiederB <- im_NiederB %>% select(week, rate_erstimpf, rate_zweitimpf, rate_drittimpf, rate_viertimpf) %>% 
+mutate(bezirk = "Niederbayern")
+
+dfultimate <- dfultimate[, -(6: 9)]
+
+impfungen <- rbind(im_schwab, im_Oberba, im_OberFr, im_Oberpf, im_MittelF, im_UnterFr, im_NiederB)
+dfultimate2 <- merge(dfultimate, impfungen, by = c("week", "bezirk"))
 
 # write.csv(df_ultimate, "/Users/colinlinke/Documents/ProgR/Stat.-Praktikum/dfultimate.csv", row.names=FALSE)
