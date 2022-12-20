@@ -552,6 +552,6 @@ mutate(bezirk = "Niederbayern")
 dfultimate <- dfultimate[, -(6: 9)]
 
 impfungen <- rbind(im_schwab, im_Oberba, im_OberFr, im_Oberpf, im_MittelF, im_UnterFr, im_NiederB)
-dfultimate2 <- merge(dfultimate, impfungen, by = c("week", "bezirk"))
+dfultimate <- merge(dfultimate, impfungen, by = c("week", "bezirk"))
 
-# write.csv(df_ultimate, "/Users/colinlinke/Documents/ProgR/Stat.-Praktikum/dfultimate.csv", row.names=FALSE)
+#write.csv(dfultimate, "C:/Users/kyril/OneDrive/Documents/Statistische Software/Stat.-Praktikum/dfultimate.csv", row.names=FALSE)
