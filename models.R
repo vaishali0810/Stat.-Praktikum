@@ -1,24 +1,7 @@
-install.packages("lme4")
-library(lme4)
-
-
-dfcombined <- df
-
-summary(lm(inzidenz~ bezirk + lag(inzidenz, 7) + gender + erstimpf_sum + zweitimpf_sum + drittimpf_sum,  data=dbayern5))
-str(dbayern5)
-#dbayern3$district <- as.factor(dbayern3$district)
-# dbayern3$population <- as.numeric(dbayern3$population)
-# dbayern3$male <- as.numeric(dbayern3$male)
-# dbayern3$female <- as.numeric(dbayern3$female)
-# dbayern3$density <- as.numeric(dbayern3$density)
-# dbayern3$area <- as.numeric(dbayern3$area)
-# str(dbayern3)
-
-# glm(cases ~ district , family = negative.binomial(2), data=dbayern3)
-# isfactor(dbayern3)
-
-dbayern6 <- dbayern3[,-6]
-dbayern7 <- pdata.frame(dbayern6, index=c("district", "date", "age_group"))
+# install.packages("lme4")
+# library(lme4)
+# 
+# 
 
 
 
