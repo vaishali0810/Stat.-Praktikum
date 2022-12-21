@@ -17,7 +17,7 @@ emptylistpop <- list()
 
 neighboring <- lapply(neighboring, function(x) {unlist(strsplit(x, ", "))})
 
-shortdf <- dfultimate %>% select(district, week, population, inzidenz)
+shortdf <- dfultimate %>% select(district, week, population, inzidenz) %>% arrange(district, week)
 View(shortdf)
 
 shortdf %>% filter(district == districtnames[1])
