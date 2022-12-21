@@ -8,6 +8,6 @@ cases_GermanTemporal_2022-11-28.rds
 04-kreise.xlsx
 04-kreise.csv
 03-regierungsbezirke.xlsx
-impfdaten_regional.csv
+#impfdaten_regional.csv
 trends.csv
 trends.zip
