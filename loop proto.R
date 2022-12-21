@@ -22,13 +22,16 @@ View(shortdf)
 
 shortdf %>% filter(district == districtnames[1])
 
+View(nachbarkreise)
+
 for (i in 1:96) {
   temp1 <- neighboring[[i]]
+  temp1 <- unlist(temp1)
   temp2 <- 0
   temp3 <- 0
   print(temp1)
   for (j in seq_along(temp1)) {
-    tempdf <- shortdf %>% filter(district == temp1[i])
+    tempdf <- shortdf %>% filter(district == temp1[j])
     tempdf <- as.data.frame(tempdf)
     print(tempdf)
     temp2 <- (temp2 + tempdf[, 4])
@@ -41,6 +44,21 @@ for (i in 1:96) {
 }
 emptylistinz
 emptylistpop
+
+### sum(populationLK * InzidenzLK) / sum( population LK)
+
+
+for ( i in 1:96) {
+  emptylistinz[[i]] <- emptylistinz[[i]] / emptylistpop [[i]]
+}
+
+
+
+
+vectorinz <- unlist(emptylistinz)
+
+dfultimate <- dfultimate %>% arrange(district, week)
+dfultimate$weightednbinz  <- vectorinz
 
 
 
