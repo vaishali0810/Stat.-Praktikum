@@ -555,11 +555,14 @@ impfungen <- rbind(im_schwab, im_Oberba, im_OberFr, im_Oberpf, im_MittelF, im_Un
 dfultimate <- merge(dfultimate, impfungen, by = c("week", "bezirk"))
 
 
+#### Kalendarwochen des Jahres sind anders als unsere week Variable
+#### deswegen neue Zeile als Referenz
 dfultimate <- dfultimate %>% 
   mutate(Kalendarwoche=dfultimate$week+3)
 
 ###############
-
+### erste bis 9 Kalendarwoche ist Phase 0 der Pandemie
+### Datensatz für Phase 0, 1, 2 etc.
 
 p<-c(1:9)
 nullt<-subset(dfultimate,dfultimate$Kalendarwoche%in%p)
@@ -569,7 +572,9 @@ erst<-subset(dfultimate,dfultimate$Kalendarwoche%in%p)
 
 p<-c(21:39)
 zweit<-subset(dfultimate,dfultimate$Kalendarwoche%in%p)
-
+##### Jahr 2020 hat 52 Wochen bei unserem erzeugten Kalendarwochen,
+##### die basierend sind auf week ist diese neue Var durchgängig
+##### aber kein Problem >>>Lösung ist 52 + Wochen neues Jahr
 p<-c(40:(52+8))
 dritt<-subset(dfultimate,dfultimate$Kalendarwoche%in%p)
 
