@@ -572,67 +572,15 @@ nachbarkreise <-Reduce(function(x, y) merge(x, y, all=TRUE), nachbarkreise_list,
 ###
 # neue Spalte: Inzidenzen * Population
 
-dfultimate <- dfultimate %>% mutate(inz.pop = inzidenz * population)
+#dfultimate <- dfultimate %>% mutate(inz.pop = inzidenz * population)
 
 
 colnames(nachbarkreise) <- c("district", "neighboring districts", "bezirk")
-dfultimate <- merge(dfultimate, nachbarkreise, by = c("district", "bezirk"), all.x = TRUE, all.y = TRUE)
+dfultimate <- merge(df_ultimate, nachbarkreise, by = c("district", "bezirk"), all.x = TRUE, all.y = TRUE)
 
-
-
-dfultimate <- dfultimate %>% mutate(M.A00.04.Anteil = M.A00.04/total_cases,
-                                    M.A05.14.Anteil = M.A05.14/total_cases,
-                                    M.A15.34.Anteil = M.A15.34/total_cases,
-                                    M.A35.59.Anteil = M.A35.59/total_cases,
-                                    M.A60.79.Anteil = M.A60.79/total_cases,
-                                    M.A80.Anteil = M.A80./total_cases,
-                                    M.Aunb.Anteil = M.A80./total_cases,
-                                    
-                                    F.A00.04.Anteil =F.A00.04/total_cases,
-                                    F.A05.14.Anteil =F.A05.14/total_cases,
-                                    F.A15.34.Anteil =F.A15.34/total_cases,
-                                    F.A35.59.Anteil =F.A35.59/total_cases,
-                                    F.A60.79.Anteil =F.A60.79/total_cases,
-                                    F.A80.Anteil =F.A80./total_cases,
-                                    F.Aunb.Anteil =F.A80./total_cases,
-                                    
-                                    Unb.A00.04.Anteil =Unb.A00.04/total_cases,
-                                    Unb.A05.14.Anteil =Unb.A05.14/total_cases,
-                                    Unb.A15.34.Anteil =Unb.A15.34/total_cases,
-                                    Unb.A35.59.Anteil =Unb.A35.59/total_cases,
-                                    Unb.A60.79.Anteil =Unb.A60.79/total_cases,
-                                    Unb.A80.Anteil =Unb.A80./total_cases,
-                                    Unb.Aunb.Anteil =Unb.A80./total_cases)
-dfultimate <- dfultimate %>% mutate_all(~replace(., is.nan(.), 0)) 
-
-
-
-dfultimate <- dfultimate %>%
-  group_by(district) %>%
-  dplyr::mutate(A00.04.Anteil = M.A00.04.Anteil + F.A00.04.Anteil + Unb.A00.04.Anteil,
-                A05.14.Anteil = M.A05.14.Anteil + F.A05.14.Anteil + Unb.A05.14.Anteil,
-                A15.34.Anteil = M.A15.34.Anteil + F.A15.34.Anteil + Unb.A15.34.Anteil,
-                A35.59.Anteil = M.A35.59.Anteil + F.A35.59.Anteil + Unb.A35.59.Anteil,
-                A60.79.Anteil = M.A60.79.Anteil + F.A60.79.Anteil + Unb.A60.79.Anteil,
-                A80.Anteil = M.A80.Anteil + F.A80.Anteil + Unb.A80.Anteil,
-                Aunb.Anteil = M.Aunb.Anteil + F.Aunb.Anteil + Unb.Aunb.Anteil,
-                M.Anteil = M.A00.04.Anteil + M.A05.14.Anteil +
-                  M.A15.34.Anteil + M.A35.59.Anteil + M.A60.79.Anteil + M.Aunb.Anteil,
-                F.Anteil = F.A00.04.Anteil + F.A05.14.Anteil +
-                  F.A15.34.Anteil + F.A35.59.Anteil + F.A60.79.Anteil + F.Aunb.Anteil,
-                Unb.Anteil = Unb.A00.04.Anteil + Unb.A05.14.Anteil +
-                  Unb.A15.34.Anteil + Unb.A35.59.Anteil + Unb.A60.79.Anteil + Unb.Aunb.Anteil)
-
-
-
-
-View(dfultimate)
-
-dfultimate<-dfultimate[,c(1:11,38:73, 12:37)]
 
 ####### Unbekannt aufteilen auf Mann und Frau
 
-## Alter 0-4
 which_vector1<-c(which(dfultimate$Unb.A00.04!=0))
 
 sum(dfultimate[which_vector1,12])
@@ -765,6 +713,59 @@ for(i in 0:((length(which_vector7)/2)-1)){
   dfultimate[which_vector7[2*i+1],18]<-dfultimate[which_vector7[2*i+1],32]+dfultimate[which_vector7[2*i+1],18]
 }
 
+
+
+
+
+
+dfultimate <- dfultimate %>% mutate(M.A00.04.Anteil = M.A00.04/total_cases,
+                                    M.A05.14.Anteil = M.A05.14/total_cases,
+                                    M.A15.34.Anteil = M.A15.34/total_cases,
+                                    M.A35.59.Anteil = M.A35.59/total_cases,
+                                    M.A60.79.Anteil = M.A60.79/total_cases,
+                                    M.A80.Anteil = M.A80./total_cases,
+                                    M.Aunb.Anteil = M.A80./total_cases,
+                                    
+                                    F.A00.04.Anteil =F.A00.04/total_cases,
+                                    F.A05.14.Anteil =F.A05.14/total_cases,
+                                    F.A15.34.Anteil =F.A15.34/total_cases,
+                                    F.A35.59.Anteil =F.A35.59/total_cases,
+                                    F.A60.79.Anteil =F.A60.79/total_cases,
+                                    F.A80.Anteil =F.A80./total_cases,
+                                    F.Aunb.Anteil =F.A80./total_cases,
+                                    
+                                    Unb.A00.04.Anteil =Unb.A00.04/total_cases,
+                                    Unb.A05.14.Anteil =Unb.A05.14/total_cases,
+                                    Unb.A15.34.Anteil =Unb.A15.34/total_cases,
+                                    Unb.A35.59.Anteil =Unb.A35.59/total_cases,
+                                    Unb.A60.79.Anteil =Unb.A60.79/total_cases,
+                                    Unb.A80.Anteil =Unb.A80./total_cases,
+                                    Unb.Aunb.Anteil =Unb.A80./total_cases)
+dfultimate <- dfultimate %>% mutate_all(~replace(., is.nan(.), 0)) 
+
+
+
+dfultimate <- dfultimate %>%
+  group_by(district) %>%
+  dplyr::mutate(A00.04.Anteil = M.A00.04.Anteil + F.A00.04.Anteil,
+                A05.14.Anteil = M.A05.14.Anteil + F.A05.14.Anteil,
+                A15.34.Anteil = M.A15.34.Anteil + F.A15.34.Anteil,
+                A35.59.Anteil = M.A35.59.Anteil + F.A35.59.Anteil,
+                A60.79.Anteil = M.A60.79.Anteil + F.A60.79.Anteil,
+                A80.Anteil = M.A80.Anteil + F.A80.Anteil,
+                Aunb.Anteil = M.Aunb.Anteil + F.Aunb.Anteil,
+                M.Anteil = M.A00.04.Anteil + M.A05.14.Anteil +
+                  M.A15.34.Anteil + M.A35.59.Anteil + M.A60.79.Anteil + M.Aunb.Anteil,
+                F.Anteil = F.A00.04.Anteil + F.A05.14.Anteil +
+                  F.A15.34.Anteil + F.A35.59.Anteil + F.A60.79.Anteil + F.Aunb.Anteil,
+  )
+            
+
+
+
+View(dfultimate)
+
+dfultimate<-dfultimate[,c(1:11,38:42,44:73, 12:37,43)]
 
 
 
@@ -969,8 +970,8 @@ for (i in 1:96) {
   emptylistinz[[i]] <- temp2
   emptylistpop[[i]] <- temp3
 }
-emptylistinz
-emptylistpop
+#emptylistinz
+#emptylistpop
 
 ### sum(populationLK * InzidenzLK) / sum( population LK)
 
@@ -1009,7 +1010,7 @@ vectorinz2 <- unlist(unweightedlist)
 dfultimate$unweightednbinz <- vectorinz2
 
 
-
+View(dfultimate)
 
 
 #write.csv(dfultimate, "C:/Users/kyril/OneDrive/Documents/Statistische Software/Stat.-Praktikum/dfultimate.csv", row.names=FALSE)
