@@ -29,16 +29,16 @@ for (i in 1:96) {
   temp1 <- unlist(temp1)
   temp2 <- 0
   temp3 <- 0
-  print(temp1)
+  #print(temp1)
   for (j in seq_along(temp1)) {
     tempdf <- shortdf %>% filter(district == temp1[j])
     tempdf <- as.data.frame(tempdf)
-    print(tempdf)
-    temp2 <- (temp2 + tempdf[, 4])
+    #print(tempdf)
+    temp2 <- (temp2 + tempdf[, 4]*tempdf[3, 3])
     temp3 <- (temp3 + tempdf[3, 3])
   }
-  print(temp2)
-  print(temp3)
+  #print(temp2)
+  #print(temp3)
   emptylistinz[[i]] <- temp2
   emptylistpop[[i]] <- temp3
 }
@@ -61,6 +61,25 @@ dfultimate <- dfultimate %>% arrange(district, week)
 dfultimate$weightednbinz  <- vectorinz
 
 
+
+
+unweightedlist <- list()
+for (i in 1:96) {
+  temp1 <- neighboring[[i]]
+  temp1 <- unlist(temp1)
+  temp2 <- length(temp1)
+  temp3 <- 0
+  #print(temp1)
+  for (j in seq_along(temp1)) {
+    tempdf <- shortdf %>% filter(district == temp1[j])
+    tempdf <- as.data.frame(tempdf)
+    temp3 <- (temp3 + tempdf[, 4])
+  }
+  unweightedlist[[i]] <- (temp3/temp2)
+}
+
+vectorinz2 <- unlist(unweightedlist)
+dfultimate$unweightednbinz <- vectorinz2
 
 unlist(neighboring)
 all(unlist(neighboring) %in% districtnames)
