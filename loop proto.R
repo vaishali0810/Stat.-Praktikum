@@ -1,12 +1,12 @@
 
 
-districtnames <- unique(dfultimate$district)
+districtnames <- sort(unique(dfultimate$district))
 districtnames
 
 
 
 
-
+### nachbarkreise[[1]] schon sortiert
 
 nachbarkreise[[1]]
 identical(districtnames, nachbarkreise[[1]])
