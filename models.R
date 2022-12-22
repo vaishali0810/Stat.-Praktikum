@@ -1,7 +1,6 @@
 # install.packages("lme4")
 # library(lme4)
 # 
-  
 library(tidyverse) # Modern data science library 
 library(plm)       # Panel data analysis library
 library(car)       # Companion to applied regression 
@@ -10,7 +9,6 @@ library(tseries)   # For timeseries analysis
 library(lmtest)   
 
 rm(list=ls())
-library(plm) 
 dfultimate <- read.csv("dfultimate.csv", header = TRUE, sep = ",")
 df <- dfultimate %>% select(district, week, bezirk, inzidenz, density, m_anteil, f_anteil, M.A00.04.Anteil, M.A05.14.Anteil,
                             M.A15.34.Anteil, M.A35.59.Anteil, M.A60.79.Anteil, M.A80.Anteil, M.Aunb.Anteil, F.A00.04.Anteil,
