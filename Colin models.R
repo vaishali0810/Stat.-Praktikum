@@ -13,7 +13,22 @@ re100 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,
 summary(re100)
 
 
-phtest(fe1, re100)
+fe2 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+           + A00.04.Anteil + A05.14.Anteil+ A15.34.Anteil + I(density*lag(inzidenz, 1))
+           + A35.59.Anteil + A60.79.Anteil 
+           - 1, data =df_pan, model = "within")
+summary(fe2)
+
+fe3 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+           + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+           + A35.59.Anteil + A60.79.Anteil 
+           - 1, data =df_pan, model = "within")
+summary(fe3)
+
+
+phtest(re100, fe1)
+#### p-value < 0.05 ---> fixed effects
+
 
 
 
