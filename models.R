@@ -105,8 +105,8 @@ re14 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(unweightednbinz, 1)  + A05.14.Ante
 summary(re14)
 
 #..
-
-
+dfultimate <- dfultimate %>% 
+  mutate(Kalendarwoche=dfultimate$week+3)
 
 p<-c(1:9)
 nullt<-subset(df,dfultimate$Kalendarwoche%in%p)
