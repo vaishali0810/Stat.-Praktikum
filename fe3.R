@@ -1,41 +1,70 @@
-dfultimate <- dfultimate %>% 
-  mutate(Kalendarwoche=dfultimate$week+3)
+nullt <- pdata.frame(nullt, index=c("district", "week"))
+fe3_0 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+           + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+           + A35.59.Anteil + A60.79.Anteil 
+           , data =nullt, model = "within")
+summary(fe3_0)
 
-###############
+erst<-pdata.frame(erst, index=c("district", "week"))
+fe3_1 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+             + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+             + A35.59.Anteil + A60.79.Anteil 
+             , data =erst, model = "within")
+summary(fe3_1)
 
+zweit<-pdata.frame(zweit, index=c("district", "week"))
+fe3_2 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+             + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+             + A35.59.Anteil + A60.79.Anteil 
+             , data =zweit, model = "within")
+summary(fe3_2)
 
-p<-c(1:9)
-nullt<-subset(dfultimate,dfultimate$Kalendarwoche%in%p)
+dritt<-pdata.frame(dritt, index=c("district", "week"))
+fe3_3 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+             + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+             + A35.59.Anteil + A60.79.Anteil 
+             , data =dritt, model = "within")
+summary(fe3_3)
 
-p<-c(10:20)
-erst<-subset(dfultimate,dfultimate$Kalendarwoche%in%p)
+viert<-pdata.frame(viert, index=c("district", "week"))
+fe3_4 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+             + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+             + A35.59.Anteil + A60.79.Anteil 
+             , data =viert, model = "within")
+summary(fe3_4)
 
-p<-c(21:39)
-zweit<-subset(dfultimate,dfultimate$Kalendarwoche%in%p)
+fünft<-pdata.frame(fünft, index=c("district", "week"))
+fe3_5 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+             + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+             + A35.59.Anteil + A60.79.Anteil 
+             , data =fünft, model = "within")
+summary(fe3_5)
 
-p<-c(40:(52+8))
-dritt<-subset(dfultimate,dfultimate$Kalendarwoche%in%p)
+sechst<-pdata.frame(sechst, index=c("district", "week"))
+fe3_6<- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+             + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+             + A35.59.Anteil + A60.79.Anteil 
+             , data =sechst, model = "within")
+summary(fe3_6)
 
-p<-c((52+9):(52+23))
-viert<-subset(dfultimate,dfultimate$Kalendarwoche%in%p)
+siebt<-pdata.frame(siebt, index=c("district", "week"))
+fe3_7<- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+            + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+            + A35.59.Anteil + A60.79.Anteil 
+            , data =siebt, model = "within")
+summary(fe3_7)
 
-p<-c((52+24):(52+30))
-fünft<-subset(dfultimate,dfultimate$Kalendarwoche%in%p)
-
-p<-c((52+31):(52+51))
-sechst<-subset(dfultimate,dfultimate$Kalendarwoche%in%p)
-
-p<-c((52+52):(52+151))
-siebt<-subset(dfultimate,dfultimate$Kalendarwoche%in%p)
 
 p<-c(21:30)
-zweit_a<-subset(dfultimate,dfultimate$Kalendarwoche%in%p)
+zweit_a<-subset(df,dfultimate$Kalendarwoche%in%p)
 
 p<-c(31:39)
-zweit_b<-subset(dfultimate,dfultimate$Kalendarwoche%in%p)
+zweit_b<-subset(df,dfultimate$Kalendarwoche%in%p)
 
 p<-c((52+31):(52+39))
-sechst_a<-subset(dfultimate,dfultimate$Kalendarwoche%in%p)
+sechst_a<-subset(df,dfultimate$Kalendarwoche%in%p)
 
 p<-c((52+40):(52+51))
-sechst_a<-subset(dfultimate,dfultimate$Kalendarwoche%in%p)
+sechst_b<-subset(dfultimate,dfultimate$Kalendarwoche%in%p)
+
+
