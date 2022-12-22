@@ -331,3 +331,150 @@ fe3_7<- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2
 summary(fe3_7)
 ## R-Squared:      0.88011
 ## Adj. R-Squared: 0.87722
+
+
+
+###### Covid Waves Models
+
+nullt <- pdata.frame(nullt, index=c("district", "week"))
+
+fe60<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+          + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+          + A60.79.Anteil + rate_zweitimpf + rate_drittimpf 
+          , data =nullt, model = "within")
+summary(fe60)
+
+## Adj. R-Squared: -0.1109
+
+
+erst <- pdata.frame(erst, index=c("district", "week"))
+
+fe61<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+          + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+          + A60.79.Anteil + rate_zweitimpf + rate_drittimpf 
+          , data =erst, model = "within")
+summary(fe61)
+
+## Adj. R-Squared: 0.64116
+
+
+zweit<-pdata.frame(zweit, index=c("district", "week"))
+
+fe62<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+          + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+          + A60.79.Anteil + rate_zweitimpf + rate_drittimpf 
+          , data =zweit, model = "within")
+summary(fe62)
+
+## Adj. R-Squared: 0.38223
+
+
+zweit_a<-pdata.frame(zweit_a, index=c("district", "week"))
+
+fe62_a<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+            + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+            + A60.79.Anteil + rate_zweitimpf + rate_drittimpf 
+            , data =zweit_a, model = "within")
+summary(fe62_a)
+
+## Adj. R-Squared: 0.019677
+
+
+zweit_b<-pdata.frame(zweit_b, index=c("district", "week"))
+
+fe62_b<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+            + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+            + A60.79.Anteil + rate_zweitimpf + rate_drittimpf 
+            , data =zweit_b, model = "within")
+summary(fe62_b)
+
+## Adj. R-Squared: -0.069239
+
+
+
+dritt<-pdata.frame(dritt, index=c("district", "week"))
+
+fe63<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+          + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+          + A60.79.Anteil + rate_zweitimpf + rate_drittimpf + rate_viertimpf
+          , data =dritt, model = "within")
+summary(fe63)
+
+## Adj. R-Squared: 0.60162
+
+
+
+viert<-pdata.frame(viert, index=c("district", "week"))
+
+fe64<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+          + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+          + A60.79.Anteil + rate_zweitimpf + rate_drittimpf + rate_viertimpf
+          , data =viert, model = "within")
+summary(fe64)
+
+## Adj. R-Squared: 0.74854
+
+
+fünft<-pdata.frame(fünft, index=c("district", "week"))
+
+fe65<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+          + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+          + A60.79.Anteil + rate_zweitimpf + rate_drittimpf + rate_viertimpf
+          , data =fünft, model = "within")
+summary(fe65)
+
+## Adj. R-Squared: 0.011509
+
+
+
+sechst<-pdata.frame(sechst, index=c("district", "week"))
+
+fe66<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+          + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+          + A60.79.Anteil + rate_zweitimpf + rate_drittimpf
+          , data =sechst, model = "within")
+summary(fe66)
+
+## Adj. R-Squared: 0.88393
+
+
+
+sechst_a<-pdata.frame(sechst_a, index=c("district", "week"))
+
+fe66_a<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+            + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+            + A60.79.Anteil + rate_zweitimpf + rate_drittimpf
+            , data =sechst_a, model = "within")
+summary(fe66_a)
+
+## Adj. R-Squared: 0.34228
+
+
+
+
+sechst_b<-pdata.frame(sechst_b, index=c("district", "week"))
+
+fe66_b<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+            + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+            + A60.79.Anteil + rate_zweitimpf + rate_drittimpf 
+            , data =sechst_b, model = "within")
+summary(fe66_b)
+
+## Adj. R-Squared: 0.76692
+
+
+
+siebt<-pdata.frame(siebt,index=c("district","week"))
+
+fe67<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+          + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+          + A60.79.Anteil + rate_zweitimpf + rate_drittimpf + rate_viertimpf
+          , data =siebt, model = "within")
+summary(fe67)
+
+## Adj. R-Squared: 0.8769
+
+
+
+
+
