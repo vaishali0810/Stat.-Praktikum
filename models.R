@@ -1,10 +1,6 @@
 # install.packages("lme4")
 # library(lme4)
 # 
-# 
-
-
-
 
 library(tidyverse) # Modern data science library 
 library(plm)       # Panel data analysis library
@@ -12,20 +8,6 @@ library(car)       # Companion to applied regression
 #library(ggplots2)    # Various programing tools for plotting data
 library(tseries)   # For timeseries analysis
 library(lmtest)   
-# dbayern4 <- pdata.frame(dfcombined, index=c("district", "gender", "age_group"))
-# dbayern5 <- dbayern4[complete.cases(dbayern4),]
-# #re1 <- plm(inzidenz~ bezirk + erstimpf_sum + zweitimpf_sum + drittimpf_sum + male_anteil, data=dbayern5, model = "random")
-# summary(re1)
-
-summary(glm(inzidenz ~ + I(zweitimpf_sum/population) + 
-             I(drittimpf_sum/population) + lag(inzidenz, 7) + I(lag(inzidenz, 7) * log(density)) , data = dbayern3))
-
-
-testpdf <- pdata.frame(dfcombined, index=c("district", "date"))
-re1 <- plm(total_cases~lag(total_cases, 7), data= testpdf, model = "random")
-
-
-
 
 rm(list=ls())
 library(plm) 
@@ -73,10 +55,11 @@ plot(residuals(re4))
 re5 <- plm(inzidenz ~ lag(inzidenz, 1) + rate_zweitimpf + rate_drittimpf + density + 
              M.Anteil*m_anteil - 1, data = dfultimate_pan, model = "random")
 summary(re5)
-plot(residuals(re6))
+plot(residuals(re5))
 
 re6 <- plm(inzidenz ~ lag(inzidenz, 1) + M.Anteil*m_anteil - 1, data = dfultimate_pan, model = "random")
 summary(re6)
+plot(residuals(re6))
 
 re7 <- plm(inzidenz ~ lag(inzidenz, 1) + M.Anteil + m_anteil - 1, data = dfultimate_pan, model = "random")
 summary(re7)
