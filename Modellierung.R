@@ -247,6 +247,12 @@ fe6 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2)
            , data =df_pan, model = "within")
 summary(fe6)
 
+fe7 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+           + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+           + A60.79.Anteil + lag(rate_zweitimpf,2) + lag(rate_drittimpf,2) + lag(rate_viertimpf,2)
+           , data =df_pan, model = "within")
+summary(fe7)
+
 
 #### Wir vermuten dass Impfungen und Inzidenz beide mit einer drittvariablen korreliert ist, die wir nicht im Modell haben
 #### Alternative captured das Modell hier Verhaltensänderungen von geimpften evtl.
