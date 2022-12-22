@@ -208,50 +208,119 @@ stepAIC(object = re100, direction = "both",
         k = log(nrow(df_pan)), trace = FALSE)
 
 
+######## Modelle ohne München
+
+dfmunich_sk<-dfultimate[dfultimate$district!="SK München",]
+dfmunich_lk<-dfultimate[dfultimate$district!="LK München",]
+dfmunich_sklk <-dfultimate[dfultimate$district!="SK München" & dfultimate$district!="LK München",]
+
+dfmunich_sk_pan<-pdata.frame(dfmunich_sk, index=c("district", "week"))
+dfmunich_lk_pan<-pdata.frame(dfmunich_lk, index=c("district", "week"))
+dfmunich_sklk_pan <- pdata.frame(dfmunich_sklk, index=c("district", "week"))
+re110 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+             + A00.04.Anteil + A05.14.Anteil+ A15.34.Anteil + M.Anteil + density
+             + A35.59.Anteil + A60.79.Anteil + A80.Anteil
+             - 1, data =dfmunich_sk_pan, model = "random")
+summary(re110)
+
+## density without sk munich -0.0060867 ** 
+
+
+re109 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+             + A00.04.Anteil + A05.14.Anteil+ A15.34.Anteil + M.Anteil + density
+             + A35.59.Anteil + A60.79.Anteil + A80.Anteil
+             - 1, data =df_pan, model = "random")
+summary(re109)
+
+
+##  with sk munich and LK munich -0.0047767 **
+
+re111 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+             + A00.04.Anteil + A05.14.Anteil+ A15.34.Anteil + M.Anteil + density
+             + A35.59.Anteil + A60.79.Anteil + A80.Anteil
+             - 1, data =dfmunich_lk_pan, model = "random")
+summary(re111)
+
+
+## without LK munich  --0.0047597 **
+
+
+
+re112<- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+            + A00.04.Anteil + A05.14.Anteil+ A15.34.Anteil + M.Anteil + density
+            + A35.59.Anteil + A60.79.Anteil + A80.Anteil
+            - 1, data =dfmunich_sklk_pan, model = "random")
+summary(re112)
+
+### wihtout SK munich and LK munich -0.0060446 * 
 
 
 
 
 
-####lambda bestimmen
-model_lasso_cv <- glmsmurf(formula = inzidenz ~ p(lag(inzidenz, 1), pen = "lasso") + p(density,pen = "lasso")
-                           + p(rate_zweitimpf, pen = "lasso")+ p(m_anteil, pen = "lasso"), family = gaussian(),
-                           data = dfultimate_pan, lambda = "cv.mse")
-plot_lambda(model_lasso_cv)
+
+##### fixed effects 
 
 
-###Schätzung mit neuem lambda
-lasso <- model_lasso_cv$lambda
-model_lasso <- glmsmurf(formula = inzidenz ~ p(lag(inzidenz, 1), pen = "lasso") + p(density,pen = "lasso")
-                           + p(rate_zweitimpf, pen = "lasso")+ p(m_anteil, pen = "lasso"), family = gaussian(),
-                           data = dfultimate_pan, lambda = lasso)
-summary(model_lasso)
+fe109 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2) +
+               A00.04.Anteil + A05.14.Anteil+ A15.34.Anteil + M.Anteil + I(density * lag(inzidenz, 1))
+             + A35.59.Anteil + A60.79.Anteil + A80.Anteil + rate_zweitimpf
+             , data =df_pan, model = "within")
+summary(fe109)
 
-###Variablenselektion https://stackoverflow.com/questions/48978179/r-plotting-lasso-beta-coefficients
-library(reshape)
+## density I(density * lag(inzidenz, 1)) -2.4686e-05 ***
 
-dfultimate=na.omit(dfultimate)
-x=model.matrix(inzidenz ~ bezirk + density + m_anteil + rate_zweitimpf, dfultimate)[,-1]
-y=as.matrix(dfultimate$inzidenz)
-lasso.mod =glmnet(x,y, alpha =1)
-beta=coef(lasso.mod)
 
-tmp <- as.data.frame(as.matrix(beta))
-tmp$coef <- row.names(tmp)
-tmp <- reshape::melt(tmp, id = "coef")
-tmp$variable <- as.numeric(gsub("s", "", tmp$variable))
-tmp$lambda <- lasso.mod$lambda[tmp$variable+1] # extract the lambda values
-tmp$norm <- apply(abs(beta[-1,]), 2, sum)[tmp$variable+1] # compute L1 norm
+fe110 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2) +
+               A00.04.Anteil + A05.14.Anteil+ A15.34.Anteil + M.Anteil + I(density * lag(inzidenz, 1))
+             + A35.59.Anteil + A60.79.Anteil + A80.Anteil + rate_zweitimpf
+             , data =dfmunich_sk_pan, model = "within")
+summary(fe110)
 
-##plot
-library(ggplot2)
+### -3.4022e-05 ***
 
-ggplot(tmp[tmp$coef != "(Intercept)",], aes(lambda, value, color = coef, linetype = coef)) + 
-  geom_line() + 
-  scale_x_log10() + 
-  xlab("Lambda (log scale)") + 
-  guides(color = guide_legend(title = ""), 
-         linetype = guide_legend(title = "")) +
-  theme_bw() + 
-  theme(legend.key.width = unit(3,"lines"))
+fe111 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2) +
+               A00.04.Anteil + A05.14.Anteil+ A15.34.Anteil + M.Anteil + I(density * lag(inzidenz, 1))
+             + A35.59.Anteil + A60.79.Anteil + A80.Anteil + rate_zweitimpf
+             , data =dfmunich_lk_pan, model = "within")
+summary(fe111)
+
+### -2.4653e-05 ***
+
+
+fe112 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2) +
+               A00.04.Anteil + A05.14.Anteil+ A15.34.Anteil + M.Anteil + I(density * lag(inzidenz, 1))
+             + A35.59.Anteil + A60.79.Anteil + A80.Anteil + rate_zweitimpf
+             , data =dfmunich_sklk_pan, model = "within")
+summary(fe112)
+
+### -3.3911e-05 ***
+
+
+### density stark durch SK munich beeinflusst
+
+
+
+
+fe109 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2) +
+               A00.04.Anteil + A05.14.Anteil+ A15.34.Anteil + M.Anteil + I(log(density) * lag(inzidenz, 1))
+             + A35.59.Anteil + A60.79.Anteil + A80.Anteil + rate_zweitimpf
+             , data =df_pan, model = "within")
+summary(fe109)
+
+## density I(log(density) * lag(inzidenz, 1)) -0.0184581 ***
+
+
+fe110 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2) +
+               A00.04.Anteil + A05.14.Anteil+ A15.34.Anteil + M.Anteil + I(log(density) * lag(inzidenz, 1))
+             + A35.59.Anteil + A60.79.Anteil + A80.Anteil + rate_zweitimpf
+             , data =dfmunich_sk_pan, model = "within")
+summary(fe110)
+
+
+### -0.0188575 ***
+
+
+## einfach logarithmieren?
+
 
