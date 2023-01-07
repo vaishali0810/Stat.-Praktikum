@@ -263,6 +263,53 @@ summary(fe7)
 #### AIC funktioniert auch nicht mit 
 AIC(fe6)
 
+
+### Verschiedene Phasen von Corona separat schätzen
+
+## data splits
+
+
+dfultimate <- dfultimate %>% 
+  mutate(Kalendarwoche=dfultimate$week+3)
+
+p<-c(1:9)
+nullt<-subset(df,dfultimate$Kalendarwoche%in%p)
+
+p<-c(10:20)
+erst<-subset(df,dfultimate$Kalendarwoche%in%p)
+
+p<-c(21:39)
+zweit<-subset(df,dfultimate$Kalendarwoche%in%p)
+
+p<-c(40:(52+8))
+dritt<-subset(df,dfultimate$Kalendarwoche%in%p)
+
+p<-c((52+9):(52+23))
+viert<-subset(df,dfultimate$Kalendarwoche%in%p)
+
+p<-c((52+24):(52+30))
+fünft<-subset(df,dfultimate$Kalendarwoche%in%p)
+
+p<-c((52+31):(52+51))
+sechst<-subset(df,dfultimate$Kalendarwoche%in%p)
+
+p<-c((52+52):(52+151))
+siebt<-subset(df,dfultimate$Kalendarwoche%in%p)
+
+p<-c(21:30)
+zweit_a<-subset(df,dfultimate$Kalendarwoche%in%p)
+
+p<-c(31:39)
+zweit_b<-subset(df,dfultimate$Kalendarwoche%in%p)
+
+p<-c((52+31):(52+39))
+sechst_a<-subset(df,dfultimate$Kalendarwoche%in%p)
+
+p<-c((52+40):(52+51))
+sechst_b<-subset(dfultimate,dfultimate$Kalendarwoche%in%p)
+
+
+
 #### fe3 auf die verschiedenen Phasen
 
 nullt <- pdata.frame(nullt, index=c("district", "week"))
@@ -340,7 +387,7 @@ summary(fe3_7)
 
 
 
-###### Covid Waves Models
+###### Covid Phases Models - fe6 als Grundlage
 
 nullt <- pdata.frame(nullt, index=c("district", "week"))
 

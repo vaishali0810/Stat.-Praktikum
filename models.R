@@ -27,14 +27,14 @@ dfultimate_pan <- pdata.frame(dfultimate, index=c("district", "week"))
 re2 <- plm(inzidenz ~ lag(inzidenz, 1) + bezirk + density +  rate_zweitimpf + 
              rate_drittimpf - 1, data = dfultimate_pan, model = "random")
 summary(re2)
-plot(residuals(re2))
+#plot(residuals(re2))
 
 re3 <- plm(inzidenz ~ lag(inzidenz, 1) + rate_zweitimpf + rate_drittimpf + density + 
              M.Anteil + A00.04.Anteil + A05.14.Anteil + A15.34.Anteil + A35.59.Anteil + A60.79.Anteil 
            + A80.Anteil - 1, data = dfultimate_pan, model = "random")
 
 summary(re3)
-plot(residuals(re3))
+#plot(residuals(re3))
 
 
 #### https://www.rki.de/DE/Content/Infekt/EpidBull/Archiv/2022/Ausgaben/10_22.pdf?__blob=publicationFile
@@ -48,16 +48,16 @@ re4 <- plm(inzidenz ~ lag(inzidenz, 1) + rate_zweitimpf + rate_drittimpf + densi
              M.Anteil  + A00.04.Anteil + A05.14.Anteil + A15.34.Anteil + A35.59.Anteil + A60.79.Anteil 
            + A80.Anteil - 1, data = dfultimate_pan, model = "random")
 summary(re4)
-plot(residuals(re4))
+#plot(residuals(re4))
 
 re5 <- plm(inzidenz ~ lag(inzidenz, 1) + rate_zweitimpf + rate_drittimpf + density + 
              M.Anteil*m_anteil - 1, data = dfultimate_pan, model = "random")
 summary(re5)
-plot(residuals(re5))
+#plot(residuals(re5))
 
 re6 <- plm(inzidenz ~ lag(inzidenz, 1) + M.Anteil*m_anteil - 1, data = dfultimate_pan, model = "random")
 summary(re6)
-plot(residuals(re6))
+#plot(residuals(re6))
 
 re7 <- plm(inzidenz ~ lag(inzidenz, 1) + M.Anteil + m_anteil - 1, data = dfultimate_pan, model = "random")
 summary(re7)
@@ -66,7 +66,7 @@ summary(re7)
 
 ####
 
-plot(residuals(re3))
+#plot(residuals(re3))
 
 
 
