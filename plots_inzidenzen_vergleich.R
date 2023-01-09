@@ -5,18 +5,17 @@ library(lubridate)
 
 ## 1. Bayern Plot mit Cases
 
-weekly_cases_bayern <- dfcombined %>%
+weekly_cases_bayern <- dfultimate %>%
   group_by(date = cut(date, "week"), district)  %>% summarise(case = sum(total_cases))
 
 
 weekly_cases_bayern$date <- as.Date(weekly_cases_bayern$date)
 
 
-ggplot(data= weekly_cases_bayern, aes(x=date, y = case)) + geom_line(color = "black") +
-  labs(x = "Datum", y = "Covid Cases", 
-       title = "Wöchentliche Covid-Cases in Bayern") +
-  geom_vline(xintercept = as.Date(c("2020-12-27", "2021-01-16", "2021-06-14")), color = "red")+
-  scale_x_date(date_breaks = "2 month", date_labels = "%d. %b %y") +
+ggplot(data= dfultimate, aes(x=week, y = inzidenz)) + geom_line(color = "black") +
+  geom_smooth()+
+  labs(x = "Week", y = "Inzidenz", 
+       title = "Wöchentliche Inzidenz in Bayern") +
   theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 1, hjust = 1, face = "bold")) +
   theme(axis.text.y = element_text(size = 10, face = "bold"))+
   theme(text = element_text(size = 15))+
@@ -41,12 +40,13 @@ new <- dbayern3 %>%
 
 # Schwaben
 augsburg <- subset(new, district =="SK Augsburg")
+augsburg<-dfultimate[dfultimate$district=="SK Augsburg",]
 memmingen <- subset(new, district =="SK Memmingen")
- ggplot() + geom_line(data=augsburg, aes(x=date, y = inz), color = "red") + 
-  geom_line(data=memmingen, aes(x=date,y=inz), color = "blue") +
+memmingen<-dfultimate[dfultimate$district=="SK Memmingen",]
+ ggplot() + geom_line(data=augsburg, aes(x=week, y = inzidenz), color = "red") + 
+  geom_line(data=memmingen, aes(x=week,y=inzidenz), color = "blue") +
   labs(x = "Datum", y = "Covid-Infektionen\npro 100.000 Einwohner", 
        title = "Covid-Infektionen pro 100.000 Einwohner in Augsburg & Memmingen (Schwaben)") +
-   scale_x_date(date_breaks = "2 month", date_labels = "%d. %b %y") +
    theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 1, hjust = 1, face = "bold")) +
    theme(axis.text.y = element_text(size = 10, face = "bold"))+
    theme(text = element_text(size = 8))+
@@ -157,12 +157,14 @@ ggplot() + geom_line(data=muenchen, aes(x=date, y = inz), color = "red") +
 
 # Mittelfranken
 nuernberg <- subset(new, district =="SK Nürnberg")
+nurnberg<-dfultimate[dfultimate$district=="SK Nürnberg",]
 schwabach <- subset(new, district =="SK Schwabach")
-ggplot() + geom_line(data=nuernberg, aes(x=date, y = inz), color = "red") + 
-  geom_line(data=schwabach, aes(x=date,y=inz), color = "blue") +
-  labs(x = "Datum", y = "Covid-Infektionen\npro 100.000 Einwohner", 
-       title = "Covid-Infektionen pro 100.000 Einwohner Nürnberg & Schwabach (Mittelfranken)") +
-  scale_x_date(date_breaks = "2 month", date_labels = "%d. %b %y") +
+schwabach<-dfultimate[dfultimate$district=="SK Schwabach",]
+ggplot() + geom_line(data=nurnberg, aes(x=week, y = inzidenz), color = "red") + 
+  geom_line(data=schwabach, aes(x=week,y=inzidenz), color = "blue") +
+  geom_smooth()+
+  labs(x = "Week", y = "Covid Inzidenz", 
+       title = "Covid-Inzidenz Nürnberg & Schwabach (Mittelfranken)") +
   theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 1, hjust = 1, face = "bold")) +
   theme(axis.text.y = element_text(size = 10, face = "bold"))+
   theme(text = element_text(size = 8))+

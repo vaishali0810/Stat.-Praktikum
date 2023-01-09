@@ -201,10 +201,13 @@ summary(fe64)
 fünft<-pdata.frame(fünft, index=c("district", "week"))
 
 fe65<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
-          + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
-          + A60.79.Anteil + rate_zweitimpf + rate_drittimpf + rate_viertimpf
+          + A05.14.Anteil+ A15.34.Anteil +I(log(density)*lag(inzidenz, 1))
+           + lag(rate_zweitimpf,2) + lag(rate_drittimpf,2)+ A35.59.Anteil
+          + A60.79.Anteil + weightednbinz +inzidenz 
           , data =fünft, model = "within")
 summary(fe65)
+
+
 
 ## Adj. R-Squared: 0.011509
 
@@ -213,10 +216,13 @@ summary(fe65)
 sechst<-pdata.frame(sechst, index=c("district", "week"))
 
 fe66<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
-          + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
-          + A60.79.Anteil + rate_zweitimpf + rate_drittimpf
+          + A35.59.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+          + A60.79.Anteil + lag(rate_zweitimpf,2) + lag(rate_drittimpf,2)
+          + rate_zweitimpf + rate_drittimpf +lag(rate_zweitimpf,1) + lag(rate_drittimpf,1)
           , data =sechst, model = "within")
 summary(fe66)
+
+plot(residuals(fe66))
 
 ## Adj. R-Squared: 0.88393
 
@@ -251,12 +257,12 @@ siebt<-pdata.frame(siebt,index=c("district","week"))
 
 fe67<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
                   + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
-                  + A60.79.Anteil + rate_zweitimpf + rate_drittimpf + rate_viertimpf
+                  + A60.79.Anteil + lag(rate_zweitimpf,2) + lag(rate_drittimpf,2)
+          + lag(rate_viertimpf,2)
                   , data =siebt, model = "within")
 summary(fe67)
 
 ## Adj. R-Squared: 0.8769
 
-
-
+plot(residuals(fe67))
 
