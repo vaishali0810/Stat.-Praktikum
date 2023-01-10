@@ -321,4 +321,12 @@ summary(fe110)
 
 ## einfach logarithmieren?
 
+df4_pan <- pdata.frame(df4,index=c("district", "week"))
 
+fe2200 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+           + I(hotspot * lag(inzidenz, 1)) + I(hotspotnb * lag(weightednbinz, 1))
+           + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+           + A60.79.Anteil + rate_zweitimpf + rate_drittimpf + rate_viertimpf
+           , data =df4_pan, model = "within")
+summary(fe2200)
+plot(residuals(fe2200))
