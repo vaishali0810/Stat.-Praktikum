@@ -38,3 +38,20 @@ df3<-do.call(rbind.data.frame,firstlist)
 
 View(df3)
 
+df3$hotspotnb<-vector(mode="logical",length=nrow(df3))
+#df3$neighboring <- neighboring
+view(df3)
+#df3 <- df3[,-38]
+
+secondlist <- list()
+for(i in 1:length(districts)){
+  secondlist[[i]]<-df3[df3$district==districts[i],]
+}
+
+for(i in 1:length(districts)){
+  secondlist[[i]][,38] <- as.list(neighboring[[i]])
+}
+
+
+df3short <- df3 %>% select(district, week, hotspot, hotspotnb)
+view(df3short)
