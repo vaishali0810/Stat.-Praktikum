@@ -28,7 +28,7 @@ A15_res<-plot(formula = fe6$residuals ~ t$A15.34.Anteil, xlab = "A15.34.Anteil",
 
 de_inz1_res<-plot(formula = fe6$residuals ~ t$density_inzidenz1, xlab = "density_inzidenz1", ylab = "Residuen", cex.axis = 0.8)
 
-A60_res<-plot(formula = fe6$residuals ~ t$60.79.Anteil, xlab = "60.79.Anteil", ylab = "Residuen", cex.axis = 0.8)
+A60_res<-plot(formula = fe6$residuals ~ t$A60.79.Anteil, xlab = "A60.79.Anteil", ylab = "Residuen", cex.axis = 0.8)
 
 zwimpf_res<-plot(formula = fe6$residuals ~ t$rate_zweitimpf, xlab = "rate_zweitimpf", ylab = "Residuen", cex.axis = 0.8)
 
