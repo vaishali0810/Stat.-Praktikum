@@ -44,14 +44,28 @@ view(df3)
 #df3 <- df3[,-38]
 
 secondlist <- list()
+df3 <- df3 %>% arrange(district)
 for(i in 1:length(districts)){
   secondlist[[i]]<-df3[df3$district==districts[i],]
 }
 
-for(i in 1:length(districts)){
-  secondlist[[i]][,38] <- as.list(neighboring[[i]])
+for (i in 1:96) {
+  temp1 <- neighboring[[i]]
+  temp1 <- unlist(temp1)
+  temp2 <- rep.int(FALSE, 148)
+  for (j in seq_along(temp1)) {
+    tempdf <- df3 %>% filter(district == temp1[j])
+    tempdf <- as.data.frame(tempdf)
+    for (k in 1:148) {
+      if(tempdf[k,7] == TRUE) {
+        temp2[k] <- TRUE
+      }
+    }
+  }
+  secondlist[[i]][, 37] <- temp2
 }
 
+df4<-do.call(rbind.data.frame,secondlist)
 
 df3short <- df3 %>% select(district, week, hotspot, hotspotnb)
 view(df3short)
