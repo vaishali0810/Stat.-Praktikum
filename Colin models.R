@@ -94,3 +94,7 @@ fe1.HC$residuals
 residuals.plm$residuals.plm
 
 ### ---> arellano
+
+df_pan2<-df_pan[-(which(df_pan$week==1)),]
+
+any(df_pan2$week==1)
