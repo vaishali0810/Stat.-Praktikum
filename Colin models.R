@@ -449,21 +449,19 @@ fe.actual <- fe.step13
 df_pan2<-df4_pan[-(which(df4_pan$week==1)),]
 df_pan2<-df_pan2[-(which(df_pan2$week==2)),]
 
-s<-data.frame(c(lag(df_pan2$inzidenz, 1)),c(lag(df_pan2$weightednbinz, 1)), c(lag(df_pan2$inzidenz,2))
-              ,c(lag(df_pan2$weightednbinz, 2)),
-              c(df_pan2$A05.14.Anteil),c(df_pan2$A15.34.Anteil),
-              c(I(log(df_pan2$density)*lag(df_pan2$inzidenz, 1))),c(df_pan2$A60.79.Anteil),
-              c(df_pan2$rate_zweitimpf), c(df_pan2$rate_drittimpf), c(df_pan2$rate_viertimpf), 
-              c(I(df_pan2$hotspot * lag(df_pan2$inzidenz, 1))) , c(I(df_pan2$hotspotnb * lag(df_pan2$inzidenz, 1))))
+s<-data.frame(c(lag(df_pan2$inzidenz, 1)),c(lag(df_pan2$weightednbinz, 1)),
+              c(I(log(df_pan2$density)*lag(df_pan2$inzidenz, 1))),
+              c(I(df_pan2$rate_zweitimpf * df_pan2$hotspot)), 
+              c(I(df_pan2$hotspot * lag(df_pan2$inzidenz, 1))) ,
+              c(I(df_pan2$hotspotnb * lag(df_pan2$inzidenz, 1))))
 
-#t<-na.omit(s)
+#s<-na.omit(s)
 
-colnames(s)<-c("inzidenz1","weightednbinz1","inzidenz2","weightednbinz2",
-               "A05.14.Anteil","A15.34.Anteil","density_inzidenz1","A60.79.Anteil",
-               "rate_zweitimpf","rate_drittimpf","rate_viertimpf", "hotspot_inzidenz1", "hotspotnb_inzidenz1")
+colnames(s)<-c("inzidenz1","weightednbinz1","density_inzidenz1",
+               "zweitimpf_hotspot", "hotspot_inzidenz1", "hotspotnb_inzidenz1")
 
 
-plot(formula = fe.actual$residuals ~ s$inzidenz2, xlab = "inzidenz", ylab = "Residuen", cex.axis = 0.8)
+plot(formula = fe.actual$residuals ~ s$inzidenz1, xlab = "inzidenz", ylab = "Residuen", cex.axis = 0.8)
 
 plot(formula = fe.actual$residuals ~ s$hotspot_inzidenz1, xlab = "hotspot_inzidenz1", ylab = "Residuen", cex.axis = 0.8)
 
