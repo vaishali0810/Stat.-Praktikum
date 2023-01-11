@@ -95,9 +95,6 @@ residuals.plm$residuals.plm
 
 ### ---> arellano
 
-df_pan2<-df_pan[-(which(df_pan$week==1)),]
-
-any(df_pan2$week==1)
 
 
 
@@ -145,6 +142,10 @@ colnames(s)<-c("inzidenz1","weightednbinz1","inzidenz2","weightednbinz2",
 
 plot(formula = fe7$residuals ~ s$inzidenz2, xlab = "inzidenz", ylab = "Residuen", cex.axis = 0.8)
 
+plot(formula = fe7$residuals ~ s$hotspot_inzidenz1, xlab = "hotspot_inzidenz1", ylab = "Residuen", cex.axis = 0.8)
+
+plot(formula = fe7$residuals ~ s$hotspotnb_inzidenz1, xlab = "hotspotnb_inzidenz1", ylab = "Residuen", cex.axis = 0.8)
+
 plot(formula = fe7$residuals ~s$weightednbinz2 , xlab = "weightednbinz2", ylab = "Residuen", cex.axis = 0.8)
 
 plot(formula = fe7$residuals ~s$A05.14.Anteil , xlab = "A05.14.Anteil", ylab = "Residuen", cex.axis = 0.8)
@@ -160,3 +161,56 @@ plot(formula = fe7$residuals ~ s$rate_zweitimpf, xlab = "rate_zweitimpf", ylab =
 plot(formula = fe7$residuals ~ s$rate_drittimpf, xlab = "rate_drittimpf", ylab = "Residuen", cex.axis = 0.8)
 
 plot(formula = fe7$residuals ~ s$rate_viertimpf, xlab = "rate_viertimpf", ylab = "Residuen", cex.axis = 0.8)
+
+
+
+
+
+
+fe7nf <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+           + I(hotspot * lag(inzidenz, 1)) + I(hotspotnb * lag(weightednbinz, 1))
+           + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+           + A60.79.Anteil + rate_zweitimpf + rate_drittimpf + rate_viertimpf 
+           , data =df4_pan, model = "within")
+
+
+
+pFtest(fe7, fe7nf)
+## < 0.05
+plmtest(fe7nf, c("time"), type=("bp"))
+## <0.05
+## fixed time effect week is needed, both clearly smaller than 0.05
+
+pcdtest(fe7, test = c("lm"))
+pcdtest(fe7, test = c("cd"))
+pbgtest(fe7)
+
+## cross sectional dependancy, is obvious given neighboring districts are part of the independent variables
+## serial correlation at hand
+
+library(tseries)
+acf(fe7$residuals, type = "correlation")
+adf.test(df4_pan$inzidenz, k=2)
+
+## pvalue 0.01 --> stationary for lag order 2 
+## This also holds for k=1, k=3, k=4
+## k meaning biggest lag level
+
+bptest(fe7, data = df4_pan, studentize=F)
+
+## heteroskedasticity at hand
+
+
+t(sapply(c("HC0", "HC1", "HC2", "HC3", "HC4"), function(x) sqrt(diag(vcovHC(fe1, type = x)))))
+
+coeftest(fe7, vcovHC(fe7, method = "arellano"))
+
+
+
+
+
+
+
+
+
+
