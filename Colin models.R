@@ -209,8 +209,13 @@ coeftest(fe7, vcovHC(fe7, method = "arellano"))
 
 
 
+### only 1 lag
+fe8 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+           + I(hotspot * lag(inzidenz, 1)) + I(hotspotnb * lag(weightednbinz, 1))
+           + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+           + A60.79.Anteil + rate_zweitimpf + rate_drittimpf  + factor(week)
+           , data =df4_pan, model = "within")
+summary(fe8)
 
-
-
-
+coeftest(fe8, vcovHC(fe8, method = "arellano"))
 
