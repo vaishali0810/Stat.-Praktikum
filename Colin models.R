@@ -462,14 +462,12 @@ colnames(s)<-c("inzidenz1","weightednbinz1","density_inzidenz1",
 
 
 plot(formula = fe.actual$residuals ~ s$inzidenz1, xlab = "inzidenz", ylab = "Residuen", cex.axis = 0.8)
-
-plot(formula = fe.actual$residuals ~ s$hotspot_inzidenz1, xlab = "hotspot_inzidenz1", ylab = "Residuen", cex.axis = 0.8)
-
+plot(formula = fe.actual$residuals ~s$weightednbinz1 , xlab = "weightednbinz1", ylab = "Residuen", cex.axis = 0.8)
 plot(formula = fe.actual$residuals ~ s$density_inzidenz1, xlab = "density_inzidenz1", ylab = "Residuen", cex.axis = 0.8)
-
+plot(formula = fe.actual$residuals ~ s$zweitimpf_hotspot, xlab = "zweitimpf_hotspot", ylab = "Residuen", cex.axis = 0.8)
+plot(formula = fe.actual$residuals ~ s$hotspot_inzidenz1, xlab = "hotspot_inzidenz1", ylab = "Residuen", cex.axis = 0.8)
 plot(formula = fe.actual$residuals ~ s$hotspotnb_inzidenz1, xlab = "hotspotnb_inzidenz1", ylab = "Residuen", cex.axis = 0.8)
 
-plot(formula = fe.actual$residuals ~s$weightednbinz2 , xlab = "weightednbinz2", ylab = "Residuen", cex.axis = 0.8)
 
 
 
