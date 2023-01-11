@@ -239,6 +239,247 @@ pwaldtest(fe.step1, plm(formula = inzidenz ~ lag(inzidenz, 1) + lag(weightednbin
                         + I(log(density)*lag(inzidenz, 1))
                         + factor(week), data =df4_pan, model = "within"), param = "coef", vcov = NULL)
 
-anova(fe.step1, fe.step0)
+pFtest(fe.step1, fe.step0)
+
+fe.step2 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                +I(hotspotnb * lag(weightednbinz, 1))
+                + factor(week)
+                , data =df4_pan, model = "within")
+
+pFtest(fe.step2, fe.step1)
+
+
+fe.step3 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                +I(hotspotnb * lag(weightednbinz, 1)) + A60.79.Anteil
+                + factor(week)
+                , data =df4_pan, model = "within")
+
+pFtest(fe.step3, fe.step2)
+
+## rejected
+
+
+fe.step4 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                +I(hotspotnb * lag(weightednbinz, 1)) + A35.59.Anteil
+                + factor(week)
+                , data =df4_pan, model = "within")
+
+pFtest(fe.step4, fe.step2)
+
+## rejected
+
+
+fe.step5 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                +I(hotspotnb * lag(weightednbinz, 1)) + A15.34.Anteil
+                + factor(week)
+                , data =df4_pan, model = "within")
+
+pFtest(fe.step5, fe.step2)
+
+## rejected
+
+
+fe.step6 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                +I(hotspotnb * lag(weightednbinz, 1)) + A05.14.Anteil
+                + factor(week)
+                , data =df4_pan, model = "within")
+
+pFtest(fe.step6, fe.step2)
+
+## rejected
+
+fe.step7 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                +I(hotspotnb * lag(weightednbinz, 1)) + A00.04.Anteil
+                + factor(week)
+                , data =df4_pan, model = "within")
+
+pFtest(fe.step7, fe.step2)
+
+## REJECTED
+
+fe.step8 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                +I(hotspotnb * lag(weightednbinz, 1)) + A80.Anteil
+                + factor(week)
+                , data =df4_pan, model = "within")
+
+pFtest(fe.step8, fe.step2)
+
+## rejected
+
+fe.step9 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                +I(hotspotnb * lag(weightednbinz, 1)) + F.Anteil
+                + factor(week)
+                , data =df4_pan, model = "within")
+
+pFtest(fe.step9, fe.step2)
+
+## rejected --- for M.Anteil as well
+
+
+fe.step10 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                +I(hotspotnb * lag(weightednbinz, 1)) + rate_zweitimpf
+                + factor(week)
+                , data =df4_pan, model = "within")
+
+pFtest(fe.step10, fe.step2)
+
+
+## rejected
+
+fe.step11 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                 +I(hotspotnb * lag(weightednbinz, 1)) + rate_drittimpf
+                 + factor(week)
+                 , data =df4_pan, model = "within")
+
+pFtest(fe.step11, fe.step2)
+
+## rejected
+
+fe.step12 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                 + I(hotspotnb * lag(weightednbinz, 1)) + rate_viertimpf
+                 + factor(week)
+                 , data =df4_pan, model = "within")
+
+pFtest(fe.step12, fe.step2)
+
+## rejected
+
+fe.step13 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                 + I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot)
+                 + factor(week)
+                 , data =df4_pan, model = "within")
+
+pFtest(fe.step13, fe.step2)
+
+## scored
+
+fe.step14 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                 + I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot)
+                 + I(rate_drittimpf * hotspot)
+                 + factor(week)
+                 , data =df4_pan, model = "within")
+
+pFtest(fe.step14, fe.step13)
+
+pFtest(fe.step14, fe.step2)
+
+### either zweitimpfung or drittimpfung
+
+fe.step15 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                 + I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot)
+                 + I(A60.79.Anteil * rate_drittimpf)
+                 + factor(week)
+                 , data =df4_pan, model = "within")
+
+pFtest(fe.step15, fe.step13)
+
+## soft rejection
+
+fe.step16 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                 + I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot)
+                 + I(A15.34.Anteil * rate_drittimpf)
+                 + factor(week)
+                 , data =df4_pan, model = "within")
+
+pFtest(fe.step16, fe.step13)
+
+## rejected
+
+fe.step17 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                 + I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot)
+                 + I(A15.34.Anteil * hotspot)
+                 + factor(week)
+                 , data =df4_pan, model = "within")
+
+pFtest(fe.step17, fe.step13)
+
+
+## STRONG REJECTION
+
+fe.step18 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                 + I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot)
+                 + I(rate_drittimpf * hotspot)
+                 + factor(week)
+                 , data =df4_pan, model = "within")
+
+pFtest(fe.step18, fe.step13)
+
+
+## rejected
+
+
+fe.step19 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                 + I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot)
+                 + I(rate_drittimpf * hotspot) + F.A15.34.Anteil
+                 + factor(week)
+                 , data = df4_pan, model = "within")
+pFtest(fe.step19, fe.step13)
+
+## rejected
+
+
+coeftest(fe.step15, vcovHC(fe.step15, method = "arellano"))
+
+summary(fe.step15)
+
+coeftest(fe.step13, vcovHC(fe.step13, method = "arellano"))
+
+## fe.step13 is the winner, hooray
+
+fe.actual <- fe.step13
+
+df_pan2<-df4_pan[-(which(df4_pan$week==1)),]
+df_pan2<-df_pan2[-(which(df_pan2$week==2)),]
+
+s<-data.frame(c(lag(df_pan2$inzidenz, 1)),c(lag(df_pan2$weightednbinz, 1)), c(lag(df_pan2$inzidenz,2))
+              ,c(lag(df_pan2$weightednbinz, 2)),
+              c(df_pan2$A05.14.Anteil),c(df_pan2$A15.34.Anteil),
+              c(I(log(df_pan2$density)*lag(df_pan2$inzidenz, 1))),c(df_pan2$A60.79.Anteil),
+              c(df_pan2$rate_zweitimpf), c(df_pan2$rate_drittimpf), c(df_pan2$rate_viertimpf), 
+              c(I(df_pan2$hotspot * lag(df_pan2$inzidenz, 1))) , c(I(df_pan2$hotspotnb * lag(df_pan2$inzidenz, 1))))
+
+#t<-na.omit(s)
+
+colnames(s)<-c("inzidenz1","weightednbinz1","inzidenz2","weightednbinz2",
+               "A05.14.Anteil","A15.34.Anteil","density_inzidenz1","A60.79.Anteil",
+               "rate_zweitimpf","rate_drittimpf","rate_viertimpf", "hotspot_inzidenz1", "hotspotnb_inzidenz1")
+
+
+plot(formula = fe.actual$residuals ~ s$inzidenz2, xlab = "inzidenz", ylab = "Residuen", cex.axis = 0.8)
+
+plot(formula = fe.actual$residuals ~ s$hotspot_inzidenz1, xlab = "hotspot_inzidenz1", ylab = "Residuen", cex.axis = 0.8)
+
+plot(formula = fe.actual$residuals ~ s$density_inzidenz1, xlab = "density_inzidenz1", ylab = "Residuen", cex.axis = 0.8)
+
+plot(formula = fe.actual$residuals ~ s$hotspotnb_inzidenz1, xlab = "hotspotnb_inzidenz1", ylab = "Residuen", cex.axis = 0.8)
+
+plot(formula = fe.actual$residuals ~s$weightednbinz2 , xlab = "weightednbinz2", ylab = "Residuen", cex.axis = 0.8)
+
+
+
+plot(formula = fe7$residuals ~ s$rate_zweitimpf, xlab = "rate_zweitimpf", ylab = "Residuen", cex.axis = 0.8)
+
+plot(formula = fe7$residuals ~ s$rate_drittimpf, xlab = "rate_drittimpf", ylab = "Residuen", cex.axis = 0.8)
+
+plot(formula = fe7$residuals ~ s$rate_viertimpf, xlab = "rate_viertimpf", ylab = "Residuen", cex.axis = 0.8)
+
 
 
