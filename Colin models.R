@@ -219,3 +219,26 @@ summary(fe8)
 
 coeftest(fe8, vcovHC(fe8, method = "arellano"))
 
+
+
+
+
+fe.step0 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+              + I(log(density)*lag(inzidenz, 1))
+              + factor(week)
+               , data =df4_pan, model = "within")
+
+summary(fe.step0)
+
+fe.step1 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1))
+                + factor(week)
+                , data =df4_pan, model = "within")
+
+pwaldtest(fe.step1, plm(formula = inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                        + I(log(density)*lag(inzidenz, 1))
+                        + factor(week), data =df4_pan, model = "within"), param = "coef", vcov = NULL)
+
+anova(fe.step1, fe.step0)
+
+
