@@ -447,7 +447,7 @@ coeftest(fe.step13, vcovHC(fe.step13, method = "arellano"))
 fe.actual <- fe.step13
 
 df_pan2<-df4_pan[-(which(df4_pan$week==1)),]
-df_pan2<-df_pan2[-(which(df_pan2$week==2)),]
+
 
 s<-data.frame(c(lag(df_pan2$inzidenz, 1)),c(lag(df_pan2$weightednbinz, 1)),
               c(I(log(df_pan2$density)*lag(df_pan2$inzidenz, 1))),
