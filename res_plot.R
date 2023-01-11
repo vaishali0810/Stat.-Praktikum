@@ -3,8 +3,13 @@ df_pan2<-df_pan2[-(which(df_pan2$week==2)),]
 
 fe6 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
            + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
-           + A60.79.Anteil + rate_zweitimpf + rate_drittimpf + rate_viertimpf
+           + A60.79.Anteil + rate_zweitimpf + rate_drittimpf + rate_viertimpf + factor(week)
            , data =df_pan2, model = "within")
+fd6 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
+           + A05.14.Anteil+ A15.34.Anteil + I(log(density)*lag(inzidenz, 1))
+           + A60.79.Anteil + rate_zweitimpf + rate_drittimpf + rate_viertimpf
+           , data =df_pan2, model = "fd")
+
 #residual plots
 
 s<-data.frame(c(lag(df_pan2$inzidenz, 1)),c(lag(df_pan2$weightednbinz, 1)), c(lag(df_pan2$inzidenz,2))
