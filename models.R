@@ -202,7 +202,7 @@ re100 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,
 summary(re100)
 
 
-stepAIC(object = re100, direction = "both",
+#stepAIC(object = re100, direction = "both",
         k = log(nrow(df_pan)), trace = FALSE)
 
 
