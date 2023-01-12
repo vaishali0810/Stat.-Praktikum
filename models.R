@@ -203,7 +203,7 @@ summary(re100)
 
 
 #stepAIC(object = re100, direction = "both",
-        k = log(nrow(df_pan)), trace = FALSE)
+#        k = log(nrow(df_pan)), trace = FALSE)
 
 
 ######## Modelle ohne München
