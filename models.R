@@ -8,6 +8,8 @@ library(car)       # Companion to applied regression
 library(tseries)   # For timeseries analysis
 library(lmtest)   
 
+df4 <- read_csv("df4.csv")
+
 rm(list=ls())
 dfultimate <- read.csv("dfultimate.csv", header = TRUE, sep = ",")
 df <- dfultimate %>% select(district, week, bezirk, inzidenz, density, m_anteil, f_anteil, M.A00.04.Anteil, M.A05.14.Anteil,
