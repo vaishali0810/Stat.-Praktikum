@@ -376,5 +376,8 @@ for (i in 1:96) {
 
 df4<-do.call(rbind.data.frame,secondlist)
 
-df3short <- df3 %>% select(district, week, hotspot, hotspotnb)
-view(df3short)
+#write.csv(df4, "/Users/colinlinke/Documents/ProgR/Stat.-Praktikum/df4.csv")
+
+#rm(list=ls())
+#df4 <- read.csv("df4.csv", header = TRUE, sep = ",")
+#view(df4)
