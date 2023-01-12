@@ -8,7 +8,6 @@ library(car)       # Companion to applied regression
 library(tseries)   # For timeseries analysis
 library(lmtest)   
 
-df4 <- read_csv("df4.csv")
 
 rm(list=ls())
 dfultimate <- read.csv("dfultimate.csv", header = TRUE, sep = ",")
@@ -322,7 +321,7 @@ summary(fe110)
 
 
 ## einfach logarithmieren?
-
+df4 <- read_csv("df4.csv")
 df4_pan <- pdata.frame(df4,index=c("district", "week"))
 
 fe2200 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
@@ -341,5 +340,5 @@ re.step0 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1)
     + factor(week)
     , data =df4_pan, model = "random")
 
-phtest(fe.step0, re.step0)
+#phtest(fe.step0, re.step0)
 

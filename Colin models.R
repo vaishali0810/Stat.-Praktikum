@@ -236,9 +236,9 @@ fe.step1 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1)
                 + factor(week)
                 , data =df4_pan, model = "within")
 
-pwaldtest(fe.step1, plm(formula = inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
-                        + I(log(density)*lag(inzidenz, 1))
-                        + factor(week), data =df4_pan, model = "within"), param = "coef", vcov = NULL)
+#pwaldtest(fe.step1, plm(formula = inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+#                        + I(log(density)*lag(inzidenz, 1))
+#                        + factor(week), data =df4_pan, model = "within"), param = "coef", vcov = NULL)
 
 pFtest(fe.step1, fe.step0)
 
