@@ -1,3 +1,4 @@
+##models.R zuerst einlesen
 fe1 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2) +
            A00.04.Anteil + A05.14.Anteil+ A15.34.Anteil + M.Anteil 
            + A35.59.Anteil + A60.79.Anteil + A80.Anteil + rate_zweitimpf
@@ -90,8 +91,8 @@ acf(fe1$residuals, type = "correlation")
 ### text=In%20R%2C%20the%20easiest%20way%20to%20test%20for,perform%20the%20Durbin-Watson%20test%20or%20the%20Breusch-Godfrey%20test.
 fe1.HC <- coeftest(fe1, vcovHC)
 summary(fe1.HC)
-fe1.HC$residuals
-residuals.plm$residuals.plm
+#fe1.HC$residuals
+#residuals.plm$residuals.plm
 
 ### ---> arellano
 
@@ -235,9 +236,9 @@ fe.step1 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1)
                 + factor(week)
                 , data =df4_pan, model = "within")
 
-pwaldtest(fe.step1, plm(formula = inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
-                        + I(log(density)*lag(inzidenz, 1))
-                        + factor(week), data =df4_pan, model = "within"), param = "coef", vcov = NULL)
+#pwaldtest(fe.step1, plm(formula = inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+#                        + I(log(density)*lag(inzidenz, 1))
+#                        + factor(week), data =df4_pan, model = "within"), param = "coef", vcov = NULL)
 
 pFtest(fe.step1, fe.step0)
 
@@ -468,14 +469,7 @@ plot(formula = fe.actual$residuals ~ s$zweitimpf_hotspot, xlab = "zweitimpf_hots
 plot(formula = fe.actual$residuals ~ s$hotspot_inzidenz1, xlab = "hotspot_inzidenz1", ylab = "Residuen", cex.axis = 0.8)
 plot(formula = fe.actual$residuals ~ s$hotspotnb_inzidenz1, xlab = "hotspotnb_inzidenz1", ylab = "Residuen", cex.axis = 0.8)
 
-
-
-
-plot(formula = fe7$residuals ~ s$rate_zweitimpf, xlab = "rate_zweitimpf", ylab = "Residuen", cex.axis = 0.8)
-
-plot(formula = fe7$residuals ~ s$rate_drittimpf, xlab = "rate_drittimpf", ylab = "Residuen", cex.axis = 0.8)
-
-plot(formula = fe7$residuals ~ s$rate_viertimpf, xlab = "rate_viertimpf", ylab = "Residuen", cex.axis = 0.8)
+plot(s$density_inzidenz1)
 
 
 df4_pan <- pdata.frame(df4, index=c("district", "week"))

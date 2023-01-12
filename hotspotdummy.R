@@ -18,6 +18,8 @@
 # "SK Kaufbeuren": "LK Ostallgäu"
 # "SK Kempten": "LK Oberallgäu"
 # "SK Memmingen": "LK Unterallgäu"
+library(readr)
+dfultimate <- read_csv("dfultimate.csv")
 
 schwaben <- data.frame(bezirk = c("LK Aichach-Friedberg","SK Augsburg",
                                   "LK Augsburg","LK Dillingen a.d.Donau",
