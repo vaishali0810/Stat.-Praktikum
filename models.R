@@ -330,3 +330,14 @@ fe2200 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz
            , data =df4_pan, model = "within")
 summary(fe2200)
 plot(residuals(fe2200))
+
+
+
+
+re.step0 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+    + I(log(density)*lag(inzidenz, 1))
+    + factor(week)
+    , data =df4_pan, model = "random")
+
+phtest(fe.step0, re.step0)
+
