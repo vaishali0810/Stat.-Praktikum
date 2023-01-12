@@ -2,7 +2,9 @@
 title: "Räumliche & Zeitliche Ausbreitung von Corona"
 author: "Kyrill Guba, Colin Linke, Batuhan Güyelkaya, Vaishali Iyer"
 date: "2023-01-12"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup,include=FALSE}
