@@ -781,3 +781,25 @@ pFtest(re.step3, re.step18)
 
 ## factor(week) stays
 
+
+
+
+pbgtest(pool)
+## serial correlation
+
+adf.test(df4_pan$inzidenz, k=1)
+## assumed stationary
+
+
+bptest(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+       + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+       +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+       + A60.79.Anteil 
+       + factor(week)
+       + factor(district)
+       , data =df4_pan, studentize = F)
+
+## assumed heteroskedasticity 
+
+coeftest(pool, vcovHC(pool, method = "arellano"))
+
