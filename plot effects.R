@@ -1,4 +1,3 @@
-l
 
 fe.step13 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
                  + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
@@ -28,8 +27,8 @@ plot1 <- plot(effect(term = "I(log(density)*lag(inzidenz, 1))", mod = fe.step14 
               ylab = "inzidenz", ylim = c(4.5, 7.5))
 
 term.plot(object = fe.step13, what = "mu", rug = TRUE,
-          main = "Glatter Effekt bezuglich des Erwartungswertes",
-          xlab = "Wohnflache (in qm)", cex.main = 1)
+          main = "Glatter Effekt bezüglich des Erwartungswertes",
+          xlab = "Wohnfläche (in qm)", cex.main = 1)
 
 
 
@@ -105,17 +104,17 @@ comparisons(mod1) %>% tidy()
 summary(df4_pan$density)
 h<-c(66.0:4788.0)
 a<-function(x){(-2.0009e-02)*(log(x)*100)}
-plot(a(h))
+plot(a(h), xlab = "Density", ylab = "Effects") + title("Effects Plot for density")
 
 summary(df4_pan$weightednbinz)
 h<-c(0.0:3302.4)
 a<-function(x){(2.7351e-01)*(log(x)*100)}
-plot(a(h))
+plot(a(h), xlab = "Weighted neighbour incidence", ylab = "Effects") + title("Effects Plot for weighted neighbour incidence")
 
 summary(df4_pan$hotspot)
 h<-c(0.0:3302.4)
 a<-function(x){(5.7362e-01)*(log(x)*100)}
-plot(a(h))
+plot(a(h), xlab = "Hotspot", ylab = "Effects") ++ title("Effects Plot for hotspot")
 
 
 
