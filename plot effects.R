@@ -114,7 +114,7 @@ plot(a(h), xlab = "Weighted neighbour incidence", ylab = "Effects") + title("Eff
 summary(df4_pan$hotspot)
 h<-c(0.0:3302.4)
 a<-function(x){(5.7362e-01)*(log(x)*100)}
-plot(a(h), xlab = "Hotspot", ylab = "Effects") ++ title("Effects Plot for hotspot")
+plot(a(h), xlab = "Hotspot", ylab = "Effects") + title("Effects Plot for hotspot")
 
 
 
