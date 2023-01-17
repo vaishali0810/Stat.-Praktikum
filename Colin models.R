@@ -900,10 +900,30 @@ df4_pan <- pdata.frame(df4, index = c("district", "week"))
 
 ### residual plots fill with alpha = 0.03
 
-
-
-
-
+pool.4 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+              + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+              +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+              + A60.79.Anteil 
+              + factor(week)
+              , data =viert, model = "pooling", index=c("district", "week"))
+pool.5 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+              + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+              +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+              + A60.79.Anteil 
+              + factor(week)
+              , data =fünft, model = "pooling", index=c("district", "week"))
+pool.6 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+              + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+              +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+              + A60.79.Anteil 
+              + factor(week)
+              , data =sechst, model = "pooling", index=c("district", "week"))
+pool.7 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+              + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+              +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+              + A60.79.Anteil 
+              + factor(week)
+              , data =siebt, model = "pooling", index=c("district", "week"))
 
 pool.zweit.a <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
                     + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
