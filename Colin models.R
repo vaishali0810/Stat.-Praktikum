@@ -818,4 +818,88 @@ bptest(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1)
 ## assumed heteroskedasticity 
 
 coeftest(pool, vcovHC(pool, method = "arellano"))
+coeftest(pool, vcovHC(pool, type = "HC0"))
+
+
+
+fgls1 <- pggls(formula = inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+               + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+               +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+               + A60.79.Anteil + factor(week),
+                data = df4_pan, effect = "time", model = "pooling")
+summary(fgls1)
+
+pbgtest(fgls1)
+pcdtest(fgls1, test = c("lm"))
+pcdtest(fgls1, test = c("cd"))
+
+
+logLik.plm <- function(object){
+  out <- -plm::nobs(object) * log(2 * var(object$residuals) * pi)/2 - deviance(object)/(2 * var(object$residuals))
+  
+  attr(out,"df") <- nobs(object) - object$df.residual
+  attr(out,"nobs") <- plm::nobs(summary(object))
+  return(out)
+}
+
+
+stats::logLik(pool)
+stats::AIC(pool)
+stats::BIC(pool)
+
+LogLik.plm(re.actual)
+
+stats::logLik(re.actual)
+stats::AIC(re.actual)
+
+
+
+df4 
+df4 <- df4 %>% 
+  mutate(Kalendarwoche = df4$week+3)
+
+
+p<-c(1:9)
+nullt<-subset(df4, df4$Kalendarwoche%in%p)
+
+p<-c(9:20)
+erst<-subset(df4,df4$Kalendarwoche%in%p)
+
+p<-c(20:39)
+zweit<-subset(df4,df4$Kalendarwoche%in%p)
+
+p<-c(39:(52+8))
+dritt<-subset(df4,df4$Kalendarwoche%in%p)
+
+p<-c((52+9-1):(52+23))
+viert<-subset(df4,df4$Kalendarwoche%in%p)
+
+p<-c((52+24-1):(52+30))
+fünft<-subset(df4,df4$Kalendarwoche%in%p)
+
+p<-c((52+31-1):(52+51))
+sechst<-subset(df4,df4$Kalendarwoche%in%p)
+
+p<-c((52+52-1):(52+151))
+siebt<-subset(df4,df4$Kalendarwoche%in%p)
+
+p<-c(20:30)
+zweit_a<-subset(df4,df4$Kalendarwoche%in%p)
+
+p<-c(30:39)
+zweit_b<-subset(df4,df4$Kalendarwoche%in%p)
+
+p<-c((52+31-1):(52+39))
+sechst_a<-subset(df4,df4$Kalendarwoche%in%p)
+
+p<-c((52+40-1):(52+51))
+sechst_b<-subset(df4,df4$Kalendarwoche%in%p)
+
+
+df4_pan <- pdata.frame(df4, index("district", "week"))
+
+
+
+
+### residual plots fill with alpha = 0.03
 

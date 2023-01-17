@@ -101,6 +101,24 @@ comparisons(mod1) %>% tidy()
 #I(rate_zweitimpf * hotspot)          -1.6095e+02
 #A60.79.Anteil                        -2.2597e+01
 
+######### 1000
+summary(df4_pan$density)
+h<-c(66.0:4788.0)
+a<-function(x){(-2.0009e-02)*(log(x)*1000)}
+plot(a(h), xlab = "Density", ylab = "Effects") + title("Effects Plot for density")
+
+summary(df4_pan$weightednbinz)
+h<-c(0.0:3302.4)
+a<-function(x){(2.7351e-01)*(log(x)*1000)}
+plot(a(h), xlab = "Density", ylab = "Effects") + title("Effects Plot for density")
+
+summary(df4_pan$hotspot)
+h<-c(0.0:3302.4)
+a<-function(x){(5.7362e-01)*(log(x)*1000)}
+plot(a(h), xlab = "Density", ylab = "Effects") + title("Effects Plot for density")
+
+########## 100
+
 summary(df4_pan$density)
 h<-c(66.0:4788.0)
 a<-function(x){(-2.0009e-02)*(log(x)*100)}
@@ -116,6 +134,22 @@ h<-c(0.0:3302.4)
 a<-function(x){(5.7362e-01)*(log(x)*100)}
 plot(a(h), xlab = "Hotspot", ylab = "Effects") + title("Effects Plot for hotspot")
 
+########## 10
+
+summary(df4_pan$density)
+h<-c(66.0:4788.0)
+a<-function(x){(-2.0009e-02)*(log(x)*10)}
+plot(a(h), xlab = "Density", ylab = "Effects") + title("Effects Plot for density")
+
+summary(df4_pan$weightednbinz)
+h<-c(0.0:3302.4)
+a<-function(x){(2.7351e-01)*(log(x)*10)}
+plot(a(h), xlab = "Density", ylab = "Effects") + title("Effects Plot for density")
+
+summary(df4_pan$hotspot)
+h<-c(0.0:3302.4)
+a<-function(x){(5.7362e-01)*(log(x)*10)}
+plot(a(h), xlab = "Density", ylab = "Effects") + title("Effects Plot for density")
 
 
 
