@@ -845,6 +845,7 @@ logLik.plm <- function(object){
 
 stats::logLik(pool)
 stats::AIC(pool)
+stats::BIC(pool)
 
 LogLik.plm(re.actual)
 
@@ -895,7 +896,7 @@ p<-c((52+40-1):(52+51))
 sechst_b<-subset(df4,df4$Kalendarwoche%in%p)
 
 
-
+df4_pan <- pdata.frame(df4, index("district", "week"))
 
 
 
