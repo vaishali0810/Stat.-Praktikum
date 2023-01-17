@@ -796,6 +796,32 @@ plmtest(pool, type=c("bp"))
 pcdtest(pool, test = c("lm"))
 pcdtest(pool, test = c("cd"))
 
+# Plots
+plot(as.vector(fitted.values(pool)), as.vector(residuals(pool)))
+
+
+#df_pan2<-df4_pan[-(which(df4_pan$week==1)),]
+
+#t<-data.frame(c(lag(df_pan2$inzidenz, 1)),
+#              c(lag(df_pan2$weightednbinz, 1)),
+ #             c(I(log(df_pan2$density)*lag(df_pan2$inzidenz, 1))), 
+  #            c(I(log(df_pan2$hotspot)*lag(df_pan2$inzidenz, 1))),
+   #           c(I(log(df_pan2$hotspotnb)*lag(df_pan2$weightednbinz, 1))),
+    #          c(I(log(df_pan2$rate_zweitimpf)*lag(df_pan2$hotspot))),
+     #         c(df_pan2$A60.79.Anteil))
+
+#t<-na.omit(s)
+
+#colnames(t)<-c("inzidenz1", "weightednbinz1", "density_inzidenz1", "hotspot_inzidenz1", "hotspotnb_weightednbinz1",
+             #  "rateZweitimpf_hotspot", "A60.79.Anteil")
+
+#plot(formula = pool$residuals ~ t$inzidenz1, xlab = "Inzidenz mit lag = 1", ylab = "Residuen", cex.axis = 0.8, cex = 0.4) + abline(h = 0, col = "red", lwd = 2) + title("Residuen Plot für Inzidenz")
+
+#plot(formula = pool$residuals ~t$weightednbinz1 , xlab = "gewichtete Nachbar-Inzidenzen mit lag = 1", ylab = "Residuen", cex.axis = 0.8, cex = 0.4) + abline(h = 0, col = "red", lwd = 2) + title("Residuen Plot für gewichtete Nachbar-Inzidenzen")
+
+#plot(formula = pool$residuals ~t$density_inzidenz1 , xlab = "log(Dichte) * Inzidenz mit lag = 1", ylab = "Residuen", cex.axis = 0.8, cex = 0.4) + abline(h = 0, col = "red", lwd = 2) + title("Residuen Plot für Dichte * Inzidenz mit lag = 1")
+
+#plot(formula = pool$residuals ~t$hotspot_inzidenz1 , xlab = "log(Hotspot) * Inzidenz mit lag = 1", ylab = "Residuen", cex.axis = 0.8, cex = 0.4) + abline(h = 0, col = "red", lwd = 2) + title("Residuen Plot für Hotspot * Inzidenz mit lag = 1")
 ## cross sectional dependence 
 
 
