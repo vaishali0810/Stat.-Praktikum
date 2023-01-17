@@ -30,7 +30,7 @@ colnames(t)<-c("inzidenz1","weightednbinz1","inzidenz2","weightednbinz2",
 
 plot(formula = fe6$residuals ~ t$inzidenz2, xlab = "inzidenz", ylab = "Residuen", cex.axis = 0.8, cex = 0.4) + abline(h = 0, col = "red", lwd = 2) + title("Residuen Plot für Inzidenz")
 
-plot(formula = fe6$residuals ~t$weightednbinz2 , xlab = "weightednbinz2", ylab = "Residuen", cex.axis = 0.8, cex = 0.4) + abline(h = 0, col = "red", lwd = 2) + title("Residuen Plot für geweichtete Nachbar Inzidenzen")
+plot(formula = fe6$residuals ~t$weightednbinz2 , xlab = "weightednbinz2", ylab = "Residuen", cex.axis = 0.8, cex = 0.4) + abline(h = 0, col = "red", lwd = 2) + title("Residuen Plot für gewichtete Nachbar-Inzidenzen")
 
 plot(formula = fe6$residuals ~t$A05.14.Anteil , xlab = "A05.14.Anteil", ylab = "Residuen", cex.axis = 0.8, cex = 0.4) + abline(h = 0, col = "red", lwd = 2) + title("Residuen Plot für A05.14.Anteil")
 
@@ -61,7 +61,7 @@ colnames(t)<-c("inzidenz1","weightednbinz1","inzidenz2","weightednbinz2",
 
 plot(formula = fe6$residuals ~ t$inzidenz2, xlab = "inzidenz", ylab = "Residuen", cex.axis = 0.8, cex = 0.4) + abline(h = 0, col = "red", lwd = 2) + title("Residuen Plot für Inzidenz")
 
-plot(formula = fe6$residuals ~t$weightednbinz2 , xlab = "weightednbinz2", ylab = "Residuen", cex.axis = 0.8, cex = 0.4) + abline(h = 0, col = "red", lwd = 2)+ title("Residuen Plot für geweichtete Nachbar Inzidenzen")
+plot(formula = fe6$residuals ~t$weightednbinz2 , xlab = "weightednbinz2", ylab = "Residuen", cex.axis = 0.8, cex = 0.4) + abline(h = 0, col = "red", lwd = 2)+ title("Residuen Plot für gewichtete Nachbar-Inzidenzen")
 
 plot(formula = fe6$residuals ~t$A05.14.Anteil , xlab = "A05.14.Anteil", ylab = "Residuen", cex.axis = 0.8, cex = 0.4) + abline(h = 0, col = "red", lwd = 2)+ title("Residuen Plot für A05.14.Anteil")
 
