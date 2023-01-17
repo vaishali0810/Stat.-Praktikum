@@ -852,46 +852,47 @@ stats::logLik(re.actual)
 stats::AIC(re.actual)
 
 
-df4_pan <- df4_pan %>% 
-  mutate(Kalendarwoche=df4_pan$week+3)
+
+df4 
+df4 <- df4 %>% 
+  mutate(Kalendarwoche = df4$week+3)
+
 
 p<-c(1:9)
-nullt<-subset(df4_pan, df4_pan$Kalendarwoche%in%p)
+nullt<-subset(df4, df4$Kalendarwoche%in%p)
 
 p<-c(9:20)
-erst<-subset(df4_pan,df4_pan$Kalendarwoche%in%p)
+erst<-subset(df4,df4$Kalendarwoche%in%p)
 
 p<-c(20:39)
-zweit<-subset(df4_pan,df4_pan$Kalendarwoche%in%p)
+zweit<-subset(df4,df4$Kalendarwoche%in%p)
 
 p<-c(39:(52+8))
-dritt<-subset(df4_pan,df4_pan$Kalendarwoche%in%p)
+dritt<-subset(df4,df4$Kalendarwoche%in%p)
 
 p<-c((52+9-1):(52+23))
-viert<-subset(df4_pan,df4_pan$Kalendarwoche%in%p)
+viert<-subset(df4,df4$Kalendarwoche%in%p)
 
 p<-c((52+24-1):(52+30))
-fünft<-subset(df4_pan,df4_pan$Kalendarwoche%in%p)
+fünft<-subset(df4,df4$Kalendarwoche%in%p)
 
 p<-c((52+31-1):(52+51))
-sechst<-subset(df4_pan,df4_pan$Kalendarwoche%in%p)
+sechst<-subset(df4,df4$Kalendarwoche%in%p)
 
 p<-c((52+52-1):(52+151))
-siebt<-subset(df4_pan,df4_pan$Kalendarwoche%in%p)
+siebt<-subset(df4,df4$Kalendarwoche%in%p)
 
 p<-c(20:30)
-zweit_a<-subset(df4_pan,df4_pan$Kalendarwoche%in%p)
+zweit_a<-subset(df4,df4$Kalendarwoche%in%p)
 
 p<-c(30:39)
-zweit_b<-subset(df4_pan,df4_pan$Kalendarwoche%in%p)
+zweit_b<-subset(df4,df4$Kalendarwoche%in%p)
 
 p<-c((52+31-1):(52+39))
-sechst_a<-subset(df4_pan,df4_pan$Kalendarwoche%in%p)
+sechst_a<-subset(df4,df4$Kalendarwoche%in%p)
 
 p<-c((52+40-1):(52+51))
-sechst_b<-subset(df4_pan,df4_pan$Kalendarwoche%in%p)
-
-
+sechst_b<-subset(df4,df4$Kalendarwoche%in%p)
 
 
 
