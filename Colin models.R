@@ -896,10 +896,50 @@ p<-c((52+40-1):(52+51))
 sechst_b<-subset(df4,df4$Kalendarwoche%in%p)
 
 
-df4_pan <- pdata.frame(df4, index("district", "week"))
-
-
-
+df4_pan <- pdata.frame(df4, index = c("district", "week"))
 
 ### residual plots fill with alpha = 0.03
 
+
+
+
+
+
+pool.zweit.a <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                    + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                    +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                    + A60.79.Anteil 
+                    + factor(week)
+                    , data = zweit_a, model = "pooling", index = c("district", "week"))
+stats::AIC(pool.zweit.a)
+
+pool.zweit.b <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                    + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                    +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                    + A60.79.Anteil 
+                    + factor(week)
+                    , data = zweit_b, model = "pooling", index = c("district", "week"))
+stats::AIC(pool.zweit.b)
+
+
+pool.sechst.a <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                    + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                    +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                    + A60.79.Anteil 
+                    + factor(week)
+                    , data = sechst_a, model = "pooling", index = c("district", "week"))
+stats::AIC(pool.sechst.a)
+
+
+pool.sechst.b <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                     + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                     +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                     + A60.79.Anteil 
+                     + factor(week)
+                     , data = sechst_b, model = "pooling", index = c("district", "week"))
+stats::AIC(pool.sechst.b)
+
+summary(pool.zweit.a)
+summary(pool.zweit.b)
+summary(pool.sechst.a)
+summary(pool.sechst.b)
