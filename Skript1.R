@@ -91,13 +91,26 @@ fe.actual <- fe.step13
 df_pan2<-df4_pan[-(which(df4_pan$week==1)),]
 df_pan2<-df_pan2[-(which(df_pan2$week==2)),]
 
-s<-data.frame(c(I(log(df_pan2$density)*lag(df_pan2$inzidenz, 1))),
-              c(I(df_pan2$hotspot * lag(df_pan2$inzidenz, 1))),
-              c(I(df_pan2$hotspotnb * lag(df_pan2$weightednbinz, 1))),
+s<-data.frame(c(lag(df_pan2$inzidenz, 1)),c(lag(df_pan2$weightednbinz, 1)),
+              c(I(log(df_pan2$density)*lag(df_pan2$inzidenz, 1))),
+              c(I(df_pan2$rate_zweitimpf * df_pan2$hotspot)), 
+              c(I(df_pan2$hotspot * lag(df_pan2$inzidenz, 1))) ,
+              c(I(df_pan2$hotspotnb * lag(df_pan2$inzidenz, 1))))
+
+
+re.step3 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                + A60.79.Anteil 
+                + factor(week)
+                , data =df4_pan, model = "random")
+s<-data.frame(c(lag(df_pan2$inzidenz, 1)),c(lag(df_pan2$weightednbinz, 1)),
+              c(I(log(df_pan2$density)*lag(df_pan2$inzidenz, 1))),
+              c(I(df_pan2$hotspot*lag(df_pan2$inzidenz,1))),
+              c(I(df_pan2$hotspotnb*lag(df_pan2$weightednbinz,1))),
               c(I(df_pan2$rate_zweitimpf * df_pan2$hotspot)),
-              c(lag(df_pan2$inzidenz, 1)),
-              c(lag(df_pan2$weightednbinz,1)),
-              )
+              c(df_pan2$A60.79.Anteil))
+
 
 #t<-na.omit(s)
 

@@ -1,0 +1,493 @@
+---
+title: "Räumliche & Zeitliche Ausbreitung von Corona"
+author: "Kyrill Guba, Colin Linke, Batuhan Güyelkaya, Vaishali Iyer"
+date: "2023-01-12"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup,include=FALSE}
+
+library(tidyverse) # Modern data science library 
+library(plm)       # Panel data analysis library
+library(car)       # Companion to applied regression 
+library(ggplot2)    # Various programing tools for plotting data
+library(tseries)   # For timeseries analysis
+library(lmtest)
+
+```
+
+```{r datasets,include=TRUE}
+df4 <- read.csv("df4.csv", header = TRUE, sep = ",")
+df4_pan<-pdata.frame(df4,index=c("district","week"))
+
+
+```
+
+Hotspot Variable definiert als: doppelt so hoch wie die Inzidenz zur Vorwoche & doppelt so hoch wie die Inzidenz der Nachbarorte
+
+Hotspotnb Variable deifiniert als: mindestens ein Nachbarort gilt als Hotspot
+
+```{r table,include=TRUE}
+
+table(df4_pan$hotspot)
+
+table(df4_pan$hotspotnb)
+
+```
+
+
+
+Entscheidung zwischen random effects und fixed effects, mit Hilfe des Hausman-Tests:
+
+```{r entscheidung,include=TRUE}
+fe.step0 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+              + I(log(density)*lag(inzidenz, 1))
+              + factor(week)
+               , data =df4_pan, model = "within")
+
+re.step0 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+    + I(log(density)*lag(inzidenz, 1))
+    + factor(week)
+    , data =df4_pan, model = "random")
+
+phtest(fe.step0, re.step0)
+
+```
+
+
+
+p-value>0.05, deswegen random effects.
+
+
+
+
+
+
+Schrittweise Modellselektion mit Hilfe von F-Test für panel-data:
+
+```{r finding right model, include=TRUE}
+
+re.step0 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1))
+                + factor(week)
+                , data =df4_pan, model = "random")
+
+#summary(re.step0)
+
+re.step1 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1))
+                + factor(week)
+                , data =df4_pan, model = "random")
+
+pFtest(re.step1, re.step0)
+
+## include: hotspot*inzidenz
+
+re.step1.5 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                  + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                  + I(hotspotnb * lag(weightednbinz, 1))
+                  + factor(week)
+                  , data =df4_pan, model = "random")
+
+pFtest(re.step1.5, re.step1)
+
+## include: hotspotnb*inzidenz 
+
+re.step2 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                +I(hotspotnb * lag(weightednbinz, 1))  
+                + rate_zweitimpf
+                + factor(week)
+                , data =df4_pan, model = "random")
+
+pFtest(re.step2, re.step1.5)
+
+## reject rate_zweitimpf
+
+
+re.step2.5 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                  + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                  + I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot)
+                  + factor(week)
+                  , data =df4_pan, model = "random")
+
+pFtest(re.step2.5, re.step1.5)
+
+## include rate_zweitimpf * hotspot
+
+
+re.step3 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                + A60.79.Anteil 
+                + factor(week)
+                , data =df4_pan, model = "random")
+
+pFtest(re.step3, re.step2.5)
+
+## include A60.79.Anteil
+
+
+re.step4 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                + A60.79.Anteil + A35.59.Anteil
+                + factor(week)
+                , data =df4_pan, model = "random")
+
+pFtest(re.step4, re.step3)
+
+
+re.step4.5 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                  + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                  +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                  + A35.59.Anteil
+                  + factor(week)
+                  , data =df4_pan, model = "random")
+
+pFtest(re.step4.5, re.step2.5)
+
+
+## reject A35.59.Anteil
+
+
+re.step5 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                + A60.79.Anteil + A15.34.Anteil
+                + factor(week)
+                , data =df4_pan, model = "random")
+
+pFtest(re.step5, re.step3)
+
+re.step5.5 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                  + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                  +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                  + A15.34.Anteil
+                  + factor(week)
+                  , data =df4_pan, model = "random")
+
+pFtest(re.step5, re.step2.5)
+
+## Entweder / oder, beide Variablen sind nicht gleichzeitig signifikant. 
+## Wir nehmen zunächst A60.79.Anteil als Variable auf
+
+
+re.step6 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                + A60.79.Anteil + A05.14.Anteil
+                + factor(week)
+                , data =df4_pan, model = "random")
+
+pFtest(re.step6, re.step3)
+
+re.step6.5 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                  + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                  +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                  + A05.14.Anteil
+                  + factor(week)
+                  , data =df4_pan, model = "random")
+
+pFtest(re.step6.5, re.step2.5)
+
+
+## reject A05.14.Anteil
+
+re.step7 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                + A60.79.Anteil + A00.04.Anteil
+                + factor(week)
+                , data =df4_pan, model = "random")
+
+pFtest(re.step7, re.step3)
+
+re.step7.5 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                  + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                  +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                  + A00.04.Anteil
+                  + factor(week)
+                  , data =df4_pan, model = "random")
+
+pFtest(re.step7.5, re.step2.5)
+
+
+## reject A00.04.Anteil
+
+re.step8 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                + A60.79.Anteil + A80.Anteil
+                + factor(week)
+                , data =df4_pan, model = "random")
+
+pFtest(re.step8, re.step3)
+
+re.step8.5 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                  + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                  +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                  + A80.Anteil
+                  + factor(week)
+                  , data =df4_pan, model = "random")
+
+pFtest(re.step8.5, re.step2.5)
+
+## reject A80.Anteil
+
+
+re.step9 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                + A60.79.Anteil + F.Anteil
+                + factor(week)
+                , data =df4_pan, model = "random")
+
+pFtest(re.step9, re.step3)
+
+re.step9.5 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                  + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                  +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                  + M.Anteil
+                  + factor(week)
+                  , data =df4_pan, model = "random")
+
+pFtest(re.step9.5, re.step2.5)
+
+## reject --- for F.Anteil, for M.Anteil as well
+
+
+re.step10 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                 +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                 + A60.79.Anteil + rate_zweitimpf
+                 + factor(week)
+                 , data =df4_pan, model = "random")
+
+pFtest(re.step10, re.step3)
+
+## reject rate_zweitimpf
+
+re.step11 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                 +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                 + A60.79.Anteil + rate_drittimpf
+                 + factor(week)
+                 , data =df4_pan, model = "random")
+pFtest(re.step11, re.step3)
+
+re.step11.5 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                   + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                   + I(hotspotnb * lag(weightednbinz, 1)) + rate_drittimpf
+                   + factor(week)
+                   , data =df4_pan, model = "random")
+
+pFtest(re.step11.5, re.step1.5)
+
+## reject rate_drittimpf
+
+re.step12 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                 +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                 + A60.79.Anteil + rate_viertimpf
+                 + factor(week)
+                 , data =df4_pan, model = "random")
+pFtest(re.step12, re.step3)
+
+re.step12.5 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                   + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                   + I(hotspotnb * lag(weightednbinz, 1)) + rate_viertimpf
+                   + factor(week)
+                   , data =df4_pan, model = "random")
+
+pFtest(re.step12.5, re.step1.5)
+
+## reject rate_viertimpf
+
+
+
+re.step14 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                 + I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot)
+                 + A60.79.Anteil + I(rate_drittimpf * hotspot)
+                 + factor(week)
+                 , data =df4_pan, model = "random")
+
+pFtest(re.step14, re.step3)
+
+re.step14.5 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                   + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                   + I(hotspotnb * lag(weightednbinz, 1)) + I(rate_drittimpf * hotspot)
+                   + factor(week)
+                   , data =df4_pan, model = "random")
+
+pFtest(re.step14.5, re.step1.5)
+
+## Entweder / oder zweitimpfung*hotspot oder drittimpfung*hotspot; 
+## beide ähnlich signifikant, drittimpf hatte einen kleineren p-value (0.01 zu 0.028)
+## jedoch hat rate_drittimpf * hotspot extrem wenig Beobachtungen --> zweitimpfung*hotspot
+
+re.step15 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                 + I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot)
+                 + A60.79.Anteil + I(A60.79.Anteil * rate_drittimpf)
+                 + factor(week)
+                 , data =df4_pan, model = "random")
+
+pFtest(re.step15, re.step3)
+
+## soft reject A60.79.Anteil * rate_drittimpf; p value 0.08
+
+re.step16 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                 + I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot)
+                 + A60.79.Anteil
+                 + I(A15.34.Anteil * rate_drittimpf)
+                 + factor(week)
+                 , data =df4_pan, model = "random")
+
+pFtest(re.step16, re.step3)
+
+## reject A15.34.Anteil * rate_drittimpf
+
+re.step17 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                 + I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot)
+                 + A60.79.Anteil
+                 + I(A60.79.Anteil * hotspot)
+                 + factor(week)
+                 , data =df4_pan, model = "random")
+
+pFtest(re.step17, re.step3)
+
+
+## reject of Age * hotspot (same conclusion for other age groups)
+
+re.step18 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                 +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                 + A60.79.Anteil 
+                 , data =df4_pan, model = "random")
+
+pFtest(re.step3, re.step18)
+
+## factor(week) stays
+
+```
+
+
+Testen ob Random Effects sinnvoll sind; ob Landkreise sich unterscheiden, mit Hilfe vom Breusch-Pagan Lagrange multiplier Test:
+
+
+```{r plmtest, include=TRUE}
+pool <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+            + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+            +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+            + A60.79.Anteil 
+            + factor(week)
+            , data =df4_pan, model = "pooling")
+plmtest(pool, type=c("bp"))
+```
+
+Anhand des Tests ist pooling besser geeignet. Es konnte keinen signifikanten Unterschied zwischen den Landkreisen festgestellt werden.
+
+
+
+Testen für cross-sectional dependence, mit Hilfe vom Breusch-Pagan LM test und Pasaran CD test:
+
+
+```{r csd-test,include=TRUE}
+pcdtest(pool, test = c("lm"))
+pcdtest(pool, test = c("cd"))
+```
+
+Anhand der Test kann festgestellt werden, dass es cross-sectional independence gibt. Vermutlich, weil die Inzidenz der Nachbarorte im Modell enthalten ist.
+
+
+
+Testen für serial correlation, mit Hilfe vom Breusch-Godfrey-Test:
+
+
+```{r correlationtest, include=TRUE}
+pbgtest(pool)
+```
+
+Anhand des Tests kann festgestellt werden, dass serial correlation vorhanden ist. Vermutlich, wegen der Inklusion vom Inzidenz der Vorwoche.
+
+
+
+
+Testen für Stationärität, mit Hilfe vom Dickey-Fuller Test:
+
+
+```{r stationtest, include=TRUE}
+adf.test(df4_pan$inzidenz, k=1)
+```
+
+Die Nullhypothese wird abgelehnt, Stationärität wird angenommen.
+
+
+
+Testen für heteroskedasticity, mit Hilfe vom Breusch-Pagan Test:
+
+```{r hstest, include=TRUE}
+bptest(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+       + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+       +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+       + A60.79.Anteil 
+       + factor(week)
+       + factor(district)
+       , data =df4_pan, studentize = F)
+
+```
+
+Nullhypothese wird abgelehnt, heteroskedasticity wird angenommen.
+
+
+
+Die Parameter für Heteroskedastizität und serial-correlation korrigieren:
+
+```{r ctest, include=TRUE}
+coeftest(pool, vcovHC(pool, type="HC0"))
+
+```
+
+
+
+
+
+Data used for the plots:
+
+
+```{r dataset for plots,include=TRUE}
+
+df_pan2<-df4_pan[-(which(df4_pan$week==1)),]
+
+s<-data.frame(c(lag(df_pan2$inzidenz, 1)),c(lag(df_pan2$weightednbinz, 1)),
+              c(I(log(df_pan2$density)*lag(df_pan2$inzidenz, 1))),
+              c(I(df_pan2$hotspot*lag(df_pan2$inzidenz,1))),
+              c(I(df_pan2$hotspotnb*lag(df_pan2$weightednbinz,1))),
+              c(I(df_pan2$rate_zweitimpf * df_pan2$hotspot)),
+              c(df_pan2$A60.79.Anteil))
+
+colnames(s)<-c("inzidenz1","weightednbinz1","density_inzidenz1",
+               "hotspot_inzidenz1", "hotspotnb_wnbinzidenz1",
+               "zweitimpf_hotspot","A60.79.Anteil")
+
+
+```
+
+Residual-Plots for variables:
+
+```{r plots,echo=FALSE}
+plot(formula = pool$residuals ~ s$inzidenz1, xlab = "inzidenz", ylab = "Residuen", cex.axis = 0.8)
+plot(formula = pool$residuals ~s$weightednbinz1 , xlab = "weightednbinz1", ylab = "Residuen", cex.axis = 0.8)
+plot(formula = pool$residuals ~ s$density_inzidenz1, xlab = "density_inzidenz1", ylab = "Residuen", cex.axis = 0.8)
+plot(formula = pool$residuals ~ s$hotspot_inzidenz1, xlab = "hotspot_inzidenz1", ylab = "Residuen", cex.axis = 0.8)
+plot(formula = pool$residuals ~ s$hotspotnb_wnbinzidenz1, xlab = "hotspotnb_wnbinzidenz1", ylab = "Residuen", cex.axis = 0.8)
+plot(formula = pool$residuals ~ s$zweitimpf_hotspot, xlab = "zweitimpf_hotspot", ylab = "Residuen", cex.axis = 0.8)
+plot(formula=pool$residuals~s$A60.79.Anteil, xlab="A60.79.Anteil",
+     ylab="Residuen", cex.axis=0.8)
+```
