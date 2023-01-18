@@ -236,10 +236,12 @@ pool3.step1<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1)
                  , data =dritt_pan, model = "pooling")
 summary(pool3.step1)
 
+plot(formula = pool$residuals ~ s$inzidenz1, xlab = "inzidenz", ylab = "Residuen", 
+     cex.axis = 0.8)+abline(h = 0, col = "black", lwd = 2,alpha=0.1)
 
 
-
-
+ggplot(data=pool)+
+  geom_point(mapping=aes(x=))
 
 
 
