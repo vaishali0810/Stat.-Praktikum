@@ -24,3 +24,32 @@ summary(fgls2)
 
 plot(as.vector(fitted.values(fgls2)),as.vector(residuals(fgls2)))
 
+pool <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+            + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+            +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+            + A60.79.Anteil 
+            + factor(week)
+            , data =df4_pan, model = "pooling")
+plot(as.vector(fitted.values(pool)),as.vector(residuals(pool)))
+
+pool2 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+            + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+            +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+            + A60.79.Anteil 
+            + factor(week),
+            sigma.formula = ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+            + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+            +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+            + A60.79.Anteil + factor(week),
+            nu.formula =  ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+            + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+            +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+            + A60.79.Anteil + factor(week),
+            family = BCCG, data =df4_pan, model = "pooling")
+plot(as.vector(fitted.values(pool2)),as.vector(residuals(pool2)))
+
+n<-nlrob(formula = inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+      + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+      +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+      + A60.79.Anteil + factor(week),
+      data = df4_pan, effect = "time", model = "pooling")
