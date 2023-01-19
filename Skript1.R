@@ -294,7 +294,7 @@ s<-data.frame(c(lag(df_pan2$inzidenz, 1)),c(lag(df_pan2$weightednbinz, 1)),
 
 colnames(s)<-c("inzidenz1","weightednbinz1","density_inzidenz1",
                "hotspot_inzidenz1", "hotspotnb_wnbinzidenz1",
-               "zweitimpf_hotspot","A60.79.Anteil")
+               "zweitimpf_hotspot","A60.79.Anteil","inzidenz")
 
 s<-na.omit(s)
 
@@ -323,6 +323,26 @@ pool_bccg<-gamlss(formula=inzidenz ~ inzidenz1 + weightednbinz1
                +hotspotnb_wnbinzidenz1 + zweitimpf_hotspot
                + A60.79.Anteil,
                family=BCCG,data=s)
+
+
+pool.sqrt <- plm(sqrt(inzidenz) ~ sqrt(lag(inzidenz, 1)) + sqrt(lag(weightednbinz, 1))
+                 + sqrt(I(log(density)*lag(inzidenz, 1))) + sqrt(I(hotspot * lag(inzidenz, 1))) 
+                 + sqrt(I(hotspotnb * lag(weightednbinz, 1))) + sqrt(I(rate_zweitimpf * hotspot)) 
+                 + A60.79.Anteil
+                 + factor(week)
+                 , data =df4_pan, model = "pooling")
+plot(as.vector(fitted.values(pool.sqrt)), as.vector(residuals(pool.sqrt)))
+
+plot(formula = pool$residuals ~ s$inzidenz1, xlab = "inzidenz",
+     ylab = "Residuen", cex.axis = 0.8,pch=16,cex=0.5, 
+     col=alpha("black",0.3))+abline(h = 0, col = adjustcolor("black",alpha=0.5),
+                                    lwd = 2)
+plot(formula=as.vector(residuals(pool.sqrt)) ~ as.vector(fitted.values(pool.sqrt),),
+     xlab="Fitted values",ylab="Residuals",
+     cex.axis=0.8,pch=16,cex=0.3,col=alpha("black",0.3))+abline(h=0,
+                                                                col=adjustcolor("black",alpha=0.5),
+                                                                lwd=2)
+
 
 
 
