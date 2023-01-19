@@ -29,9 +29,12 @@ pool.Tukey <- plm(transformTukey(inzidenz, plotit=FALSE) ~ transformTukey(lag(in
                  + A60.79.Anteil
                  + factor(week)
                  ,data = df4_pan, model = "pooling")
-pool.T_cub <- plm((sign(inzidenz) * abs(inzidenz)^(1/3)) ~ (sign(lag(inzidenz, 1)) * abs(lag(inzidenz, 1))^(1/3)) + (sign(lag(weightednbinz, 1)) * abs(lag(weightednbinz, 1))^(1/3))
-                 + (sign(I(log(density)*lag(inzidenz, 1))) * abs(I(log(density)*lag(inzidenz, 1)))^(1/3)) + (sign(I(hotspot * lag(inzidenz, 1))) * abs(I(hotspot * lag(inzidenz, 1)))^(1/3)) 
-                 + (sign(I(hotspotnb * lag(weightednbinz, 1))) * abs(I(hotspotnb * lag(weightednbinz, 1)))^(1/3)) + (sign(I(rate_zweitimpf * hotspot)) * abs(I(rate_zweitimpf * hotspot))^(1/3)) 
+pool.T_cub <- plm((sign(inzidenz) * abs(inzidenz)^(1/3)) ~ (sign(lag(inzidenz, 1)) * (abs(lag(inzidenz, 1))^(1/3))) 
+                 +(sign(lag(weightednbinz, 1)) * (abs(lag(weightednbinz, 1))^(1/3)))
+                 +(sign(I(log(density)*lag(inzidenz, 1))) * (abs(I(log(density)*lag(inzidenz, 1)))^(1/3)))
+                 +(sign(I(hotspot * lag(inzidenz, 1))) * (abs(I(hotspot * lag(inzidenz, 1)))^(1/3))) 
+                 +(sign(I(hotspotnb * lag(weightednbinz, 1))) * (abs(I(hotspotnb * lag(weightednbinz, 1)))^(1/3)))
+                 +(sign(I(rate_zweitimpf * hotspot)) * (abs(I(rate_zweitimpf * hotspot))^(1/3))) 
                  + A60.79.Anteil
                  + factor(week)
                  , data =df4_pan, model = "pooling")
