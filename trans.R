@@ -43,3 +43,12 @@ pool.T_cub <- plm((sign(inzidenz) * abs(inzidenz)^(1/3)) ~ (sign(lag(inzidenz, 1
 
 T_cub
 (sign(I(rate_zweitimpf * hotspot)) * abs(I(rate_zweitimpf * hotspot))^(1/3))
+
+library(MASS)
+
+pool.boxcox <- plm(boxcox(inzidenz~ 1,lambda = seq(-6,6,0.1)) ~ boxcox(lag(inzidenz, 1)~ 1,lambda = seq(-6,6,0.1)) + boxcox(lag(weightednbinz, 1)~ 1,lambda = seq(-6,6,0.1))
+                + boxcox(I(log(density)*lag(inzidenz, 1))~ 1,lambda = seq(-6,6,0.1)) + boxcox(I(hotspot * lag(inzidenz, 1))~ 1,lambda = seq(-6,6,0.1)) 
+                + boxcox(I(hotspotnb * lag(weightednbinz, 1))~ 1,lambda = seq(-6,6,0.1)) + boxcox(I(rate_zweitimpf * hotspot)~ 1,lambda = seq(-6,6,0.1)) 
+                + A60.79.Anteil
+                + factor(week)
+                , data =df4_pan, model = "pooling")
