@@ -1247,9 +1247,19 @@ pool.sqrt <- plm(sqrt(inzidenz) ~ sqrt(lag(inzidenz, 1)) + sqrt(lag(weightednbin
                  + A60.79.Anteil
                  + factor(week)
                  , data =df4_pan, model = "pooling")
+pool.sqrt2 <- plm(sqrt(inzidenz) ~ sqrt(lag(inzidenz, 1)) + sqrt(lag(weightednbinz, 1))
+                 + I(log(density)*sqrt(lag(inzidenz, 1))) + sqrt(I(hotspot * lag(inzidenz, 1))) 
+                 + sqrt(I(hotspotnb * lag(weightednbinz, 1))) + sqrt(I(rate_zweitimpf * hotspot)) 
+                 + A60.79.Anteil
+                 + factor(week)
+                 , data =df4_pan, model = "pooling")
 plot(as.vector(fitted.values(pool.sqrt)), as.vector(residuals(pool.sqrt)))
+plot(as.vector(fitted.values(pool.sqrt2)), as.vector(residuals(pool.sqrt2)))
 
-summary(pool.sqrt)
+stats::AIC(pool.sqrt)
+stats::AIC(pool.sqrt2)
+
+summary(pool.sqrt2)
 
 pcdtest(pool.sqrt, test = c("lm"))
 pcdtest(pool.sqrt, test = c("cd"))
