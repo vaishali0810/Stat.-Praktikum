@@ -244,4 +244,6 @@ ggplot(data=pool)+
   geom_point(mapping=aes(x=))
 
 
+plot(formula = pool$residuals ~ s$inzidenz1, xlab = "inzidenz", ylab = "Residuen", 
+     cex.axis = 0.8,pch=16,cex=0.5, col=alpha("black",0.3))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2)
 

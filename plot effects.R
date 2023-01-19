@@ -139,17 +139,17 @@ plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekten Plot für Hotsp
 summary(df4_pan$density)
 h<-c(66.0:4788.0)
 a<-function(x){(-2.0009e-02)*(log(x)*10)}
-plot(a(h), xlab = "Dichte", ylab = "Effekte") + title("Effekten Plot für Dichte mit Inzidenz = 10")
+plot(a(h), xlab = "Dichte", ylab = "Effekte") + title("Effekt Plot für Dichte mit Inzidenz = 10")
 
 summary(df4_pan$weightednbinz)
 h<-c(0.0:3302.4)
 a<-function(x){(2.7351e-01)*(log(x)*10)}
-plot(a(h), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekten Plot für gewichtete Nachbar-Inzidenz mit Inzidenz = 10")
+plot(a(h), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekt Plot für gewichtete Nachbar-Inzidenz mit Inzidenz = 10")
 
 summary(df4_pan$hotspot)
 h<-c(0.0:3302.4)
 a<-function(x){(5.7362e-01)*(log(x)*10)}
-plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekten Plot für Hotspot mit Inzidenz = 10")
+plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekt Plot für Hotspot mit Inzidenz = 10")
 
 
 
