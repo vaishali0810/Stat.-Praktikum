@@ -1235,7 +1235,37 @@ pool.log4 <- plm(log(inzidenz + 1, base = 1.1) ~ lag(log(inzidenz + 1, base = 1.
                  , data =df4_pan, model = "pooling")
 plot(as.vector(fitted.values(pool.log4)), as.vector(residuals(pool.log4)))
 
-plot(fitted.values(pool.log), pool.log$residuals)
+
+
+
+colnames(df4)
+
+
+pool.sqrt <- plm(sqrt(inzidenz) ~ sqrt(lag(inzidenz, 1)) + sqrt(lag(weightednbinz, 1))
+                 + sqrt(I(log(density)*lag(inzidenz, 1))) + sqrt(I(hotspot * lag(inzidenz, 1))) 
+                 + sqrt(I(hotspotnb * lag(weightednbinz, 1))) + sqrt(I(rate_zweitimpf * hotspot)) 
+                 + A60.79.Anteil
+                 + factor(week)
+                 , data =df4_pan, model = "pooling")
+plot(as.vector(fitted.values(pool.sqrt)), as.vector(residuals(pool.sqrt)))
+
+summary(pool.sqrt)
+
+pcdtest(pool.sqrt, test = c("lm"))
+pcdtest(pool.sqrt, test = c("cd"))
+pbgtest(pool.sqrt)
+
+bptest(sqrt(inzidenz) ~ sqrt(lag(inzidenz, 1)) + sqrt(lag(weightednbinz, 1))
+       + sqrt(I(log(density)*lag(inzidenz, 1))) + sqrt(I(hotspot * lag(inzidenz, 1))) 
+       + sqrt(I(hotspotnb * lag(weightednbinz, 1))) + sqrt(I(rate_zweitimpf * hotspot)) 
+       + A60.79.Anteil
+       + factor(week)
+       + factor(district)
+       , data =df4_pan,  studentize=F)
+
+coeftest(pool.sqrt, vcovHC(pool.sqrt, type = "HC0"))
+
+
 
 
 pool <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
@@ -1244,3 +1274,4 @@ pool <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1)
             + A60.79.Anteil 
             + factor(week)
             , data =df4_pan, model = "pooling")
+plot(as.vector(fitted.values(pool)), as.vector(residuals(pool)))
