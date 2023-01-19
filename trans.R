@@ -29,6 +29,8 @@ pool.Tukey <- plm(transformTukey(inzidenz, plotit=FALSE) ~ transformTukey(lag(in
                  + A60.79.Anteil
                  + factor(week)
                  ,data = df4_pan, model = "pooling")
+
+a<-(sign(lag(inzidenz, 1)) * (abs(lag(inzidenz, 1))^(1/3)))
 pool.T_cub <- plm((sign(inzidenz) * abs(inzidenz)^(1/3)) ~ (sign(lag(inzidenz, 1)) * (abs(lag(inzidenz, 1))^(1/3))) 
                  +(sign(lag(weightednbinz, 1)) * (abs(lag(weightednbinz, 1))^(1/3)))
                  +(sign(I(log(density)*lag(inzidenz, 1))) * (abs(I(log(density)*lag(inzidenz, 1)))^(1/3)))
