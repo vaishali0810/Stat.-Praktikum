@@ -247,3 +247,88 @@ ggplot(data=pool)+
 plot(formula = pool$residuals ~ s$inzidenz1, xlab = "inzidenz", ylab = "Residuen", 
      cex.axis = 0.8,pch=16,cex=0.5, col=alpha("black",0.3))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2)
 
+
+pool_bccg<-plm(formula=inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+               + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+               +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+               + A60.79.Anteil 
+               + factor(week),
+               sigma.formula= ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+               + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+               +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+               + A60.79.Anteil 
+               + factor(week),
+               nu.formula= ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+               + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+               +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+               + A60.79.Anteil 
+               + factor(week),
+               family="BCCG",
+               data =df4_pan, model = "pooling")
+
+library(MASS)
+
+pool_bccg<-boxcox(df4_pan$inzidenz ~ lag(df4$inzidenz, 1) + lag(df4$weightednbinz, 1) 
+                  + I(log(df4_pan$density)*lag(df4_pan$inzidenz, 1)) + I(df4_pan$hotspot * lag(df4_pan$inzidenz, 1)) 
+                  +I(df4_pan$hotspotnb * lag(df4_pan$weightednbinz, 1)) + I(df4_pan$rate_zweitimpf * df4_pan$hotspot) 
+                  + df4_pan$A60.79.Anteil 
+                  + factor(df4_pan$week))
+library(geoR)
+
+pool_bccg<-boxcoxfit(df4_pan$inzidenz ~ lag(df4$inzidenz, 1) + lag(df4$weightednbinz, 1) 
+                     + I(log(df4_pan$density)*lag(df4_pan$inzidenz, 1)) + I(df4_pan$hotspot * lag(df4_pan$inzidenz, 1)) 
+                     +I(df4_pan$hotspotnb * lag(df4_pan$weightednbinz, 1)) + I(df4_pan$rate_zweitimpf * df4_pan$hotspot) 
+                     + df4_pan$A60.79.Anteil 
+                     + factor(df4_pan$week))
+
+
+df_pan2<-df4_pan
+
+s<-data.frame(c(lag(df_pan2$inzidenz, 1)),c(lag(df_pan2$weightednbinz, 1)),
+              c(I(log(df_pan2$density)*lag(df_pan2$inzidenz, 1))),
+              c(I(df_pan2$hotspot*lag(df_pan2$inzidenz,1))),
+              c(I(df_pan2$hotspotnb*lag(df_pan2$weightednbinz,1))),
+              c(I(df_pan2$rate_zweitimpf * df_pan2$hotspot)),
+              c(df_pan2$A60.79.Anteil))
+
+
+colnames(s)<-c("inzidenz1","weightednbinz1","density_inzidenz1",
+               "hotspot_inzidenz1", "hotspotnb_wnbinzidenz1",
+               "zweitimpf_hotspot","A60.79.Anteil")
+
+s<-na.omit(s)
+
+df4_2<-df4[-which(df4$week==1),]
+
+s<-cbind(s,df4_2$inzidenz)
+
+library(mgcv)
+
+library(MASS)
+
+library(gamlss)
+
+library(gamlss.util)
+
+pool_bccg<-gamlss(formula=inzidenz ~ inzidenz1 + weightednbinz1 
+               + density_inzidenz1 + hotspot_inzidenz1 
+               +hotspotnb_wnbinzidenz1 + zweitimpf_hotspot
+               + A60.79.Anteil,
+               sigma.formula= ~ inzidenz1 + weightednbinz1 
+               + density_inzidenz1 + hotspot_inzidenz1 
+               +hotspotnb_wnbinzidenz1 + zweitimpf_hotspot
+               + A60.79.Anteil,
+               nu.formula= ~ inzidenz1 + weightednbinz1 
+               + density_inzidenz1 + hotspot_inzidenz1 
+               +hotspotnb_wnbinzidenz1 + zweitimpf_hotspot
+               + A60.79.Anteil,
+               family=BCCG,data=s)
+
+
+
+
+
+
+
+
+
