@@ -1,0 +1,668 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Journal Article
+% LaTeX Template
+% Version 1.4 (15/5/16)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com) with extensive modifications by
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[twoside,twocolumn]{article}
+
+\usepackage{blindtext} % Package to generate dummy text throughout this template 
+
+\usepackage[sc]{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\linespread{1.05} % Line spacing - Palatino needs more space between lines
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+
+\usepackage[english]{babel} % Language hyphenation and typographical rules
+
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry} % Document margins
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+
+\usepackage{enumitem} % Customized lists
+\setlist[itemize]{noitemsep} % Make itemize lists more compact
+
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\usepackage{titlesec} % Allows customization of titles
+\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+\renewcommand\thesubsection{\roman{subsection}} % roman numerals for subsections
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{} % Blank out the default header
+\fancyfoot{} % Blank out the default footer
+\fancyhead[C]{Running title $\bullet$ May 2016 $\bullet$ Vol. XXI, No. 1} % Custom header text
+\fancyfoot[RO,LE]{\thepage} % Custom footer text
+
+\usepackage{titling} % Customizing the title section
+
+\usepackage{hyperref} % For hyperlinks in the PDF
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\setlength{\droptitle}{-4\baselineskip} % Move the title up
+
+\pretitle{\begin{center}\Huge\bfseries} % Article title formatting
+\posttitle{\end{center}} % Article title closing formatting
+\title{Article Title} % Article title
+\author{%
+\textsc{John Smith}\thanks{A thank you or further information} \\[1ex] % Your name
+\normalsize University of California \\ % Your institution
+\normalsize \href{mailto:john@smith.com}{john@smith.com} % Your email address
+%\and % Uncomment if 2 authors are required, duplicate these 4 lines if more
+%\textsc{Jane Smith}\thanks{Corresponding author} \\[1ex] % Second author's name
+%\normalsize University of Utah \\ % Second author's institution
+%\normalsize \href{mailto:jane@smith.com}{jane@smith.com} % Second author's email address
+}
+\date{\today} % Leave empty to omit a date
+\renewcommand{\maketitlehookd}{%
+\begin{abstract}
+\noindent \blindtext % Dummy abstract text - replace \blindtext with your abstract text
+\end{abstract}
+}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+% Print the title
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\section{Introduction}
+
+
+\subsection{topic}
+
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & inzidenz \\ 
+\hline \\[-1.8ex] 
+ lag(inzidenz, 1) & 0.597$^{***}$ \\ 
+  & (0.010) \\ 
+  & \\ 
+ lag(weightednbinz, 1) & 0.274$^{***}$ \\ 
+  & (0.011) \\ 
+  & \\ 
+ I(log(density) \textasteriskcentered  lag(inzidenz, 1)) & $-$0.020$^{***}$ \\ 
+  & (0.001) \\ 
+  & \\ 
+ I(hotspot \textasteriskcentered  lag(inzidenz, 1)) & 0.562$^{***}$ \\ 
+  & (0.082) \\ 
+  & \\ 
+ I(hotspotnb \textasteriskcentered  lag(weightednbinz, 1)) & 0.131$^{***}$ \\ 
+  & (0.045) \\ 
+  & \\ 
+ I(rate\_zweitimpf \textasteriskcentered  hotspot) & $-$160.945$^{**}$ \\ 
+  & (73.368) \\ 
+  & \\ 
+ A60.79.Anteil & $-$22.597$^{**}$ \\ 
+  & (10.607) \\ 
+  & \\ 
+ factor(week)3 & $-$0.011 \\ 
+  & (16.144) \\ 
+  & \\ 
+ factor(week)4 & $-$0.005 \\ 
+  & (16.144) \\ 
+  & \\ 
+ factor(week)5 & 0.297 \\ 
+  & (16.144) \\ 
+  & \\ 
+ factor(week)6 & 0.910 \\ 
+  & (16.144) \\ 
+  & \\ 
+ factor(week)7 & 9.001 \\ 
+  & (16.189) \\ 
+  & \\ 
+ factor(week)8 & 27.313$^{*}$ \\ 
+  & (16.257) \\ 
+  & \\ 
+ factor(week)9 & 39.066$^{**}$ \\ 
+  & (16.326) \\ 
+  & \\ 
+ factor(week)10 & 38.270$^{**}$ \\ 
+  & (16.325) \\ 
+  & \\ 
+ factor(week)11 & 0.658 \\ 
+  & (16.326) \\ 
+  & \\ 
+ factor(week)12 & $-$3.480 \\ 
+  & (16.284) \\ 
+  & \\ 
+ factor(week)13 & 0.614 \\ 
+  & (16.263) \\ 
+  & \\ 
+ factor(week)14 & $-$1.585 \\ 
+  & (16.246) \\ 
+  & \\ 
+ factor(week)15 & 3.657 \\ 
+  & (16.252) \\ 
+  & \\ 
+ factor(week)16 & 5.028 \\ 
+  & (16.236) \\ 
+  & \\ 
+ factor(week)17 & 3.093 \\ 
+  & (16.217) \\ 
+  & \\ 
+ factor(week)18 & 3.324 \\ 
+  & (16.220) \\ 
+  & \\ 
+ factor(week)19 & 1.589 \\ 
+  & (16.181) \\ 
+  & \\ 
+ factor(week)20 & 1.178 \\ 
+  & (16.153) \\ 
+  & \\ 
+ factor(week)21 & 2.957 \\ 
+  & (16.190) \\ 
+  & \\ 
+ factor(week)22 & 3.400 \\ 
+  & (16.177) \\ 
+  & \\ 
+ factor(week)23 & 2.670 \\ 
+  & (16.165) \\ 
+  & \\ 
+ factor(week)24 & 2.373 \\ 
+  & (16.161) \\ 
+  & \\ 
+ factor(week)25 & 2.315 \\ 
+  & (16.155) \\ 
+  & \\ 
+ factor(week)26 & 4.856 \\ 
+  & (16.166) \\ 
+  & \\ 
+ factor(week)27 & 2.330 \\ 
+  & (16.162) \\ 
+  & \\ 
+ factor(week)28 & 3.125 \\ 
+  & (16.165) \\ 
+  & \\ 
+ factor(week)29 & 6.130 \\ 
+  & (16.172) \\ 
+  & \\ 
+ factor(week)30 & 7.294 \\ 
+  & (16.151) \\ 
+  & \\ 
+ factor(week)31 & 4.337 \\ 
+  & (16.154) \\ 
+  & \\ 
+ factor(week)32 & 6.201 \\ 
+  & (16.154) \\ 
+  & \\ 
+ factor(week)33 & 8.454 \\ 
+  & (16.172) \\ 
+  & \\ 
+ factor(week)34 & 7.582 \\ 
+  & (16.197) \\ 
+  & \\ 
+ factor(week)35 & 3.505 \\ 
+  & (16.181) \\ 
+  & \\ 
+ factor(week)36 & 7.603 \\ 
+  & (16.209) \\ 
+  & \\ 
+ factor(week)37 & 15.147 \\ 
+  & (16.220) \\ 
+  & \\ 
+ factor(week)38 & 27.147$^{*}$ \\ 
+  & (16.211) \\ 
+  & \\ 
+ factor(week)39 & 48.650$^{***}$ \\ 
+  & (16.259) \\ 
+  & \\ 
+ factor(week)40 & 73.034$^{***}$ \\ 
+  & (16.238) \\ 
+  & \\ 
+ factor(week)41 & 67.554$^{***}$ \\ 
+  & (16.277) \\ 
+  & \\ 
+ factor(week)42 & 49.316$^{***}$ \\ 
+  & (16.315) \\ 
+  & \\ 
+ factor(week)43 & 47.439$^{***}$ \\ 
+  & (16.320) \\ 
+  & \\ 
+ factor(week)44 & 51.096$^{***}$ \\ 
+  & (16.313) \\ 
+  & \\ 
+ factor(week)45 & 44.987$^{***}$ \\ 
+  & (16.317) \\ 
+  & \\ 
+ factor(week)46 & 78.654$^{***}$ \\ 
+  & (16.318) \\ 
+  & \\ 
+ factor(week)47 & 58.427$^{***}$ \\ 
+  & (16.361) \\ 
+  & \\ 
+ factor(week)48 & 16.695 \\ 
+  & (16.374) \\ 
+  & \\ 
+ factor(week)49 & 41.716$^{**}$ \\ 
+  & (16.334) \\ 
+  & \\ 
+ factor(week)50 & 50.648$^{***}$ \\ 
+  & (16.322) \\ 
+  & \\ 
+ factor(week)51 & 16.262 \\ 
+  & (16.330) \\ 
+  & \\ 
+ factor(week)52 & 8.925 \\ 
+  & (16.302) \\ 
+  & \\ 
+ factor(week)53 & 20.753 \\ 
+  & (16.281) \\ 
+  & \\ 
+ factor(week)54 & 13.784 \\ 
+  & (16.257) \\ 
+  & \\ 
+ factor(week)55 & 3.229 \\ 
+  & (16.243) \\ 
+  & \\ 
+ factor(week)56 & 21.232 \\ 
+  & (16.229) \\ 
+  & \\ 
+ factor(week)57 & 27.468$^{*}$ \\ 
+  & (16.228) \\ 
+  & \\ 
+ factor(week)58 & 30.227$^{*}$ \\ 
+  & (16.223) \\ 
+  & \\ 
+ factor(week)59 & 39.338$^{**}$ \\ 
+  & (16.227) \\ 
+  & \\ 
+ factor(week)60 & 50.793$^{***}$ \\ 
+  & (16.234) \\ 
+  & \\ 
+ factor(week)61 & 59.795$^{***}$ \\ 
+  & (16.254) \\ 
+  & \\ 
+ factor(week)62 & 35.266$^{**}$ \\ 
+  & (16.278) \\ 
+  & \\ 
+ factor(week)63 & 58.222$^{***}$ \\ 
+  & (16.267) \\ 
+  & \\ 
+ factor(week)64 & 70.445$^{***}$ \\ 
+  & (16.283) \\ 
+  & \\ 
+ factor(week)65 & 45.052$^{***}$ \\ 
+  & (16.317) \\ 
+  & \\ 
+ factor(week)66 & 6.248 \\ 
+  & (16.305) \\ 
+  & \\ 
+ factor(week)67 & 13.406 \\ 
+  & (16.265) \\ 
+  & \\ 
+ factor(week)68 & $-$1.632 \\ 
+  & (16.246) \\ 
+  & \\ 
+ factor(week)69 & $-$2.618 \\ 
+  & (16.216) \\ 
+  & \\ 
+ factor(week)70 & $-$7.091 \\ 
+  & (16.200) \\ 
+  & \\ 
+ factor(week)71 & $-$1.774 \\ 
+  & (16.188) \\ 
+  & \\ 
+ factor(week)72 & 3.967 \\ 
+  & (16.171) \\ 
+  & \\ 
+ factor(week)73 & $-$3.478 \\ 
+  & (16.171) \\ 
+  & \\ 
+ factor(week)74 & 1.153 \\ 
+  & (16.167) \\ 
+  & \\ 
+ factor(week)75 & 0.921 \\ 
+  & (16.157) \\ 
+  & \\ 
+ factor(week)76 & 4.766 \\ 
+  & (16.168) \\ 
+  & \\ 
+ factor(week)77 & 7.169 \\ 
+  & (16.163) \\ 
+  & \\ 
+ factor(week)78 & 5.661 \\ 
+  & (16.155) \\ 
+  & \\ 
+ factor(week)79 & 5.373 \\ 
+  & (16.157) \\ 
+  & \\ 
+ factor(week)80 & 7.072 \\ 
+  & (16.165) \\ 
+  & \\ 
+ factor(week)81 & 16.594 \\ 
+  & (16.158) \\ 
+  & \\ 
+ factor(week)82 & 25.144 \\ 
+  & (16.162) \\ 
+  & \\ 
+ factor(week)83 & 40.516$^{**}$ \\ 
+  & (16.161) \\ 
+  & \\ 
+ factor(week)84 & 31.421$^{*}$ \\ 
+  & (16.174) \\ 
+  & \\ 
+ factor(week)85 & 29.777$^{*}$ \\ 
+  & (16.179) \\ 
+  & \\ 
+ factor(week)86 & 21.588 \\ 
+  & (16.186) \\ 
+  & \\ 
+ factor(week)87 & 17.392 \\ 
+  & (16.189) \\ 
+  & \\ 
+ factor(week)88 & 30.541$^{*}$ \\ 
+  & (16.191) \\ 
+  & \\ 
+ factor(week)89 & 28.275$^{*}$ \\ 
+  & (16.209) \\ 
+  & \\ 
+ factor(week)90 & 49.107$^{***}$ \\ 
+  & (16.202) \\ 
+  & \\ 
+ factor(week)91 & 107.428$^{***}$ \\ 
+  & (16.229) \\ 
+  & \\ 
+ factor(week)92 & 129.616$^{***}$ \\ 
+  & (16.309) \\ 
+  & \\ 
+ factor(week)93 & 152.772$^{***}$ \\ 
+  & (16.438) \\ 
+  & \\ 
+ factor(week)94 & 303.699$^{***}$ \\ 
+  & (16.626) \\ 
+  & \\ 
+ factor(week)95 & 225.945$^{***}$ \\ 
+  & (17.265) \\ 
+  & \\ 
+ factor(week)96 & 146.854$^{***}$ \\ 
+  & (17.601) \\ 
+  & \\ 
+ factor(week)97 & 51.263$^{***}$ \\ 
+  & (17.538) \\ 
+  & \\ 
+ factor(week)98 & $-$0.027 \\ 
+  & (17.134) \\ 
+  & \\ 
+ factor(week)99 & $-$15.683 \\ 
+  & (16.727) \\ 
+  & \\ 
+ factor(week)100 & $-$29.233$^{*}$ \\ 
+  & (16.450) \\ 
+  & \\ 
+ factor(week)101 & 44.172$^{***}$ \\ 
+  & (16.299) \\ 
+  & \\ 
+ factor(week)102 & 154.431$^{***}$ \\ 
+  & (16.318) \\ 
+  & \\ 
+ factor(week)103 & 295.431$^{***}$ \\ 
+  & (16.442) \\ 
+  & \\ 
+ factor(week)104 & 506.430$^{***}$ \\ 
+  & (17.167) \\ 
+  & \\ 
+ factor(week)105 & 724.929$^{***}$ \\ 
+  & (18.544) \\ 
+  & \\ 
+ factor(week)106 & 704.984$^{***}$ \\ 
+  & (21.424) \\ 
+  & \\ 
+ factor(week)107 & 601.117$^{***}$ \\ 
+  & (23.822) \\ 
+  & \\ 
+ factor(week)108 & 498.561$^{***}$ \\ 
+  & (25.089) \\ 
+  & \\ 
+ factor(week)109 & 361.521$^{***}$ \\ 
+  & (25.416) \\ 
+  & \\ 
+ factor(week)110 & 321.443$^{***}$ \\ 
+  & (24.479) \\ 
+  & \\ 
+ factor(week)111 & 941.102$^{***}$ \\ 
+  & (23.629) \\ 
+  & \\ 
+ factor(week)112 & 678.350$^{***}$ \\ 
+  & (27.892) \\ 
+  & \\ 
+ factor(week)113 & 627.887$^{***}$ \\ 
+  & (28.872) \\ 
+  & \\ 
+ factor(week)114 & 1.196 \\ 
+  & (29.383) \\ 
+  & \\ 
+ factor(week)115 & $-$83.208$^{***}$ \\ 
+  & (24.987) \\ 
+  & \\ 
+ factor(week)116 & $-$48.488$^{**}$ \\ 
+  & (21.170) \\ 
+  & \\ 
+ factor(week)117 & 101.937$^{***}$ \\ 
+  & (19.115) \\ 
+  & \\ 
+ factor(week)118 & 100.228$^{***}$ \\ 
+  & (18.435) \\ 
+  & \\ 
+ factor(week)119 & 63.666$^{***}$ \\ 
+  & (17.961) \\ 
+  & \\ 
+ factor(week)120 & 63.141$^{***}$ \\ 
+  & (17.487) \\ 
+  & \\ 
+ factor(week)121 & $-$54.861$^{***}$ \\ 
+  & (17.187) \\ 
+  & \\ 
+ factor(week)122 & $-$67.049$^{***}$ \\ 
+  & (16.673) \\ 
+  & \\ 
+ factor(week)123 & 118.739$^{***}$ \\ 
+  & (16.371) \\ 
+  & \\ 
+ factor(week)124 & 134.180$^{***}$ \\ 
+  & (16.476) \\ 
+  & \\ 
+ factor(week)125 & 155.905$^{***}$ \\ 
+  & (16.621) \\ 
+  & \\ 
+ factor(week)126 & 277.955$^{***}$ \\ 
+  & (16.769) \\ 
+  & \\ 
+ factor(week)127 & 231.613$^{***}$ \\ 
+  & (17.308) \\ 
+  & \\ 
+ factor(week)128 & 277.453$^{***}$ \\ 
+  & (17.661) \\ 
+  & \\ 
+ factor(week)129 & 376.230$^{***}$ \\ 
+  & (18.141) \\ 
+  & \\ 
+ factor(week)130 & 271.261$^{***}$ \\ 
+  & (18.973) \\ 
+  & \\ 
+ factor(week)131 & 4.028 \\ 
+  & (19.145) \\ 
+  & \\ 
+ factor(week)132 & $-$97.153$^{***}$ \\ 
+  & (17.955) \\ 
+  & \\ 
+ factor(week)133 & $-$26.391 \\ 
+  & (16.990) \\ 
+  & \\ 
+ factor(week)134 & 2.537 \\ 
+  & (16.636) \\ 
+  & \\ 
+ factor(week)135 & 57.395$^{***}$ \\ 
+  & (16.475) \\ 
+  & \\ 
+ factor(week)136 & 50.661$^{***}$ \\ 
+  & (16.463) \\ 
+  & \\ 
+ factor(week)137 & 70.853$^{***}$ \\ 
+  & (16.439) \\ 
+  & \\ 
+ factor(week)138 & 118.044$^{***}$ \\ 
+  & (16.450) \\ 
+  & \\ 
+ factor(week)139 & 177.222$^{***}$ \\ 
+  & (16.543) \\ 
+  & \\ 
+ factor(week)140 & 379.283$^{***}$ \\ 
+  & (17.650) \\ 
+  & \\ 
+ factor(week)141 & 333.275$^{***}$ \\ 
+  & (17.907) \\ 
+  & \\ 
+ factor(week)142 & 232.447$^{***}$ \\ 
+  & (18.675) \\ 
+  & \\ 
+ factor(week)143 & $-$53.067$^{***}$ \\ 
+  & (18.676) \\ 
+  & \\ 
+ factor(week)144 & $-$89.528$^{***}$ \\ 
+  & (17.516) \\ 
+  & \\ 
+ factor(week)145 & $-$72.257$^{***}$ \\ 
+  & (16.772) \\ 
+  & \\ 
+ factor(week)146 & 23.057 \\ 
+  & (16.434) \\ 
+  & \\ 
+ factor(week)147 & $-$7.002 \\ 
+  & (16.389) \\ 
+  & \\ 
+ factor(week)148 & 13.100 \\ 
+  & (16.351) \\ 
+  & \\ 
+ Constant & $-$0.001 \\ 
+  & (11.416) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 14,112 \\ 
+R$^{2}$ & 0.958 \\ 
+Adjusted R$^{2}$ & 0.957 \\ 
+F Statistic & 2,067.740$^{***}$ (df = 153; 13958) \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
+
+\lettrine[nindent=0em,lines=3]{L} orem ipsum dolor sit amet, consectetur adipiscing elit.
+\blindtext % Dummy text
+
+\blindtext % Dummy text
+
+%------------------------------------------------
+
+\section{Methods}
+
+Maecenas sed ultricies felis. Sed imperdiet dictum arcu a egestas. 
+\begin{itemize}
+\item Donec dolor arcu, rutrum id molestie in, viverra sed diam
+\item Curabitur feugiat
+\item turpis sed auctor facilisis
+\item arcu eros accumsan lorem, at posuere mi diam sit amet tortor
+\item Fusce fermentum, mi sit amet euismod rutrum
+\item sem lorem molestie diam, iaculis aliquet sapien tortor non nisi
+\item Pellentesque bibendum pretium aliquet
+\end{itemize}
+\blindtext % Dummy text
+
+Text requiring further explanation\footnote{Example footnote}.
+
+%------------------------------------------------
+
+\section{Results}
+
+\begin{table}
+\caption{Example table}
+\centering
+\begin{tabular}{llr}
+\toprule
+\multicolumn{2}{c}{Name} \\
+\cmidrule(r){1-2}
+First name & Last Name & Grade \\
+\midrule
+John & Doe & $7.5$ \\
+Richard & Miles & $2$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\blindtext % Dummy text
+
+\begin{equation}
+\label{eq:emc}
+e = mc^2
+\end{equation}
+
+\blindtext % Dummy text
+
+%------------------------------------------------
+
+\section{Discussion}
+
+\subsection{Subsection One}
+
+A statement requiring citation \cite{Figueredo:2009dg}.
+\blindtext % Dummy text
+
+\subsection{Subsection Two}
+
+\blindtext % Dummy text
+
+%----------------------------------------------------------------------------------------
+%	REFERENCE LIST
+%----------------------------------------------------------------------------------------
+
+\begin{thebibliography}{99} % Bibliography - this is intentionally simple in this template
+
+\bibitem[Figueredo and Wolf, 2009]{Figueredo:2009dg}
+Figueredo, A.~J. and Wolf, P. S.~A. (2009).
+\newblock Assortative pairing and life history strategy - a cross-cultural
+  study.
+\newblock {\em Human Nature}, 20:317--330.
+ 
+\end{thebibliography}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
