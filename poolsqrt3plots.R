@@ -30,7 +30,7 @@ colnames(s)<-c("inzidenz1","weightednbinz1","density_inzidenz1",
 
 ## ???? plot komisch
 plot(formula = pool.sqrt$residuals ~ s$A60.79.Anteil, xlab = "A60.79.Anteil", ylab = "Residuen", cex.axis = 0.8, pch=16, cex=0.5, 
-     bg="black", col=alpha("black",0.2))+ abline(h = 0, col = adjustcolor("red",alpha=0.5), lwd = 3, lty = "longdash")
+     bg="black", col=alpha("black",0.2))+ abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 3, lty = "longdash")
 
 ## pool.sqrt3 Fitted Plot
 
