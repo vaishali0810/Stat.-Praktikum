@@ -1268,6 +1268,10 @@ stats::AIC(pool.sqrt)
 stats::AIC(pool.sqrt2)
 stats::AIC(pool.sqrt3)
 
+stats::BIC(pool.sqrt)
+stats::BIC(pool.sqrt2)
+stats::BIC(pool.sqrt3)
+
 
 summary(pool.sqrt2)
 
