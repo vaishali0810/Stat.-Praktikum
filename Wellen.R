@@ -1,136 +1,3 @@
----
-title: "Zusammenfassung Neu"
-author: "Kyrill Guba, Colin Linke, Batuhan Güyelkaya, Vaishali Iyer"
-date: "2023-01-21"
-output:
-  pdf_document: default
-  html_document: default
----
-
-```{r setup, include=FALSE}
-library(tidyverse) # Modern data science library 
-library(plm)       # Panel data analysis library
-library(car)       # Companion to applied regression 
-library(ggplot2)    # Various programing tools for plotting data
-library(tseries)   # For timeseries analysis
-library(lmtest)
-```
-
-```{r datasets, include=TRUE}
-df4 <- read.csv("df4.csv", header = TRUE, sep = ",")
-df4_pan<-pdata.frame(df4,index=c("district","week"))
-
-df_pan2<-df4_pan[-(which(df4_pan$week==1)),]
-
-s<-data.frame(c(lag(df_pan2$inzidenz, 1)),c(lag(df_pan2$weightednbinz, 1)),
-              c(I(log(df_pan2$density)*lag(df_pan2$inzidenz, 1))),
-              c(I(df_pan2$hotspot*lag(df_pan2$inzidenz,1))),
-              c(I(df_pan2$hotspotnb*lag(df_pan2$weightednbinz,1))),
-              c(I(df_pan2$rate_zweitimpf * df_pan2$hotspot)),
-              c(df_pan2$A60.79.Anteil))
-
-colnames(s)<-c("inzidenz1","weightednbinz1","density_inzidenz1",
-               "hotspot_inzidenz1", "hotspotnb_wnbinzidenz1",
-               "zweitimpf_hotspot","A60.79.Anteil")
-
-
-```
-
-
-
-```{r pools, include=TRUE}
-pool <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
-            + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-            +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
-            + A60.79.Anteil 
-            + factor(week)
-            , data =df4_pan, model = "pooling")
-
-pool.sqrt <- plm(sqrt(inzidenz) ~ sqrt(lag(inzidenz, 1)) + sqrt(lag(weightednbinz, 1))
-                 + sqrt(I(log(density)*lag(inzidenz, 1))) + sqrt(I(hotspot * lag(inzidenz, 1))) 
-                 + sqrt(I(hotspotnb * lag(weightednbinz, 1))) + sqrt(I(rate_zweitimpf * hotspot)) 
-                 + A60.79.Anteil
-                 + factor(week)
-                 , data =df4_pan, model = "pooling")
-pool.sqrt2 <- plm(sqrt(inzidenz) ~ sqrt(lag(inzidenz, 1)) + sqrt(lag(weightednbinz, 1))
-                 + I(log(density)*sqrt(lag(inzidenz, 1))) + sqrt(I(hotspot * lag(inzidenz, 1))) 
-                 + sqrt(I(hotspotnb * lag(weightednbinz, 1))) + sqrt(I(rate_zweitimpf * hotspot)) 
-                 + A60.79.Anteil
-                 + factor(week)
-                 , data =df4_pan, model = "pooling")
-pool.sqrt3 <- plm(sqrt(inzidenz) ~ sqrt(lag(inzidenz, 1)) + sqrt(lag(weightednbinz, 1))
-                 + sqrt(I(log(density)*lag(inzidenz, 1))) + sqrt(I(hotspot * lag(inzidenz, 1))) 
-                 + sqrt(I(hotspotnb * lag(weightednbinz, 1))) + sqrt(I(rate_zweitimpf * hotspot)) 
-                 + sqrt(A60.79.Anteil)
-                 + factor(week)
-                 , data =df4_pan, model = "pooling")
-
-
-
-```
-
-
-```{r functions, include=TRUE}
-logLik.plm <- function(object){
-  out <- -plm::nobs(object) * log(2 * var(object$residuals) * pi)/2 - deviance(object)/(2 * var(object$residuals))
-  
-  attr(out,"df") <- nobs(object) - object$df.residual
-  attr(out,"nobs") <- plm::nobs(summary(object))
-  return(out)
-}
-```
-
-
-```{r AIC, include=TRUE}
-stats::AIC(pool.sqrt)
-stats::AIC(pool.sqrt2)
-stats::AIC(pool.sqrt3)
-```
-
-
-
-```{r plots, echo=FALSE}
-plot(as.vector(fitted.values(pool)), as.vector(residuals(pool)), cex.axis = 0.8,pch=16,cex=0.5, col=alpha("black",0.3))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2)
-
-plot(as.vector(fitted.values(pool.sqrt3)), as.vector(residuals(pool.sqrt3)), cex.axis = 0.8,pch=16,cex=0.5, col=alpha("black",0.3))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2)
-
-
-plot(formula=as.vector(residuals(pool.sqrt3)) ~ as.vector(fitted.values(pool.sqrt3),),
-     xlab="Fitted values", ylab="Residuals",
-     cex.axis=0.8, pch=16, cex=0.3, col=alpha("black",0.7)) + abline(h=0,
-                                                                     col=adjustcolor("black",alpha=0.5),
-                                                                     lwd=3, lty = "longdash")
-
-plot(formula = pool.sqrt3$residuals ~ s$inzidenz1, xlab = "lag(Inzidenz, 1)",
-     ylab = "Residuen", cex.axis = 0.8,pch=21,cex=0.5, col=alpha("black",0.8))+ abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 3, lty = "longdash")
-
-plot(formula = pool.sqrt3$residuals ~s$weightednbinz1 , xlab = "lag(gewichtete Nachbar-Inzidenzen, 1)",
-     ylab = "Residuen", cex.axis = 0.8,pch=21,cex=0.5, col=alpha("black",0.8))+ abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 3, lty = "longdash")
-
-plot(formula = pool.sqrt3$residuals ~ s$density_inzidenz1, xlab = "log(Dichte) * lag(Inzidenz, 1) ", 
-     ylab = "Residuen", cex.axis = 0.8,pch=21,cex=0.5,col=alpha("black",0.8)) +abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 3, lty = "longdash")
-
-plot(formula = pool.sqrt3$residuals ~ s$hotspot_inzidenz1, xlab = "Hotspot * lag(Inzidenz, 1)", 
-     ylab = "Residuen", cex.axis = 0.8,pch=21,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 3, lty = "longdash")
-
-plot(formula = pool.sqrt3$residuals ~ s$hotspotnb_wnbinzidenz1, xlab = "Nachbar-Hotspot * lag(gewichtete Nachbar-Inzidenzen, 1)", 
-     ylab = "Residuen", cex.axis = 0.8,pch=21,cex=0.5, col=alpha("black",0.8)) +abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 3, lty = "longdash")
-
-plot(formula = pool.sqrt3$residuals ~ s$zweitimpf_hotspot, xlab = "Zweitimpfungrate * Hotspot",
-     ylab = "Residuen", cex.axis = 0.8,pch=21,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 3, lty = "longdash")
-
-plot(formula=pool.sqrt3$residuals~s$A60.79.Anteil, xlab="A60.79.Anteil", 
-     ylab="Residuen", cex.axis=0.8,pch=16,cex=0.5, col=alpha("black",0.25))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 3, lty = "longdash")
-
-plot(formula = pool.sqrt$residuals ~ s$A60.79.Anteil, xlab = "A60.79.Anteil", ylab = "Residuen", cex.axis = 0.8, pch=16, cex=0.5, 
-     bg="black", col=alpha("black",0.25))+ abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 3, lty = "longdash")
-
-
-```
-
-
-```{r Wellen, include=TRUE}
-
 df4 <- df4 %>% 
   mutate(Kalendarwoche = df4$week+3)
 
@@ -312,18 +179,20 @@ sum.zweit.b <-summary(pool.zweit.b)
 sum.sechst.a <-summary(pool.sechst.a)
 sum.sechst.b <-summary(pool.sechst.b)
 
-pooled_r_squared<-c(nullte=sum.nullt$r.squared[2],
-erste=sum.erst$r.squared[2],
-zweite=sum.zweit$r.squared[2],
-dritte=sum.dritt$r.squared[2],
-vierte=sum.viert$r.squared[2],
-fuenfte=sum.fuenft$r.squared[2],
-sechste=sum.sechst$r.squared[2],
-siebte=sum.siebt$r.squared[2],
-zweite_a=sum.zweit.a$r.squared[2],
-zweite_b=sum.zweit.b$r.squared[2],
-sechste_a=sum.sechst.a$r.squared[2],
-sechste_b=sum.sechst.b$r.squared[2])
+sum.nullt$r.squared
+sum.erst$r.squared
+sum.zweit$r.squared
+sum.dritt$r.squared
+sum.viert$r.squared
+sum.fuenft$r.squared
+sum.sechst$r.squared
+sum.siebt$r.squared
+sum.zweit.a$r.squared
+sum.zweit.b$r.squared
+sum.sechst.a$r.squared
+sum.sechst.b$r.squared
+
+
 
 pool.sqrt.nullt <- plm(sqrt(inzidenz) ~ sqrt(lag(inzidenz, 1)) + sqrt(lag(weightednbinz, 1))
                   + sqrt(I(log(density)*lag(inzidenz, 1))) + sqrt(I(hotspot * lag(inzidenz, 1))) 
@@ -414,18 +283,19 @@ sum.sqrt.zweit.b <-summary(pool.sqrt.zweit.b)
 sum.sqrt.sechst.a <-summary(pool.sqrt.sechst.a)
 sum.sqrt.sechst.b <-summary(pool.sqrt.sechst.b)
 
-sqrt_r_squared<-c(nullte=sum.sqrt.nullt$r.squared[2],
-erste=sum.sqrt.erst$r.squared[2],
-zweite=sum.sqrt.zweit$r.squared[2],
-dritte=sum.sqrt.dritt$r.squared[2],
-vierte=sum.sqrt.viert$r.squared[2],
-fuenfte=sum.sqrt.fuenft$r.squared[2],
-sechste=sum.sqrt.sechst$r.squared[2],
-siebte=sum.sqrt.siebt$r.squared[2],
-zweite_a=sum.sqrt.zweit.a$r.squared[2],
-zweite_b=sum.sqrt.zweit.b$r.squared[2],
-sechste_a=sum.sqrt.sechst.a$r.squared[2],
-sechste_b=sum.sqrt.sechst.b$r.squared[2])
+sum.sqrt.nullt$r.squared
+sum.sqrt.erst$r.squared
+sum.sqrt.zweit$r.squared
+sum.sqrt.dritt$r.squared
+sum.sqrt.viert$r.squared
+sum.sqrt.fuenft$r.squared
+sum.sqrt.sechst$r.squared
+sum.sqrt.siebt$r.squared
+sum.sqrt.zweit.a$r.squared
+sum.sqrt.zweit.b$r.squared
+sum.sqrt.sechst.a$r.squared
+sum.sqrt.sechst.b$r.squared
+
 
 
 nullt_pan<-pdata.frame(nullt,index=c("district","week"))
@@ -540,25 +410,16 @@ sum.weighted.zweit.b <-summary(pool.weighted.zweit.b)
 sum.weighted.sechst.a <-summary(pool.weighted.sechst.a)
 sum.weighted.sechst.b <-summary(pool.weighted.sechst.b)
 
-weighted_r_squared<-c(nullte=sum.weighted.nullt$r.squared[2],
-erste=sum.weighted.erst$r.squared[2],
-zweite=sum.weighted.zweit$r.squared[2],
-dritte=sum.weighted.dritt$r.squared[2],
-vierte=sum.weighted.viert$r.squared[2],
-fuenfte=sum.weighted.fuenft$r.squared[2],
-sechste=sum.weighted.sechst$r.squared[2],
-siebte=sum.weighted.siebt$r.squared[2],
-zweite_a=sum.weighted.zweit.a$r.squared[2],
-zweite_b=sum.weighted.zweit.b$r.squared[2],
-sechste_a=sum.weighted.sechst.a$r.squared[2],
-sechste_b=sum.weighted.sechst.b$r.squared[2])
-
-r_squares<-cbind(weighted=weighted_r_squared,squareroot=sqrt_r_squared,pooled=pooled_r_squared)
-
-r_squares
-
-```
-
-
-
+sum.weighted.nullt$r.squared
+sum.weighted.erst$r.squared
+sum.weighted.zweit$r.squared
+sum.weighted.dritt$r.squared
+sum.weighted.viert$r.squared
+sum.weighted.fuenft$r.squared
+sum.weighted.sechst$r.squared
+sum.weighted.siebt$r.squared
+sum.weighted.zweit.a$r.squared
+sum.weighted.zweit.b$r.squared
+sum.weighted.sechst.a$r.squared
+sum.weighted.sechst.b$r.squared
 

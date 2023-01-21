@@ -901,241 +901,6 @@ stats::AIC(re.actual)
 
 
 
-df4 
-df4 <- df4 %>% 
-  mutate(Kalendarwoche = df4$week+3)
-
-
-p<-c(1:9)
-nullt<-subset(df4, df4$Kalendarwoche%in%p)
-
-p<-c(9:20)
-erst<-subset(df4,df4$Kalendarwoche%in%p)
-
-p<-c(20:39)
-zweit<-subset(df4,df4$Kalendarwoche%in%p)
-
-p<-c(39:(52+8))
-dritt<-subset(df4,df4$Kalendarwoche%in%p)
-
-p<-c((52+9-1):(52+23))
-viert<-subset(df4,df4$Kalendarwoche%in%p)
-
-p<-c((52+24-1):(52+30))
-fünft<-subset(df4,df4$Kalendarwoche%in%p)
-
-p<-c((52+31-1):(52+51))
-sechst<-subset(df4,df4$Kalendarwoche%in%p)
-
-p<-c((52+52-1):(52+151))
-siebt<-subset(df4,df4$Kalendarwoche%in%p)
-
-p<-c(20:30)
-zweit_a<-subset(df4,df4$Kalendarwoche%in%p)
-
-p<-c(30:39)
-zweit_b<-subset(df4,df4$Kalendarwoche%in%p)
-
-p<-c((52+31-1):(52+39))
-sechst_a<-subset(df4,df4$Kalendarwoche%in%p)
-
-p<-c((52+40-1):(52+51))
-sechst_b<-subset(df4,df4$Kalendarwoche%in%p)
-
-
-df4_pan <- pdata.frame(df4, index = c("district", "week"))
-
-### residual plots fill with alpha = 0.03
-
-
-nullt_pan<-pdata.frame(nullt,index=c("district","week"))
-
-pool.nullt<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
-                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-                 +I(hotspotnb * lag(weightednbinz, 1)) 
-                 + A60.79.Anteil 
-                 + factor(week)
-                 , data =nullt_pan, model = "pooling")
-
-summary(pool.nullt)
-
-# pool0.step2<-plm(inzidenz ~ lag(inzidenz, 1) 
-#                  + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-#                  +I(hotspotnb * lag(weightednbinz, 1)) 
-#                  + A60.79.Anteil 
-#                  + factor(week)
-#                  , data =nullt_pan, model = "pooling")
-# 
-# #pFtest(pool0.step1, pool0.step2)
-# 
-# #pool0.step3<-plm(inzidenz ~ lag(inzidenz, 1) 
-#                  + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1))
-#                  + A60.79.Anteil 
-#                  + factor(week)
-#                  , data =nullt_pan, model = "pooling")
-# 
-# #pFtest(pool0.step2,pool0.step3)
-# 
-# #pool0.step4<-plm(inzidenz ~ lag(inzidenz, 1) 
-# #               + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1))
-# #              + factor(week)
-# #             , data =nullt_pan, model = "pooling")
-# 
-# #pFtest(pool0.step3,pool0.step4)
-# 
-pool.nullt.adj<-plm(inzidenz ~ lag(inzidenz, 1)
-                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1))
-                 + A60.79.Anteil + A15.34.Anteil
-                 + factor(week)
-                 , data =nullt_pan, model = "pooling")
-summary(pool.nullt.adj)
-coeftest(pool.nullt.adj, vcovHC(pool.nullt.adj, type = "HC0"))
-
-#pool0.step52<-plm(inzidenz ~ lag(inzidenz, 1) 
-#               + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-#               + A60.79.Anteil + A15.34.Anteil
-#               + factor(week)
-#               , data =nullt, model = "pooling",index=c("district","week"))
-
-
-#summary(pool0.step5)
-
-#pFtest(pool0.step5,pool0.step3)
-
-
-nullt_pan<-pdata.frame(nullt,index=c("district","week"))
-
-pool.nullt<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
-                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-                +I(hotspotnb * lag(weightednbinz, 1)) 
-                + A60.79.Anteil 
-                + factor(week)
-                , data =nullt_pan, model = "pooling")
-
-summary(pool.nullt)
-
-
-erst_pan<-pdata.frame(erst,index=c("district","week"))
-
-pool.erst<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
-                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-                 +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
-                 + A60.79.Anteil 
-                 + factor(week)
-                 , data =erst_pan, model = "pooling")
-
-summary(pool.erst)
-
-
-
-zweit_pan<-pdata.frame(zweit,index=c("district","week"))
-
-pool.zweit<-plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
-                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-                 +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
-                 + A60.79.Anteil 
-                 + factor(week)
-                 , data =zweit_pan, model = "pooling")
-
-summary(pool.zweit)
-
-dritt_pan <-pdata.frame(dritt,index=c("district","week"))
-
-pool.dritt <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
-                 + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-                 +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
-                 + A60.79.Anteil 
-                 + factor(week)
-                 , data =dritt_pan, model = "pooling")
-summary(pool.dritt)
-
-
-
-pool.viert <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
-              + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-              +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
-              + A60.79.Anteil 
-              + factor(week)
-              , data =viert, model = "pooling", index=c("district", "week"))
-pool.fuenft <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
-              + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-              +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
-              + A60.79.Anteil 
-              + factor(week)
-              , data =fünft, model = "pooling", index=c("district", "week"))
-pool.sechst <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
-              + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-              +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
-              + A60.79.Anteil 
-              + factor(week)
-              , data =sechst, model = "pooling", index=c("district", "week"))
-pool.siebt <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
-              + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-              +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
-              + A60.79.Anteil 
-              + factor(week)
-              , data =siebt, model = "pooling", index=c("district", "week"))
-
-pool.zweit.a <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
-                    + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-                    +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
-                    + A60.79.Anteil 
-                    + factor(week)
-                    , data = zweit_a, model = "pooling", index = c("district", "week"))
-stats::AIC(pool.zweit.a)
-
-pool.zweit.b <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
-                    + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-                    +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
-                    + A60.79.Anteil 
-                    + factor(week)
-                    , data = zweit_b, model = "pooling", index = c("district", "week"))
-stats::AIC(pool.zweit.b)
-
-
-pool.sechst.a <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
-                    + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-                    +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
-                    + A60.79.Anteil 
-                    + factor(week)
-                    , data = sechst_a, model = "pooling", index = c("district", "week"))
-stats::AIC(pool.sechst.a)
-
-
-pool.sechst.b <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
-                     + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-                     +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
-                     + A60.79.Anteil 
-                     + factor(week)
-                     , data = sechst_b, model = "pooling", index = c("district", "week"))
-stats::AIC(pool.sechst.b)
-
-
-sum.nullt <- summary(pool.nullt)
-sum.erst <- summary(pool.erst)
-sum.zweit <- summary(pool.zweit)
-sum.dritt <-summary(pool.dritt)
-sum.viert <-summary(pool.viert)
-sum.fuenft <-summary(pool.fuenft)
-sum.sechst <-summary(pool.sechst)
-sum.siebt <-summary(pool.siebt)
-sum.zweit.a <-summary(pool.zweit.a)
-sum.zweit.b <-summary(pool.zweit.b)
-sum.sechst.a <-summary(pool.sechst.a)
-sum.sechst.b <-summary(pool.sechst.b)
-
-sum.nullt$r.squared
-sum.erst$r.squared
-sum.zweit$r.squared
-sum.dritt$r.squared
-sum.viert$r.squared
-sum.fuenft$r.squared
-sum.sechst$r.squared
-sum.siebt$r.squared
-sum.zweit.a$r.squared
-sum.zweit.b$r.squared
-sum.sechst.a$r.squared
-sum.sechst.b$r.squared
 
 
 test.vcov <- vcovHC(
@@ -1273,6 +1038,10 @@ stats::BIC(pool.sqrt2)
 stats::BIC(pool.sqrt3)
 
 
+coeftest(pool.sqrt, vcov = vcovHC(pool.sqrt, type = "HC0"))
+coeftest(pool.sqrt3, vcov = vcovHC(pool.sqrt3, type = "HC0"))
+
+
 summary(pool.sqrt2)
 
 pcdtest(pool.sqrt, test = c("lm"))
@@ -1289,6 +1058,20 @@ bptest(sqrt(inzidenz) ~ sqrt(lag(inzidenz, 1)) + sqrt(lag(weightednbinz, 1))
 
 coeftest(pool.sqrt, vcovHC(pool.sqrt, type = "HC0"))
 
+df4_plot<-df4_pan[-(which(df4_pan$week==1)),]
+
+plot(as.vector(Var(pool) * df4_plot$inzidenz ), as.vector(residuals(pool)))
+
+
+
+
+pool.weighted <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                     + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                     +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                     + A60.79.Anteil 
+                     + factor(week)
+                     , data =df4_pan,weights = 1/(sqrt(inzidenz) +1), model = "pooling")
+plot(as.vector(fitted.values(pool.weighted)), as.vector(residuals(pool.weighted)))
 
 
 
@@ -1299,3 +1082,6 @@ pool <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1)
             + factor(week)
             , data =df4_pan, model = "pooling")
 plot(as.vector(fitted.values(pool)), as.vector(residuals(pool)))
+
+
+
