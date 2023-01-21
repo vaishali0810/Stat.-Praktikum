@@ -1,0 +1,65 @@
+\documentclass{article}
+
+\usepackage{geometry}
+
+\usepackage{amsmath}
+
+\usepackage{graphicx}
+
+\title{Corona output}
+
+\author{Batu, Colin, Kyrill, Vaishali}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & inzidenz & sqrt(inzidenz) \\ 
+\\[-1.8ex] & (1) & (2)\\ 
+\hline \\[-1.8ex] 
+ lag(inzidenz, 1) & $-$0.597$^{**}$ & $-$0.674$^{*}$  \\ 
+  & (0.010) & (0.011) \\ 
+  & & \\
+ lag(weightednbinz, 1) & $-$0.274$^{**}$ & $-$0.232$^{*}$ \\ 
+  & (0.011) & (0.011) \\ 
+  & & \\ 
+ I(log(density) \textasteriskcentered  lag(inzidenz, 1)) & $-$0.020$^{**}$ & $-$0.028$^{*}$ \\ 
+  & (0.001) & (0.004) \\ 
+  & & \\ 
+ I(hotspot \textasteriskcentered  lag(inzidenz, 1)) & $-$0.562$^{**}$ & $-$0.228$^{*}$ \\ 
+  & (0.082) & (0.023) \\ 
+  & & \\
+ I(hotspotnb \textasteriskcentered  lag(weightednbinz, 1)) & $-$0.131$^{**}$ & $-$0.068$^{*}$ \\ 
+  & (0.045) & (0.013) \\ 
+  & & \\
+ I(rate\_zweitimpf \textasteriskcentered  hotspot) & $-$160.945$^{**}$ & $-$1.897$^{*}$ \\ 
+  & (73.368) & (0.911) \\ 
+  & & \\ 
+ A60.79.Anteil & $-$22.597$^{**}$ & $-$0.313$^{*}$ \\ 
+  & (10.607) & (0.175) \\ 
+  & & \\  
+ Intercept & $-$0.001 & $-$0.009 \\ 
+  & (11.416) & (0.188) \\ 
+  & & \\ 
+\hline \\[-1.8ex] 
+Observations & 14,112 & 14,112 \\ 
+R$^{2}$ & 0.958 & 0.977 \\ 
+Adjusted R$^{2}$ & 0.957 & 0.977 \\ 
+F Statistic (df = 153; 13958) & 2,067.740$^{***}$ & 3,857.262$^{***}$ \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table}
+
+\end{document}
