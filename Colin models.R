@@ -1273,6 +1273,10 @@ stats::BIC(pool.sqrt2)
 stats::BIC(pool.sqrt3)
 
 
+coeftest(pool.sqrt, vcov = vcovHC(pool.sqrt, type = "HC0"))
+coeftest(pool.sqrt3, vcov = vcovHC(pool.sqrt3, type = "HC0"))
+
+
 summary(pool.sqrt2)
 
 pcdtest(pool.sqrt, test = c("lm"))
@@ -1289,6 +1293,20 @@ bptest(sqrt(inzidenz) ~ sqrt(lag(inzidenz, 1)) + sqrt(lag(weightednbinz, 1))
 
 coeftest(pool.sqrt, vcovHC(pool.sqrt, type = "HC0"))
 
+df4_plot<-df4_pan[-(which(df4_pan$week==1)),]
+
+plot(as.vector(Var(pool) * df4_plot$inzidenz ), as.vector(residuals(pool)))
+
+
+
+
+pool.weighted <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+                     + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+                     +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+                     + A60.79.Anteil 
+                     + factor(week)
+                     , data =df4_pan,weights = 1/(sqrt(inzidenz) +1), model = "pooling")
+plot(as.vector(fitted.values(pool.weighted)), as.vector(residuals(pool.weighted)))
 
 
 
@@ -1299,3 +1317,6 @@ pool <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1)
             + factor(week)
             , data =df4_pan, model = "pooling")
 plot(as.vector(fitted.values(pool)), as.vector(residuals(pool)))
+
+
+

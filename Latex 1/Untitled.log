@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.12.4)  21 JAN 2023 17:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.12.4)  21 JAN 2023 17:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -133,7 +133,14 @@ File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 \Gin@req@height=\dimen120
 \Gin@req@width=\dimen121
 )
-(./Untitled.aux)
+(./Untitled.aux
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+)
 \openout1 = `Untitled.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
@@ -205,85 +212,97 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-./Untitled.tex:28: Missing $ inserted.
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 9
+5.
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 95.
+
+./Untitled.tex:127: Missing $ inserted.
 <inserted text> 
                 $
-l.28 
-     
+l.127 
+      
 ? 
-./Untitled.tex:28: Display math should end with $$.
+./Untitled.tex:127: Display math should end with $$.
 <to be read again> 
                    \par 
-l.28 
-     
+l.127 
+      
 ? 
-./Untitled.tex:29: Missing $ inserted.
+./Untitled.tex:128: Missing $ inserted.
 <inserted text> 
                 $
-l.29 	Y_
-        i = \beta * x_i
+l.128 	Y_
+         i = \beta * x_i
 ? 
-./Untitled.tex:30: Missing $ inserted.
+./Untitled.tex:129: Missing $ inserted.
 <inserted text> 
                 $
-l.30 
-     
+l.129 
+      
 ? 
 
-./Untitled.tex:31: LaTeX Error: Bad math environment delimiter.
+./Untitled.tex:130: LaTeX Error: Bad math environment delimiter.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.31 \end{equation}
-                   
+l.130 \end{equation}
+                    
 ? 
-./Untitled.tex:31: You can't use `\eqno' in vertical mode.
+./Untitled.tex:130: You can't use `\eqno' in vertical mode.
 \endmathdisplay@a ...\df@tag \@empty \else \veqno 
                                                   \alt@tag \df@tag \fi \ifx ...
-l.31 \end{equation}
-                   
+l.130 \end{equation}
+                    
 ? 
-./Untitled.tex:31: Missing $ inserted.
+./Untitled.tex:130: Missing $ inserted.
 <inserted text> 
                 $
-l.31 \end{equation}
-                   
+l.130 \end{equation}
+                    
 ? 
-./Untitled.tex:31: Display math should end with $$.
+./Untitled.tex:130: Display math should end with $$.
 <to be read again> 
                    \endgroup 
-l.31 \end{equation}
-                   
+l.130 \end{equation}
+                    
 ? 
 [1
 
 {/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2] (./Untitled.aux)
+[2] [3] [4] (./Untitled.aux)
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 2174 strings out of 492164
- 28163 string characters out of 6125318
- 112596 words of memory out of 5000000
- 6549 multiletter control sequences out of 15000+600000
- 8408 words of font info for 31 fonts, out of 8000000 for 9000
+ 2194 strings out of 492164
+ 28505 string characters out of 6125318
+ 128643 words of memory out of 5000000
+ 6565 multiletter control sequences out of 15000+600000
+ 8754 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,8n,23p,204b,219s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 30i,9n,23p,204b,265s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 ></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
 </usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></
 usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></us
 r/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/
 local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/lo
-cal/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on Untitled.pdf (2 pages, 71487 bytes).
+cal/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local
+/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/
+texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/te
+xlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on Untitled.pdf (4 pages, 100586 bytes).
 PDF statistics:
- 39 PDF objects out of 1000 (max. 8388607)
- 27 compressed objects within 1 object stream
+ 57 PDF objects out of 1000 (max. 8388607)
+ 40 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
