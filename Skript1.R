@@ -343,7 +343,9 @@ plot(formula=as.vector(residuals(pool.sqrt)) ~ as.vector(fitted.values(pool.sqrt
                                                                 col=adjustcolor("black",alpha=0.5),
                                                                 lwd=2)
 
+library(stargazer)
 
+stargazer(pool)
 
 
 
