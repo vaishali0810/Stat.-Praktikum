@@ -1070,7 +1070,7 @@ pool.weighted <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1)
                      +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
                      + A60.79.Anteil 
                      + factor(week)
-                     , data =df4_pan,weights = 1/(sqrt(inzidenz) +1), model = "pooling")
+                     , data =df4_pan,weights = 1/(sqrt(inzidenz + 1)), model = "pooling")
 coeftest(pool.weighted, vcovHC(pool.weighted, type = "HC0"))
 plot(as.vector(fitted.values(pool.weighted)), as.vector(residuals(pool.weighted)))
 
