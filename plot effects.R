@@ -212,3 +212,5 @@ summary(df4_pan$hotspot)
 h<-c(0.0:3302.4)
 a<-function(x){(0.2275481)*sqrt(log(x)*10)}
 plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit Inzidenz = 10 für sqrt-Modell")
+
+#
