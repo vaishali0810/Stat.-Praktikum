@@ -201,7 +201,7 @@ plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit 
 summary(df4_pan$density)
 h<-c(66.0:4788.0)
 a<-function(x){(-0.0284347)*sqrt(log(x)*10)}
-plot(a(h), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 10 sqrt-Modell")
+p6<-plot(a(h), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 10 sqrt-Modell")
 
 summary(df4_pan$weightednbinz)
 h<-c(0.0:3302.4)
