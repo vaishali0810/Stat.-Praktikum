@@ -1,3 +1,22 @@
+rm(list=ls())
+
+library(tidyverse) # Modern data science library 
+library(plm)       # Panel data analysis library
+library(car)       # Companion to applied regression 
+#library(ggplots2)    # Various programing tools for plotting data
+library(tseries)   # For timeseries analysis
+library(lmtest)   
+
+df4 <- read_csv("df4.csv")
+df4_pan <- pdata.frame(df4,index=c("district", "week"))
+
+
+
+
+
+
+
+
 ##models.R zuerst einlesen
 fe1 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2) +
            A00.04.Anteil + A05.14.Anteil+ A15.34.Anteil + M.Anteil 
