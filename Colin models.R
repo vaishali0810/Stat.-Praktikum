@@ -958,25 +958,25 @@ pool <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1)
             + factor(week)
             , data =df4_pan, model = "pooling")
 
-pool.2 <- plm(inzidenz ~ 0 + lag(inzidenz, 1) + lag(weightednbinz, 1) 
-              + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-              +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
-              + A60.79.Anteil 
-              + lag(exp(inzidenzsqrd), 1)
-              + factor(week) * factor(district)
-              , data =df4_pan, model = "pooling")
-coeftest(pool.2, vcov = vcovHC(
-  pool.2,
-  type = "HC0",
-  cluster = c("group", "time")))
-summary(pool.2)
-# + lag(weightednbinz, 1) 
-# + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-# +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
-# + A60.79.Anteil 
-# + factor(week)
-plot(as.vector(fitted.values(pool.2)), as.vector(residuals(pool.2)))
-
+# pool.2 <- plm(inzidenz ~ 0 + lag(inzidenz, 1) + lag(weightednbinz, 1) 
+#               + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+#               +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+#               + A60.79.Anteil 
+#               + lag(exp(inzidenzsqrd), 1)
+#               + factor(week) * factor(district)
+#               , data =df4_pan, model = "pooling")
+# coeftest(pool.2, vcov = vcovHC(
+#   pool.2,
+#   type = "HC0",
+#   cluster = c("group", "time")))
+# summary(pool.2)
+# # + lag(weightednbinz, 1) 
+# # + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+# # +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+# # + A60.79.Anteil 
+# # + factor(week)
+# plot(as.vector(fitted.values(pool.2)), as.vector(residuals(pool.2)))
+# 
 
 summary(pool, vcov=vcovHC)
 
