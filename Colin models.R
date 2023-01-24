@@ -926,8 +926,8 @@ coefficients <- coeftest(pool, vcovHC(
 ))
 
 
-df4 <- df4 %>% mutate(inzidenzsqrd = inzidenz * inzidenz)
-df4_pan <- pdata.frame(df4, index = c("district", "week"))
+# df4 <- df4 %>% mutate(inzidenzsqrd = inzidenz * inzidenz)
+# df4_pan <- pdata.frame(df4, index = c("district", "week"))
 
 
 
