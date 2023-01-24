@@ -1085,4 +1085,12 @@ pool <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1)
 plot(as.vector(fitted.values(pool)), as.vector(residuals(pool)))
 
 
-
+pool.sqrt.actual <- plm(sqrt(inzidenz) ~ sqrt(lag(inzidenz, 1)) + sqrt(lag(weightednbinz, 1))
+                        + I(log(density)*sqrt(lag(inzidenz, 1))) + I(hotspot * sqrt(lag(inzidenz, 1))) 
+                        + I(hotspotnb * sqrt(lag(weightednbinz, 1))) + I(rate_zweitimpf * hotspot)
+                        + A60.79.Anteil
+                        + factor(week)
+                        , data =df4_pan, model = "pooling")
+coeftest(pool.sqrt.actual, vcovHC(pool.sqrt.actual, type = "HC0"))
+plot(as.vector(fitted.values(pool.sqrt.actual)), as.vector(residuals(pool.sqrt.actual)))
+#.
