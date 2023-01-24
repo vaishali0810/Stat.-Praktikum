@@ -978,7 +978,7 @@ pool <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1)
 # plot(as.vector(fitted.values(pool.2)), as.vector(residuals(pool.2)))
 # 
 
-summary(pool, vcov=vcovHC)
+#summary(pool, vcov=vcovHC)
 
 testc <- coefficients[,1]
 pool.adj <- pool
@@ -1089,7 +1089,7 @@ coeftest(pool.sqrt, vcovHC(pool.sqrt, type = "HC0"))
 
 df4_plot<-df4_pan[-(which(df4_pan$week==1)),]
 
-plot(as.vector(Var(pool) * df4_plot$inzidenz ), as.vector(residuals(pool)))
+# plot(as.vector(Var(pool) * df4_plot$inzidenz ), as.vector(residuals(pool)))
 
 
 
@@ -1100,7 +1100,7 @@ pool.weighted <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1)
                      + A60.79.Anteil 
                      + factor(week)
                      , data =df4_pan,weights = 1/(sqrt(inzidenz + 1)), model = "pooling")
-coeftest(pool.weighted, vcovHC(pool.weighted, type = "HC0"))
+#coeftest(pool.weighted, vcovHC(pool.weighted, type = "HC0"))
 plot(as.vector(fitted.values(pool.weighted)), as.vector(residuals(pool.weighted)))
 
 
