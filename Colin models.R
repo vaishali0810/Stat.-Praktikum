@@ -923,7 +923,7 @@ stats::logLik(pool)
 stats::AIC(pool)
 stats::BIC(pool)
 
-LogLik.plm(re.actual)
+#LogLik.plm(re.actual)
 
 stats::logLik(re.actual)
 stats::AIC(re.actual)
@@ -970,11 +970,11 @@ coeftest(pool.2, vcov = vcovHC(
   type = "HC0",
   cluster = c("group", "time")))
 summary(pool.2)
-+ lag(weightednbinz, 1) 
-+ I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-+I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
-+ A60.79.Anteil 
-+ factor(week)
+# + lag(weightednbinz, 1) 
+# + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+# +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+# + A60.79.Anteil 
+# + factor(week)
 plot(as.vector(fitted.values(pool.2)), as.vector(residuals(pool.2)))
 
 
