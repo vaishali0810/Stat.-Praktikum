@@ -86,8 +86,8 @@ df4_pan <- pdata.frame(df4,index=c("district", "week"))
 ## cross sectional dependancy, is obvious given neighboring districts are part of the independent variables
 ## serial correlation at hand
 
-library(tseries)
-adf.test(df_pan$inzidenz, k=2)
+# library(tseries)
+# adf.test(df_pan$inzidenz, k=2)
 
 ## pvalue 0.01 --> stationary for lag order 2 
 ## This also holds for k=1, k=3, k=4
