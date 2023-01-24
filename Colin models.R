@@ -895,19 +895,19 @@ plot(as.vector(fitted.values(fgls1)), as.vector(residuals(fgls1)))
 
 
 
-fgls2 <- pggls(formula = inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
-               + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
-               +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
-               + A60.79.Anteil ,
-               data = df4_pan, family = BCCG, c("individual", "time"), model = "pooling")
+# fgls2 <- pggls(formula = inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
+#                + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
+#                +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
+#                + A60.79.Anteil ,
+#                data = df4_pan, family = BCCG, c("individual", "time"), model = "pooling")
+# 
+# plot(as.vector(fitted.values(fgls2)), as.vector(residuals(fgls2)))
 
-plot(as.vector(fitted.values(fgls2)), as.vector(residuals(fgls2)))
 
-
-
-pbgtest(fgls1)
-pcdtest(fgls1, test = c("lm"))
-pcdtest(fgls1, test = c("cd"))
+# 
+# pbgtest(fgls1)
+# pcdtest(fgls1, test = c("lm"))
+# pcdtest(fgls1, test = c("cd"))
 
 
 logLik.plm <- function(object){
