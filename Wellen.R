@@ -389,6 +389,7 @@ pool.weighted.sechst.a <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1
                               + A60.79.Anteil 
                               + factor(week)
                               , data = sechst_a, model = "pooling", weights = 1/sqrt(inzidenz + 1), index = c("district", "week"))
+
 pool.weighted.sechst.b <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
                               + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
                               +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
@@ -422,4 +423,16 @@ sum.weighted.zweit.a$r.squared
 sum.weighted.zweit.b$r.squared
 sum.weighted.sechst.a$r.squared
 sum.weighted.sechst.b$r.squared
+
+
+summary(pool.nullt)
+coeftest(pool.nullt, vcovHC(pool.nullt, type = "HC0"))
+summary(pool.erst)
+summary(pool.zweit)
+summary(pool.dritt)
+summary(pool.viert)
+summary(pool.fuenft)
+summary(pool.sechst)
+summary(pool.siebt)
+
 
