@@ -208,23 +208,23 @@ pbgtest(fe7)
 ## cross sectional dependancy, is obvious given neighboring districts are part of the independent variables
 ## serial correlation at hand
 
-library(tseries)
-acf(fe7$residuals, type = "correlation")
-adf.test(df4_pan$inzidenz, k=2)
-
-## pvalue 0.01 --> stationary for lag order 2 
-## This also holds for k=1, k=3, k=4
-## k meaning biggest lag level
-
-bptest(fe7, data = df4_pan, studentize=F)
-
-## heteroskedasticity at hand
-
-
-t(sapply(c("HC0", "HC1", "HC2", "HC3", "HC4"), function(x) sqrt(diag(vcovHC(fe1, type = x)))))
-
-coeftest(fe7, vcovHC(fe7, method = "arellano"))
-
+# library(tseries)
+# acf(fe7$residuals, type = "correlation")
+# adf.test(df4_pan$inzidenz, k=2)
+# 
+# ## pvalue 0.01 --> stationary for lag order 2 
+# ## This also holds for k=1, k=3, k=4
+# ## k meaning biggest lag level
+# 
+# bptest(fe7, data = df4_pan, studentize=F)
+# 
+# ## heteroskedasticity at hand
+# 
+# 
+# t(sapply(c("HC0", "HC1", "HC2", "HC3", "HC4"), function(x) sqrt(diag(vcovHC(fe1, type = x)))))
+# 
+# coeftest(fe7, vcovHC(fe7, method = "arellano"))
+# 
 
 
 
