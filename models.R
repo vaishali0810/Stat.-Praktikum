@@ -323,6 +323,7 @@ summary(fe110)
 ## einfach logarithmieren?
 df4 <- read_csv("df4.csv")
 df4_pan <- pdata.frame(df4,index=c("district", "week"))
+df4_pan[, 12:37] <- df4_pan[,12:37] * 100
 
 fe2200 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) + lag(inzidenz,2) + lag(weightednbinz, 2)
            + I(hotspot * lag(inzidenz, 1)) + I(hotspotnb * lag(weightednbinz, 1))
