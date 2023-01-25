@@ -44,6 +44,18 @@ sechst_a<-subset(df4,df4$Kalendarwoche%in%p)
 p<-c((52+40-1):(52+51))
 sechst_b<-subset(df4,df4$Kalendarwoche%in%p)
 
+
+list_wellen <- list(nullt, erst, zweit, dritt, viert, fünft, sechst, siebt)
+
+store_wellen <- list()
+for(i in seq_along(list_wellen)) {
+  store_wellen[[i]] <- table(list_wellen[[i]]$hotspot)
+  
+}
+
+b <- as.data.frame(store_wellen)
+view(b)
+
 pool.4 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
             + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
             +I(hotspotnb * lag(weightednbinz, 1)) + I(rate_zweitimpf * hotspot) 
