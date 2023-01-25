@@ -23,3 +23,5 @@ a<-coeftest(pool, vcovHC(pool, type = "HC0"))
 b<-coeftest(pool.sqrt.actual, vcovHC(pool.sqrt.actual, type = "HC0"))
 c<-summary(pool.weighted)
 stargazer(c$coefficients)
+
+stargazer(p)
