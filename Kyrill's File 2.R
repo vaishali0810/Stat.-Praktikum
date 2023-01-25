@@ -1080,5 +1080,17 @@ vector16 # 22 districts mit Beobachtungen
 
 
 
+df4$rate_zweitimpf<-df4$rate_zweitimpf*100
+df4$rate_drittimpf<-df4$rate_drittimpf*100
+df4$rate_viertimpf<-df4$rate_viertimpf*100
+df4$rate_erstimpf<-df4$rate_erstimpf*100
+max(df4$rate_zweitimpf)
 
+df4$A00.04.Anteil<-df4$A00.04.Anteil*100
+df4$A05.14.Anteil<-df4$A05.14.Anteil*100
+df4$A15.34.Anteil<-df4$A15.34.Anteil*100
+df4$A35.59.Anteil<-df4$A35.59.Anteil*100
+df4$A60.79.Anteil<-df4$A60.79.Anteil*100
+df4$A80.Anteil<-df4$A80.Anteil*100
 
+summary(df4$A80.Anteil)

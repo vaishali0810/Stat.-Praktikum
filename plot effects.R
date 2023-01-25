@@ -103,54 +103,135 @@ comparisons(mod1) %>% tidy()
 
 ######### 1000
 summary(df4_pan$density)
-h<-c(66.0:4788.0)
-a<-function(x){(-2.0009e-02)*(log(x)*1000)}
-plot(a(h), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 1000")
+h1<-c(66.0:4788.0)
+a1<-function(x){(-2.0009e-02)*(log(x)*1000)}
+# plot(a1(h1), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 1000") +
 
 summary(df4_pan$weightednbinz)
-h<-c(0.0:3302.4)
-a<-function(x){(2.7351e-01)*(log(x)*1000)}
-plot(a(h), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekt für gewichtete Nachbar-Inzidenz mit Inzidenz = 1000")
+h2<-c(0.0:3302.4)
+a2<-function(x){(2.7351e-01)*(log(x)*1000)}
+# plot(a(h), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekt für gewichtete Nachbar-Inzidenz mit Inzidenz = 1000")
 
 summary(df4_pan$hotspot)
-h<-c(0.0:3302.4)
-a<-function(x){(5.7362e-01)*(log(x)*1000)}
-plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit Inzidenz = 1000")
+h3<-c(0.0:3302.4)
+a3<-function(x){(5.7362e-01)*(log(x)*1000)}
+# plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit Inzidenz = 1000")
 
 ########## 100
 
 summary(df4_pan$density)
-h<-c(66.0:4788.0)
-a<-function(x){(-2.0009e-02)*(log(x)*100)}
-plot(a(h), xlab = "Density", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 100")
+h4<-c(66.0:4788.0)
+a4<-function(x){(-2.0009e-02)*(log(x)*100)}
+# plot(a(h), xlab = "Density", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 100")
 
 summary(df4_pan$weightednbinz)
-h<-c(0.0:3302.4)
-a<-function(x){(2.7351e-01)*(log(x)*100)}
-plot(a(h), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekt für gewichtete Nachbar-Inzidenz mit Inzidenz = 100")
+h5<-c(0.0:3302.4)
+a5<-function(x){(2.7351e-01)*(log(x)*100)}
+# plot(a(h), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekt für gewichtete Nachbar-Inzidenz mit Inzidenz = 100")
 
 summary(df4_pan$hotspot)
-h<-c(0.0:3302.4)
-a<-function(x){(5.7362e-01)*(log(x)*100)}
-plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit Inzidenz = 100")
+h6<-c(0.0:3302.4)
+a6<-function(x){(5.7362e-01)*(log(x)*100)}
+# plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit Inzidenz = 100")
 
 ########## 10
 
 summary(df4_pan$density)
-h<-c(66.0:4788.0)
-a<-function(x){(-2.0009e-02)*(log(x)*10)}
-plot(a(h), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 10")
+h7<-c(66.0:4788.0)
+a7<-function(x){(-2.0009e-02)*(log(x)*10)}
+# plot(a(h), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 10")
 
 summary(df4_pan$weightednbinz)
-h<-c(0.0:3302.4)
-a<-function(x){(2.7351e-01)*(log(x)*10)}
-plot(a(h), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekt für gewichtete Nachbar-Inzidenz mit Inzidenz = 10")
+h8<-c(0.0:3302.4)
+a8<-function(x){(2.7351e-01)*(log(x)*10)}
+# plot(a(h), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekt für gewichtete Nachbar-Inzidenz mit Inzidenz = 10")
 
 summary(df4_pan$hotspot)
-h<-c(0.0:3302.4)
-a<-function(x){(5.7362e-01)*(log(x)*10)}
-plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit Inzidenz = 10")
+h9<-c(0.0:3302.4)
+a9<-function(x){(5.7362e-01)*(log(x)*10)}
+# plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit Inzidenz = 10")
 
+## Plots
+
+# densityPlots
+d_density <- data.frame(h1, a1(h1), h4, a4(h4), h7, a7(h7))
+ggplot(d_density) + geom_point(aes(x = h1, y = a1(h1)), colour = "black", show.legend = T) + 
+  geom_point(aes(x = h4, y = a4(h4)), colour = "darkgrey", show.legend = T) +
+  geom_point(aes(x = h7, y = a7(h7)), colour = "blue", show.legend = T) + 
+  xlab("Dichte") + ylab("Effekte") +
+  ggtitle("Effekt Plot für Dichte") + 
+  theme(axis.text.x = element_text(size = 16, vjust = 1, hjust = 1, face = "bold")) +
+  theme(axis.text.y = element_text(size = 16, face = "bold")) +
+  theme(text = element_text(size = 23)) +
+  theme(panel.background = element_rect(fill = "white",
+                                        colour = "white",
+                                        size = 0.5, linetype = "solid"),
+        panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+                                        colour = "grey"), 
+        panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+                                        colour = "white") )+
+  scale_colour_manual(name = '', 
+                      guide = 'legend',
+                      values = c('black' = 'black',
+                                 'darkgrey' = 'grey',
+                                 'blue' = 'blue'), 
+                      labels = c('Inzidenz = 1000',
+                                 'Inzidenz = 100',
+                                 'Inzidenz = 10'))
+
+
+# weightednbinz
+d_weighted <- data.frame(h2, a2(h2), h5, a5(h5), h8, a8(h8))
+ggplot(d_weighted) + geom_point(aes(x = h2, y = a2(h2)), colour = "black", show.legend = T) + 
+  geom_point(aes(x = h5, y = a5(h5)), colour = "darkgrey", show.legend = T) +
+  geom_point(aes(x = h8, y = a8(h8)), colour = "blue", show.legend = T) + 
+  xlab(" gewichtete Nachbar-Inzidenz") + ylab("Effekte") +
+  ggtitle("Effekt Plot für gewichtete Nachbar-Inzidenz") + 
+  theme(axis.text.x = element_text(size = 16, vjust = 1, hjust = 1, face = "bold")) +
+  theme(axis.text.y = element_text(size = 16, face = "bold")) +
+  theme(text = element_text(size = 23)) +
+  theme(panel.background = element_rect(fill = "white",
+                                        colour = "white",
+                                        size = 0.5, linetype = "solid"),
+        panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+                                        colour = "grey"), 
+        panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+                                        colour = "white") )+
+  scale_colour_manual(name = '', 
+                      guide = 'legend',
+                      values = c('black' = 'black',
+                                 'darkgrey' = 'grey',
+                                 'blue' = 'blue'), 
+                      labels = c('Inzidenz = 1000',
+                                 'Inzidenz = 100',
+                                 'Inzidenz = 10'))
+
+# hotspot
+
+d_hotspot <- data.frame(h3, a3(h3), h6, a6(h6), h9, a9(h9))
+ggplot(d_hotspot) + geom_point(aes(x = h3, y = a3(h3)), colour = "black", show.legend = T) + 
+  geom_point(aes(x = h6, y = a6(h6)), colour = "darkgrey", show.legend = T) +
+  geom_point(aes(x = h9, y = a9(h9)), colour = "blue", show.legend = T) + 
+  xlab("Hotspot") + ylab("Effekte") +
+  ggtitle("Effekt Plot für Hotspot") + 
+  theme(axis.text.x = element_text(size = 16, vjust = 1, hjust = 1, face = "bold")) +
+  theme(axis.text.y = element_text(size = 16, face = "bold")) +
+  theme(text = element_text(size = 23)) +
+  theme(panel.background = element_rect(fill = "white",
+                                        colour = "white",
+                                        size = 0.5, linetype = "solid"),
+        panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+                                        colour = "grey"), 
+        panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+                                        colour = "white") )+
+  scale_colour_manual(name = '', 
+                      guide = 'legend',
+                      values = c('black' = 'black',
+                                 'darkgrey' = 'grey',
+                                 'blue' = 'blue'), 
+                      labels = c('Inzidenz = 1000',
+                                 'Inzidenz = 100',
+                                 'Inzidenz = 10'))
 
 
 #Coefficients:
@@ -167,50 +248,137 @@ plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit 
 
 ######### 1000 mit sqrt
 summary(df4_pan$density)
-h<-c(66.0:4788.0)
-a<-function(x){(-0.0284347)*sqrt(log(x)*1000)}
-plot(a(h), xlab = "Dichte", ylab = "Effekte") + title("Effekt bei Inzidenz=1000 sqrt-Modell")
+h1_sqrt<-c(66.0:4788.0)
+a1_sqrt<-function(x){(-0.0284347)*sqrt(log(x)*1000)}
+# plot(a1_sqrt(h1_sqrt), xlab = "Dichte", ylab = "Effekte") + title("Effekt bei Inzidenz=1000 sqrt-Modell", pch = 1)
 
 summary(df4_pan$weightednbinz)
-h<-c(0.0:3302.4)
-a<-function(x){(0.2316856)*sqrt(log(x)*1000)}
-plot(a(h), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekt für gewichtete Nachbar-Inzidenz mit Inzidenz = 1000 sqrt-Modell")
+h2_sqrt<-c(0.0:3302.4)
+a2_sqrt<-function(x){(0.2316856)*sqrt(log(x)*1000)}
+# plot(a2_sqrt(h2_sqrt), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekt für gewichtete Nachbar-Inzidenz mit Inzidenz = 1000 sqrt-Modell")
 
 summary(df4_pan$hotspot)
-h<-c(0.0:3302.4)
-a<-function(x){(0.2275481)*sqrt(log(x)*1000)}
-plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit Inzidenz = 1000 sqrt-Modell")
+h3_sqrt<-c(0.0:3302.4)
+a3_sqrt<-function(x){(0.2275481)*sqrt(log(x)*1000)}
+# plot(a3_sqrt(h3_sqrt), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit Inzidenz = 1000 sqrt-Modell")
 
 ########## 100
 summary(df4_pan$density)
-h<-c(66.0:4788.0)
-a<-function(x){(-0.0284347)*sqrt(log(x)*100)}
-plot(a(h), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 100 sqrt-Modell")
+h4_sqrt<-c(66.0:4788.0)
+a4_sqrt<-function(x){(-0.0284347)*sqrt(log(x)*100)}
+# plot(a4_sqrt(h4_sqrt), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 100 sqrt-Modell")
 
 summary(df4_pan$weightednbinz)
-h<-c(0.0:3302.4)
-a<-function(x){(0.2316856)*sqrt(log(x)*100)}
-plot(a(h), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekt für gewichtete Nachbar-Inzidenz mit Inzidenz = 100 sqrt-Modell")
+h5_sqrt<-c(0.0:3302.4)
+a5_sqrt<-function(x){(0.2316856)*sqrt(log(x)*100)}
+# plot(a5_sqrt(h5_sqrt), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekt für gewichtete Nachbar-Inzidenz mit Inzidenz = 100 sqrt-Modell")
 
 summary(df4_pan$hotspot)
-h<-c(0.0:3302.4)
-a<-function(x){(0.2275481)*sqrt(log(x)*100)}
-plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit Inzidenz = 100 sqrt-Modell")
+h6_sqrt<-c(0.0:3302.4)
+a6_sqrt<-function(x){(0.2275481)*sqrt(log(x)*100)}
+# plot(a6_sqrt(h6_sqrt), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit Inzidenz = 100 sqrt-Modell")
 
 ########## 10
 summary(df4_pan$density)
+<<<<<<< HEAD
 h<-c(66.0:4788.0)
 a<-function(x){(-0.0284347)*sqrt(log(x)*10)}
 p6<-plot(a(h), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 10 sqrt-Modell")
+=======
+h7_sqrt<-c(66.0:4788.0)
+a7_sqrt<-function(x){(-0.0284347)*sqrt(log(x)*10)}
+# plot(a7_sqrt(h7_sqrt), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 10 sqrt-Modell")
+>>>>>>> 84f4657640ae704834f03f7ed48a3a45c6b0206a
 
 summary(df4_pan$weightednbinz)
-h<-c(0.0:3302.4)
-a<-function(x){(0.2316856)*sqrt(log(x)*10)}
-plot(a(h), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekt für gewichtete Nachbar-Inzidenz mit Inzidenz = 10 sqrt-Modell")
+h8_sqrt<-c(0.0:3302.4)
+a8_sqrt<-function(x){(0.2316856)*sqrt(log(x)*10)}
+# plot(a8_sqrt(h8_sqrt), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekt für gewichtete Nachbar-Inzidenz mit Inzidenz = 10 sqrt-Modell")
 
 summary(df4_pan$hotspot)
-h<-c(0.0:3302.4)
-a<-function(x){(0.2275481)*sqrt(log(x)*10)}
-plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit Inzidenz = 10 sqrt-Modell")
+h9_sqrt<-c(0.0:3302.4)
+a9_sqrt<-function(x){(0.2275481)*sqrt(log(x)*10)}
+# plot(a9_sqrt(h9_sqrt), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit Inzidenz = 10 sqrt-Modell")
 
-#
+
+## Sqrt Plots
+
+# density_sqrt Plots
+d_density_sqrt <- data.frame(h1_sqrt, a1_sqrt(h1_sqrt), h4_sqrt, a4_sqrt(h4_sqrt), h7_sqrt, a7_sqrt(h7_sqrt))
+ggplot(d_density_sqrt) + geom_point(aes(x = h1_sqrt, y = a1_sqrt(h1_sqrt)), colour = "black", show.legend = T) + 
+  geom_point(aes(x = h4_sqrt, y = a4_sqrt(h4_sqrt)), colour = "darkgrey", show.legend = T) +
+  geom_point(aes(x = h7_sqrt, y = a7_sqrt(h7_sqrt)), colour = "blue", show.legend = T) + 
+  xlab("Dichte") + ylab("Effekte") +
+  ggtitle("Effekt Plot für Dichte von sqrt-Modell") + 
+  theme(axis.text.x = element_text(size = 16, vjust = 1, hjust = 1, face = "bold")) +
+  theme(axis.text.y = element_text(size = 16, face = "bold")) +
+  theme(text = element_text(size = 23)) +
+  theme(panel.background = element_rect(fill = "white",
+                                        colour = "white",
+                                        size = 0.5, linetype = "solid"),
+        panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+                                        colour = "grey"), 
+        panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+                                        colour = "white") )+
+  scale_colour_manual(name = '', 
+                      guide = 'legend',
+                      values = c('black' = 'black',
+                                 'darkgrey' = 'grey',
+                                 'blue' = 'blue'), 
+                      labels = c('Inzidenz = 1000',
+                                 'Inzidenz = 100',
+                                 'Inzidenz = 10'))
+  
+
+# weightednbinz_sqrt
+d_weighted_sqrt <- data.frame(h2_sqrt, a2_sqrt(h2_sqrt), h5_sqrt, a5_sqrt(h5_sqrt), h8_sqrt, a8_sqrt(h8_sqrt))
+ggplot(d_weighted_sqrt) + geom_point(aes(x = h2_sqrt, y = a2_sqrt(h2_sqrt)), colour = "black", show.legend = T) + 
+  geom_point(aes(x = h5_sqrt, y = a5_sqrt(h5_sqrt)), colour = "darkgrey", show.legend = T) +
+  geom_point(aes(x = h8_sqrt, y = a8_sqrt(h8_sqrt)), colour = "blue", show.legend = T) + 
+  xlab(" gewichtete Nachbar-Inzidenz") + ylab("Effekte") +
+  ggtitle("Effekt Plot für gewichtete Nachbar-Inzidenz von sqrt-Modell") + 
+  theme(axis.text.x = element_text(size = 16, vjust = 1, hjust = 1, face = "bold")) +
+  theme(axis.text.y = element_text(size = 16, face = "bold")) +
+  theme(text = element_text(size = 23)) +
+  theme(panel.background = element_rect(fill = "white",
+                                        colour = "white",
+                                        size = 0.5, linetype = "solid"),
+        panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+                                        colour = "grey"), 
+        panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+                                        colour = "white") )+
+  scale_colour_manual(name = '', 
+                      guide = 'legend',
+                      values = c('black' = 'black',
+                                 'darkgrey' = 'grey',
+                                 'blue' = 'blue'), 
+                      labels = c('Inzidenz = 1000',
+                                 'Inzidenz = 100',
+                                 'Inzidenz = 10'))
+
+# hotspot_sqrt
+
+d_hotspot_sqrt <- data.frame(h3_sqrt, a3_sqrt(h3_sqrt), h6_sqrt, a6_sqrt(h6_sqrt), h9_sqrt, a9_sqrt(h9_sqrt))
+ggplot(d_hotspot_sqrt) + geom_point(aes(x = h3_sqrt, y = a3_sqrt(h3_sqrt)), colour = "black", show.legend = T) + 
+  geom_point(aes(x = h6_sqrt, y = a6_sqrt(h6_sqrt)), colour = "darkgrey", show.legend = T) +
+  geom_point(aes(x = h9_sqrt, y = a9_sqrt(h9_sqrt)), colour = "blue", show.legend = T) + 
+  xlab("Hotspot") + ylab("Effekte") +
+  ggtitle("Effekt Plot für Hotspot von sqrt-Modell") + 
+  theme(axis.text.x = element_text(size = 16, vjust = 1, hjust = 1, face = "bold")) +
+  theme(axis.text.y = element_text(size = 16, face = "bold")) +
+  theme(text = element_text(size = 23)) +
+  theme(panel.background = element_rect(fill = "white",
+                                        colour = "white",
+                                        size = 0.5, linetype = "solid"),
+        panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+                                        colour = "grey"), 
+        panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+                                        colour = "white") )+
+  scale_colour_manual(name = '', 
+                      guide = 'legend',
+                      values = c('black' = 'black',
+                                 'darkgrey' = 'grey',
+                                 'blue' = 'blue'), 
+                      labels = c('Inzidenz = 1000',
+                                 'Inzidenz = 100',
+                                 'Inzidenz = 10'))
