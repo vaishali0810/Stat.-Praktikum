@@ -53,8 +53,10 @@ for(i in seq_along(list_wellen)) {
   
 }
 
-b <- as.data.frame(store_wellen)
-view(b)
+o<-do.call(cbind,store_wellen)
+p<-as.matrix(o)
+p<-t(p)
+rownames(p)<-
 
 pool.4 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
             + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
