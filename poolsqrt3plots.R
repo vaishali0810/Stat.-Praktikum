@@ -56,31 +56,32 @@ plot(formula = pool.sqrt$residuals ~ s$A60.79.Anteil, xlab = "A60.79.Anteil", yl
 
 # pool.sqrt.actual plot
 
-par(mfrow = c(2, 2), cex.lab = 1.5, cex.axis = 2) 
+par(mfrow = c(2, 2), cex.lab = 1.3) 
 p1 <- plot(formula = pool.sqrt.actual$residuals ~ s$inzidenz1, xlab = "lag(Inzidenz, 1)",
-           ylab = "Residuen", cex.axis = 1.5,pch=23,cex=0.5, col=alpha("black",0.8))+ abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+           ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8))+ abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
 
 p2 <- plot(formula = pool.sqrt.actual$residuals ~s$weightednbinz1 , xlab = "lag(gewichtete Nachbar-Inzidenzen, 1)",
-           ylab = "Residuen", cex.axis = 1.5,pch=23,cex=0.5, col=alpha("black",0.8))+ abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+           ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8))+ abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
 
 p3 <- plot(formula = pool.sqrt.actual$residuals ~ s$density_inzidenz1, xlab = "log(Dichte) * lag(Inzidenz, 1) ", 
-           ylab = "Residuen", cex.axis = 1.5,pch=23,cex=0.5,col=alpha("black",0.8)) +abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+           ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5,col=alpha("black",0.8)) +abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
 
 p4 <- plot(formula = pool.sqrt.actual$residuals ~ s$hotspot_inzidenz1, xlab = "Hotspot * lag(Inzidenz, 1)", 
-           ylab = "Residuen", cex.axis = 1.5,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+           ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
 
+mtext("Residuen Plots von pool.sqrt", side = 3, line = -2, outer = TRUE, font = 2, cex = 2)
 
-par(mfrow = c(2, 2), cex.lab = 1.5, cex.axis = 2)
+par(mfrow = c(2, 2), cex.lab = 1.2, cex.axis = 2)
 p5 <- plot(formula = pool.sqrt.actual$residuals ~ s$hotspotnb_wnbinzidenz1, xlab = "Nachbar-Hotspot * lag(gewichtete Nachbar-Inzidenzen, 1)", 
-           ylab = "Residuen", cex.axis = 1.5,pch=23,cex=0.5, col=alpha("black",0.8)) +abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+           ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8)) +abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
 
 p6 <- plot(formula = pool.sqrt.actual$residuals ~ s$zweitimpf_hotspot, xlab = "Zweitimpfungrate * Hotspot",
-           ylab = "Residuen", cex.axis = 1.5,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+           ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
 
 p7 <-  plot(formula=pool.sqrt.actual$residuals~s$A60.79.Anteil, xlab="A60.79.Anteil", 
-           ylab="Residuen", cex.axis=1.5,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+           ylab="Residuen", cex.axis=1.3,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
 
-
+mtext("Residuen Plots von pool.sqrt", side = 3, line = -2, outer = TRUE, font = 2, cex = 2)
 
 ###### pool.sqrts fitted Plots
 
@@ -101,47 +102,108 @@ plot(as.vector(fitted.values(pool.sqrt3)), as.vector(residuals(pool.sqrt3)),
                                                                                      
                                                                                                                                                                          col=adjustcolor("black",alpha=0, lwd=3, lty = "longdash"))
 ## pool.sqrt3 Residual-Plots
-par(mfrow = c(3, 3), cex.lab = 1.5, cex.axis = 2)
+par(mfrow = c(2, 2), cex.lab = 1.3, cex.axis = 2)
 p1 <- plot(formula = pool.sqrt3$residuals ~ s$inzidenz1, xlab = "lag(Inzidenz, 1)",
-     ylab = "Residuen", cex.axis = 1.5,pch=23,cex=0.5, col=alpha("black",0.8))+ abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+     ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8))+ abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
 
 p2 <- plot(formula = pool.sqrt3$residuals ~s$weightednbinz1 , xlab = "lag(gewichtete Nachbar-Inzidenzen, 1)",
-     ylab = "Residuen", cex.axis = 1.5,pch=23,cex=0.5, col=alpha("black",0.8))+ abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+     ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8))+ abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
 
 p3 <- plot(formula = pool.sqrt3$residuals ~ s$density_inzidenz1, xlab = "log(Dichte) * lag(Inzidenz, 1) ", 
-     ylab = "Residuen", cex.axis = 1.5,pch=23,cex=0.5,col=alpha("black",0.8)) +abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+     ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5,col=alpha("black",0.8)) +abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
 
 p4 <- plot(formula = pool.sqrt3$residuals ~ s$hotspot_inzidenz1, xlab = "Hotspot * lag(Inzidenz, 1)", 
-     ylab = "Residuen", cex.axis = 1.5,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+     ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
 
+mtext("Residuen Plots von pool.sqrt3", side = 3, line = -2, outer = TRUE, font = 2, cex = 2)
+
+par(mfrow = c(2, 2), cex.lab = 1.2, cex.axis = 2)
 p5 <- plot(formula = pool.sqrt3$residuals ~ s$hotspotnb_wnbinzidenz1, xlab = "Nachbar-Hotspot * lag(gewichtete Nachbar-Inzidenzen, 1)", 
-     ylab = "Residuen", cex.axis = 1.5,pch=23,cex=0.5, col=alpha("black",0.8)) +abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+     ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8)) +abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
 
 p6 <- plot(formula = pool.sqrt3$residuals ~ s$zweitimpf_hotspot, xlab = "Zweitimpfungrate * Hotspot",
-     ylab = "Residuen", cex.axis = 1.5,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+     ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
 
 p7 <- plot(formula=pool.sqrt3$residuals~s$A60.79.Anteil, xlab="A60.79.Anteil", 
-     ylab="Residuen", cex.axis=1.5,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+     ylab="Residuen", cex.axis=1.3,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
 
+mtext("Residuen Plots von pool.sqrt3", side = 3, line = -2, outer = TRUE, font = 2, cex = 2)
 
-plot(as.vector(fitted.values(pool)), as.vector(residuals(pool)), xlab="Fitted values", ylab="Residuals", cex.lab = 1.5, cex.axis = 1.5) + abline(h=0,
-                                                                                                                                                col=adjustcolor("black",alpha=0.5),
-                                                                                                                                                lwd=3, lty = "longdash")
-##### Neue Plots: Fitted values
 
 # pool.weighted
 
+# Fitted Value
 plot(as.vector(fitted.values(pool.weighted)), as.vector(residuals(pool.weighted)),
      xlab="Fitted values", ylab="Residuals", cex.lab = 1.3, cex.axis = 1.3) 
 + abline(h=0, col=adjustcolor("black",alpha=0.5), lwd=3, lty = "longdash")
 + title("Fitted Values von pool.weighted", cex.main = 1.8)
 
+## Residuen 
+par(mfrow = c(2, 2), cex.lab = 1.3)
+p1 <- plot(formula = pool.weighted$residuals ~ s$inzidenz1, xlab = "lag(Inzidenz, 1)",
+           ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8))+ abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+
+p2 <- plot(formula = pool.weighted$residuals ~s$weightednbinz1 , xlab = "lag(gewichtete Nachbar-Inzidenzen, 1)",
+           ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8))+ abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+
+p3 <- plot(formula = pool.weighted$residuals ~ s$density_inzidenz1, xlab = "log(Dichte) * lag(Inzidenz, 1) ", 
+           ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5,col=alpha("black",0.8)) +abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+
+p4 <- plot(formula = pool.weighted$residuals ~ s$hotspot_inzidenz1, xlab = "Hotspot * lag(Inzidenz, 1)", 
+           ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+
+mtext("Residuen Plots von pool.weighted", side = 3, line = -2, outer = TRUE, font = 2, cex = 2)
+
+par(mfrow = c(2, 2), cex.lab = 1.2)
+p5 <- plot(formula = pool.weighted$residuals ~ s$hotspotnb_wnbinzidenz1, xlab = "Nachbar-Hotspot * lag(gewichtete Nachbar-Inzidenzen, 1)", 
+           ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8)) +abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+
+p6 <- plot(formula = pool.weighted$residuals ~ s$zweitimpf_hotspot, xlab = "Zweitimpfungrate * Hotspot",
+           ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+
+p7 <- plot(formula=pool.weighted$residuals~s$A60.79.Anteil, xlab="A60.79.Anteil", 
+           ylab="Residuen", cex.axis=1.3,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+
+mtext("Residuen Plots von pool.weighted", side = 3, line = -2, outer = TRUE, font = 2, cex = 2)
+
+
 # pool 
 
+# Fitted Value
 plot(as.vector(fitted.values(pool)), as.vector(residuals(pool)),
      xlab="Fitted values", ylab="Residuals", cex.lab = 1.3, cex.axis = 1.3) 
 + abline(h=0, col=adjustcolor("black",alpha=0.5), lwd=3, lty = "longdash")
 + title("Fitted Values von pool", cex.main = 1.8)
+
+# Residuen
+par(mfrow = c(2, 2), cex.lab = 1.3, cex.axis = 2)
+p1 <- plot(formula = pool$residuals ~ s$inzidenz1, xlab = "lag(Inzidenz, 1)",
+           ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8))+ abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+
+p2 <- plot(formula = pool$residuals ~s$weightednbinz1 , xlab = "lag(gewichtete Nachbar-Inzidenzen, 1)",
+           ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8))+ abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+
+p3 <- plot(formula = pool$residuals ~ s$density_inzidenz1, xlab = "log(Dichte) * lag(Inzidenz, 1) ", 
+           ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5,col=alpha("black",0.8)) +abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+
+p4 <- plot(formula = pool$residuals ~ s$hotspot_inzidenz1, xlab = "Hotspot * lag(Inzidenz, 1)", 
+           ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+
+mtext("Residuen Plots von pool", side = 3, line = -2, outer = TRUE, font = 2, cex = 2)
+
+
+par(mfrow = c(2, 2), cex.lab = 1.2, cex.axis = 2)
+p5 <- plot(formula = pool$residuals ~ s$hotspotnb_wnbinzidenz1, xlab = "Nachbar-Hotspot * lag(gewichtete Nachbar-Inzidenzen, 1)", 
+           ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8)) +abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+
+p6 <- plot(formula = pool$residuals ~ s$zweitimpf_hotspot, xlab = "Zweitimpfungrate * Hotspot",
+           ylab = "Residuen", cex.axis = 1.3,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+
+p7 <- plot(formula=pool$residuals~s$A60.79.Anteil, xlab="A60.79.Anteil", 
+           ylab="Residuen", cex.axis=1.3,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+
+mtext("Residuen Plots von pool", side = 3, line = -2, outer = TRUE, font = 2, cex = 2)
+
 
 # pool.sqrt.actual
 

@@ -105,7 +105,8 @@ comparisons(mod1) %>% tidy()
 summary(df4_pan$density)
 h<-c(66.0:4788.0)
 a<-function(x){(-2.0009e-02)*(log(x)*1000)}
-plot(a(h), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 1000")
+plot(a(h), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 1000") +
+  lines(x2, col = "red" ,type = 'b')
 
 summary(df4_pan$weightednbinz)
 h<-c(0.0:3302.4)
@@ -120,8 +121,9 @@ plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit 
 ########## 100
 
 summary(df4_pan$density)
-h<-c(66.0:4788.0)
-a<-function(x){(-2.0009e-02)*(log(x)*100)}
+h2<-c(66.0:4788.0)
+a2<-function(x){(-2.0009e-02)*(log(x)*100)}
+x2 <- a2(h2)
 plot(a(h), xlab = "Density", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 100")
 
 summary(df4_pan$weightednbinz)
@@ -167,50 +169,53 @@ plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit 
 
 ######### 1000 mit sqrt
 summary(df4_pan$density)
-h<-c(66.0:4788.0)
-a<-function(x){(-0.0284347)*sqrt(log(x)*1000)}
-plot(a(h), xlab = "Dichte", ylab = "Effekte") + title("Effekt bei Inzidenz=1000 sqrt-Modell")
+h1_sqrt<-c(66.0:4788.0)
+a1_sqrt<-function(x){(-0.0284347)*sqrt(log(x)*1000)}
+# plot(a1_sqrt(h1_sqrt), xlab = "Dichte", ylab = "Effekte") + title("Effekt bei Inzidenz=1000 sqrt-Modell", pch = 1)
 
 summary(df4_pan$weightednbinz)
-h<-c(0.0:3302.4)
-a<-function(x){(0.2316856)*sqrt(log(x)*1000)}
-plot(a(h), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekt für gewichtete Nachbar-Inzidenz mit Inzidenz = 1000 sqrt-Modell")
+h2_sqrt<-c(0.0:3302.4)
+a2_sqrt<-function(x){(0.2316856)*sqrt(log(x)*1000)}
+# plot(a2_sqrt(h2_sqrt), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekt für gewichtete Nachbar-Inzidenz mit Inzidenz = 1000 sqrt-Modell")
 
 summary(df4_pan$hotspot)
-h<-c(0.0:3302.4)
-a<-function(x){(0.2275481)*sqrt(log(x)*1000)}
-plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit Inzidenz = 1000 sqrt-Modell")
+h3_sqrt<-c(0.0:3302.4)
+a3_sqrt<-function(x){(0.2275481)*sqrt(log(x)*1000)}
+# plot(a3_sqrt(h3_sqrt), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit Inzidenz = 1000 sqrt-Modell")
 
 ########## 100
 summary(df4_pan$density)
-h<-c(66.0:4788.0)
-a<-function(x){(-0.0284347)*sqrt(log(x)*100)}
-plot(a(h), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 100 sqrt-Modell")
+h4_sqrt<-c(66.0:4788.0)
+a4_sqrt<-function(x){(-0.0284347)*sqrt(log(x)*100)}
+# plot(a4_sqrt(h4_sqrt), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 100 sqrt-Modell")
 
 summary(df4_pan$weightednbinz)
-h<-c(0.0:3302.4)
-a<-function(x){(0.2316856)*sqrt(log(x)*100)}
-plot(a(h), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekt für gewichtete Nachbar-Inzidenz mit Inzidenz = 100 sqrt-Modell")
+h5_sqrt<-c(0.0:3302.4)
+a5_sqrt<-function(x){(0.2316856)*sqrt(log(x)*100)}
+# plot(a5_sqrt(h5_sqrt), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekt für gewichtete Nachbar-Inzidenz mit Inzidenz = 100 sqrt-Modell")
 
 summary(df4_pan$hotspot)
-h<-c(0.0:3302.4)
-a<-function(x){(0.2275481)*sqrt(log(x)*100)}
-plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit Inzidenz = 100 sqrt-Modell")
+h6_sqrt<-c(0.0:3302.4)
+a6_sqrt<-function(x){(0.2275481)*sqrt(log(x)*100)}
+# plot(a6_sqrt(h6_sqrt), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit Inzidenz = 100 sqrt-Modell")
 
 ########## 10
 summary(df4_pan$density)
-h<-c(66.0:4788.0)
-a<-function(x){(-0.0284347)*sqrt(log(x)*10)}
-plot(a(h), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 10 sqrt-Modell")
+h7_sqrt<-c(66.0:4788.0)
+a7_sqrt<-function(x){(-0.0284347)*sqrt(log(x)*10)}
+# plot(a7_sqrt(h7_sqrt), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 10 sqrt-Modell")
 
 summary(df4_pan$weightednbinz)
-h<-c(0.0:3302.4)
-a<-function(x){(0.2316856)*sqrt(log(x)*10)}
-plot(a(h), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekt für gewichtete Nachbar-Inzidenz mit Inzidenz = 10 sqrt-Modell")
+h8_sqrt<-c(0.0:3302.4)
+a8_sqrt<-function(x){(0.2316856)*sqrt(log(x)*10)}
+# plot(a8_sqrt(h8_sqrt), xlab = "gewichtete Nachbar-Inzidenz", ylab = "Effekte") + title("Effekt für gewichtete Nachbar-Inzidenz mit Inzidenz = 10 sqrt-Modell")
 
 summary(df4_pan$hotspot)
-h<-c(0.0:3302.4)
-a<-function(x){(0.2275481)*sqrt(log(x)*10)}
-plot(a(h), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit Inzidenz = 10 sqrt-Modell")
+h9_sqrt<-c(0.0:3302.4)
+a9_sqrt<-function(x){(0.2275481)*sqrt(log(x)*10)}
+# plot(a9_sqrt(h9_sqrt), xlab = "Hotspot", ylab = "Effekte") + title("Effekt für Hotspot mit Inzidenz = 10 sqrt-Modell")
 
-#
+# Density SQRT Plots
+d_density <- data.frame(h1_sqrt, a1_sqrt(h1_sqrt), h4_sqrt, a4_sqrt(h4_sqrt), h7_sqrt, h7_sqrt(h7_sqrt))
+ggplot(d) + geom_point(aes(x = h1_sqrt, y = a1_sqrt(h1_sqrt)), size = 0.5) + geom_point(aes(x = h4_sqrt, y = a4_sqrt(h4_sqrt)), col = "darkgrey") +
+  geom_point(aes(x = h7_sqrt, y = a7_sqrt(h7_sqrt)), col = "blue")
