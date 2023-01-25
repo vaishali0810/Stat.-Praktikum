@@ -56,7 +56,7 @@ for(i in seq_along(list_wellen)) {
 o<-do.call(cbind,store_wellen)
 p<-as.matrix(o)
 p<-t(p)
-rownames(p)<-
+rownames(p)<-c("nullt", "erst", "zweit", "dritt", "viert", "fünft", "sechst", "siebt")
 
 pool.4 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1) 
             + I(log(density)*lag(inzidenz, 1)) + I(hotspot * lag(inzidenz, 1)) 
