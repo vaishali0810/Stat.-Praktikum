@@ -275,9 +275,15 @@ a6_sqrt<-function(x){(0.2275481)*sqrt(log(x)*100)}
 
 ########## 10
 summary(df4_pan$density)
+<<<<<<< HEAD
+h<-c(66.0:4788.0)
+a<-function(x){(-0.0284347)*sqrt(log(x)*10)}
+p6<-plot(a(h), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 10 sqrt-Modell")
+=======
 h7_sqrt<-c(66.0:4788.0)
 a7_sqrt<-function(x){(-0.0284347)*sqrt(log(x)*10)}
 # plot(a7_sqrt(h7_sqrt), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 10 sqrt-Modell")
+>>>>>>> 84f4657640ae704834f03f7ed48a3a45c6b0206a
 
 summary(df4_pan$weightednbinz)
 h8_sqrt<-c(0.0:3302.4)
