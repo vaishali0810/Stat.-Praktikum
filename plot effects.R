@@ -275,15 +275,9 @@ a6_sqrt<-function(x){(0.2275481)*sqrt(log(x)*100)}
 
 ########## 10
 summary(df4_pan$density)
-<<<<<<< HEAD
-h<-c(66.0:4788.0)
-a<-function(x){(-0.0284347)*sqrt(log(x)*10)}
-p6<-plot(a(h), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 10 sqrt-Modell")
-=======
 h7_sqrt<-c(66.0:4788.0)
 a7_sqrt<-function(x){(-0.0284347)*sqrt(log(x)*10)}
 # plot(a7_sqrt(h7_sqrt), xlab = "Dichte", ylab = "Effekte") + title("Effekt für Dichte mit Inzidenz = 10 sqrt-Modell")
->>>>>>> 84f4657640ae704834f03f7ed48a3a45c6b0206a
 
 summary(df4_pan$weightednbinz)
 h8_sqrt<-c(0.0:3302.4)
@@ -408,39 +402,42 @@ ggplot(d_density) + geom_point(aes(x = h1, y = a1(h1), colour = "Inzidenz = 1000
                                  'Inzidenz = 10'))
 
 # density_sqrt Plots
+colors <- c("Inzidenz = 1000" = "black", "Inzidenz = 100" = "red", "Inzidenz = 10" = "blue")
 par(mfrow = c(2,1))
-p1 <- ggplot(d_density) + geom_point(aes(x = h1, y = a1(h1), colour = "Inzidenz = 1000")) + 
-  geom_point(aes(x = h4, y = a4(h4),  colour = "Inzidenz = 100")) +
-  geom_point(aes(x = h7, y = a7(h7), colour = "Inzidenz = 10")) + 
+p1 <- ggplot(d_density) + geom_point(aes(x = h1, y = a1(h1), colour = "Inz = 1000")) + 
+  geom_point(aes(x = h4, y = a4(h4),  colour = "Inz = 100")) +
+  geom_point(aes(x = h7, y = a7(h7), colour = "Inz = 10")) + 
   xlab("Dichte") + ylab("Effekte") +
   ggtitle("Effekt Plot für Dichte") + 
-  theme(axis.text.x = element_text(size = 16, vjust = 1, hjust = 1, face = "bold")) +
-  theme(axis.text.y = element_text(size = 16, face = "bold")) +
-  theme(text = element_text(size = 23)) +
+  theme(axis.text.x = element_text(size = 20, vjust = 1, hjust = 1, face = "bold")) +
+  theme(axis.text.y = element_text(size = 20, face = "bold")) +
+  theme(text = element_text(size = 22)) +
   theme(panel.background = element_rect(fill = "white",
                                         colour = "white",
                                         size = 0.5, linetype = "solid"),
         panel.grid.major = element_line(size = 0.5, linetype = 'solid',
                                         colour = "grey"), 
         panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
-                                        colour = "white") )
+                                        colour = "white") ) +
+theme(legend.position="none")
 
 p1_sqrt <- ggplot(d_density_sqrt) +
-  geom_point(aes(x = h1_sqrt, y = a1_sqrt(h1_sqrt), color = "Inzidenz = 1000")) + 
-  geom_point(aes(x = h4_sqrt, y = a4_sqrt(h4_sqrt), color = "Inzidenz = 100")) +
-  geom_point(aes(x = h7_sqrt, y = a7_sqrt(h7_sqrt),color = "Inzidenz = 10")) + 
+  geom_point(aes(x = h1_sqrt, y = a1_sqrt(h1_sqrt), color = "Inz = 1000")) + 
+  geom_point(aes(x = h4_sqrt, y = a4_sqrt(h4_sqrt), color = "Inz = 100")) +
+  geom_point(aes(x = h7_sqrt, y = a7_sqrt(h7_sqrt),color = "Inz = 10")) + 
   xlab("Dichte") + ylab("Effekte") +
-  ggtitle("Effekt Plot für Dichte von sqrt-Modell") + 
-  theme(axis.text.x = element_text(size = 16, vjust = 1, hjust = 1, face = "bold")) +
-  theme(axis.text.y = element_text(size = 16, face = "bold")) +
-  theme(text = element_text(size = 23)) +
+  ggtitle("Effekt Plot für Dichte vom Wurzel-Modell") + 
+  theme(axis.text.x = element_text(size = 20, vjust = 1, hjust = 1, face = "bold")) +
+  theme(axis.text.y = element_text(size = 20, face = "bold")) +
+  theme(text = element_text(size = 22)) +
   theme(panel.background = element_rect(fill = "white",
                                         colour = "white",
                                         size = 0.5, linetype = "solid"),
         panel.grid.major = element_line(size = 0.5, linetype = 'solid',
                                         colour = "grey"), 
         panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
-                                        colour = "white") ) 
+                                        colour = "white") ) +
+  theme(legend.text=element_text(size=15), legend.title=element_blank())
 library(ggpubr)
 ggarrange(p1, p1_sqrt)
 
