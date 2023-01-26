@@ -1104,85 +1104,57 @@ r_squares<-cbind(weighted=weighted_r_squared,squareroot=sqrt_r_squared,pooled=po
 r_squares
 
 
-weighted.inzidenz1<-c(nullt=2.7668096,erst=0.5550713,zweit=0.1654423,
+weighted.inzidenz1<-c(sporadisch=2.7668096,erst=0.5550713,zweit=0.1654423,
                       dritt=0.6973943,viert=0.6789099,fuenft=-0.0253710,
                       sechst=0.7982215,siebt=0.5962823)
 
-weighted.wnbinzidenz1<-c(nullt=0.1252372,erst=0.1604687,zweit=0.1295247,
+weighted.wnbinzidenz1<-c(sporadisch=0.1252372,erst=0.1604687,zweit=0.1295247,
                          dritt=0.2010791,viert=0.1239203,fuenft=0.1880349,
                          sechst=0.1696918,siebt=0.2394618)
 
-weighted.densityInzidenz<-c(nullt=-0.4511571,erst=0.0048924,zweit=0.0521371,
+weighted.densityInzidenz<-c(sporadisch=-0.4511571,erst=0.0048924,zweit=0.0521371,
                             dritt=-0.0010754,viert=0.0066245,fuenft=0.0648796,
                             sechst=-0.0103242,siebt=-0.0208797)
 
-weighted.hotspotInzidenz<-c(nullt=7.4650833,erst=1.1136609,zweit=1.7558749,
+weighted.hotspotInzidenz<-c(sporadisch=7.4650833,erst=1.1136609,zweit=1.7558749,
                             dritt=0.6899014,viert=1.5667665,fuenft=1.8015844,
                             sechst=0.0523044,siebt=0.6132007)
 
-weighted.hotspotnbWnbinzidenz<-c(nullt=0.9125414,erst=0.4589981,zweit=0.1744875,
+weighted.hotspotnbWnbinzidenz<-c(sporadisch=0.9125414,erst=0.4589981,zweit=0.1744875,
                             dritt=0.2178449,viert=0.0587393,fuenft=0.2929069,
                             sechst=0.1808597,siebt=0.1405323)
 
-weighted.zweitimpfHotspot<-c(nullt=NA,erst=NA,zweit=NA,dritt=NA,viert=-66.1471685,
+weighted.zweitimpfHotspot<-c(sporadisch=NA,erst=NA,zweit=NA,dritt=NA,viert=-66.1471685,
                              fuenft=0.0376960,sechst=0.2212714,siebt=-2.3415206)
 
-weighted.A60.79<-c(nullt=0.0156210,erst=0.0199370,zweit=0.0054493,
+weighted.A60.79<-c(sporadisch=0.0156210,erst=0.0199370,zweit=0.0054493,
                    dritt=0.0090236,viert=-0.1665328,fuenft=-0.0023885,
                    sechst=-0.2483869,siebt=-4.2558274)
 
-
-sqrt.inzidenz1<-c(nullt=2.0972704,erst=0.63380679,zweit=0.3116570,
-                  dritt=0.70931053,viert=0.7176103,fuenft=0.17465442,
-                  sechst=0.7821665,siebt=0.5911434)
-
-sqrt.wnbinzidenz1<-c(nullt=0.1609981,erst=0.24580012,zweit=0.1418535,
-                     dritt=0.23850670,viert=0.1283686,fuenft=0.27144742,
-                     sechst=0.1842323,siebt=0.2374102)
-
-sqrt.densityInzidenz<-c(nullt=-0.3439453,erst=-0.00020297,zweit=0.0365050,
-                        dritt=-0.00075521,viert=0.0042699,fuenft=0.04543828,
-                        sechst=-0.0057843,siebt=-0.0106490)
-
-sqrt.hotspotInzidenz<-c(nullt=2.8067334,erst=0.34067481,zweit=0.5744111,
-                        dritt=0.22086662,viert=0.6528536,fuenft=0.58125082,
-                        sechst=0.0843292,siebt=0.2095512)
-
-sqrt.hotspotnbWnbinzidenz<-c(nullt=0.5591390,erst=0.13501991,zweit=0.1689080,
-                             dritt=0.08500171,viert=0.1263817,fuenft=0.18297279,
-                             sechst=0.1053626,siebt=0.0491935)
-
-sqrt.zweitimpfHotspot<-c(nullt=NA,erst=NA,zweit=NA,dritt=NA,viert=-5.0652841,
-                         fuenft=0.00567384,sechst=0.0095237,siebt=-0.0402019)
-
-sqrt.A60.79<-c(nullt=0.0118842,erst=0.00493577,zweit=0.0035951,dritt=0.00282902,
-               viert=-0.0214177,fuenft=-0.00060437,sechst=-0.0203527,siebt=-0.1207974)
-
-
-pooled.inzidenz1<-c(nullt=5.3474577,erst=0.6811960,zweit=0.4670898,
+pooled.inzidenz1<-c(sporadisch=5.3474577,erst=0.6811960,zweit=0.4670898,
                     dritt=0.7174329,viert=0.7029977,fuenft=0.018152,
                     sechst=0.8247824,siebt=0.5815510)
 
-pooled.wnbinzidenz1<-c(nullt=0.1286365,erst=0.1625975,zweit=0.0703312,
+pooled.wnbinzidenz1<-c(sporadisch=0.1286365,erst=0.1625975,zweit=0.0703312,
                        dritt=0.1976777,viert=0.1286938,fuenft=0.155424,
                        sechst=0.1609298,siebt=0.2777451)
 
-pooled.densityInzidenz<-c(nullt=-0.9066297,erst=-0.0036743,zweit=0.0250933,
+pooled.densityInzidenz<-c(sporadisch=-0.9066297,erst=-0.0036743,zweit=0.0250933,
                           dritt=-0.0010176,viert=0.0072035,fuenft=0.065162,
                           sechst=-0.0141249,siebt=-0.0238211)
 
-pooled.hotspotInzidenz<-c(nullt=10.1933767,erst=1.0282582,zweit=1.5258893,
+pooled.hotspotInzidenz<-c(sporadisch=10.1933767,erst=1.0282582,zweit=1.5258893,
                           dritt=0.6533205,viert=1.5249491,fuenft=1.539005,
                           sechst=-0.0372353,siebt=0.5708867)
 
-pooled.hotspotnbWnbinzidenz<-c(nullt=0.8150946,erst=0.5087354,zweit=0.3034571,
+pooled.hotspotnbWnbinzidenz<-c(sporadisch=0.8150946,erst=0.5087354,zweit=0.3034571,
                                dritt=0.2363805,viert=0.1554143,fuenft=0.277433,
                                sechst=0.1148830,siebt=0.1179980)
 
-pooled.zweitimpfHotspot<-c(nullt=NA,erst=NA,zweit=NA,dritt=NA,viert=-69.4829645,
+pooled.zweitimpfHotspot<-c(sporadisch=NA,erst=NA,zweit=NA,dritt=NA,viert=-69.4829645,
                            fuenft=-0.014969,sechst=0.0487976,siebt=-2.2045901)
 
-pooled.A60.79<-c(nullt=0.0188747,erst=0.0156790,zweit=-0.0010253,dritt=0.0648375,
+pooled.A60.79<-c(sporadisch=0.0188747,erst=0.0156790,zweit=-0.0010253,dritt=0.0648375,
                  viert=-0.2973884,fuenft=-0.021424,sechst=-0.5230795,siebt=-6.0371608)
 
 
@@ -1199,4 +1171,78 @@ df.densityInzidenz<-cbind(pooled.densityInzidenz,weighted.densityInzidenz,sqrt.d
 df.wnbinzidenz1<-cbind(pooled.wnbinzidenz1,weighted.wnbinzidenz1,sqrt.wnbinzidenz1)
   
 df.inzidenz1<-cbind(pooled.inzidenz1,weighted.inzidenz1,sqrt.inzidenz1)
+
+
+
+df.A60.79<-cbind(pooled.A60.79,sqrt.A60.79)
+
+df.zweitimpfHotspot<-cbind(pooled.zweitimpfHotspot,sqrt.zweitimpfHotspot)
+
+df.hotspotnbWnbinzidenz<-cbind(pooled.hotspotnbWnbinzidenz,sqrt.hotspotnbWnbinzidenz)
+
+df.hotspotInzidenz<-cbind(pooled.hotspotInzidenz,sqrt.hotspotInzidenz)
+
+df.densityInzidenz<-cbind(pooled.densityInzidenz,sqrt.densityInzidenz)
+
+df.wnbinzidenz1<-cbind(pooled.wnbinzidenz1,sqrt.wnbinzidenz1)
+
+df.inzidenz1<-cbind(pooled.inzidenz1,sqrt.inzidenz1)
+
+
+
+sqrt.inzidenz1<-c(model.value=0.64025401,sporadisch=2.0972704,ersteWelle=0.63380679,sommerplateau20=0.3116570,
+                  zweiteWelle=0.70931053,dritteWelle=0.7176103,sommerplateau21=0.17465442,
+                  vierteWelle=0.7821665,fuenfteWelle=0.5911434)
+
+sqrt.inzidenz1<-as.data.frame(sqrt.inzidenz1)
+
+colnames(sqrt.inzidenz1)<-"lag(Inz,1)"
+
+sqrt.wnbinzidenz1<-c(model.value=0.23179853,sporadisch=0.1609981,ersteWelle=0.24580012,sommerplateau20=0.1418535,
+                     zweiteWelle=0.23850670,dritteWelle=0.1283686,sommerplateau21=0.27144742,
+                     vierteWelle=0.1842323,fuenfteWelle=0.2374102)
+
+sqrt.wnbinzidenz1<-as.data.frame(sqrt.wnbinzidenz1)
+
+colnames(sqrt.wnbinzidenz1)<-"sqrt(lag(NB.inz,1))"
+
+sqrt.densityInzidenz<-c(model.value=-0.00582599,sporadisch=-0.3439453,ersteWelle=-0.00020297,sommerplateau20=0.0365050,
+                        zweiteWelle=-0.00075521,dritteWelle=0.0042699,sommerplateau21=0.04543828,
+                        vierteWelle=-0.0057843,fuenfteWelle=-0.0106490)
+
+sqrt.densityInzidenz<-as.data.frame(sqrt.densityInzidenz)
+
+colnames(sqrt.densityInzidenz)<-"ln(Dichte)*sqrt(lag(Inz,1))"
+
+sqrt.hotspotInzidenz<-c(model.value=0.22953751,sporadisch=2.8067334,ersteWelle=0.34067481,sommerplateau20=0.5744111,
+                        zweiteWelle=0.22086662,dritteWelle=0.6528536,sommerplateau21=0.58125082,
+                        vierteWelle=0.0843292,fuenfteWelle=0.2095512)
+
+sqrt.hotspotInzidenz<-as.data.frame(sqrt.hotspotInzidenz)
+
+colnames(sqrt.hotspotInzidenz)<-"Hotspot*sqrt(lag(Inz,1))"
+
+sqrt.hotspotnbWnbinzidenz<-c(model.value=0.06910794,sporadisch=0.5591390,ersteWelle=0.13501991,sommerplateau20=0.1689080,
+                             zweiteWelle=0.08500171,dritteWelle=0.1263817,sommerplateau21=0.18297279,
+                             vierteWelle=0.1053626,fuenfteWelle=0.0491935)
+
+sqrt.hotspotnbWnbinzidenz<-as.data.frame(sqrt.hotspotnbWnbinzidenz)
+
+colnames(sqrt.hotspotnbWnbinzidenz)<-"NB.hotspot*sqrt(lag(NB.inz,1))"
+
+sqrt.zweitimpfHotspot<-c(model.value=-0.03336469,sporadisch=NA,ersteWelle=NA,sommerplateau20=NA,zweiteWelle=NA,dritteWelle=-5.0652841,
+                         sommerplateau21=0.00567384,vierteWelle=0.0095237,fuenfteWelle=-0.0402019)
+
+sqrt.zweitimpfHotspot<-as.data.frame(sqrt.zweitimpfHotspot)
+
+colnames(sqrt.zweitimpfHotspot)<-"Hotspot*Zweitimpfrate"
+
+sqrt.A60.79<-c(model.value=-0.00311676,sporadisch=0.0118842,ersteWelle=0.00493577,sommerplateau20=0.0035951,zweiteWelle=0.00282902,
+               dritteWelle=-0.0214177,sommerplateau21=-0.00060437,vierteWelle=-0.0203527,fuenfteWelle=-0.1207974)
+
+sqrt.A60.79<-as.data.frame(sqrt.A60.79)
+
+colnames(sqrt.A60.79)<-"Anteil.A60.79"
+
+
 
