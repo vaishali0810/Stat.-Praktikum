@@ -92,7 +92,7 @@ as.data.frame(df_wellen_plot)
 my_labels <- as.character(c(4:53, 1:52, 1:46))
 df_wellen_plot
 
-ggplot(df_wellen_plot, aes(x = KW, y = Inz)) + geom_bar(stat='identity') +
+ggplot(df_wellen_plot, aes(x = KW, y = Inz/96)) + geom_bar(stat='identity') +
   xlab("Kalendarwoche") + ylab("Inzidenz") + ggtitle("Inzidenzen in Bayern") + 
   theme(axis.text.x = element_text(size = 20, vjust = 1, hjust = 1, face = "bold")) +
   theme(axis.text.y = element_text(size = 20, face = "bold")) +
@@ -104,6 +104,5 @@ ggplot(df_wellen_plot, aes(x = KW, y = Inz)) + geom_bar(stat='identity') +
                                         colour = "grey"), 
         panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
                                         colour = "white") ) +
-  theme(legend.text=element_text(size=15), legend.title=element_blank()) +
-  scale_x_discrete(labels=my_labels)
+  theme(legend.text=element_text(size=15), legend.title=element_blank()) 
 
