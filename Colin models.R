@@ -1142,3 +1142,5 @@ pool.sqrt.actual.lag <- plm(sqrt(inzidenz) ~ sqrt(lag(inzidenz, 1)) + sqrt(lag(w
                         + factor(week)
                         , data =df4_pan, model = "pooling")
 coeftest(pool.sqrt.actual.lag, vcovHC(pool.sqrt.actual.lag, type = "HC0"))
+
+plot(as.vector(fitted.values(pool.sqrt.actual.lag)), as.vector(residuals(pool.sqrt.actual.lag)))
