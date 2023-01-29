@@ -83,4 +83,27 @@ pool.7 <- plm(inzidenz ~ lag(inzidenz, 1) + lag(weightednbinz, 1)
               + factor(week)
               , data =siebt, model = "pooling", index=c("district", "week"))
 
+## Wellen plot
+df_wellen_plot <- aggregate(df4$inzidenz,
+                            by = list(df4$Kalendarwoche),
+                            FUN = sum)
+colnames(df_wellen_plot) <- c("KW", "Inz")
+as.data.frame(df_wellen_plot)
+my_labels <- as.character(c(4:53, 1:52, 1:46))
+df_wellen_plot
+
+ggplot(df_wellen_plot, aes(x = KW, y = Inz)) + geom_bar(stat='identity') +
+  xlab("Kalendarwoche") + ylab("Inzidenz") + ggtitle("Inzidenzen in Bayern") + 
+  theme(axis.text.x = element_text(size = 20, vjust = 1, hjust = 1, face = "bold")) +
+  theme(axis.text.y = element_text(size = 20, face = "bold")) +
+  theme(text = element_text(size = 22)) +
+  theme(panel.background = element_rect(fill = "white",
+                                        colour = "white",
+                                        size = 0.5, linetype = "solid"),
+        panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+                                        colour = "grey"), 
+        panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+                                        colour = "white") ) +
+  theme(legend.text=element_text(size=15), legend.title=element_blank()) +
+  scale_x_discrete(labels=my_labels)
 
