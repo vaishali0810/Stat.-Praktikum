@@ -439,6 +439,4 @@ ggplot(d_density_sqrt) +
                                         colour = "white") ) +
   theme(legend.text=element_text(size=22), legend.title=element_blank())
   
-library(ggpubr)
-ggarrange(p1, p1_sqrt)
-expression(sqrt(x)))
+  
