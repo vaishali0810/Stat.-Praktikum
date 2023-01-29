@@ -67,12 +67,12 @@ p2 <- plot(formula = pool.sqrt.actual$residuals ~s$weightednbinz1 , xlab = "lag(
 p3 <- plot(formula = pool.sqrt.actual$residuals ~ s$density_inzidenz1, xlab = "log(Dichte) * lag(Inz, 1) ", 
            ylab = "Residuen", cex.axis = 2,pch=23,cex=0.5,col=alpha("black",0.8)) +abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
 
-p4 <- plot(formula = pool.sqrt.actual$residuals ~ s$hotspot_inzidenz1, xlab = "Hotspot * lag(Inz, 1)", 
-           ylab = "Residuen", cex.axis = 2,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
-
 mtext("Residuen Plots vom Wurzel-Modell", side = 3, line = -2, outer = TRUE, font = 2, cex = 2.4)
 
 par(mfrow = c(2, 2), cex.lab = 2.2)
+p4 <- plot(formula = pool.sqrt.actual$residuals ~ s$hotspot_inzidenz1, xlab = "Hotspot * lag(Inz, 1)", 
+           ylab = "Residuen", cex.axis = 2,pch=23,cex=0.5, col=alpha("black",0.8))+abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
+
 p5 <- plot(formula = pool.sqrt.actual$residuals ~ s$hotspotnb_wnbinzidenz1, xlab = "NB.Hotspot * lag(NB.Inz, 1)", 
            ylab = "Residuen", cex.axis = 2,pch=23, cex=0.5, col=alpha("black",0.8)) +abline(h = 0, col = adjustcolor("black",alpha=0.5), lwd = 2, lty = "longdash")
 

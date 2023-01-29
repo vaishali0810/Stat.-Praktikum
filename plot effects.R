@@ -421,15 +421,15 @@ p1 <- ggplot(d_density) + geom_point(aes(x = h1, y = a1(h1), colour = "Inz = 100
                                         colour = "white") ) +
 theme(legend.position="none")
 
-p1_sqrt <- ggplot(d_density_sqrt) +
+ggplot(d_density_sqrt) +
   geom_point(aes(x = h1_sqrt, y = a1_sqrt(h1_sqrt), color = "Inz = 1000")) + 
   geom_point(aes(x = h4_sqrt, y = a4_sqrt(h4_sqrt), color = "Inz = 100")) +
   geom_point(aes(x = h7_sqrt, y = a7_sqrt(h7_sqrt),color = "Inz = 10")) + 
   xlab("Dichte") + ylab("Effekte") +
   ggtitle("Effekt Plot für Dichte vom Wurzel-Modell") + 
-  theme(axis.text.x = element_text(size = 20, vjust = 1, hjust = 1, face = "bold")) +
-  theme(axis.text.y = element_text(size = 20, face = "bold")) +
-  theme(text = element_text(size = 22)) +
+  theme(axis.text.x = element_text(size = 24, vjust = 1, hjust = 1, face = "bold")) +
+  theme(axis.text.y = element_text(size = 24, face = "bold")) +
+  theme(text = element_text(size = 26)) +
   theme(panel.background = element_rect(fill = "white",
                                         colour = "white",
                                         size = 0.5, linetype = "solid"),
@@ -437,7 +437,8 @@ p1_sqrt <- ggplot(d_density_sqrt) +
                                         colour = "grey"), 
         panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
                                         colour = "white") ) +
-  theme(legend.text=element_text(size=15), legend.title=element_blank())
+  theme(legend.text=element_text(size=22), legend.title=element_blank())
+  
 library(ggpubr)
 ggarrange(p1, p1_sqrt)
-
+expression(sqrt(x)))
