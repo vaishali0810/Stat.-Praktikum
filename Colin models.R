@@ -1123,3 +1123,22 @@ pool.sqrt.actual <- plm(sqrt(inzidenz) ~ sqrt(lag(inzidenz, 1)) + sqrt(lag(weigh
 coeftest(pool.sqrt.actual, vcovHC(pool.sqrt.actual, type = "HC0"))
 plot(as.vector(fitted.values(pool.sqrt.actual)), as.vector(residuals(pool.sqrt.actual)))
 #.
+
+
+
+
+pool.sqrt.actual.15.34 <- plm(sqrt(inzidenz) ~ sqrt(lag(inzidenz, 1)) + sqrt(lag(weightednbinz, 1))
+                        + I(log(density)*sqrt(lag(inzidenz, 1))) + I(hotspot * sqrt(lag(inzidenz, 1))) 
+                        + I(hotspotnb * sqrt(lag(weightednbinz, 1))) + I(rate_zweitimpf * hotspot)
+                        + lag(A15.34.Anteil, 1)
+                        + factor(week)
+                        , data =df4_pan, model = "pooling")
+coeftest(pool.sqrt.actual.15.34, vcovHC(pool.sqrt.actual.15.34, type = "HC0"))
+
+pool.sqrt.actual.lag <- plm(sqrt(inzidenz) ~ sqrt(lag(inzidenz, 1)) + sqrt(lag(weightednbinz, 1))
+                        + I(log(density)*sqrt(lag(inzidenz, 1))) + I(hotspot * sqrt(lag(inzidenz, 1))) 
+                        + I(hotspotnb * sqrt(lag(weightednbinz, 1))) + I(lag(rate_zweitimpf,1) * hotspot)
+                        + lag(A60.79.Anteil, 1)
+                        + factor(week)
+                        , data =df4_pan, model = "pooling")
+coeftest(pool.sqrt.actual.lag, vcovHC(pool.sqrt.actual.lag, type = "HC0"))
