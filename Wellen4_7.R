@@ -89,8 +89,7 @@ df_wellen_plot <- aggregate(df4$inzidenz,
                             FUN = sum)
 colnames(df_wellen_plot) <- c("KW", "Inz")
 as.data.frame(df_wellen_plot)
-my_labels <- as.character(c(4:53, 1:52, 1:46))
-df_wellen_plot
+df_wellen_plot <- df_wellen_plot[-c(124:148), ]
 
 ggplot(df_wellen_plot, aes(x = KW, y = Inz/96)) + geom_bar(stat='identity') +
   xlab("Kalendarwoche") + ylab("Inzidenz") + ggtitle("Inzidenzen in Bayern") + 
@@ -104,5 +103,32 @@ ggplot(df_wellen_plot, aes(x = KW, y = Inz/96)) + geom_bar(stat='identity') +
                                         colour = "grey"), 
         panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
                                         colour = "white") ) +
-  theme(legend.text=element_text(size=15), legend.title=element_blank()) 
+  theme(legend.text=element_text(size=15), legend.title=element_blank()) +
+  geom_vline(xintercept = as.numeric(c("5", "10", "21", "40", "59","75", "84", "105")), color = "black", size = 1, ) +
+  annotate("rect", fill = "lightgoldenrod1", alpha = 0.4, 
+           xmin = as.numeric(c(5)) -0.5, xmax = as.numeric(c(10)) +0.5,
+           ymin = 0, ymax = Inf) +
+  annotate("rect", fill = "skyblue1", alpha = 0.4, 
+           xmin = as.numeric(c(10)) -0.5, xmax = as.numeric(c(21)) +0.5,
+           ymin = 0, ymax = Inf) +
+  annotate("rect", fill = "lightgoldenrod1", alpha = 0.4, 
+           xmin = as.numeric(c(21)) -0.5, xmax = as.numeric(c(40)) +0.5,
+           ymin = 0, ymax = Inf) +
+  annotate("rect", fill = "skyblue1", alpha = 0.4, 
+           xmin = as.numeric(c(41)) -0.5, xmax = as.numeric(c(59)) +0.5,
+           ymin = 0, ymax = Inf) +
+  annotate("rect", fill = "skyblue2", alpha = 0.4, 
+           xmin = as.numeric(c(60)) -0.5, xmax = as.numeric(c(75)) +0.5,
+           ymin = 0, ymax = Inf) +
+  annotate("rect", fill = "lightgoldenrod1", alpha = 0.4, 
+           xmin = as.numeric(c(76)) -0.5, xmax = as.numeric(c(84)) +0.5,
+           ymin = 0, ymax = Inf) +
+  annotate("rect", fill = "skyblue1", alpha = 0.4, 
+           xmin = as.numeric(c(85)) -0.5, xmax = as.numeric(c(105)) +0.5,
+           ymin = 0, ymax = Inf) +
+  annotate("rect", fill = "skyblue2", alpha = 0.4, 
+           xmin = as.numeric(c(106)) -0.5, xmax = as.numeric(c(124)) +0.5,
+           ymin = 0, ymax = Inf) +
+  scale_y_continuous(limits = c(0, 2500))
+  
 
