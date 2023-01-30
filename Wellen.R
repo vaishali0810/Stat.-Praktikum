@@ -306,19 +306,36 @@ sum.sqrt.zweit.b <-summary(pool.sqrt.zweit.b)
 sum.sqrt.sechst.a <-summary(pool.sqrt.sechst.a)
 sum.sqrt.sechst.b <-summary(pool.sqrt.sechst.b)
 
-sum.sqrt.nullt$r.squared
-sum.sqrt.erst$r.squared
-sum.sqrt.zweit$r.squared
-sum.sqrt.dritt$r.squared
-sum.sqrt.viert$r.squared
-sum.sqrt.fuenft$r.squared
-sum.sqrt.sechst$r.squared
-sum.sqrt.siebt$r.squared
+sporadisch<-sum.sqrt.nullt$r.squared[2]
+ersteWelle<-sum.sqrt.erst$r.squared[2]
+sommerplateau20<-sum.sqrt.zweit$r.squared[2]
+zweiteWelle<-sum.sqrt.dritt$r.squared[2]
+dritteWelle<-sum.sqrt.viert$r.squared[2]
+sommerplateau21<-sum.sqrt.fuenft$r.squared[2]
+vierteWelle<-sum.sqrt.sechst$r.squared[2]
+fuenfteWelle<-sum.sqrt.siebt$r.squared[2]
+
+
+
+Rsquared<-rbind(sporadisch,ersteWelle,sommerplateau20,zweiteWelle,dritteWelle,sommerplateau21,vierteWelle,fuenfteWelle)
+
+Rsquared
+
+
+
+
+
+
+### nicht relevant
+
 sum.sqrt.zweit.a$r.squared
 sum.sqrt.zweit.b$r.squared
 sum.sqrt.sechst.a$r.squared
 sum.sqrt.sechst.b$r.squared
 
+Rsquared<-rbind(sporadisch,ersteWelle,sommerplateau20,zweiteWelle,dritteWelle,sommerplateau21,vierteWelle,fuenfteWelle)
+
+Rsquared
 
 
 nullt_pan<-pdata.frame(nullt,index=c("district","week"))
