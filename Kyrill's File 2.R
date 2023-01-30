@@ -49,11 +49,11 @@ library(dplyr)
 
 ## Schwaben
 dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"LK Aichach-Friedberg"="Schwaben","SK Augsburg"="Schwaben",
-                                     "LK Augsburg"="Schwaben","LK Dillingen a.d.Donau"="Schwaben",
-                                     "LK Donau-Ries"="Schwaben","LK Günzburg"="Schwaben","LK Lindau"="Schwaben",
-                                     "LK Neu-Ulm"="Schwaben","LK Oberallgäu"="Schwaben","LK Ostallgäu"="Schwaben",
-                                     "LK Unterallgäu"="Schwaben","SK Kaufbeuren"="Schwaben","SK Kempten"="Schwaben",
-                                     "SK Memmingen"="Schwaben"))
+                                        "LK Augsburg"="Schwaben","LK Dillingen a.d.Donau"="Schwaben",
+                                        "LK Donau-Ries"="Schwaben","LK Günzburg"="Schwaben","LK Lindau"="Schwaben",
+                                        "LK Neu-Ulm"="Schwaben","LK Oberallgäu"="Schwaben","LK Ostallgäu"="Schwaben",
+                                        "LK Unterallgäu"="Schwaben","SK Kaufbeuren"="Schwaben","SK Kempten"="Schwaben",
+                                        "SK Memmingen"="Schwaben"))
 ## Oberfranken
 dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"SK Bamberg"="Oberfranken","SK Bayreuth"="Oberfranken",
                                         "SK Coburg"="Oberfranken","SK Hof"="Oberfranken","LK Bamberg"="Oberfranken",
@@ -73,7 +73,7 @@ dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"SK München" = "Oberbayern", "SK
                                         "LK Pfaffenhofen a.d.Ilm" = "Oberbayern", "LK Rosenheim" = "Oberbayern", "LK Starnberg" = "Oberbayern", 
                                         "LK Traunstein" = "Oberbayern", "LK Weilheim-Schongau" = "Oberbayern", 
                                         "LK Erding" = "Oberbayern", "LK Bad Reichenhall" = "Oberbayern","LK Fürstenfeldbruck"="Oberbayern",
-                                        ))
+))
 
 dbayern<-dbayern%>%mutate(bezirk=recode(bezirk,"LK Aschaffenburg" = "Unterfranken", "LK Aschaffenburg" = "Unterfranken",
                                         "LK Haßberge" = "Unterfranken", "LK Kitzingen" = "Unterfranken",
@@ -113,8 +113,8 @@ vector23<-c(summary(dbayern$district))
 vector23names<-names(vector23)
 Storage<-list()
 for(i in 1:length(vector23names)){
-   Storage[[i]]<-dbayern[dbayern$district==vector23names[i],]
- }
+  Storage[[i]]<-dbayern[dbayern$district==vector23names[i],]
+}
 # View(Storage)
 
 ## Nach Datum sortieren
@@ -180,8 +180,8 @@ for(i in 1:length(bezirk_names)){
 #                                                cases)/population) * 100000)
 #  
 #}
-  
-  
+
+
 Storage7<-Storage6
 for(i in 1:length(bezirk_names)){
   Storage7[[i]]<-Storage7[[i]]%>%arrange(gender)
@@ -252,7 +252,7 @@ c1<-seq(as.Date(a), as.Date(b), "days")
 c1<-as.data.frame(c)
 colnames(c1)[1] <- "date"
 y1<-merge(Storage9[[1]],c1, by="date",
-         all.x=TRUE, all.y=TRUE)
+          all.x=TRUE, all.y=TRUE)
 v1<-y1$cases
 index1<-is.na(v1)
 v1[index]<-0
@@ -268,18 +268,18 @@ yfem1<-subset(y1,gender=="W")
 yunk1<-subset(y1,gender=="unbekannt")
 
 smal1<-aggregate(x = ymal1$cases,               
-                by = list(ymal1$date),              
-                FUN = sum)
+                 by = list(ymal1$date),              
+                 FUN = sum)
 smal1<-mutate(smal1, gender ="M")
 
 sfem1<-aggregate(x = yfem1$cases,               
-                by = list(yfem1$date),              
-                FUN = sum)
+                 by = list(yfem1$date),              
+                 FUN = sum)
 sfem1<-mutate(sfem1, gender ="W")
 
 sunk1<-aggregate(x = yunk1$cases,               
-                by = list(yunk1$date),              
-                FUN = sum)
+                 by = list(yunk1$date),              
+                 FUN = sum)
 sunk1<-mutate(sunk1, gender ="U")
 
 sall1<-rbind(smal1,sfem1,sunk1)
@@ -316,7 +316,7 @@ smal2<-aggregate(x = ymal2$cases,
 smal2<-mutate(smal2, gender ="M")
 
 sfem2<-aggregate(x = yfem2$cases,               
-                by = list(yfem2$date),              
+                 by = list(yfem2$date),              
                  FUN = sum)
 sfem2<-mutate(sfem2, gender ="W")
 
@@ -396,7 +396,7 @@ yfem4<-subset(y4,gender=="W")
 yunk4<-subset(y4,gender=="unbekannt")
 
 smal4<-aggregate(x = ymal4$cases,               
-                by = list(ymal4$date),              
+                 by = list(ymal4$date),              
                  FUN = sum)
 smal4<-mutate(smal4, gender ="M")
 
@@ -563,9 +563,9 @@ ggplot(sall7, aes(Group.1,x,color = gender)) +
 
 
 #for(i in 1:length(Storage2)){
- # for(j in 1:681){
-  #  Storage2[[i]][Storage2[[i]]$date==2020-12-26+j,26]<-sum(Storage2[[i]][Storage2[[i]]$date==2020-12-26+j,15])+sum(Storage2[[i]][Storage2[[i]]$date==2020-12-26+(j-1),15])
-  #}
+# for(j in 1:681){
+#  Storage2[[i]][Storage2[[i]]$date==2020-12-26+j,26]<-sum(Storage2[[i]][Storage2[[i]]$date==2020-12-26+j,15])+sum(Storage2[[i]][Storage2[[i]]$date==2020-12-26+(j-1),15])
+#}
 #}
 
 #View(Storage2[[1]])
@@ -817,7 +817,7 @@ for(i in 1:length(vector33)){
 View(Storage01[[1]])
 
 for(i in 1:length(Storage01))
-Storage01[[i]] <- Storage01[[i]] %>% 
+  Storage01[[i]] <- Storage01[[i]] %>% 
   mutate(week = cut.Date(date, breaks = "1 week", labels = FALSE)) %>% 
   arrange(date)
 
@@ -832,7 +832,7 @@ View(Storage012[[1]])
 #library(lubridate)
 
 #View(Storage01[[69]])
-  
+
 Storage012[[69]]<-Storage01[[69]]%>%select(date,`M.A00-04`,week)
 
 Storage012[[69]]<-Storage01[[69]]%>%group_by(week)%>%summarise(`M.A00-04`=sum(`M.A00-04`),.groups="keep")
@@ -881,7 +881,7 @@ subscript2<-levels(subscript1)
 
 for(i in 1:length(vector33)){
   for(j in 1:nrow(Storage_new))
-  Storage_new[[i]][j,4]<-Storage01[[i]][j,4]
+    Storage_new[[i]][j,4]<-Storage01[[i]][j,4]
 }
 
 
@@ -1121,8 +1121,8 @@ weighted.hotspotInzidenz<-c(sporadisch=7.4650833,erst=1.1136609,zweit=1.7558749,
                             sechst=0.0523044,siebt=0.6132007)
 
 weighted.hotspotnbWnbinzidenz<-c(sporadisch=0.9125414,erst=0.4589981,zweit=0.1744875,
-                            dritt=0.2178449,viert=0.0587393,fuenft=0.2929069,
-                            sechst=0.1808597,siebt=0.1405323)
+                                 dritt=0.2178449,viert=0.0587393,fuenft=0.2929069,
+                                 sechst=0.1808597,siebt=0.1405323)
 
 weighted.zweitimpfHotspot<-c(sporadisch=NA,erst=NA,zweit=NA,dritt=NA,viert=-66.1471685,
                              fuenft=0.0376960,sechst=0.2212714,siebt=-2.3415206)
@@ -1169,7 +1169,7 @@ df.hotspotInzidenz<-cbind(pooled.hotspotInzidenz,weighted.hotspotInzidenz,sqrt.h
 df.densityInzidenz<-cbind(pooled.densityInzidenz,weighted.densityInzidenz,sqrt.densityInzidenz)
 
 df.wnbinzidenz1<-cbind(pooled.wnbinzidenz1,weighted.wnbinzidenz1,sqrt.wnbinzidenz1)
-  
+
 df.inzidenz1<-cbind(pooled.inzidenz1,weighted.inzidenz1,sqrt.inzidenz1)
 
 
@@ -1190,18 +1190,20 @@ df.inzidenz1<-cbind(pooled.inzidenz1,sqrt.inzidenz1)
 
 
 
-sqrt.inzidenz1<-c(model.value=0.64026677,sporadisch=1.7275431,ersteWelle=0.63730532,sommerplateau20=0.71085,
-                  zweiteWelle=0.70817868,dritteWelle=0.7176103,sommerplateau21=0.1752151,
+sqrt.inzidenz1<-c(model.value=0.64026677,sporadisch=1.7275431,ersteWelle=0.63730532,sommerplateau20=0.3267231,
+                  zweiteWelle=0.710850,dritteWelle=0.7176103,sommerplateau21=0.1752151,
                   vierteWelle=0.7799930,fuenfteWelle=0.5799259)
 sqrt.inzidenz1<-as.data.frame(sqrt.inzidenz1)
 colnames(sqrt.inzidenz1)<-"lag(Inz,1)"
+
 sqrt.wnbinzidenz1<-c(model.value=0.23171750,sporadisch=0.1453111,ersteWelle=0.24599765,sommerplateau20=0.1434222,
                      zweiteWelle=0.23873,dritteWelle=0.12683469,sommerplateau21=0.2693283,
                      vierteWelle=0.1877512,fuenfteWelle=0.2394195)
 sqrt.wnbinzidenz1<-as.data.frame(sqrt.wnbinzidenz1)
 colnames(sqrt.wnbinzidenz1)<-"sqrt(lag(NB.inz,1))"
+
 sqrt.densityInzidenz<-c(model.value=-0.00584863,sporadisch=-0.2705284,ersteWelle=-0.00020297,sommerplateau20=0.0365050,
-                        zweiteWelle=-0.00075521,dritteWelle=0.0042699,sommerplateau21=0.04543828,
+                        zweiteWelle=-0.0009883, dritteWelle=0.0042699,sommerplateau21=0.04543828,
                         vierteWelle=-0.0057843,fuenfteWelle=-0.0106490)
 
 sqrt.densityInzidenz<-as.data.frame(sqrt.densityInzidenz)
@@ -1213,19 +1215,25 @@ sqrt.hotspotInzidenz<-c(model.value=0.23092034,sporadisch=3.4252897,ersteWelle=0
                         vierteWelle=0.0843292,fuenfteWelle=0.2095512)
 sqrt.hotspotInzidenz<-as.data.frame(sqrt.hotspotInzidenz)
 colnames(sqrt.hotspotInzidenz)<-"Hotspot*sqrt(lag(Inz,1))"
+
 sqrt.hotspotnbWnbinzidenz<-c(model.value=0.06928206,sporadisch=0.6256243,ersteWelle=0.13501991,sommerplateau20=0.1689080,
                              zweiteWelle=0.08500171,dritteWelle=0.1263817,sommerplateau21=0.18297279,
                              vierteWelle=0.1053626,fuenfteWelle=0.0491935)
 sqrt.hotspotnbWnbinzidenz<-as.data.frame(sqrt.hotspotnbWnbinzidenz)
 colnames(sqrt.hotspotnbWnbinzidenz)<-"NB.hotspot*sqrt(lag(NB.inz,1))"
-sqrt.zweitimpfHotspot<-c(model.value=-0.03427165,sporadisch=NA,ersteWelle=NA,sommerplateau20=NA,zweiteWelle=NA,dritteWelle=-5.0652841,
-                         sommerplateau21=0.00567384,vierteWelle=0.0095237,fuenfteWelle=-0.0402019)
+
+sqrt.zweitimpfHotspot<-c(model.value=-0.03427165,sporadisch=NA,ersteWelle=NA,sommerplateau20=NA,zweiteWelle=NA,dritteWelle=-2.60577324,
+                         sommerplateau21= 0.0053421,vierteWelle=0.0120367,fuenfteWelle=-0.0447972)
 sqrt.zweitimpfHotspot<-as.data.frame(sqrt.zweitimpfHotspot)
 colnames(sqrt.zweitimpfHotspot)<-"Hotspot*Zweitimpfrate"
-sqrt.A60.79<-c(model.value=-0.00373027,sporadisch=-0.0163743,ersteWelle=0.00493577,sommerplateau20=0.0035951,zweiteWelle=0.00282902,
-               dritteWelle=-0.0214177,sommerplateau21=-0.00060437,vierteWelle=-0.0203527,fuenfteWelle=-0.1207974)
+
+sqrt.A60.79<-c(model.value=-0.00373027,sporadisch=-0.0163743,ersteWelle=0.00174279,sommerplateau20=-0.0023077,zweiteWelle=0.0000930,
+               dritteWelle=-0.00056633,sommerplateau21=-0.0022412,vierteWelle=-0.0067067,fuenfteWelle=-0.0666460)
 sqrt.A60.79<-as.data.frame(sqrt.A60.79)
 colnames(sqrt.A60.79)<-"Anteil.A60.79"
+
+
+
 
 
 
